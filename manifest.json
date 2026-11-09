@@ -26,5 +26,6 @@
     "orientation": "portrait-primary",
     "scope": ".",
     "dir": "ltr",
-    "lang": "es-HN"
+    "lang": "es-HN",
+    "description": "Balam es una aplicación web progresiva (PWA) para el aprendizaje de matemáticas, diseñada para estudiantes del III ciclo de educación básica y diversificado. La aplicación ofrece una experiencia interactiva y atractiva, permitiendo a los usuarios practicar y mejorar sus habilidades matemáticas a través de ejercicios, juegos y recursos educativos. Con un enfoque en la accesibilidad y la facilidad de uso, Balam busca fomentar el interés por las matemáticas y apoyar el aprendizaje autónomo de los estudiantes."
 }
