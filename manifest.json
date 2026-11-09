@@ -3,17 +3,23 @@
     "short_name": "Balam",
     "icons": [
         {
-            "src": "/img/icon-192.png",
+            "src": "img/icon-192.png",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "/img/icon-512.png",
+            "src": "img/icon-512.png",
             "sizes": "512x512",
             "type": "image/png"
+        },
+        {
+            "src": "img/icon-maskable-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
         }
     ],
-    "start_url": "/index.html",
+    "start_url": "./index.html",
     "display": "standalone",
     "background_color": "#F7F3E6",
     "theme_color": "#1B3A6B",
