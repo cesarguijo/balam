@@ -1,0 +1,23 @@
+{
+    "name": "Balam",
+    "short_name": "Balam",
+    "version": "1.0.0",
+    "author": "Cesar Arguijo",
+    "description": "Aplicación de aprendizaje de matemáticas para estudiantes de III Ciclo de Honduras.",
+    "developer": {
+        "name": "Cesar Arguijo"
+    },
+    "icons": {
+        "192": "img/icon-192.png",
+        "512": "img/icon-512.png"
+    },
+    "manifest_version": 3,
+    "start_url": "/index.html",
+    "display": "standalone",
+    "backgraund_color": "#ffffff",
+    "theme_color": "#000000",
+    "orientation": "portrait-primary",
+    "scope": ".",
+    "dir": "ltr",
+    "lang": "es-HN"
+}
