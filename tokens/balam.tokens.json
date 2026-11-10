@@ -1,0 +1,364 @@
+{
+  "ambar": {
+    "200": {
+      "$type": "color",
+      "$value": "#f7c27e",
+      "$description": "Ámbar claro · faceta iluminada",
+      "$extensions": {
+        "mode": {}
+      }
+    },
+    "300": {
+      "$type": "color",
+      "$value": "#f5b565",
+      "$description": "Ámbar luz · franja de brillo",
+      "$extensions": {
+        "mode": {}
+      }
+    },
+    "400": {
+      "$type": "color",
+      "$value": "#f0a24a",
+      "$description": "Ámbar medio",
+      "$extensions": {
+        "mode": {}
+      }
+    },
+    "500": {
+      "$type": "color",
+      "$value": "#e89030",
+      "$description": "Ámbar jaguar · pelaje del jaguar, color de marca",
+      "$extensions": {
+        "mode": {}
+      }
+    },
+    "600": {
+      "$type": "color",
+      "$value": "#d47e25",
+      "$description": "Ámbar sombra",
+      "$extensions": {
+        "mode": {}
+      }
+    },
+    "700": {
+      "$type": "color",
+      "$value": "#c26f1e",
+      "$description": "Ámbar tostado",
+      "$extensions": {
+        "mode": {}
+      }
+    },
+    "800": {
+      "$type": "color",
+      "$value": "#9a5410",
+      "$description": "Ámbar oscuro",
+      "$extensions": {
+        "mode": {}
+      }
+    }
+  },
+  "azul": {
+    "800": {
+      "$type": "color",
+      "$value": "#1b3a6b",
+      "$description": "Azul profundo · obsidiana y noche",
+      "$extensions": {
+        "mode": {}
+      }
+    }
+  },
+  "crema": {
+    "50": {
+      "$type": "color",
+      "$value": "#f7f3e6",
+      "$description": "Crema orquídea · orquídea nacional Rhyncholaelia digbyana",
+      "$extensions": {
+        "mode": {}
+      }
+    }
+  },
+  "maya": {
+    "500": {
+      "$type": "color",
+      "$value": "#1a7088",
+      "$description": "Azul maya · pigmento de índigo y paligorskita",
+      "$extensions": {
+        "mode": {}
+      }
+    }
+  },
+  "cafe": {
+    "700": {
+      "$type": "color",
+      "$value": "#7a4e32",
+      "$description": "Café venado · venado cola blanca, animal nacional",
+      "$extensions": {
+        "mode": {}
+      }
+    }
+  },
+  "gris": {
+    "200": {
+      "$type": "color",
+      "$value": "#d3d1c7",
+      "$description": "Piedra clara",
+      "$extensions": {
+        "mode": {}
+      }
+    },
+    "300": {
+      "$type": "color",
+      "$value": "#b4b2a9",
+      "$description": "Piedra media",
+      "$extensions": {
+        "mode": {}
+      }
+    },
+    "600": {
+      "$type": "color",
+      "$value": "#5f5e5a",
+      "$description": "Piedra oscura",
+      "$extensions": {
+        "mode": {}
+      }
+    }
+  },
+  "texto": {
+    "principal": {
+      "$type": "color",
+      "$value": "{azul.800}",
+      "$description": "Texto normal sobre el fondo. Contraste 10.2:1",
+      "$extensions": {
+        "mode": {}
+      }
+    }
+  },
+  "superficie": {
+    "fondo": {
+      "$type": "color",
+      "$value": "{crema.50}",
+      "$description": "Fondo general de las pantallas",
+      "$extensions": {
+        "mode": {}
+      }
+    }
+  },
+  "accion": {
+    "primaria": {
+      "fondo": {
+        "$type": "color",
+        "$value": "{ambar.500}",
+        "$description": "Fondo del botón principal. Uno por pantalla",
+        "$extensions": {
+          "mode": {}
+        }
+      },
+      "borde": {
+        "$type": "color",
+        "$value": "{ambar.800}",
+        "$description": "Anillo del botón principal",
+        "$extensions": {
+          "mode": {}
+        }
+      },
+      "texto": {
+        "$type": "color",
+        "$value": "{azul.800}",
+        "$description": "Texto del botón principal. Contraste 4.5:1, siempre en Bold",
+        "$extensions": {
+          "mode": {}
+        }
+      }
+    },
+    "secundaria": {
+      "fondo": {
+        "$type": "color",
+        "$value": "{crema.50}",
+        "$description": "Fondo del botón de contorno",
+        "$extensions": {
+          "mode": {}
+        }
+      },
+      "borde": {
+        "$type": "color",
+        "$value": "{azul.800}",
+        "$description": "Anillo del botón de contorno",
+        "$extensions": {
+          "mode": {}
+        }
+      },
+      "texto": {
+        "$type": "color",
+        "$value": "{azul.800}",
+        "$description": "Texto del botón de contorno",
+        "$extensions": {
+          "mode": {}
+        }
+      }
+    },
+    "texto": {
+      "$type": "color",
+      "$value": "{maya.500}",
+      "$description": "Botón de solo texto, para acciones menores",
+      "$extensions": {
+        "mode": {}
+      }
+    },
+    "deshabilitada": {
+      "fondo": {
+        "$type": "color",
+        "$value": "{gris.200}",
+        "$description": "Fondo de cualquier botón deshabilitado",
+        "$extensions": {
+          "mode": {}
+        }
+      },
+      "borde": {
+        "$type": "color",
+        "$value": "{gris.300}",
+        "$description": "Anillo de cualquier botón deshabilitado",
+        "$extensions": {
+          "mode": {}
+        }
+      },
+      "texto": {
+        "$type": "color",
+        "$value": "{gris.600}",
+        "$description": "Texto de cualquier botón deshabilitado",
+        "$extensions": {
+          "mode": {}
+        }
+      }
+    }
+  },
+  "foco": {
+    "anillo": {
+      "$type": "color",
+      "$value": "{maya.500}",
+      "$description": "Contorno de foco para teclado. 3 px, separado 3 px",
+      "$extensions": {
+        "mode": {}
+      }
+    }
+  },
+  "boton": {
+    "faceta": {
+      "izq-arriba": {
+        "$type": "color",
+        "$value": "{ambar.200}",
+        "$description": "",
+        "$extensions": {
+          "mode": {}
+        }
+      },
+      "izq-abajo": {
+        "$type": "color",
+        "$value": "{ambar.400}",
+        "$description": "",
+        "$extensions": {
+          "mode": {}
+        }
+      },
+      "der-arriba": {
+        "$type": "color",
+        "$value": "{ambar.600}",
+        "$description": "",
+        "$extensions": {
+          "mode": {}
+        }
+      },
+      "der-abajo": {
+        "$type": "color",
+        "$value": "{ambar.700}",
+        "$description": "",
+        "$extensions": {
+          "mode": {}
+        }
+      }
+    },
+    "franja": {
+      "arriba": {
+        "$type": "color",
+        "$value": "{ambar.300}",
+        "$description": "",
+        "$extensions": {
+          "mode": {}
+        }
+      },
+      "abajo": {
+        "$type": "color",
+        "$value": "{ambar.700}",
+        "$description": "",
+        "$extensions": {
+          "mode": {}
+        }
+      }
+    },
+    "labio": {
+      "primario": {
+        "$type": "color",
+        "$value": "{cafe.700}",
+        "$description": "Sombra sólida de 5 px bajo el botón",
+        "$extensions": {
+          "mode": {}
+        }
+      },
+      "secundario": {
+        "$type": "color",
+        "$value": "{azul.800}",
+        "$description": "Sombra sólida de 5 px bajo el botón",
+        "$extensions": {
+          "mode": {}
+        }
+      }
+    }
+  },
+  "Typography-styles": {
+    "etiqueta": {
+      "boton": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "Atkinson Hyperlegible Next",
+          "fontWeight": 700,
+          "fontStyle": "normal",
+          "fontSize": {
+            "value": 18,
+            "unit": "px"
+          },
+          "lineHeight": {
+            "value": 24,
+            "unit": "px"
+          },
+          "letterSpacing": "0%",
+          "paragraphSpacing": {
+            "value": 0,
+            "unit": "px"
+          },
+          "paragraphIndent": {
+            "value": 0,
+            "unit": "px"
+          },
+          "textDecoration": "NONE",
+          "textCase": "ORIGINAL"
+        },
+        "$description": "Etiquetas de botones",
+        "$extensions": {
+          "styleId": "S:d80e541fa26f6751db4127cf7109f2004d279bf2,"
+        }
+      }
+    }
+  },
+  "$extensions": {
+    "tokens-bruecke-meta": {
+      "useDTCG": true,
+      "spec": "https://www.designtokens.org/tr/2025.10/format/",
+      "colorMode": "hex",
+      "variableCollections": [
+        "Paleta",
+        "Roles",
+        "Componentes"
+      ],
+      "createdAt": "2026-11-10T05:02:02.416Z"
+    }
+  }
+}
