@@ -1,10 +1,12 @@
 // js/enrutador.js
 import { mostrarBienvenida } from '../pantallas/bienvenida/bienvenida.js';
 import { mostrarInicio } from '../pantallas/inicio/inicio.js';
+import { mostrarCatalogo } from '../pantallas/catalogo/catalogo.js';
 
 const rutas = {
   '#/bienvenida': mostrarBienvenida,
   '#/inicio': mostrarInicio,
+  '#/catalogo': mostrarCatalogo,
 };
 
 function navegar() {
