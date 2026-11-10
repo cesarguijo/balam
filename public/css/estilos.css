@@ -1,0 +1,6 @@
+/* Índice de estilos de Balam: aquí se agregan los componentes nuevos */
+@layer tokens, base, componentes;
+
+@import url("tokens.css") layer(tokens);
+@import url("base.css") layer(base);
+@import url("../componentes/boton/boton.css") layer(componentes);

@@ -21,5 +21,6 @@
   "homepage": "https://github.com/cesarguijo/balam#readme",
   "devDependencies": {
     "style-dictionary": "^5.8.0"
-  }
+  },
+  "private": true
 }
