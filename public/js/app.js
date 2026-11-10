@@ -1,3 +1,5 @@
+import './enrutador.js';
+
 var deferredPrompt;
 
 if ('serviceWorker' in navigator) {
