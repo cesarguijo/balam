@@ -1,0 +1,25 @@
+{
+  "name": "balam",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "tokens": "style-dictionary build --config sd.config.mjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cesarguijo/balam.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/cesarguijo/balam/issues"
+  },
+  "homepage": "https://github.com/cesarguijo/balam#readme",
+  "devDependencies": {
+    "style-dictionary": "^5.8.0"
+  }
+}

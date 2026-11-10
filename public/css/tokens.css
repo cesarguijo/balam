@@ -1,0 +1,41 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --ambar-200: #f7c27e; /** Ámbar claro · faceta iluminada */
+  --ambar-300: #f5b565; /** Ámbar luz · franja de brillo */
+  --ambar-400: #f0a24a; /** Ámbar medio */
+  --ambar-500: #e89030; /** Ámbar jaguar · pelaje del jaguar, color de marca */
+  --ambar-600: #d47e25; /** Ámbar sombra */
+  --ambar-700: #c26f1e; /** Ámbar tostado */
+  --ambar-800: #9a5410; /** Ámbar oscuro */
+  --azul-800: #1b3a6b; /** Azul profundo · obsidiana y noche */
+  --crema-50: #f7f3e6; /** Crema orquídea · orquídea nacional Rhyncholaelia digbyana */
+  --maya-500: #1a7088; /** Azul maya · pigmento de índigo y paligorskita */
+  --cafe-700: #7a4e32; /** Café venado · venado cola blanca, animal nacional */
+  --gris-200: #d3d1c7; /** Piedra clara */
+  --gris-300: #b4b2a9; /** Piedra media */
+  --gris-600: #5f5e5a; /** Piedra oscura */
+  --texto-principal: var(--azul-800); /** Texto normal sobre el fondo. Contraste 10.2:1 */
+  --superficie-fondo: var(--crema-50); /** Fondo general de las pantallas */
+  --accion-primaria-fondo: var(--ambar-500); /** Fondo del botón principal. Uno por pantalla */
+  --accion-primaria-borde: var(--ambar-800); /** Anillo del botón principal */
+  --accion-primaria-texto: var(--azul-800); /** Texto del botón principal. Contraste 4.5:1, siempre en Bold */
+  --accion-secundaria-fondo: var(--crema-50); /** Fondo del botón de contorno */
+  --accion-secundaria-borde: var(--azul-800); /** Anillo del botón de contorno */
+  --accion-secundaria-texto: var(--azul-800); /** Texto del botón de contorno */
+  --accion-texto: var(--maya-500); /** Botón de solo texto, para acciones menores */
+  --accion-deshabilitada-fondo: var(--gris-200); /** Fondo de cualquier botón deshabilitado */
+  --accion-deshabilitada-borde: var(--gris-300); /** Anillo de cualquier botón deshabilitado */
+  --accion-deshabilitada-texto: var(--gris-600); /** Texto de cualquier botón deshabilitado */
+  --foco-anillo: var(--maya-500); /** Contorno de foco para teclado. 3 px, separado 3 px */
+  --boton-faceta-izq-arriba: var(--ambar-200);
+  --boton-faceta-izq-abajo: var(--ambar-400);
+  --boton-faceta-der-arriba: var(--ambar-600);
+  --boton-faceta-der-abajo: var(--ambar-700);
+  --boton-franja-arriba: var(--ambar-300);
+  --boton-franja-abajo: var(--ambar-700);
+  --boton-labio-primario: var(--cafe-700); /** Sombra sólida de 5 px bajo el botón */
+  --boton-labio-secundario: var(--azul-800); /** Sombra sólida de 5 px bajo el botón */
+}
