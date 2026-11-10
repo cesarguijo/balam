@@ -7,22 +7,20 @@ if ('serviceWorker' in navigator) {
 
     });
 }
-/*
+
 window.addEventListener('beforeinstallprompt', function(event) {
   console.log('beforeinstallprompt', event);
   event.preventDefault();
-  window.deferredPrompt = event;
   deferredPrompt = event;
   return false;
-  
 });
 
-*/
+
 const texto = document.getElementById('texto');
 const boton = document.getElementById('installButton');
 boton.addEventListener('click', function(event) {
   texto.appendChild(document.createTextNode('Instalando...'));
-  /*if(deferredPrompt) {
+  if(deferredPrompt) {
     deferredPrompt.prompt();
     deferredPrompt.userChoice.then(function(choiceResult) {
       console.log(choiceResult.outcome);
@@ -34,5 +32,5 @@ boton.addEventListener('click', function(event) {
     });
   }
 
-  deferredPrompt = null;*/
+  deferredPrompt = null;
 });
