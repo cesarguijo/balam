@@ -114,7 +114,7 @@
   --_faceta-der-abajo: transparent;
 }
 
-/*------------5. Cargando ---------------------------/*
+/*------------5. Cargando ---------------------------*/
 
 /* La piramide: oculta mientras el boton no este cargando */
 .boton__indicador {
@@ -132,18 +132,18 @@
 }
 
 /* Cima */
-.boton__indicador:nth-child(1) {
+.boton__indicador span:nth-child(1) {
   width: 6px;
   animation-delay: 0.5s;
 }
 
 /* Medio */
-.boton__indicador:nth-child(2) {
+.boton__indicador span:nth-child(2) {
   width: 12px;
   animation-delay: 0.25s;
 }
 
-.boton__indicador:nth-child(1) {
+.boton__indicador span:nth-child(3) {
   width: 18px;
   animation-delay: 0s;
 }

@@ -10,7 +10,7 @@ export function mostrarCatalogo(app) {
                 <span class="boton__indicador" aria-hidden="true">
                     <span></span><span></span><span></span>
                 </span>
-                <span class="boton__tiqueta">Cargando...</span>
+                <span class="boton__etiqueta">Instalar</span>
             </span>
         </button>
     `;
@@ -20,7 +20,7 @@ export function mostrarCatalogo(app) {
     }
 
     const boton = app.querySelector('#prueba-carga');
-    const etiqueta = boton.querySelector('.boton__tiqueta');
+    const etiqueta = boton.querySelector('.boton__etiqueta');
 
     boton.addEventListener('click', async () => {
        if(boton.getAttribute('aria-busy') === 'true') return;
@@ -29,7 +29,7 @@ export function mostrarCatalogo(app) {
        
        //1. Pasa a "cargando"
        boton.setAttribute('aria-busy', 'true');
-       etiqueta.textContent = 'Cargando...';
+       etiqueta.textContent = 'Instalando...';
        
        //2. Simula el trabajo
        await esperar(3000);
