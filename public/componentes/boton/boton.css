@@ -1,8 +1,6 @@
 /* ==================================================
    BOTÓN
    .boton            → estructura común a todos
-   .boton__relleno   → colores del relleno (con facetas)
-   .boton__contorno  → colores del contorno (sin facetas)
    .boton--relleno   → variante: colores de relleno (con facetas)
    .boton--contorno  → variante: colores de contorno
    :disabled, :active, [aria-busy]         → estados nativos (sin clase)
@@ -32,7 +30,10 @@
 }
 
 .boton__cuerpo {
-  display: grid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
   place-items: center;
   height: 52px;
   padding: 0 28px;
@@ -73,7 +74,7 @@
 }
 
 /* ---------- 2. Variante relleno ---------- */
-.boton__relleno {
+.boton--relleno {
   --_anillo: var(--accion-primaria-borde);
   --_fondo:  var(--accion-primaria-fondo);
   --_texto:  var(--accion-primaria-texto);
@@ -88,7 +89,7 @@
 }
 
 /* ---------- 3. Variante contorno ---------- */
-.boton__contorno {
+.boton--contorno {
   --_anillo: var(--accion-secundaria-borde);
   --_fondo:  var(--accion-secundaria-fondo);
   --_texto:  var(--accion-secundaria-texto);
@@ -111,4 +112,63 @@
   --_faceta-izq-abajo: transparent;
   --_faceta-der-arriba: transparent;
   --_faceta-der-abajo: transparent;
+}
+
+/*------------5. Cargando ---------------------------/*
+
+/* La piramide: oculta mientras el boton no este cargando */
+.boton__indicador {
+  display: none;
+  flex-direction: column; /* escalones uno sobre otro */
+  align-items: center;
+  gap: 2px;
+}
+
+/* Cada escalon */
+.boton__indicador span {
+  height: 5px;
+  background-color: currentColor; /* mismo color que el texto del boton */
+  animation: escalon 1.2s ease-in-out infinite;
+}
+
+/* Cima */
+.boton__indicador:nth-child(1) {
+  width: 6px;
+  animation-delay: 0.5s;
+}
+
+/* Medio */
+.boton__indicador:nth-child(2) {
+  width: 12px;
+  animation-delay: 0.25s;
+}
+
+.boton__indicador:nth-child(1) {
+  width: 18px;
+  animation-delay: 0s;
+}
+
+/* La animacion: cada escalon se enciende y se apaga */
+@keyframes escalon {
+  0%, 100% { opacity: 0.25; }
+  35% { opacity: 1; }
+}
+
+/* El boton mientras carga: hundido, sin labio y con la piramide visible */
+.boton[aria-busy="true"] {
+  transform: translateY(5px);
+  filter: none;
+  cursor: progress;
+}
+
+.boton[aria-busy="true"] .boton__indicador {
+  display: flex;
+}
+
+/* Quien activa "reducir movimiento" en su celular ve la piramide quieta */
+@media (prefers-reduced-motion: reduce) {
+  .boton__indicador span {
+    animation: none;
+    opacity: 1;
+  }
 }
