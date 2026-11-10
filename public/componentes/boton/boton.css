@@ -1,9 +1,11 @@
 /* ==================================================
    BOTÓN
    .boton            → estructura común a todos
-   .boton-relleno   → colores del relleno (con facetas)
-   .boton-contorno  → colores del contorno (sin facetas)
-   :disabled         → colores apagados, para los dos
+   .boton__relleno   → colores del relleno (con facetas)
+   .boton__contorno  → colores del contorno (sin facetas)
+   .boton--relleno   → variante: colores de relleno (con facetas)
+   .boton--contorno  → variante: colores de contorno
+   :disabled, :active, [aria-busy]         → estados nativos (sin clase)
    ================================================== */
 /* ---------- 1. Estructura: igual en todos los botones ---------- */
 .boton {
@@ -29,7 +31,7 @@
   filter: none;
 }
 
-.boton-cuerpo {
+.boton__cuerpo {
   display: grid;
   place-items: center;
   height: 52px;
@@ -48,7 +50,7 @@
                      calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px), 0 10px);
 }
 
-.boton-cuerpo::before {
+.boton__cuerpo::before {
   content: "";
   position: absolute;
   inset: 3px;
@@ -71,7 +73,7 @@
 }
 
 /* ---------- 2. Variante relleno ---------- */
-.boton-relleno {
+.boton__relleno {
   --_anillo: var(--accion-primaria-borde);
   --_fondo:  var(--accion-primaria-fondo);
   --_texto:  var(--accion-primaria-texto);
@@ -86,7 +88,7 @@
 }
 
 /* ---------- 3. Variante contorno ---------- */
-.boton-contorno {
+.boton__contorno {
   --_anillo: var(--accion-secundaria-borde);
   --_fondo:  var(--accion-secundaria-fondo);
   --_texto:  var(--accion-secundaria-texto);
