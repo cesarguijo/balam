@@ -5,12 +5,12 @@ export function mostrarCatalogo(app) {
         <h1>Catálogo de componentes</h1>
 
         <h2>Botón</h2>
-        <button class="boton boton-relleno" id="prueba-carga">
-            <span class="boton-cuerpo">
-                <span class="boton-indicador" aria-hidden="true">
+        <button class="boton boton--relleno" id="prueba-carga">
+            <span class="boton__cuerpo">
+                <span class="boton__indicador" aria-hidden="true">
                     <span></span><span></span><span></span>
                 </span>
-                <span class="boton-tiqueta">Cargando...</span>
+                <span class="boton__tiqueta">Cargando...</span>
             </span>
         </button>
     `;
@@ -20,7 +20,7 @@ export function mostrarCatalogo(app) {
     }
 
     const boton = app.querySelector('#prueba-carga');
-    const etiqueta = boton.querySelector('.boton-tiqueta');
+    const etiqueta = boton.querySelector('.boton__tiqueta');
 
     boton.addEventListener('click', async () => {
        if(boton.getAttribute('aria-busy') === 'true') return;
