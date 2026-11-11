@@ -1,24 +1,37 @@
 @font-face {
-  font-family: "Atkinson Hyperlegible Next";
-  src: url("../fuentes/atkinson-hyperlegible-next-latin.woff2") format("woff2");
-  font-weight: 200 800;     /* el rango de pesos de la fuente variable */
+  font-family: 'Atkinson Hyperlegible Next';
+  src: url('../fuentes/atkinson-hyperlegible-next-latin.woff2') format('woff2');
+  font-weight: 200 800; /* el rango de pesos de la fuente variable */
   font-style: normal;
-  font-display: swap;       /* muestra el texto de inmediato con otra fuente y la cambia al cargar */
+  font-display: swap; /* muestra el texto de inmediato con otra fuente y la cambia al cargar */
 }
 
-*, *::before, *::after { box-sizing: border-box; }
-
-body { 
-    margin: 0; 
-    background-color: var(--superficie-fondo);
-    color: var(--texto-principal);
-    font-family: "Atkinson Hyperlegible Next", sans-serif
-
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
 }
 
-button, input { font: inherit; color: inherit; }
+body {
+  margin: 0;
+  background-color: var(--superficie-fondo);
+  color: var(--texto-principal);
+  font-family: 'Atkinson Hyperlegible Next', sans-serif;
+}
 
-img { max-width: 100%; display: block; }
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
 
-:focus-visible { outline: 3px solid var(--foco-anillo); outline-offset: 3px; }
+img {
+  max-width: 100%;
+  display: block;
+}
 
+:focus-visible {
+  outline: 3px solid var(--foco-anillo);
+  outline-offset: 3px;
+}

@@ -1,19 +1,21 @@
 {
+  "path-intellisense.mappings": {
+    "/": "${workspaceFolder}/public"
+  },
+
   "cSpell.language": "en,es",
   "cSpell.languageSettings": [
     {
       "languageId": "javascript",
       "includeRegExpList": ["CStyleComment", "string"],
-      "ignoreRegExpList": [
-        "/class=\"[^\"]*\"/g",
-        "/[.#][a-z][\\w-]*/g"
-      ]
+      "ignoreRegExpList": ["/class=\"[^\"]*\"/g", "/[.#][a-z][\\w-]*/g"]
     }
   ],
-  "cSpell.words": [
-    "Balam",
-    "beforeinstallprompt",
-    "enrutador",
-    "milisegundos"
-  ]
+  "cSpell.words": ["Balam", "beforeinstallprompt", "enrutador", "milisegundos"],
+  "emmet.includeLanguages": { "javascript": "html" },
+  "editor.linkedEditing": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "cssVariables.lookupFiles": ["public/css/tokens.css"],
+  "liveServer.settings.root": "/public"
 }

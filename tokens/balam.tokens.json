@@ -241,6 +241,83 @@
       }
     }
   },
+  "icono": {
+    "secundario": {
+      "$type": "color",
+      "$value": "{cafe.700}",
+      "$description": "",
+      "$extensions": {
+        "mode": {}
+      }
+    }
+  },
+  "decoracion": {
+    "greca": {
+      "$type": "color",
+      "$value": "{cafe.700}",
+      "$description": "",
+      "$extensions": {
+        "mode": {}
+      }
+    }
+  },
+  "separacion": {
+    "grupos": {
+      "$type": "dimension",
+      "$value": "{espacio.24}",
+      "$description": "",
+      "$extensions": {
+        "mode": {}
+      }
+    },
+    "elementos": {
+      "$type": "dimension",
+      "$value": "{espacio.16}",
+      "$description": "",
+      "$extensions": {
+        "mode": {}
+      }
+    },
+    "filas": {
+      "$type": "dimension",
+      "$value": "{espacio.12}",
+      "$description": "",
+      "$extensions": {
+        "mode": {}
+      }
+    },
+    "icono-texto": {
+      "$type": "dimension",
+      "$value": "{espacio.12}",
+      "$description": "",
+      "$extensions": {
+        "mode": {}
+      }
+    }
+  },
+  "margen": {
+    "pantalla": {
+      "$type": "dimension",
+      "$value": "{espacio.24}",
+      "$description": "",
+      "$extensions": {
+        "mode": {}
+      }
+    }
+  },
+  "tamano": {
+    "control": {
+      "$type": "dimension",
+      "$value": {
+        "value": 52,
+        "unit": "px"
+      },
+      "$description": "",
+      "$extensions": {
+        "mode": {}
+      }
+    }
+  },
   "boton": {
     "faceta": {
       "izq-arriba": {
@@ -311,40 +388,125 @@
           "mode": {}
         }
       }
+    },
+    "alto": {
+      "$type": "dimension",
+      "$value": "{tamano.control}",
+      "$description": "",
+      "$extensions": {
+        "mode": {}
+      }
+    },
+    "extremo": {
+      "$type": "dimension",
+      "$value": {
+        "value": 14,
+        "unit": "px"
+      },
+      "$description": "",
+      "$extensions": {
+        "mode": {}
+      }
+    },
+    "anillo": {
+      "$type": "dimension",
+      "$value": {
+        "value": 3,
+        "unit": "px"
+      },
+      "$description": "",
+      "$extensions": {
+        "mode": {}
+      }
+    },
+    "chaflan": {
+      "$type": "dimension",
+      "$value": {
+        "value": 10,
+        "unit": "px"
+      },
+      "$description": "",
+      "$extensions": {
+        "mode": {}
+      }
+    },
+    "labio-alto": {
+      "$type": "dimension",
+      "$value": {
+        "value": 5,
+        "unit": "px"
+      },
+      "$description": "",
+      "$extensions": {
+        "mode": {}
+      }
     }
   },
-  "Typography-styles": {
-    "etiqueta": {
-      "boton": {
-        "$type": "typography",
-        "$value": {
-          "fontFamily": "Atkinson Hyperlegible Next",
-          "fontWeight": 700,
-          "fontStyle": "normal",
-          "fontSize": {
-            "value": 18,
-            "unit": "px"
-          },
-          "lineHeight": {
-            "value": 24,
-            "unit": "px"
-          },
-          "letterSpacing": "0%",
-          "paragraphSpacing": {
-            "value": 0,
-            "unit": "px"
-          },
-          "paragraphIndent": {
-            "value": 0,
-            "unit": "px"
-          },
-          "textDecoration": "NONE",
-          "textCase": "ORIGINAL"
-        },
-        "$description": "Etiquetas de botones",
-        "$extensions": {
-          "styleId": "S:d80e541fa26f6751db4127cf7109f2004d279bf2,"
-        }
+  "espacio": {
+    "4": {
+      "$type": "dimension",
+      "$value": {
+        "value": 4,
+        "unit": "px"
+      },
+      "$description": "",
+      "$extensions": {
+        "mode": {}
+      }
+    },
+    "8": {
+      "$type": "dimension",
+      "$value": {
+        "value": 8,
+        "unit": "px"
+      },
+      "$description": "",
+      "$extensions": {
+        "mode": {}
+      }
+    },
+    "12": {
+      "$type": "dimension",
+      "$value": {
+        "value": 12,
+        "unit": "px"
+      },
+      "$description": "",
+      "$extensions": {
+        "mode": {}
+      }
+    },
+    "16": {
+      "$type": "dimension",
+      "$value": {
+        "value": 16,
+        "unit": "px"
+      },
+      "$description": "",
+      "$extensions": {
+        "mode": {}
+      }
+    },
+    "24": {
+      "$type": "dimension",
+      "$value": {
+        "value": 24,
+        "unit": "px"
+      },
+      "$description": "",
+      "$extensions": {
+        "mode": {}
+      }
+    },
+    "32": {
+      "$type": "dimension",
+      "$value": {
+        "value": 32,
+        "unit": "px"
+      },
+      "$description": "",
+      "$extensions": {
+        "mode": {}
       }
     }
   },
@@ -353,12 +515,8 @@
       "useDTCG": true,
       "spec": "https://www.designtokens.org/tr/2025.10/format/",
       "colorMode": "hex",
-      "variableCollections": [
-        "Paleta",
-        "Roles",
-        "Componentes"
-      ],
-      "createdAt": "2026-11-10T05:02:02.416Z"
+      "variableCollections": ["Paleta", "Roles", "Componentes", "Medidas"],
+      "createdAt": "2026-11-11T06:17:06.223Z"
     }
   }
 }
