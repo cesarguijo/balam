@@ -80,7 +80,9 @@
 .caracteristicas {
   display: flex;
   flex-direction: column;
+  margin-inline: auto;
   gap: var(--separacion-filas);
+  padding: 0;
 }
 
 .caracteristicas__item {
@@ -90,7 +92,7 @@
   gap: var(--separacion-icono-texto);
 }
 
-.caracteristicas__icono {
-  width: 36px;
-  text-align: center;
+.caracteristicas__icono .icono {
+  color: var(--icono-secundario);
+  filter: drop-shadow(0 1px 1.5px #a58766);
 }
