@@ -8,6 +8,18 @@
   padding: var(--margen-pantalla);
 }
 
+.bienvenida::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(
+    ellipse at center,
+    var(--superficie-fondo) 40%,
+    transparent 60%
+  );
+}
+
 .bienvenida::before {
   content: '';
   position: fixed; /* cubre la pantalla aunque haya scroll */
