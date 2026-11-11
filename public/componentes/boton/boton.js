@@ -2,6 +2,7 @@
  * @file Componente <balam-boton>: registra la etiqueta y define su
  * comportamiento (texto, variante y estado «cargando»).
  */
+
 /**
  * Botón de Balam con estilo de piedra.
  *
@@ -56,14 +57,14 @@ export class BotonBalam extends HTMLElement {
      * @type {boolean}
      */
     get cargando() {
-        return (this.#boton.getAttribute('aria-busy') === 'true')
+        return this.#boton.getAttribute('aria-busy') === 'true';
     }
 
     /** @param {boolean} valor */
     set cargando(valor) {
         if(valor) {
             this.#boton.setAttribute('aria-busy', 'true');
-            this.#etiqueta.textContent = 'Cargando...';
+            this.#etiqueta.textContent = 'Cargando…';
         } else {
             this.#boton.removeAttribute('aria-busy');
             this.#etiqueta.textContent = this.#texto;

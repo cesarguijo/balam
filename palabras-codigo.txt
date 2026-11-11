@@ -19,3 +19,5 @@ cuerpo
 etiqueta
 indicador
 texto
+balam
+cargando
