@@ -20,6 +20,14 @@ window.addEventListener('beforeinstallprompt', (evento) => {
   aviso = /** @type {AvisoInstalacion} */ (evento);
 });
 
+window.addEventListener('appinstalled', () => {
+  localStorage.setItem('balam-instalada', 'si');
+});
+
+export function yaSeInstalo() {
+  return localStorage.getItem('balam-instalada') === 'si';
+}
+
 /**
  * Indica si el navegador permite instalar con un botón.
  * @returns {boolean}
