@@ -58,4 +58,5 @@ function navegar() {
 }
 
 window.addEventListener('hashchange', navegar); // cada vez que cambia la #
-navegar(); // al abrir la app
+matchMedia('(display-mode: standalone)').addEventListener('change', navegar); // cuando la pestaña pasa a ser la app instalada
+navegar();
