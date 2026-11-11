@@ -4,15 +4,15 @@
  * Por ahora solo avisa en consola cada vez que ocurre uno de sus eventos.
  */
 
-self.addEventListener('install', function(event) {
+self.addEventListener('install', function() {
     //console.log('[Service Worker] Installing Service Worker...', event);
 });
 
-self.addEventListener('activate', function(event) {
+self.addEventListener('activate', function() {
    // console.log('[Service Worker] Activating Service Worker...', event);
     return self.clients.claim();
 });
 
-self.addEventListener('fetch', function(event) {
+self.addEventListener('fetch', function() {
     //console.log('[Service Worker] Fetching resource...', event);
 });

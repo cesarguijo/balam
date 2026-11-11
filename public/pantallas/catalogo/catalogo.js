@@ -1,12 +1,12 @@
 /**
- * @file Pantalla catálogo: muestra un catálogo de los elementos de la interfaz de usuario.
+ * @file Pantalla de catálogo: muestra un catálogo de los elementos de la interfaz de usuario.
  */
 
 import {esperar} from '../../js/utilidades.js';
 import { BotonBalam } from '../../componentes/boton/boton.js';
 
 /**
- * Muestra la pantalla catálogo dentro del contenedor.
+ * Muestra la pantalla de catálogo dentro del contenedor.
  * @param {HTMLElement} app - Contenedor donde se dibuja la pantalla.
  */
 export function mostrarCatalogo(app) {
@@ -21,12 +21,13 @@ export function mostrarCatalogo(app) {
     
     const boton = app.querySelector('balam-boton');
     if(!(boton instanceof BotonBalam)){
-        throw new Error('No se encontró instancia de BotonBalam');
+        throw new Error('No se encontró <balam-boton> en el catálogo');
     }
 
     boton.addEventListener('click', async () => {
        if(boton.cargando) return;
        boton.cargando = true;
+       // Simula el trabajo
        await esperar(3000);
        boton.cargando = false;
     });
