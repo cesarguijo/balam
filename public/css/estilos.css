@@ -14,6 +14,8 @@
  * Se importan antes de las pantallas para que puedan usar los tokens y estilos base
  */
 @import url('../componentes/boton/boton.css') layer(componentes);
+@import url('../componentes/pie-instalacion/pie-instalacion.css')
+layer(componentes);
 
 /**
  * Pantallas de la aplicación
