@@ -18,3 +18,4 @@ esperar
 cuerpo
 etiqueta
 indicador
+texto
