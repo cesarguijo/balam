@@ -12,7 +12,9 @@ export class BalamPieInstalacion extends HTMLElement {
     else if (sePuedeInstalar()) this.estado = 'instalar';
     else this.estado = 'manual';
     window.addEventListener('beforeinstallprompt', () => {
-      if (this.estado === 'manual') this.estado = 'instalar';
+      if (this.estado === 'manual' || this.estado === 'instalada') {
+        this.estado = 'instalar';
+      }
     });
     // Al terminar la instalación.
     window.addEventListener('appinstalled', () => {

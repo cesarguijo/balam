@@ -18,6 +18,7 @@ let aviso = null;
 window.addEventListener('beforeinstallprompt', (evento) => {
   evento.preventDefault();
   aviso = /** @type {AvisoInstalacion} */ (evento);
+  localStorage.removeItem('balam-instalada');
 });
 
 window.addEventListener('appinstalled', () => {
