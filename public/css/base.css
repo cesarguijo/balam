@@ -35,3 +35,9 @@ img {
   outline: 3px solid var(--foco-anillo);
   outline-offset: 3px;
 }
+
+.icono {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0; /* en un flex, el ícono no se encoge si el texto es largo */
+}

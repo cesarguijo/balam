@@ -1,1 +1,10 @@
-{ "singleQuote": true }
+{
+  "singleQuote": true,
+  "plugins": ["@prettier/plugin-xml"],
+  "overrides": [
+    {
+      "files": "*.svg",
+      "options": { "parser": "xml" }
+    }
+  ]
+}
