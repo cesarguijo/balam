@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint public",
     "tokens": "style-dictionary build --config sd.config.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,6 +21,10 @@
   },
   "homepage": "https://github.com/cesarguijo/balam#readme",
   "devDependencies": {
+    "@cspell/eslint-plugin": "^10.4.1",
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.14.0",
+    "globals": "^17.14.0",
     "style-dictionary": "^5.8.0"
   },
   "private": true

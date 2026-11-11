@@ -1,0 +1,14 @@
+{
+  "cSpell.language": "en,es",
+  "cSpell.languageSettings": [
+    {
+      "languageId": "javascript",
+      "includeRegExpList": ["CStyleComment", "string"]
+    }
+  ],
+  "cSpell.words": [
+    "Balam",
+    "beforeinstallprompt",
+    "enrutador"
+  ]
+}
