@@ -1,31 +1,32 @@
 {
-    "name": "Balam",
-    "short_name": "Balam",
-    "icons": [
-        {
-            "src": "img/icon-192.png",
-            "sizes": "192x192",
-            "type": "image/png"
-        },
-        {
-            "src": "img/icon-512.png",
-            "sizes": "512x512",
-            "type": "image/png"
-        },
-        {
-            "src": "img/icon-maskable-512.png",
-            "sizes": "512x512",
-            "type": "image/png",
-            "purpose": "maskable"
-        }
-    ],
-    "start_url": "./index.html",
-    "display": "standalone",
-    "background_color": "#F7F3E6",
-    "theme_color": "#1B3A6B",
-    "orientation": "portrait-primary",
-    "scope": ".",
-    "dir": "ltr",
-    "lang": "es-HN",
-    "description": "Balam es una aplicación web progresiva (PWA) para el aprendizaje de matemáticas, diseñada para estudiantes del III ciclo de educación básica y diversificado. La aplicación ofrece una experiencia interactiva y atractiva, permitiendo a los usuarios practicar y mejorar sus habilidades matemáticas a través de ejercicios, juegos y recursos educativos. Con un enfoque en la accesibilidad y la facilidad de uso, Balam busca fomentar el interés por las matemáticas y apoyar el aprendizaje autónomo de los estudiantes."
+  "id": "/",
+  "name": "Balam",
+  "short_name": "Balam",
+  "icons": [
+    {
+      "src": "img/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "img/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "img/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#F7F3E6",
+  "theme_color": "#1B3A6B",
+  "orientation": "portrait-primary",
+  "scope": ".",
+  "dir": "ltr",
+  "lang": "es-HN",
+  "description": "Balam es una aplicación web progresiva (PWA) para el aprendizaje de matemáticas, diseñada para estudiantes del III ciclo de educación básica y diversificado. La aplicación ofrece una experiencia interactiva y atractiva, permitiendo a los usuarios practicar y mejorar sus habilidades matemáticas a través de ejercicios, juegos y recursos educativos. Con un enfoque en la accesibilidad y la facilidad de uso, Balam busca fomentar el interés por las matemáticas y apoyar el aprendizaje autónomo de los estudiantes."
 }
