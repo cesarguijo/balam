@@ -15,7 +15,6 @@
   z-index: -1; /* detrás del contenido */
   background-color: var(--decoracion-greca); /* el color del token */
   mask: url('/img/greca.svg') repeat; /* el esténcil, repetido como mosaico */
-  mask-size: 110px 80px;
   opacity: 0.07; /* lo tenue que tenías en el SVG */
 }
 .bienvenida__contenido {
@@ -44,7 +43,7 @@
   overflow: hidden;
 }
 
-.identidad_logo img {
+.identidad__logo img {
   width: 100%;
   display: block;
 }
@@ -58,7 +57,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--separacion-elementos);
-  align-items: center;
+  margin-inline: auto;
   max-width: 312px;
 }
 
