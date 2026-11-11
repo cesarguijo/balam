@@ -8,14 +8,16 @@ import { mostrarCatalogo } from '../pantallas/catalogo/catalogo.js';
 
 /**
  * Una pantalla de la app: recibe el contenedor y dibuja su contenido dentro.
- * @typedef {(app: HTMLElement) => void} Pantalla
+ * @callback Pantalla
+ * @param {HTMLElement} app - Contenedor donde se dibuja la pantalla.
+ * @returns {void}
  */
 
 /**
  * Tabla de rutas de la aplicación: relaciona cada ruta con la función que
  * muestra su pantalla. Para agregar una pantalla nueva:
  * 1. Importa la función de la pantalla.
- * 2. Agrega una linea con la forma `'#/ruta': mostrarPantalla,`.
+ * 2. Agrega una línea con la forma `'#/ruta': mostrarPantalla,`.
  * @type {Record<string, Pantalla>}
  */
 const rutas = {
@@ -35,7 +37,7 @@ function navegar() {
     throw new Error('No se encontró el contenedor #app en index.html');
   }
   const pantalla = rutas[location.hash] ?? mostrarInicio;  
-  pantalla(app)
+  pantalla(app);
 }
 
 window.addEventListener('hashchange', navegar);   // cada vez que cambia la #

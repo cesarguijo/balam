@@ -1,5 +1,5 @@
 /**
- * @file  Pantalla de inicio: por ahora solo muestra un saludo.
+ * @file Pantalla de inicio: por ahora solo muestra un saludo.
  */
 /**
  * Muestra la pantalla de inicio dentro del contenedor.

@@ -1,11 +1,11 @@
 /**
- * @file Pantalla catalogo: muestra un catalogo de los elementos de la interfaz de usuario.
+ * @file Pantalla catálogo: muestra un catalogo de los elementos de la interfaz de usuario.
  */
 
 import {esperar} from '../../js/utilidades.js';
 
 /**
- * Muestra la pantalla catalogo dentro del contenedor.
+ * Muestra la pantalla catálogo dentro del contenedor.
  * @param {HTMLElement} app - Contenedor donde se dibuja la pantalla.
  */
 export function mostrarCatalogo(app) {

@@ -11,6 +11,7 @@ import './enrutador.js';
  * cuando el usuario toque "Instalar". Es null mientras no haya aviso.
  * @type {Event|null}
  */
+// eslint-disable-next-line no-unused-vars -- Se usará en el botón «Instalar» de la bienvenida.
 let avisoInstalacion = null;
 
 
@@ -22,7 +23,7 @@ if ('serviceWorker' in navigator) {
         console.log('Service worker registrado en: ', registro.scope);
     })
     .catch( (error) => {
-        console.log('Error al registrar el service worker:', error);
+        console.error('Error al registrar el service worker:', error);
     });
 }
 
