@@ -45,6 +45,12 @@ function navegar() {
     throw new Error('No se encontró el contenedor #app en index.html');
   }
 
+  // Dentro de la app instalada no se muestra la bienvenida: ya cumplió su función.
+  if (seAbrioComoApp() && location.hash === '#/bienvenida') {
+    location.replace('#/inicio');
+    return;
+  }
+
   // Sin ruta o con una ruta desconocida: instalada va a inicio; en el navegador, a la bienvenida.
   const porDefecto = seAbrioComoApp() ? mostrarInicio : mostrarBienvenida;
   const pantalla = rutas[location.hash] ?? porDefecto;
