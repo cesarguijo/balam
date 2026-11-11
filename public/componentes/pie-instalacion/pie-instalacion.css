@@ -1,0 +1,15 @@
+balam-pie-instalacion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--separacion-elementos);
+  margin-inline: auto;
+  max-width: 312px;
+}
+
+balam-pie-instalacion balam-boton {
+  width: 100%;
+}
+
+.pie-instalacion__nota {
+  text-align: center;
+}

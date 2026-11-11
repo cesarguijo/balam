@@ -3,6 +3,7 @@
  */
 
 import '../../componentes/boton/boton.js';
+import { BalamPieInstalacion } from '../../componentes/pie-instalacion/pie-instalacion.js';
 
 /**
  * Muestra la pantalla de bienvenida dentro del contenedor.
@@ -52,9 +53,8 @@ export function mostrarBienvenida(app) {
             <p class="cuerpo-grande">Privado gratis y sin anuncios</p>
           </li>
         </ul>
-        <footer class="pie-instalacion">
-          <balam-boton texto="Instalar"></balam-boton>
-          <p class="etiqueta-pequena">Consume pocos datos y almacenamiento</p>
+        <footer>
+          <balam-pie-instalacion>
         </footer>
       </div>
     </div>
