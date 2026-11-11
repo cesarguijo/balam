@@ -3,9 +3,9 @@ import { sePuedeInstalar, instalar } from '../../js/instalacion.js';
 
 export class BalamPieInstalacion extends HTMLElement {
   connectedCallback() {
-    this.estado = sePuedeInstalar() ? 'instalar' : 'manual';
-
-    this.#dibujar();
+    window.addEventListener('beforeinstallprompt', () => {
+      if (this.estado === 'manual') this.estado = 'instalar';
+    });
   }
 
   get #balamBoton() {
@@ -40,7 +40,7 @@ export class BalamPieInstalacion extends HTMLElement {
   }
 
   #dibujar() {
-    if (this.estado === 'instalado') {
+    if (this.estado === 'instalada') {
       this.innerHTML = /* HTML */ `
         <p class="pie-instalacion__nota etiqueta-pequena">
           ¡Listo! Balam ya está instalada <br />

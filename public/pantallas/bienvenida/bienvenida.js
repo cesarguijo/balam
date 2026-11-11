@@ -1,9 +1,8 @@
 /**
- * @file Pantalla de bienvenida: por ahora solo muestra un mensaje corto de bienvenida.
+ * @file Pantalla de bienvenida: describe brevemente la app y muestra el botón de instalación.
  */
 
-import '../../componentes/boton/boton.js';
-import { BalamPieInstalacion } from '../../componentes/pie-instalacion/pie-instalacion.js';
+import '../../componentes/pie-instalacion/pie-instalacion.js';
 
 /**
  * Muestra la pantalla de bienvenida dentro del contenedor.
@@ -36,16 +35,16 @@ export function mostrarBienvenida(app) {
             </div>
             <p class="cuerpo-grande">Avisos y notas en tu celular</p>
           </li>
-          <li class="caracteristicas__item" aria-hidden="true">
-            <div class="caracteristicas__icono">
+          <li class="caracteristicas__item">
+            <div class="caracteristicas__icono" aria-hidden="true">
               <svg class="icono">
                 <use href="/img/iconos.svg#calculadora"></use>
               </svg>
             </div>
             <p class="cuerpo-grande">Matemáticas a tu ritmo</p>
           </li>
-          <li class="caracteristicas__item" aria-hidden="true">
-            <div class="caracteristicas__icono">
+          <li class="caracteristicas__item">
+            <div class="caracteristicas__icono" aria-hidden="true">
               <svg class="icono">
                 <use href="/img/iconos.svg#candado"></use>
               </svg>
@@ -54,7 +53,7 @@ export function mostrarBienvenida(app) {
           </li>
         </ul>
         <footer>
-          <balam-pie-instalacion>
+          <balam-pie-instalacion></balam-pie-instalacion>
         </footer>
       </div>
     </div>
