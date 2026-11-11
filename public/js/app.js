@@ -3,6 +3,7 @@
  * service worker y guarda el aviso de instalación para usarlo después.
  */
 
+
 import './enrutador.js';
 
 /**
@@ -17,8 +18,8 @@ let avisoInstalacion = null;
 // Solo si el navegador lo soporta (los muy antiguos no).
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sw.js')
-    .then( (registration) =>{
-        console.log(registration);
+    .then( (registro) =>{
+        console.log('Service worker registrado en: ', registro.scope);
     })
     .catch( (error) => {
         console.log('Error al registrar el service worker:', error);
@@ -27,7 +28,7 @@ if ('serviceWorker' in navigator) {
 
 
 // Cuando el navegador avise que la app se puede instalar, guarda ese aviso
-// en lugar de mostrarlo: lo mostrará el boton "Instalar" de la bienvenida.
+// en lugar de mostrarlo: lo mostrará el botón "Instalar" de la bienvenida.
 window.addEventListener('beforeinstallprompt', (evento) => {
   evento.preventDefault();
   avisoInstalacion = evento;
