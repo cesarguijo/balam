@@ -3,12 +3,17 @@
   "cSpell.languageSettings": [
     {
       "languageId": "javascript",
-      "includeRegExpList": ["CStyleComment", "string"]
+      "includeRegExpList": ["CStyleComment", "string"],
+      "ignoreRegExpList": [
+        "/class=\"[^\"]*\"/g",
+        "/[.#][a-z][\\w-]*/g"
+      ]
     }
   ],
   "cSpell.words": [
     "Balam",
     "beforeinstallprompt",
-    "enrutador"
+    "enrutador",
+    "milisegundos"
   ]
 }
