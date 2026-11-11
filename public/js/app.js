@@ -6,12 +6,6 @@
 import './enrutador.js';
 import './instalacion.js';
 
-/**
- * El aviso de instalación que ofrece el navegador, guardado para mostrarlo
- * cuando el usuario toque "Instalar". Es null mientras no haya aviso.
- * @type {Event|null}
- */
-
 // Registrar el service worker, que permitirá usar la app sin internet.
 // Solo si el navegador lo soporta (los muy antiguos no).
 if ('serviceWorker' in navigator) {
