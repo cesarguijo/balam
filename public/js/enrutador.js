@@ -27,18 +27,29 @@ const rutas = {
 };
 
 /**
+ * Indica si la app se abrió instalada, en su propia ventana, y no en el navegador.
+ * @returns {boolean}
+ */
+function seAbrioComoApp() {
+  return matchMedia('(display-mode: standalone)').matches;
+}
+
+/**
  * Muestra la pantalla que corresponde a la ruta actual; si la ruta no
  * existe, muestra la de inicio.
  * @throws {Error} Si no existe el contenedor #app en index.html.
  */
 function navegar() {
   const app = document.getElementById('app');
-  if(!app) {
+  if (!app) {
     throw new Error('No se encontró el contenedor #app en index.html');
   }
-  const pantalla = rutas[location.hash] ?? mostrarInicio;  
+
+  // Sin ruta o con una ruta desconocida: instalada va a inicio; en el navegador, a la bienvenida.
+  const porDefecto = seAbrioComoApp() ? mostrarInicio : mostrarBienvenida;
+  const pantalla = rutas[location.hash] ?? porDefecto;
   pantalla(app);
 }
 
-window.addEventListener('hashchange', navegar);   // cada vez que cambia la #
-navegar();                                        // al abrir la app
+window.addEventListener('hashchange', navegar); // cada vez que cambia la #
+navegar(); // al abrir la app
