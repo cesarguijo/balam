@@ -1,24 +1,24 @@
 /* Índice de estilos de Balam: aquí se agregan los componentes nuevos */
 @layer tokens, base, componentes, pantallas;
 
-
 /**
  * Tokens de diseño: colores, tipografía, etc.
  * Se importan primero para que puedan ser usados por los demás estilos
  */
-@import url("tokens.css") layer(tokens);
-@import url("base.css") layer(base);
+@import url('tokens.css') layer(tokens);
+@import url('base.css') layer(base);
+@import url('tipografia.css') layer(base);
 
 /**
  * Componentes de la aplicación
  * Se importan antes de las pantallas para que puedan usar los tokens y estilos base
  */
-@import url("../componentes/boton/boton.css") layer(componentes);
+@import url('../componentes/boton/boton.css') layer(componentes);
 
 /**
  * Pantallas de la aplicación
  * Se importan al final para que puedan usar los tokens y estilos base
  */
-@import url("../pantallas/bienvenida/bienvenida.css") layer(pantallas);
-@import url("../pantallas/inicio/inicio.css") layer(pantallas);
-@import url("../pantallas/catalogo/catalogo.css") layer(pantallas);
+@import url('../pantallas/bienvenida/bienvenida.css') layer(pantallas);
+@import url('../pantallas/inicio/inicio.css') layer(pantallas);
+@import url('../pantallas/catalogo/catalogo.css') layer(pantallas);

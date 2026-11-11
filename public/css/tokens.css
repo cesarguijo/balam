@@ -17,6 +17,17 @@
   --gris-200: #d3d1c7; /** Piedra clara */
   --gris-300: #b4b2a9; /** Piedra media */
   --gris-600: #5f5e5a; /** Piedra oscura */
+  --tamano-control: 52px;
+  --boton-extremo: 14px;
+  --boton-anillo: 3px;
+  --boton-chaflan: 10px;
+  --boton-labio-alto: 5px;
+  --espacio-4: 4px;
+  --espacio-8: 8px;
+  --espacio-12: 12px;
+  --espacio-16: 16px;
+  --espacio-24: 24px;
+  --espacio-32: 32px;
   --texto-principal: var(--azul-800); /** Texto normal sobre el fondo. Contraste 10.2:1 */
   --superficie-fondo: var(--crema-50); /** Fondo general de las pantallas */
   --accion-primaria-fondo: var(--ambar-500); /** Fondo del botón principal. Uno por pantalla */
@@ -30,6 +41,13 @@
   --accion-deshabilitada-borde: var(--gris-300); /** Anillo de cualquier botón deshabilitado */
   --accion-deshabilitada-texto: var(--gris-600); /** Texto de cualquier botón deshabilitado */
   --foco-anillo: var(--maya-500); /** Contorno de foco para teclado. 3 px, separado 3 px */
+  --icono-secundario: var(--cafe-700);
+  --decoracion-greca: var(--cafe-700);
+  --separacion-grupos: var(--espacio-24);
+  --separacion-elementos: var(--espacio-16);
+  --separacion-filas: var(--espacio-12);
+  --separacion-icono-texto: var(--espacio-12);
+  --margen-pantalla: var(--espacio-24);
   --boton-faceta-izq-arriba: var(--ambar-200);
   --boton-faceta-izq-abajo: var(--ambar-400);
   --boton-faceta-der-arriba: var(--ambar-600);
@@ -38,4 +56,5 @@
   --boton-franja-abajo: var(--ambar-700);
   --boton-labio-primario: var(--cafe-700); /** Sombra sólida de 5 px bajo el botón */
   --boton-labio-secundario: var(--azul-800); /** Sombra sólida de 5 px bajo el botón */
+  --boton-alto: var(--tamano-control);
 }

@@ -1,0 +1,85 @@
+.bienvenida {
+  position: relative;
+  isolation: isolate;
+  min-height: 100svh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: var(--margen-pantalla);
+}
+
+.bienvenida::before {
+  content: '';
+  position: fixed; /* cubre la pantalla aunque haya scroll */
+  inset: 0;
+  z-index: -1; /* detrás del contenido */
+  background-color: var(--decoracion-greca); /* el color del token */
+  mask: url('/img/greca.svg') repeat; /* el esténcil, repetido como mosaico */
+  mask-size: 110px 80px;
+  opacity: 0.07; /* lo tenue que tenías en el SVG */
+}
+.bienvenida__contenido {
+  display: flex;
+  flex-direction: column;
+  gap: var(--separacion-grupos);
+}
+
+.identidad {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--separacion-elementos);
+}
+
+.identidad > * {
+  height: fit-content;
+  padding: 0;
+  margin: 0;
+}
+
+.identidad__logo {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.identidad_logo img {
+  width: 100%;
+  display: block;
+}
+
+.identidad__lema {
+  width: 272px;
+  text-align: center;
+}
+
+.pie-instalacion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--separacion-elementos);
+  align-items: center;
+  max-width: 312px;
+}
+
+.pie-instalacion balam-boton {
+  width: 100%;
+}
+
+.caracteristicas {
+  display: flex;
+  flex-direction: column;
+  gap: var(--separacion-filas);
+}
+
+.caracteristicas__item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--separacion-icono-texto);
+}
+
+.caracteristicas__icono {
+  width: 36px;
+  text-align: center;
+}

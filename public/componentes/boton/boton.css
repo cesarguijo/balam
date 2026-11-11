@@ -6,14 +6,21 @@
    :disabled, :active, [aria-busy]         → estados nativos (sin clase)
    ================================================== */
 /* ---------- 1. Estructura: igual en todos los botones ---------- */
+balam-boton {
+  display: block;
+}
+
 .boton {
+  width: 100%;
   border: none;
   background: none;
   padding: 0;
-  margin-bottom: 5px;                          /* espacio para el labio */
+  margin-bottom: 5px; /* espacio para el labio */
   cursor: pointer;
   filter: drop-shadow(0 5px 0 var(--_labio));
-  transition: transform 80ms, filter 80ms;
+  transition:
+    transform 80ms,
+    filter 80ms;
 
   /* Por defecto, sin facetas ni franjas (solo el relleno las activa) */
   --_franja-arriba: transparent;
@@ -24,7 +31,8 @@
   --_faceta-der-abajo: transparent;
 }
 
-.boton:not(:disabled):active {                 /* se hunde solo si está activo */
+.boton:not(:disabled):active {
+  /* se hunde solo si está activo */
   transform: translateY(5px);
   filter: none;
 }
@@ -47,53 +55,86 @@
   font-weight: 700;
   line-height: 24px;
 
-  clip-path: polygon(10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px),
-                     calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px), 0 10px);
+  clip-path: polygon(
+    10px 0,
+    calc(100% - 10px) 0,
+    100% 10px,
+    100% calc(100% - 10px),
+    calc(100% - 10px) 100%,
+    10px 100%,
+    0 calc(100% - 10px),
+    0 10px
+  );
 }
 
 .boton__cuerpo::before {
-  content: "";
+  content: '';
   position: absolute;
   inset: 3px;
   z-index: -1;
-  clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px),
-                     calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px), 0 8px);
+  clip-path: polygon(
+    8px 0,
+    calc(100% - 8px) 0,
+    100% 8px,
+    100% calc(100% - 8px),
+    calc(100% - 8px) 100%,
+    8px 100%,
+    0 calc(100% - 8px),
+    0 8px
+  );
 
   background-color: var(--_fondo);
   background-image:
-    linear-gradient(to bottom right, var(--_faceta-izq-arriba) 50%, transparent 50%),
-    linear-gradient(to top right,    var(--_faceta-izq-abajo)  50%, transparent 50%),
-    linear-gradient(to bottom left,  var(--_faceta-der-arriba) 50%, transparent 50%),
-    linear-gradient(to top left,     var(--_faceta-der-abajo)  50%, transparent 50%);
+    linear-gradient(
+      to bottom right,
+      var(--_faceta-izq-arriba) 50%,
+      transparent 50%
+    ),
+    linear-gradient(
+      to top right,
+      var(--_faceta-izq-abajo) 50%,
+      transparent 50%
+    ),
+    linear-gradient(
+      to bottom left,
+      var(--_faceta-der-arriba) 50%,
+      transparent 50%
+    ),
+    linear-gradient(to top left, var(--_faceta-der-abajo) 50%, transparent 50%);
   background-size: 11px 50%;
-  background-position: left top, left bottom, right top, right bottom;
+  background-position:
+    left top,
+    left bottom,
+    right top,
+    right bottom;
   background-repeat: no-repeat;
 
-  box-shadow: inset 0 3px 0 var(--_franja-arriba),
-              inset 0 -3px 0 var(--_franja-abajo);
+  box-shadow:
+    inset 0 3px 0 var(--_franja-arriba),
+    inset 0 -3px 0 var(--_franja-abajo);
 }
 
 /* ---------- 2. Variante relleno ---------- */
 .boton--relleno {
   --_anillo: var(--accion-primaria-borde);
-  --_fondo:  var(--accion-primaria-fondo);
-  --_texto:  var(--accion-primaria-texto);
-  --_labio:  var(--boton-labio-primario);
+  --_fondo: var(--accion-primaria-fondo);
+  --_texto: var(--accion-primaria-texto);
+  --_labio: var(--boton-labio-primario);
 
-  --_franja-arriba:     var(--boton-franja-arriba);
-  --_franja-abajo:      var(--boton-franja-abajo);
+  --_franja-arriba: var(--boton-franja-arriba);
+  --_franja-abajo: var(--boton-franja-abajo);
   --_faceta-izq-arriba: var(--boton-faceta-izq-arriba);
-  --_faceta-izq-abajo:  var(--boton-faceta-izq-abajo);
+  --_faceta-izq-abajo: var(--boton-faceta-izq-abajo);
   --_faceta-der-arriba: var(--boton-faceta-der-arriba);
-  --_faceta-der-abajo:  var(--boton-faceta-der-abajo);
+  --_faceta-der-abajo: var(--boton-faceta-der-abajo);
 }
 
 /* ---------- 3. Variante contorno ---------- */
 .boton--contorno {
   --_anillo: var(--accion-secundaria-borde);
-  --_fondo:  var(--accion-secundaria-fondo);
-  --_texto:  var(--accion-secundaria-texto);
-  --_labio:  var(--boton-labio-secundario);
+  --_fondo: var(--accion-secundaria-fondo);
+  --_texto: var(--accion-secundaria-texto);
+  --_labio: var(--boton-labio-secundario);
   /* sin facetas ni franjas: usa las transparentes de .boton */
 }
 
@@ -103,8 +144,8 @@
   filter: none;
 
   --_anillo: var(--accion-deshabilitada-borde);
-  --_fondo:  var(--accion-deshabilitada-fondo);
-  --_texto:  var(--accion-deshabilitada-texto);
+  --_fondo: var(--accion-deshabilitada-fondo);
+  --_texto: var(--accion-deshabilitada-texto);
 
   --_franja-arriba: transparent;
   --_franja-abajo: transparent;
@@ -150,18 +191,23 @@
 
 /* La animacion: cada escalon se enciende y se apaga */
 @keyframes escalon {
-  0%, 100% { opacity: 0.25; }
-  35% { opacity: 1; }
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  35% {
+    opacity: 1;
+  }
 }
 
 /* El boton mientras carga: hundido, sin labio y con la piramide visible */
-.boton[aria-busy="true"] {
+.boton[aria-busy='true'] {
   transform: translateY(5px);
   filter: none;
   cursor: progress;
 }
 
-.boton[aria-busy="true"] .boton__indicador {
+.boton[aria-busy='true'] .boton__indicador {
   display: flex;
 }
 

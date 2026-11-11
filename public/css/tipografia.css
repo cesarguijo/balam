@@ -1,0 +1,23 @@
+@layer base {
+  .titulo-marca {
+    font-size: 40px;
+    line-height: 48px;
+    font-weight: bold; /* míralo en Figma */
+  }
+
+  .titulo-grande {
+    font-size: 22px;
+    line-height: 28px;
+    font-weight: bold;
+  }
+
+  .cuerpo-grande {
+    font-size: 16px;
+    line-height: 24px;
+  } /* 16/24 */
+  .etiqueta-pequena {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: bold;
+  } /* 14/20 */
+}
