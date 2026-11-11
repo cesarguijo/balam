@@ -1,6 +1,8 @@
 /**
- * @file Enrutador de Balam: muestra dentro de #app la pantalla que corresponde a
- * la dirección, cada vez que esta cambia.
+ * Muestra la pantalla que corresponde a la ruta actual. Si la ruta no existe,
+ * muestra inicio en la app instalada o la bienvenida en el navegador; dentro
+ * de la app instalada, nunca muestra la bienvenida.
+ * @throws {Error} Si no existe el contenedor #app en index.html.
  */
 import { mostrarBienvenida } from '../pantallas/bienvenida/bienvenida.js';
 import { mostrarInicio } from '../pantallas/inicio/inicio.js';
