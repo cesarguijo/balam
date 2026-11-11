@@ -1,10 +1,22 @@
 import { BalamBoton } from '../boton/boton.js';
-import { sePuedeInstalar, instalar } from '../../js/instalacion.js';
+import {
+  yaSeInstalo,
+  sePuedeInstalar,
+  instalar,
+} from '../../js/instalacion.js';
 
 export class BalamPieInstalacion extends HTMLElement {
   connectedCallback() {
+    // Estado inicial.
+    if (yaSeInstalo()) this.estado = 'instalada';
+    else if (sePuedeInstalar()) this.estado = 'instalar';
+    else this.estado = 'manual';
     window.addEventListener('beforeinstallprompt', () => {
       if (this.estado === 'manual') this.estado = 'instalar';
+    });
+    // Al terminar la instalación.
+    window.addEventListener('appinstalled', () => {
+      this.estado = 'instalada';
     });
   }
 
