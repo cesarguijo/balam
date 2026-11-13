@@ -19,7 +19,6 @@ public/                  → lo que se publica
   pantallas/<nombre>/    → una pantalla por carpeta
   js/                    → lógica compartida (enrutador, instalación, plataforma, íconos, utilidades)
   css/                   → estilos.css importa todo con @layer; tokens.css es GENERADO
-  img/iconos.svg         → sprite viejo, en migración a js/iconos.js (ADR 0006); no agregar íconos aquí
 pruebas/                 → pruebas con node:test (*.test.js)
 tokens/                  → tokens de diseño DTCG (fuente de tokens.css)
 docs/decisiones/         → ADR numerados; plantilla.md es el formato
