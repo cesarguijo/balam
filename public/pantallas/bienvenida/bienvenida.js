@@ -3,6 +3,7 @@
  */
 
 import '../../componentes/pie-instalacion/pie-instalacion.js';
+import { icono } from '../../js/iconos.js';
 
 /**
  * Muestra la pantalla de bienvenida dentro del contenedor.
@@ -28,28 +29,16 @@ export function mostrarBienvenida(app) {
         </header>
         <ul class="caracteristicas" role="list">
           <li class="caracteristicas__item">
-            <div class="caracteristicas__icono" aria-hidden="true">
-              <svg class="icono">
-                <use href="/img/iconos.svg#megafono"></use>
-              </svg>
-            </div>
+            <div class="caracteristicas__icono">${icono('megafono')}</div>
             <p class="cuerpo-grande">Avisos y notas en tu celular</p>
           </li>
           <li class="caracteristicas__item">
-            <div class="caracteristicas__icono" aria-hidden="true">
-              <svg class="icono">
-                <use href="/img/iconos.svg#calculadora"></use>
-              </svg>
-            </div>
+            <div class="caracteristicas__icono">${icono('calculadora')}</div>
             <p class="cuerpo-grande">Matemáticas a tu ritmo</p>
           </li>
           <li class="caracteristicas__item">
-            <div class="caracteristicas__icono" aria-hidden="true">
-              <svg class="icono">
-                <use href="/img/iconos.svg#candado"></use>
-              </svg>
-            </div>
-            <p class="cuerpo-grande">Privado gratis y sin anuncios</p>
+            <div class="caracteristicas__icono">${icono('candado')}</div>
+            <p class="cuerpo-grande">Privado, gratis y sin anuncios</p>
           </li>
         </ul>
         <footer>
