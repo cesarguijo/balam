@@ -1,0 +1,5 @@
+{
+  "all": true,
+  "include": ["public/**/*.js"],
+  "reporter": ["html", "text"]
+}

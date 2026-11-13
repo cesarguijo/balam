@@ -11,7 +11,13 @@
       "ignoreRegExpList": ["/class=\"[^\"]*\"/g", "/[.#][a-z][\\w-]*/g"]
     }
   ],
-  "cSpell.words": ["Balam", "beforeinstallprompt", "enrutador", "milisegundos"],
+  "cSpell.words": [
+    "Balam",
+    "beforeinstallprompt",
+    "enrutador",
+    "milisegundos",
+    "redibuja"
+  ],
   "emmet.includeLanguages": { "javascript": "html" },
   "editor.linkedEditing": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
