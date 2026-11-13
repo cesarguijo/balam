@@ -1,44 +1,119 @@
+/**
+ * @file Componente <balam-pie-instalacion>: registra la etiqueta y decide
+ * cómo ofrecer la instalación (botón, progreso, confirmación o instrucciones
+ * según la plataforma).
+ */
 import { BalamBoton } from '../boton/boton.js';
 import {
   yaSeInstalo,
   sePuedeInstalar,
   instalar,
 } from '../../js/instalacion.js';
+import { detectarPlataforma } from '../../js/plataforma.js';
+import { instrucciones } from './instrucciones.js';
 
+/**
+ * Estados del pie de instalación:
+ * - `instalar`: el navegador permite instalar; se muestra el botón.
+ * - `instalando`: la persona aceptó; se espera el evento `appinstalled`.
+ * - `instalada`: la app ya está instalada; se muestra la confirmación.
+ * - `manual`: el navegador no ofrece el botón (o la persona canceló); se
+ *   muestran las instrucciones de su plataforma.
+ * @typedef {'instalar' | 'instalando' | 'instalada' | 'manual'} EstadoInstalacion
+ */
+
+/**
+ * Pie de la bienvenida que invita a instalar Balam.
+ *
+ * Calcula su propio estado (no recibe atributos) y se redibuja cada vez que
+ * cambia. Escucha `beforeinstallprompt` y `appinstalled` en `window` mientras
+ * está en la página.
+ */
 export class BalamPieInstalacion extends HTMLElement {
+  /**
+   * Quita los listeners de window al salir de la página, para no dejar
+   * componentes fantasma en memoria.
+   * @type {AbortController | undefined}
+   */
+  #controlador;
+
+  /**
+   * Estado actual. Solo se cambia con #cambiarEstado, para que siempre se redibuje.
+   * @type {EstadoInstalacion}
+   */
+  #estado = 'instalar';
+
+  /**
+   * Calcula el estado inicial y empieza a escuchar los eventos de instalación.
+   * Crea un controlador nuevo en cada conexión, porque uno abortado no se
+   * puede reutilizar.
+   */
   connectedCallback() {
+    this.#controlador = new AbortController();
     // Estado inicial.
-    if (yaSeInstalo()) this.estado = 'instalada';
-    else if (sePuedeInstalar()) this.estado = 'instalar';
-    else this.estado = 'manual';
-    window.addEventListener('beforeinstallprompt', () => {
-      if (this.estado === 'manual' || this.estado === 'instalada') {
-        this.estado = 'instalar';
-      }
-    });
+    if (yaSeInstalo()) this.#cambiarEstado('instalada');
+    else if (sePuedeInstalar()) this.#cambiarEstado('instalar');
+    else this.#cambiarEstado('manual');
+    window.addEventListener(
+      'beforeinstallprompt',
+      () => {
+        if (this.#estado === 'manual' || this.#estado === 'instalada') {
+          this.#cambiarEstado('instalar');
+        }
+      },
+      { signal: this.#controlador.signal },
+    );
     // Al terminar la instalación.
-    window.addEventListener('appinstalled', () => {
-      this.estado = 'instalada';
-    });
+    window.addEventListener(
+      'appinstalled',
+      () => {
+        this.#cambiarEstado('instalada');
+      },
+      { signal: this.#controlador.signal },
+    );
   }
 
+  /**
+   * Quita los listeners de `window` al salir de la página.
+   */
+  disconnectedCallback() {
+    this.#controlador?.abort();
+  }
+
+  /**
+   * Devuelve el botón dibujado dentro del componente.
+   * @returns {BalamBoton}
+   * @throws {Error} Si el estado actual no dibujó un <balam-boton>.
+   */
   get #balamBoton() {
-    const balamButon = this.querySelector('balam-boton');
-    if (!(balamButon instanceof BalamBoton)) {
+    const balamBoton = this.querySelector('balam-boton');
+    if (!(balamBoton instanceof BalamBoton)) {
       throw new Error('No se encontró el elemento <balam-boton>');
     }
-    return balamButon;
+    return balamBoton;
   }
 
-  get estado() {
-    return this.getAttribute('estado') ?? 'instalar';
-  }
-
-  set estado(valor) {
-    this.setAttribute('estado', valor);
+  /**
+   * Cambia el estado y redibuja el componente.
+   * @param {EstadoInstalacion} valor - El nuevo estado.
+   */
+  #cambiarEstado(valor) {
+    this.#estado = valor;
     this.#dibujar();
   }
 
+  /**
+   * Detecta la plataforma del navegador actual. Usa `navigator`, por eso la
+   * detección en sí vive en plataforma.js, que es pura y se puede probar.
+   */
+  get #plataforma() {
+    return detectarPlataforma(navigator.userAgent, navigator.maxTouchPoints);
+  }
+
+  /**
+   * Lanza el aviso de instalación del navegador al tocar el botón. El
+   * listener va en el botón (no en `window`), así que se va junto con él.
+   */
   #conectarBoton() {
     this.#balamBoton.addEventListener('click', async () => {
       if (this.#balamBoton.cargando) return;
@@ -46,32 +121,28 @@ export class BalamPieInstalacion extends HTMLElement {
 
       const resultado = await instalar();
       if (resultado === 'accepted') {
-        this.estado = 'instalando'; // termina en 'instalada' con el evento appinstalled
+        this.#cambiarEstado('instalando'); // termina en 'instalada' con el evento appinstalled
       } else {
-        this.estado = 'manual'; // canceló o no estaba disponible: instrucciones
+        this.#cambiarEstado('manual'); // canceló o no estaba disponible: instrucciones
       }
     });
   }
 
+  /**
+   * Reemplaza el contenido según el estado actual.
+   */
   #dibujar() {
-    if (this.estado === 'instalada') {
+    if (this.#estado === 'instalada') {
       this.innerHTML = /* HTML */ `
         <p class="pie-instalacion__nota etiqueta-pequena">
           ¡Listo! Balam ya está instalada <br />
           Ábrela desde tu pantalla de inicio
         </p>
       `;
-    } else if (this.estado === 'manual') {
-      this.innerHTML = /* HTML */ `
-        <p class="pie-instalacion__nota etiqueta-pequena">
-          Instálala desde tu navegador:
-        </p>
-        <ol>
-          <li>Instruction</li>
-          <li>Instruction</li>
-        </ol>
-      `;
-    } else if (this.estado === 'instalando') {
+    } else if (this.#estado === 'manual') {
+      const plataforma = this.#plataforma;
+      this.innerHTML = instrucciones[plataforma] ?? instrucciones['otro'];
+    } else if (this.#estado === 'instalando') {
       this.innerHTML = /* HTML */ `
         <balam-boton texto="Instalando..."></balam-boton>
         <p class="pie-instalacion__nota etiqueta-pequena">
@@ -80,7 +151,7 @@ export class BalamPieInstalacion extends HTMLElement {
         </p>
       `;
       this.#balamBoton.cargando = true;
-    } else if (this.estado === 'instalar') {
+    } else if (this.#estado === 'instalar') {
       this.innerHTML = /* HTML */ `
         <balam-boton texto="Instalar"></balam-boton>
         <p class="pie-instalacion__nota etiqueta-pequena">
