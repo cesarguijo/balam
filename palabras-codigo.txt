@@ -21,3 +21,4 @@ indicador
 texto
 balam
 cargando
+megafono
