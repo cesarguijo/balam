@@ -3,6 +3,7 @@
  */
 
 import { icono } from '../../js/iconos.js';
+import { decoraciones } from '../../js/decoraciones.js';
 
 /**
  * Instrucciones de instalación por plataforma.
@@ -11,21 +12,40 @@ import { icono } from '../../js/iconos.js';
  */
 export const instrucciones = {
   escritorio: /* HTML */ `
-    <div class="pie-instalacion__nota">
-      <p class="etiqueta-pequena">Balam funciona mejor en tu celular</p>
-    </div>
-    <div class="pie-instalacion__QR">
+    <p class="pie-instalacion__nota pie-instalacion__nota--grande">
+      Balam funciona
+      <span class="pie-instalacion__subrayado">mejor</span> en tu celular
+    </p>
+    <div class="pie-instalacion__qr">
       <img
+        class="pie-instalacion__qr-imagen"
         src="/img/qr-balam.svg"
         width="400"
+        height="400"
         alt="Código QR para abrir Balam en tu celular"
       />
+      <span
+        class="pie-instalacion__esquina pie-instalacion__esquina--arriba-izquierda"
+        >${decoraciones['angulo-redondeado']}</span
+      >
+      <span
+        class="pie-instalacion__esquina pie-instalacion__esquina--arriba-derecha"
+        >${decoraciones['angulo-redondeado']}</span
+      >
+      <span
+        class="pie-instalacion__esquina pie-instalacion__esquina--abajo-izquierda"
+        >${decoraciones['angulo-redondeado']}</span
+      >
+      <span
+        class="pie-instalacion__esquina pie-instalacion__esquina--abajo-derecha"
+        >${decoraciones['angulo-redondeado']}</span
+      >
     </div>
-    <div class="pie-instalacion__instrucciones">
-      <div class="pie-instalacion__icono">${icono('movil')}</div>
-      <div class="pie-instalacion__texto">
+    <div class="pie-instalacion__escanear">
+      <div class="pie-instalacion__escanear-icono">${icono('movil')}</div>
+      <div class="pie-instalacion__escanear-texto">
         <p>Escanea este código con la cámara de tu celular</p>
-        <p>balam-math.web.app</p>
+        <p><strong>balam-math.web.app</strong></p>
       </div>
     </div>
   `,

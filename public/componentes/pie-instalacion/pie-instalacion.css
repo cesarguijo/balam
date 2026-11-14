@@ -3,7 +3,7 @@ balam-pie-instalacion {
   flex-direction: column;
   gap: var(--separacion-elementos);
   margin-inline: auto;
-  max-width: 312px;
+  max-width: 100%;
 }
 
 balam-pie-instalacion balam-boton {
@@ -12,4 +12,156 @@ balam-pie-instalacion balam-boton {
 
 .pie-instalacion__nota {
   text-align: center;
+}
+
+/* El título de los pasos se alinea con ellos, como en Figma. */
+.pie-instalacion__nota:has(+ .pie-instalacion__pasos) {
+  text-align: start;
+}
+
+/* Pasos de instalación manual (celulares). */
+.pie-instalacion__pasos {
+  display: flex;
+  flex-direction: column;
+  gap: var(--separacion-filas);
+  padding: 0;
+  list-style: none;
+}
+
+.pie-instalacion__paso {
+  display: flex;
+  align-items: center;
+  gap: var(--separacion-icono-texto);
+}
+
+/* El ícono va dentro de un círculo ámbar; el padding del SVG achica el dibujo dentro del círculo. */
+.pie-instalacion__paso .icono {
+  width: var(--espacio-32);
+  height: var(--espacio-32);
+  padding: var(--espacio-8);
+  border-radius: 50%;
+  background-color: var(--ambar-200);
+}
+
+/*
+ * Variante de escritorio (QR). Sus clases solo existen en esa plantilla, así que
+ * no dependen del ancho: también deben verse bien en una ventana angosta.
+ */
+
+/* clamp con una parte en rem: crece con la pantalla, pero también con el zoom. */
+.pie-instalacion__nota--grande {
+  font-size: clamp(1.5rem, 1rem + 1vw, 2.25rem);
+  line-height: 1.2;
+  /* Reparte las palabras parejo entre las líneas, para no dejar una sola abajo. */
+  text-wrap: balance;
+}
+
+/*
+ * El trazo curvo se dibuja con una máscara: el SVG solo da la forma y el color
+ * sale del token, porque una URL data: no puede leer var(...).
+ */
+.pie-instalacion__subrayado {
+  position: relative;
+  display: inline-block;
+}
+
+.pie-instalacion__subrayado::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  bottom: -0.2em;
+  height: 0.3em;
+  background-color: var(--ambar-300);
+  --forma-subrayado: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 12' preserveAspectRatio='none'%3E%3Cpath d='M4 7.85C36.24 3.12 79.08 2.33 123.5 7.85' stroke-width='8' stroke-linecap='round' stroke='black' fill='none'/%3E%3C/svg%3E");
+  /* Con prefijo para Chromium viejos (Android antiguos, Responsively); sin él se vería un rectángulo. */
+  -webkit-mask: var(--forma-subrayado) no-repeat center / 100% 100%;
+  mask: var(--forma-subrayado) no-repeat center / 100% 100%;
+}
+
+/* El tope en svh evita que, en pantallas bajitas, el contenido baje hasta la onda. */
+.pie-instalacion__qr {
+  position: relative;
+  width: min(100%, 30rem, 50svh);
+  margin-inline: auto;
+  padding: var(--espacio-32);
+  /* TODO: crear en Figma el token --superficie-tarjeta y usarlo aquí. */
+  background-color: white;
+}
+
+.pie-instalacion__qr-imagen {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.pie-instalacion__esquina {
+  position: absolute;
+  width: var(--espacio-32);
+  stroke: var(--ambar-300);
+  fill: none;
+}
+
+.pie-instalacion__esquina .decoracion {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.pie-instalacion__esquina--arriba-izquierda {
+  top: var(--espacio-16);
+  left: var(--espacio-16);
+}
+
+.pie-instalacion__esquina--arriba-derecha {
+  top: var(--espacio-16);
+  right: var(--espacio-16);
+  transform: scaleX(-1);
+}
+
+.pie-instalacion__esquina--abajo-izquierda {
+  bottom: var(--espacio-16);
+  left: var(--espacio-16);
+  transform: scaleY(-1);
+}
+
+.pie-instalacion__esquina--abajo-derecha {
+  bottom: var(--espacio-16);
+  right: var(--espacio-16);
+  transform: rotate(180deg);
+}
+
+.pie-instalacion__escanear {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espacio-24);
+}
+
+.pie-instalacion__escanear-icono {
+  padding-right: var(--espacio-24);
+  border-right: var(--espacio-4) solid var(--ambar-300);
+}
+
+.pie-instalacion__escanear-icono .icono {
+  display: block;
+  width: clamp(3rem, 2rem + 3vw, 5.75rem);
+  height: clamp(3rem, 2rem + 3vw, 5.75rem);
+}
+
+.pie-instalacion__escanear-texto {
+  font-size: clamp(1rem, 0.5rem + 1vw, 1.5rem);
+  line-height: 1.3;
+}
+
+/* En una sola columna (ventana angosta) el QR va debajo de todo: más chico para no obligar a hacer scroll. */
+@media (max-width: 1024px) {
+  .pie-instalacion__qr {
+    width: min(100%, 30rem, 30svh);
+  }
+}
+
+@media (min-width: 1025px) {
+  balam-pie-instalacion {
+    gap: var(--espacio-32);
+  }
 }
