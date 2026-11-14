@@ -8,33 +8,6 @@
   padding: var(--margen-pantalla);
 }
 
-.bienvenida::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background: radial-gradient(
-    ellipse at center,
-    var(--superficie-fondo) 40%,
-    transparent 60%
-  );
-}
-
-.bienvenida::before {
-  content: '';
-  position: fixed; /* cubre la pantalla aunque haya scroll */
-  inset: 0;
-  z-index: -1; /* detrás del contenido */
-  background-color: var(--decoracion-greca); /* el color del token */
-  mask: url('/img/greca.svg') repeat; /* el esténcil, repetido como mosaico */
-  opacity: 0.07; /* lo tenue que tenías en el SVG */
-}
-.bienvenida__contenido {
-  display: flex;
-  flex-direction: column;
-  gap: var(--separacion-grupos);
-}
-
 .identidad {
   display: flex;
   flex-direction: column;
@@ -46,18 +19,6 @@
   height: fit-content;
   padding: 0;
   margin: 0;
-}
-
-.identidad__logo {
-  width: 52px;
-  height: 52px;
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.identidad__logo img {
-  width: 100%;
-  display: block;
 }
 
 .identidad__lema {
@@ -82,5 +43,176 @@
 
 .caracteristicas__icono .icono {
   color: var(--icono-secundario);
-  filter: drop-shadow(0 1px 1.5px #a58766);
+  /* Sombra del mismo café, aclarado con el fondo, para que se vea suave. */
+  filter: drop-shadow(
+    0 1px 1.5px
+      color-mix(in srgb, var(--icono-secundario) 65%, var(--superficie-fondo))
+  );
+}
+
+.bienvenida__contenido {
+  display: flex;
+  flex-direction: column;
+  gap: var(--separacion-grupos);
+}
+
+.bienvenida__columna-izquierda {
+  display: flex;
+  flex-direction: column;
+  gap: var(--separacion-grupos);
+}
+
+.identidad__logo {
+  border-radius: 20%;
+  overflow: hidden;
+}
+
+/* Fondo decorativo: capa fija detrás del contenido; el orden del DOM decide qué va encima. */
+.bienvenida__fondo {
+  position: fixed;
+  pointer-events: none;
+  z-index: -1;
+  inset: 0;
+}
+
+/* Solo las decoraciones del fondo se posicionan; las del pie (esquinas del QR) no. */
+.bienvenida__fondo .decoracion {
+  position: absolute;
+}
+
+.decoracion__azul {
+  fill: var(--azul-800);
+}
+
+.decoracion__ambar {
+  fill: var(--ambar-400);
+}
+
+/* No hay token para este ámbar tan claro, así que se mezcla con el fondo. */
+.decoracion__ambar-claro {
+  fill: color-mix(in srgb, var(--ambar-200) 50%, var(--superficie-fondo));
+}
+
+.decoracion--onda-arriba {
+  top: 0;
+  left: 0;
+  width: clamp(12rem, 35vw, 40rem);
+}
+
+.decoracion--onda-abajo {
+  right: 0;
+  bottom: 0;
+  width: clamp(12rem, 50vw, 40rem);
+}
+
+/* Las grecas van muy tenues para no competir con el texto. */
+.decoracion--greca {
+  fill: var(--decoracion-greca);
+  opacity: 0.12;
+}
+
+.decoracion--greca-abajo-izquierda {
+  bottom: 0;
+  left: 0;
+  width: clamp(12rem, 18vw, 24rem);
+}
+
+.decoracion--greca-arriba-izquierda {
+  top: 10vw;
+  left: 0;
+  width: clamp(8rem, 12vw, 14rem);
+}
+
+/* En celular solo van las grecas de la izquierda, para que no compitan con el texto. */
+.decoracion--greca-arriba-derecha,
+.decoracion--greca-abajo-derecha {
+  display: none;
+}
+
+.decoracion--greca-arriba-derecha {
+  top: 0;
+  right: 0;
+  width: clamp(10rem, 14vw, 18rem);
+}
+
+.decoracion--greca-abajo-derecha {
+  bottom: var(--espacio-32);
+  right: 0;
+  width: clamp(10rem, 14vw, 18rem);
+}
+
+@media (min-width: 1025px) {
+  .decoracion--greca-arriba-derecha,
+  .decoracion--greca-abajo-derecha {
+    display: block;
+  }
+
+  .bienvenida__contenido {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(var(--espacio-32), 5vw, 5rem);
+    width: 100%;
+    max-width: 72rem;
+    align-self: center;
+  }
+
+  /* flex-basis + max-width en vez de anchos fijos: las columnas se encogen si no caben. */
+  .bienvenida__columna-izquierda {
+    flex: 1 1 22rem;
+    max-width: 26rem;
+    gap: var(--espacio-32);
+  }
+
+  .bienvenida__pie {
+    flex: 1 1 26rem;
+    max-width: 33rem;
+  }
+
+  .identidad__nombre {
+    font-size: clamp(3rem, 2rem + 4vw, 6rem);
+    line-height: 1.1;
+  }
+
+  /* En em, para que la raya crezca junto con el nombre. */
+  .identidad__nombre::after {
+    content: '';
+    display: block;
+    margin-inline: auto;
+    width: 2.2em;
+    height: 0.1em;
+    background-color: var(--ambar-300);
+  }
+
+  .identidad__logo {
+    width: clamp(6rem, 10vw, 10rem);
+    aspect-ratio: 1;
+  }
+
+  /* Solo en escritorio: en celular la imagen usa su tamaño de 52 px del HTML. */
+  .identidad__logo img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .identidad__lema {
+    width: auto;
+    max-width: 27rem;
+    font-size: clamp(1.25rem, 0.75rem + 1.25vw, 2rem);
+    line-height: 1.2;
+    font-weight: bold;
+    /* Reparte las palabras parejo entre las líneas, para no dejar una sola abajo. */
+    text-wrap: balance;
+  }
+
+  .caracteristicas__texto {
+    font-size: clamp(1rem, 0.5rem + 1vw, 1.5rem);
+    line-height: 1.3;
+  }
+
+  .caracteristicas__icono .icono {
+    display: block;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
 }

@@ -50,14 +50,19 @@ export class BalamPieInstalacion extends HTMLElement {
    */
   connectedCallback() {
     this.#controlador = new AbortController();
+    const esEscritorio = this.#plataforma === 'escritorio';
     // Estado inicial.
-    if (yaSeInstalo()) this.#cambiarEstado('instalada');
+    if (esEscritorio) this.#cambiarEstado('manual');
+    else if (yaSeInstalo()) this.#cambiarEstado('instalada');
     else if (sePuedeInstalar()) this.#cambiarEstado('instalar');
     else this.#cambiarEstado('manual');
     window.addEventListener(
       'beforeinstallprompt',
       () => {
-        if (this.#estado === 'manual' || this.#estado === 'instalada') {
+        if (
+          (this.#estado === 'manual' || this.#estado === 'instalada') &&
+          !esEscritorio
+        ) {
           this.#cambiarEstado('instalar');
         }
       },
