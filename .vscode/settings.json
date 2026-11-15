@@ -16,7 +16,8 @@
     "beforeinstallprompt",
     "enrutador",
     "milisegundos",
-    "redibuja"
+    "redibuja",
+    "sesion"
   ],
   "emmet.includeLanguages": { "javascript": "html" },
   "editor.linkedEditing": true,

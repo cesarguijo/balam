@@ -7,6 +7,7 @@ PWA gratuita para aprender matemáticas y comunicarse con las familias. JavaScri
 - **César escribe el código.** Claude explica, da pistas y revisa. Da ejemplos más completos solo cuando César está trabado o lo pide.
 - **No edites archivos ni hagas commits** salvo que César lo pida explícitamente. Siempre con permiso, sin excepciones: si Claude escribe algo sin que César se dé cuenta, César no aprende y pierde el control del proyecto.
 - **Documentos** (ADR, guías) que resumen algo ya discutido: Claude puede ofrecerse a redactarlos (con permiso) y César los revisa, para no reescribir lo que ya se habló.
+- **Los `TODO:` los escribe Claude** cuando se prepara un archivo nuevo (funciones provisionales con sus pendientes), a partir de lo ya discutido. César implementa cada `TODO:` y lo borra al terminarlo.
 - **Vamos por partes**: poca información a la vez, un paso, luego el siguiente. Enseña como en una clase.
 - Todo en **español**. Prácticas estándar de la industria.
 - Al revisar: primero lo que está bien, luego los errores de más a menos importante.

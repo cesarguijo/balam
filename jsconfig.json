@@ -2,7 +2,13 @@
   "compilerOptions": {
     "checkJs": true,
     "module": "ES2022",
-    "target": "ES2022"
+    "target": "ES2022",
+    "moduleResolution": "bundler",
+    "paths": {
+      "https://www.gstatic.com/firebasejs/13.3.0/firebase-*.js": [
+        "./node_modules/firebase/*"
+      ]
+    }
   },
   "include": ["public/**/*.js"]
 }
