@@ -70,3 +70,6 @@ credenciales
 referencia
 captura
 objeto
+mensaje
+mensajes
+desconocido
