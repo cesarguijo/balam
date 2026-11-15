@@ -41,19 +41,31 @@ globalThis.localStorage = /** @type {Storage} */ ({
   removeItem,
 });
 
-const haySesion = mock.fn(() => Promise.resolve(true));
-const cerrarSesion = mock.fn(() => Promise.resolve());
-
-mock.module('../public/js/firebase/adaptador-sesion.js', {
-  namedExports: { haySesion, cerrarSesion },
-});
-const { obtenerSesion } = await import('../public/js/sesion.js');
-
 /** Familia válida para guardar como copia en el teléfono. */
 const familiaValida = {
   usuario: 'arguijo.reyes',
   hijos: [{ id: 'prueba-ana', grado: 7, nombre: 'Ana Arguijo' }],
 };
+
+const credenciales = {
+  usuario: 'arguijo-reyes',
+  clave: 'clave-de-prueba',
+};
+
+const iniciarSesionDelAdaptador = mock.fn(() => Promise.resolve(familiaValida));
+
+const haySesion = mock.fn(() => Promise.resolve(true));
+const cerrarSesion = mock.fn(() => Promise.resolve());
+
+mock.module('../public/js/firebase/adaptador-sesion.js', {
+  namedExports: {
+    haySesion,
+    cerrarSesion,
+    iniciarSesion: iniciarSesionDelAdaptador,
+  },
+});
+const { obtenerSesion, ErrorDeSesion, iniciarSesion } =
+  await import('../public/js/sesion.js');
 
 describe('obtenerSesion (sesion.js)', () => {
   beforeEach(() => {
@@ -122,6 +134,91 @@ describe('obtenerSesion (sesion.js)', () => {
         assert.equal(cerrarSesion.mock.callCount(), 1);
         assert.equal(aviso.mock.callCount(), 1);
       });
+    });
+  });
+});
+
+describe('ErrorDeSesion (sesion.js)', () => {
+  const error = new ErrorDeSesion('sin-conexion');
+  test('guarda el tipo que recibe', () => {
+    assert.equal(error.tipo, 'sin-conexion');
+  });
+
+  test('se llama ErrorDeSesion', () => {
+    assert.equal(error.name, 'ErrorDeSesion');
+  });
+
+  test('es un Error', () => {
+    assert.ok(error instanceof Error);
+    assert.ok(error instanceof ErrorDeSesion);
+  });
+
+  test('guarda la causa que recibe', () => {
+    const causa = new Error('error de Firebase');
+    const error = new ErrorDeSesion('sin-conexion', { cause: causa });
+    assert.equal(error.cause, causa);
+  });
+});
+
+describe('iniciarSesion (sesion.js)', () => {
+  beforeEach(() => {
+    datos.clear();
+    iniciarSesionDelAdaptador.mock.resetCalls();
+  });
+
+  describe('cuando el adaptador responde', () => {
+    test('le pasa el usuario y la clave al adaptador', () => {
+      return iniciarSesion(credenciales.usuario, credenciales.clave).then(
+        () => {
+          assert.deepEqual(iniciarSesionDelAdaptador.mock.calls[0].arguments, [
+            credenciales.usuario,
+            credenciales.clave,
+          ]);
+        },
+      );
+    });
+
+    test('devuelve la familia', () => {
+      return iniciarSesion(credenciales.usuario, credenciales.clave).then(
+        (result) => {
+          assert.deepEqual(result, familiaValida);
+        },
+      );
+    });
+
+    test('guarda la familia en el teléfono', () => {
+      return iniciarSesion(credenciales.usuario, credenciales.clave).then(
+        () => {
+          const texto = globalThis.localStorage.getItem('familia');
+          assert.ok(texto);
+          const familiaLocalStorage = JSON.parse(texto);
+          assert.deepEqual(familiaLocalStorage, familiaValida);
+        },
+      );
+    });
+  });
+
+  describe('cuando el adaptador falla', () => {
+    test('el error llega igual a quien llamó', () => {
+      const error = new ErrorDeSesion('clave-incorrecta');
+      iniciarSesionDelAdaptador.mock.mockImplementationOnce(() =>
+        Promise.reject(error),
+      );
+      return assert.rejects(
+        iniciarSesion(credenciales.usuario, credenciales.clave),
+        error,
+      );
+    });
+
+    test('no guarda nada en el teléfono', () => {
+      iniciarSesionDelAdaptador.mock.mockImplementationOnce(() =>
+        Promise.reject(new ErrorDeSesion('clave-incorrecta')),
+      );
+      return assert
+        .rejects(iniciarSesion(credenciales.usuario, credenciales.clave))
+        .then(() => {
+          assert.equal(globalThis.localStorage.getItem('familia'), null);
+        });
     });
   });
 });
