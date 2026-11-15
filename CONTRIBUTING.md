@@ -14,13 +14,17 @@ git pull
 
 1. **Entender:** ¿qué necesita el alumno o la familia? ¿En qué pantalla aparece?
 2. **Aprender lo justo:** solo lo que la tarea requiere.
-3. **Diseñar en Figma:** explorar con colores sueltos, crear el componente y sus variantes, probar el prototipo y, al final, conectar todo a variables.
-4. **Construir:** exportar los tokens (`npm run tokens`), escribir el CSS y, si hace falta, el JavaScript.
-5. **Probar:** en un celular real y en pantalla de 320 px de ancho.
-6. **Cerrar:** commit, `firebase deploy` y actualizar la documentación.
+3. **Lógica primero:** escribir las funciones puras con sus pruebas (`npm test`). La lógica bien definida dice qué estados y mensajes debe tener el diseño.
+4. **Diseñar en Figma:** explorar con colores sueltos, crear el componente y sus variantes (una por cada estado que pide la lógica), probar el prototipo y, al final, conectar todo a variables.
+5. **Construir:** exportar los tokens (`npm run tokens`), escribir el HTML y el CSS, y conectar la lógica a la pantalla.
+6. **Probar:** en un celular real y en pantalla de 320 px de ancho.
+7. **Cerrar:** commit, `firebase deploy` y actualizar la documentación.
+
+Si al diseñar aparece lógica que faltaba (un estado "cargando", un botón para mostrar la clave), se vuelve al paso 3 y se agrega con su prueba.
 
 ### Una tarea está terminada cuando…
 
+- [ ] La lógica pura tiene sus pruebas y `npm test` pasa.
 - [ ] Usa solo variables de diseño (ningún color o medida suelta).
 - [ ] Funciona en un celular real, con 320 px de ancho.
 - [ ] El texto tiene contraste de al menos 4.5:1 y los elementos táctiles miden 48 px o más.
