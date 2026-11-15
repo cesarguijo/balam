@@ -39,14 +39,14 @@ export async function haySesion() {
  * Inicia sesión en Firebase con usuario y clave, y lee una sola vez el
  * documento de la familia (`familias/{uid}`). El usuario se convierte en un
  * correo inventado (`usuario@balam.local`) porque Firebase Auth pide correo.
- * @param {string} usuario - Usuario de la familia, sin el dominio, p. ej. `perez.familia`.
+ * @param {string} usuario - Usuario de la familia, sin el dominio y ya normalizado por `validarCredenciales`, p. ej. `mariaperez1985`.
  * @param {string} clave - Clave que el docente entregó en papel.
  * @returns {Promise<Familia>} La familia, ya validada por `convertirEnFamilia`.
  * @throws {ErrorDeSesion} Si la clave es incorrecta, no hay internet, la cuenta
  * está deshabilitada o el documento de la familia falta o viene mal.
  */
 export async function iniciarSesion(usuario, clave) {
-  const email = `${usuario.trim().toLowerCase()}@balam.local`;
+  const email = `${usuario}@balam.local`;
   return iniciarSesionFirebase(autenticacion, email, clave)
     .then((credencialesDeUsuario) => {
       const uid = credencialesDeUsuario.user.uid;

@@ -98,7 +98,7 @@ export function obtenerSesion() {
 /**
  * Inicia sesión en este teléfono. La sesión queda guardada: el padre no tiene
  * que volver a escribir su clave.
- * @param {string} usuario - Usuario de la familia, p. ej. `perez.familia`.
+ * @param {string} usuario - Usuario de la familia, ya normalizado por `validarCredenciales`, p. ej. `mariaperez1985`.
  * @param {string} clave - Clave que el docente entregó en papel.
  * @returns {Promise<Familia>} La familia que inició sesión.
  * @throws {ErrorDeSesion} Si la clave es incorrecta, no hay internet o la

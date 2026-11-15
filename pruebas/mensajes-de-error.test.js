@@ -9,6 +9,9 @@ describe('obtenerMensajeDeError (login/mensajes-de-error.js)', () => {
     'cuenta-deshabilitada',
     'demasiados-intentos',
     'desconocido',
+    'usuario-vacio',
+    'usuario-invalido',
+    'clave-vacia',
   ];
 
   describe('devuelve un texto no vacío para', () => {

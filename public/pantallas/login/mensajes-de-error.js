@@ -5,11 +5,11 @@
  */
 
 /** @typedef {import('../../js/sesion.js').TipoDeErrorDeSesion} TipoDeErrorDeSesion */
-
+/** @typedef {import('./validacion.js').TipoDeErrorDeValidacion} TipoDeErrorDeValidacion */
 /**
  * Relaciona cada tipo de error con el mensaje que ve el padre. Los mensajes
  * son cortos y dicen qué hacer, porque se leen en el teléfono y sin ayuda.
- * @type {Record<TipoDeErrorDeSesion, string>}
+ * @type {Record<TipoDeErrorDeSesion|TipoDeErrorDeValidacion, string>}
  */
 const mensajes = {
   'clave-incorrecta':
@@ -21,6 +21,10 @@ const mensajes = {
   'demasiados-intentos':
     'Ha intentado iniciar sesión demasiadas veces, espere antes de volver a intentar.',
   desconocido: 'Ocurrió un error desconocido, reporte al maestro encargado.',
+  'clave-vacia': 'Por favor ingrese su clave.',
+  'usuario-invalido':
+    'Usuario inválido, El usuario solo lleva letras y números, sin espacios ni puntos.',
+  'usuario-vacio': 'Por favor ingrese su usuario.',
 };
 
 /**

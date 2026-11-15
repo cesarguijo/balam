@@ -73,3 +73,6 @@ objeto
 mensaje
 mensajes
 desconocido
+normalizar
+normalizado
+valido
