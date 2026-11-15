@@ -32,7 +32,9 @@ const mensajes = {
  */
 export function obtenerMensajeDeError(tipo) {
   if (tipo !== undefined && Object.hasOwn(mensajes, tipo)) {
-    return mensajes[tipo];
+    // El cast es seguro: Object.hasOwn ya confirmó que tipo es una clave de
+    // mensajes, pero TypeScript no lo deduce por su cuenta.
+    return mensajes[/** @type {TipoDeErrorDeSesion} */ (tipo)];
   }
   return mensajes.desconocido;
 }

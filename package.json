@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "pendientes": "leasot \"public/**/*.{js,css}\" --reporter markdown > docs/pendientes.md",
-    "cobertura": "c8 node --test",
-    "test": "node --test",
+    "cobertura": "c8 node --test --experimental-test-module-mocks",
+    "test": "node --test --experimental-test-module-mocks",
     "docs": "jsdoc2md --files \"public/**/*.js\" > docs/codigo.md",
     "lint": "eslint public",
     "tokens": "style-dictionary build --config sd.config.mjs"

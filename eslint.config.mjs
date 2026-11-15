@@ -15,7 +15,7 @@ export default [
       ecmaVersion: 2022,
       sourceType: 'module', // usamos import/export
       globals: {
-        ...globals.browser,       // window, document, navigator…
+        ...globals.browser, // window, document, navigator…
         ...globals.serviceworker, // self, caches… (para sw.js)
       },
     },
@@ -25,13 +25,23 @@ export default [
     rules: {
       // Ortografía SOLO de nombres (variables, funciones, propiedades).
       // Los comentarios y textos los revisa la extensión de VS Code, con tildes.
-      '@cspell/spellchecker': ['warn', {
-        checkIdentifiers: true,
-        checkComments: false,
-        checkStrings: false,
-        checkStringTemplates: false,
-        customWordListFile: './palabras-codigo.txt',
-      }],
+      '@cspell/spellchecker': [
+        'warn',
+        {
+          checkIdentifiers: true,
+          checkComments: false,
+          checkStrings: false,
+          checkStringTemplates: false,
+          customWordListFile: './palabras-codigo.txt',
+        },
+      ],
+    },
+  },
+  // 3. Reglas para las pruebas (corren en Node).
+  {
+    files: ['pruebas/**/*.js'],
+    languageOptions: {
+      globals: { ...globals.node },
     },
   },
 ];
