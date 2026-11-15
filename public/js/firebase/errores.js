@@ -33,7 +33,8 @@ const traduccion = {
  * @returns {TipoDeErrorDeSesion} El tipo de error que entiende la pantalla de login.
  */
 export function traducirErrorDeFirebase(codigo) {
-  if (codigo === undefined) return 'desconocido';
-  else if (Object.hasOwn(traduccion, codigo)) return traduccion[codigo];
-  else return 'desconocido';
+  if (codigo !== undefined && Object.hasOwn(traduccion, codigo)) {
+    return traduccion[codigo];
+  }
+  return 'desconocido';
 }

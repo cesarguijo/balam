@@ -23,7 +23,7 @@ describe('traducirErrorDeFirebase (firebase/errores.js)', () => {
     describe('desconocido cuando', () => {
       const esperados = [
         { prueba: 'algo-raro', mensaje: 'un código no existe' },
-        { prueba: '', mensaje: 'un texto esta vació' },
+        { prueba: '', mensaje: 'un texto está vacío' },
         { prueba: undefined, mensaje: 'se pasa undefined' },
         {
           prueba: 'constructor',
