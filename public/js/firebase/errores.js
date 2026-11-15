@@ -29,9 +29,11 @@ const traduccion = {
  * Traduce un código de error de Firebase al tipo de error de la app. Si no
  * reconoce el código, devuelve `desconocido`: así ningún error de Firebase
  * llega a las pantallas sin traducir.
- * @param {string} codigo - El código del error de Firebase (`error.code`), p. ej. `auth/user-disabled`.
+ * @param {string|undefined} codigo - El código del error de Firebase puede ser undefined si el error no es de Firebase (`error.code`), p. ej. `auth/user-disabled`.
  * @returns {TipoDeErrorDeSesion} El tipo de error que entiende la pantalla de login.
  */
 export function traducirErrorDeFirebase(codigo) {
-  return traduccion[codigo] ?? 'desconocido';
+  if (codigo === undefined) return 'desconocido';
+  else if (Object.hasOwn(traduccion, codigo)) return traduccion[codigo];
+  else return 'desconocido';
 }

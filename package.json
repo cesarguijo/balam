@@ -37,8 +37,5 @@
     "prettier": "^3.9.10",
     "style-dictionary": "^5.8.0"
   },
-  "private": true,
-  "dependencies": {
-    "cobertura": "^1.0.3"
-  }
+  "private": true
 }
