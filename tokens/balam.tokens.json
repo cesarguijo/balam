@@ -1,9 +1,9 @@
 {
-  "ambar": {
+  "amber": {
     "200": {
       "$type": "color",
       "$value": "#f7c27e",
-      "$description": "Ámbar claro · faceta iluminada",
+      "$description": "Light amber · lit facet",
       "$extensions": {
         "mode": {}
       }
@@ -11,7 +11,7 @@
     "300": {
       "$type": "color",
       "$value": "#f5b565",
-      "$description": "Ámbar luz · franja de brillo",
+      "$description": "Bright amber · highlight strip",
       "$extensions": {
         "mode": {}
       }
@@ -19,7 +19,7 @@
     "400": {
       "$type": "color",
       "$value": "#f0a24a",
-      "$description": "Ámbar medio",
+      "$description": "Medium amber",
       "$extensions": {
         "mode": {}
       }
@@ -27,7 +27,7 @@
     "500": {
       "$type": "color",
       "$value": "#e89030",
-      "$description": "Ámbar jaguar · pelaje del jaguar, color de marca",
+      "$description": "Jaguar amber · the jaguar's coat, brand color",
       "$extensions": {
         "mode": {}
       }
@@ -35,7 +35,7 @@
     "600": {
       "$type": "color",
       "$value": "#d47e25",
-      "$description": "Ámbar sombra",
+      "$description": "Shadow amber",
       "$extensions": {
         "mode": {}
       }
@@ -43,7 +43,7 @@
     "700": {
       "$type": "color",
       "$value": "#c26f1e",
-      "$description": "Ámbar tostado",
+      "$description": "Toasted amber",
       "$extensions": {
         "mode": {}
       }
@@ -51,27 +51,27 @@
     "800": {
       "$type": "color",
       "$value": "#9a5410",
-      "$description": "Ámbar oscuro",
+      "$description": "Dark amber",
       "$extensions": {
         "mode": {}
       }
     }
   },
-  "azul": {
+  "blue": {
     "800": {
       "$type": "color",
       "$value": "#1b3a6b",
-      "$description": "Azul profundo · obsidiana y noche",
+      "$description": "Deep blue · obsidian and night",
       "$extensions": {
         "mode": {}
       }
     }
   },
-  "crema": {
+  "cream": {
     "50": {
       "$type": "color",
       "$value": "#f7f3e6",
-      "$description": "Crema orquídea · orquídea nacional Rhyncholaelia digbyana",
+      "$description": "Orchid cream · national orchid Rhyncholaelia digbyana",
       "$extensions": {
         "mode": {}
       }
@@ -81,27 +81,35 @@
     "500": {
       "$type": "color",
       "$value": "#1a7088",
-      "$description": "Azul maya · pigmento de índigo y paligorskita",
+      "$description": "Maya blue · indigo and palygorskite pigment",
       "$extensions": {
         "mode": {}
       }
     }
   },
-  "cafe": {
+  "brown": {
+    "500": {
+      "$type": "color",
+      "$value": "#9c7458",
+      "$description": "Medium deer brown · field border. Contrast 3.7:1 on cream",
+      "$extensions": {
+        "mode": {}
+      }
+    },
     "700": {
       "$type": "color",
       "$value": "#7a4e32",
-      "$description": "Café venado · venado cola blanca, animal nacional",
+      "$description": "Deer brown · white-tailed deer, national animal",
       "$extensions": {
         "mode": {}
       }
     }
   },
-  "gris": {
+  "gray": {
     "200": {
       "$type": "color",
       "$value": "#d3d1c7",
-      "$description": "Piedra clara",
+      "$description": "Light stone",
       "$extensions": {
         "mode": {}
       }
@@ -109,7 +117,7 @@
     "300": {
       "$type": "color",
       "$value": "#b4b2a9",
-      "$description": "Piedra media",
+      "$description": "Medium stone",
       "$extensions": {
         "mode": {}
       }
@@ -117,195 +125,239 @@
     "600": {
       "$type": "color",
       "$value": "#5f5e5a",
-      "$description": "Piedra oscura",
+      "$description": "Dark stone",
       "$extensions": {
         "mode": {}
       }
     }
   },
-  "texto": {
-    "principal": {
+  "white": {
+    "$type": "color",
+    "$value": "#ffffff",
+    "$description": "White · raised surfaces (fields, QR card)",
+    "$extensions": {
+      "mode": {}
+    }
+  },
+  "pink": {
+    "50": {
       "$type": "color",
-      "$value": "{azul.800}",
-      "$description": "Texto normal sobre el fondo. Contraste 10.2:1",
+      "$value": "#fbeaf0",
+      "$description": "Very light macuelizo pink · server error background",
       "$extensions": {
         "mode": {}
       }
-    }
-  },
-  "superficie": {
-    "fondo": {
+    },
+    "600": {
       "$type": "color",
-      "$value": "{crema.50}",
-      "$description": "Fondo general de las pantallas",
+      "$value": "#a8406b",
+      "$description": "Macuelizo pink · Tabebuia rosea flower",
       "$extensions": {
         "mode": {}
       }
     }
   },
-  "accion": {
-    "primaria": {
-      "fondo": {
+  "text": {
+    "primary": {
+      "$type": "color",
+      "$value": "{blue.800}",
+      "$description": "Body text on the background. Contrast 10.2:1",
+      "$extensions": {
+        "mode": {}
+      }
+    },
+    "secondary": {
+      "$type": "color",
+      "$value": "{gray.600}",
+      "$description": "Placeholders and helper text. Contrast 6.5:1 on white",
+      "$extensions": {
+        "mode": {}
+      }
+    }
+  },
+  "surface": {
+    "background": {
+      "$type": "color",
+      "$value": "{cream.50}",
+      "$description": "Main screen background",
+      "$extensions": {
+        "mode": {}
+      }
+    },
+    "raised": {
+      "$type": "color",
+      "$value": "{white}",
+      "$description": "Background of what sits on the screen: fields and cards",
+      "$extensions": {
+        "mode": {}
+      }
+    }
+  },
+  "action": {
+    "primary": {
+      "background": {
         "$type": "color",
-        "$value": "{ambar.500}",
-        "$description": "Fondo del botón principal. Uno por pantalla",
+        "$value": "{amber.500}",
+        "$description": "Primary button background. One per screen",
         "$extensions": {
           "mode": {}
         }
       },
-      "borde": {
+      "border": {
         "$type": "color",
-        "$value": "{ambar.800}",
-        "$description": "Anillo del botón principal",
+        "$value": "{amber.800}",
+        "$description": "Primary button ring",
         "$extensions": {
           "mode": {}
         }
       },
-      "texto": {
+      "text": {
         "$type": "color",
-        "$value": "{azul.800}",
-        "$description": "Texto del botón principal. Contraste 4.5:1, siempre en Bold",
+        "$value": "{blue.800}",
+        "$description": "Primary button text. Contrast 4.5:1, always bold",
         "$extensions": {
           "mode": {}
         }
       }
     },
-    "secundaria": {
-      "fondo": {
+    "secondary": {
+      "background": {
         "$type": "color",
-        "$value": "{crema.50}",
-        "$description": "Fondo del botón de contorno",
+        "$value": "{cream.50}",
+        "$description": "Secondary (outline) button background",
         "$extensions": {
           "mode": {}
         }
       },
-      "borde": {
+      "border": {
         "$type": "color",
-        "$value": "{azul.800}",
-        "$description": "Anillo del botón de contorno",
+        "$value": "{blue.800}",
+        "$description": "Secondary (outline) button ring",
         "$extensions": {
           "mode": {}
         }
       },
-      "texto": {
+      "text": {
         "$type": "color",
-        "$value": "{azul.800}",
-        "$description": "Texto del botón de contorno",
+        "$value": "{blue.800}",
+        "$description": "Secondary (outline) button text",
         "$extensions": {
           "mode": {}
         }
       }
     },
-    "texto": {
+    "tertiary": {
+      "text": {
+        "$type": "color",
+        "$value": "{maya.500}",
+        "$description": "Text-only button, for minor actions",
+        "$extensions": {
+          "mode": {}
+        }
+      }
+    },
+    "disabled": {
+      "background": {
+        "$type": "color",
+        "$value": "{gray.200}",
+        "$description": "Background of any disabled control",
+        "$extensions": {
+          "mode": {}
+        }
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{gray.300}",
+        "$description": "Ring of any disabled button",
+        "$extensions": {
+          "mode": {}
+        }
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{gray.600}",
+        "$description": "Text of any disabled button",
+        "$extensions": {
+          "mode": {}
+        }
+      }
+    }
+  },
+  "focus": {
+    "ring": {
       "$type": "color",
       "$value": "{maya.500}",
-      "$description": "Botón de solo texto, para acciones menores",
+      "$description": "Keyboard focus outline. 3 px wide, 3 px offset",
       "$extensions": {
         "mode": {}
       }
-    },
-    "deshabilitada": {
-      "fondo": {
-        "$type": "color",
-        "$value": "{gris.200}",
-        "$description": "Fondo de cualquier botón deshabilitado",
-        "$extensions": {
-          "mode": {}
-        }
-      },
-      "borde": {
-        "$type": "color",
-        "$value": "{gris.300}",
-        "$description": "Anillo de cualquier botón deshabilitado",
-        "$extensions": {
-          "mode": {}
-        }
-      },
-      "texto": {
-        "$type": "color",
-        "$value": "{gris.600}",
-        "$description": "Texto de cualquier botón deshabilitado",
-        "$extensions": {
-          "mode": {}
-        }
-      }
     }
   },
-  "foco": {
-    "anillo": {
+  "icon": {
+    "secondary": {
       "$type": "color",
-      "$value": "{maya.500}",
-      "$description": "Contorno de foco para teclado. 3 px, separado 3 px",
+      "$value": "{brown.700}",
+      "$description": "Decorative icons and icons inside fields. Contrast 6.4:1",
       "$extensions": {
         "mode": {}
       }
     }
   },
-  "icono": {
-    "secundario": {
+  "decoration": {
+    "maya-fret": {
       "$type": "color",
-      "$value": "{cafe.700}",
-      "$description": "",
+      "$value": "{brown.700}",
+      "$description": "Background frets, always at 12% opacity",
       "$extensions": {
         "mode": {}
       }
     }
   },
-  "decoracion": {
-    "greca": {
-      "$type": "color",
-      "$value": "{cafe.700}",
-      "$description": "",
-      "$extensions": {
-        "mode": {}
-      }
-    }
-  },
-  "separacion": {
-    "grupos": {
+  "spacing": {
+    "groups": {
       "$type": "dimension",
-      "$value": "{espacio.24}",
+      "$value": "{space.24}",
       "$description": "",
       "$extensions": {
         "mode": {}
       }
     },
-    "elementos": {
+    "elements": {
       "$type": "dimension",
-      "$value": "{espacio.16}",
+      "$value": "{space.16}",
       "$description": "",
       "$extensions": {
         "mode": {}
       }
     },
-    "filas": {
+    "row": {
       "$type": "dimension",
-      "$value": "{espacio.12}",
+      "$value": "{space.12}",
       "$description": "",
       "$extensions": {
         "mode": {}
       }
     },
-    "icono-texto": {
+    "text-icon": {
       "$type": "dimension",
-      "$value": "{espacio.12}",
+      "$value": "{space.12}",
       "$description": "",
       "$extensions": {
         "mode": {}
       }
     }
   },
-  "margen": {
-    "pantalla": {
+  "margin": {
+    "screen": {
       "$type": "dimension",
-      "$value": "{espacio.24}",
+      "$value": "{space.24}",
       "$description": "",
       "$extensions": {
         "mode": {}
       }
     }
   },
-  "tamano": {
+  "size": {
     "control": {
       "$type": "dimension",
       "$value": {
@@ -318,86 +370,258 @@
       }
     }
   },
-  "boton": {
-    "faceta": {
-      "izq-arriba": {
+  "feedback": {
+    "to-correct": {
+      "$type": "color",
+      "$value": "{pink.600}",
+      "$description": "Error border, icon and message. Never red. Contrast 5.2:1",
+      "$extensions": {
+        "mode": {}
+      }
+    }
+  },
+  "alert": {
+    "error": {
+      "background": {
         "$type": "color",
-        "$value": "{ambar.200}",
+        "$value": "{pink.50}",
+        "$description": "Server error message background",
+        "$extensions": {
+          "mode": {}
+        }
+      }
+    }
+  },
+  "field": {
+    "border": {
+      "$type": "color",
+      "$value": "{brown.500}",
+      "$description": "Field border at rest, 1 px. Contrast 3.7:1",
+      "$extensions": {
+        "mode": {}
+      }
+    }
+  },
+  "font": {
+    "weight": {
+      "regular": {
+        "$type": "dimension",
+        "$value": {
+          "value": 400,
+          "unit": "px"
+        },
         "$description": "",
         "$extensions": {
           "mode": {}
         }
       },
-      "izq-abajo": {
-        "$type": "color",
-        "$value": "{ambar.400}",
-        "$description": "",
-        "$extensions": {
-          "mode": {}
-        }
-      },
-      "der-arriba": {
-        "$type": "color",
-        "$value": "{ambar.600}",
-        "$description": "",
-        "$extensions": {
-          "mode": {}
-        }
-      },
-      "der-abajo": {
-        "$type": "color",
-        "$value": "{ambar.700}",
+      "bold": {
+        "$type": "dimension",
+        "$value": {
+          "value": 700,
+          "unit": "px"
+        },
         "$description": "",
         "$extensions": {
           "mode": {}
         }
       }
     },
-    "franja": {
-      "arriba": {
-        "$type": "color",
-        "$value": "{ambar.300}",
+    "size": {
+      "display": {
+        "$type": "dimension",
+        "$value": {
+          "value": 40,
+          "unit": "px"
+        },
         "$description": "",
         "$extensions": {
           "mode": {}
         }
       },
-      "abajo": {
-        "$type": "color",
-        "$value": "{ambar.700}",
+      "title": {
+        "$type": "dimension",
+        "$value": {
+          "value": 22,
+          "unit": "px"
+        },
+        "$description": "",
+        "$extensions": {
+          "mode": {}
+        }
+      },
+      "label-large": {
+        "$type": "dimension",
+        "$value": {
+          "value": 18,
+          "unit": "px"
+        },
+        "$description": "",
+        "$extensions": {
+          "mode": {}
+        }
+      },
+      "body": {
+        "$type": "dimension",
+        "$value": {
+          "value": 16,
+          "unit": "px"
+        },
+        "$description": "",
+        "$extensions": {
+          "mode": {}
+        }
+      },
+      "label": {
+        "$type": "dimension",
+        "$value": {
+          "value": 14,
+          "unit": "px"
+        },
         "$description": "",
         "$extensions": {
           "mode": {}
         }
       }
     },
-    "labio": {
-      "primario": {
-        "$type": "color",
-        "$value": "{cafe.700}",
-        "$description": "Sombra sólida de 5 px bajo el botón",
+    "line-height": {
+      "display": {
+        "$type": "dimension",
+        "$value": {
+          "value": 48,
+          "unit": "px"
+        },
+        "$description": "",
         "$extensions": {
           "mode": {}
         }
       },
-      "secundario": {
+      "title": {
+        "$type": "dimension",
+        "$value": {
+          "value": 28,
+          "unit": "px"
+        },
+        "$description": "",
+        "$extensions": {
+          "mode": {}
+        }
+      },
+      "label-large": {
+        "$type": "dimension",
+        "$value": {
+          "value": 24,
+          "unit": "px"
+        },
+        "$description": "",
+        "$extensions": {
+          "mode": {}
+        }
+      },
+      "body": {
+        "$type": "dimension",
+        "$value": {
+          "value": 24,
+          "unit": "px"
+        },
+        "$description": "",
+        "$extensions": {
+          "mode": {}
+        }
+      },
+      "label": {
+        "$type": "dimension",
+        "$value": {
+          "value": 20,
+          "unit": "px"
+        },
+        "$description": "",
+        "$extensions": {
+          "mode": {}
+        }
+      }
+    }
+  },
+  "button": {
+    "facet": {
+      "top-left": {
         "$type": "color",
-        "$value": "{azul.800}",
-        "$description": "Sombra sólida de 5 px bajo el botón",
+        "$value": "{amber.200}",
+        "$description": "",
+        "$extensions": {
+          "mode": {}
+        }
+      },
+      "bottom-left": {
+        "$type": "color",
+        "$value": "{amber.400}",
+        "$description": "",
+        "$extensions": {
+          "mode": {}
+        }
+      },
+      "top-right": {
+        "$type": "color",
+        "$value": "{amber.600}",
+        "$description": "",
+        "$extensions": {
+          "mode": {}
+        }
+      },
+      "bottom-right": {
+        "$type": "color",
+        "$value": "{amber.700}",
+        "$description": "",
         "$extensions": {
           "mode": {}
         }
       }
     },
-    "alto": {
+    "strip": {
+      "top": {
+        "$type": "color",
+        "$value": "{amber.300}",
+        "$description": "",
+        "$extensions": {
+          "mode": {}
+        }
+      },
+      "bottom": {
+        "$type": "color",
+        "$value": "{amber.700}",
+        "$description": "",
+        "$extensions": {
+          "mode": {}
+        }
+      }
+    },
+    "lip": {
+      "primary": {
+        "$type": "color",
+        "$value": "{brown.700}",
+        "$description": "Solid 5 px shadow under the button",
+        "$extensions": {
+          "mode": {}
+        }
+      },
+      "secondary": {
+        "$type": "color",
+        "$value": "{blue.800}",
+        "$description": "Solid 5 px shadow under the button",
+        "$extensions": {
+          "mode": {}
+        }
+      }
+    },
+    "height": {
       "$type": "dimension",
-      "$value": "{tamano.control}",
+      "$value": "{size.control}",
       "$description": "",
       "$extensions": {
         "mode": {}
       }
     },
-    "extremo": {
+    "end": {
       "$type": "dimension",
       "$value": {
         "value": 14,
@@ -408,7 +632,7 @@
         "mode": {}
       }
     },
-    "anillo": {
+    "ring": {
       "$type": "dimension",
       "$value": {
         "value": 3,
@@ -419,7 +643,7 @@
         "mode": {}
       }
     },
-    "chaflan": {
+    "chamfer": {
       "$type": "dimension",
       "$value": {
         "value": 10,
@@ -430,7 +654,7 @@
         "mode": {}
       }
     },
-    "labio-alto": {
+    "lip-height": {
       "$type": "dimension",
       "$value": {
         "value": 5,
@@ -440,9 +664,66 @@
       "$extensions": {
         "mode": {}
       }
+    },
+    "loader": {
+      "step-height": {
+        "$type": "dimension",
+        "$value": {
+          "value": 6,
+          "unit": "px"
+        },
+        "$description": "",
+        "$extensions": {
+          "mode": {}
+        }
+      },
+      "step-width": {
+        "$type": "dimension",
+        "$value": {
+          "value": 8,
+          "unit": "px"
+        },
+        "$description": "",
+        "$extensions": {
+          "mode": {}
+        }
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": {
+          "value": 3,
+          "unit": "px"
+        },
+        "$description": "",
+        "$extensions": {
+          "mode": {}
+        }
+      }
+    },
+    "padding-inline": {
+      "$type": "dimension",
+      "$value": {
+        "value": 28,
+        "unit": "px"
+      },
+      "$description": "",
+      "$extensions": {
+        "mode": {}
+      }
+    },
+    "facet-width": {
+      "$type": "dimension",
+      "$value": {
+        "value": 11,
+        "unit": "px"
+      },
+      "$description": "",
+      "$extensions": {
+        "mode": {}
+      }
     }
   },
-  "espacio": {
+  "space": {
     "4": {
       "$type": "dimension",
       "$value": {
@@ -515,8 +796,8 @@
       "useDTCG": true,
       "spec": "https://www.designtokens.org/tr/2025.10/format/",
       "colorMode": "hex",
-      "variableCollections": ["Paleta", "Roles", "Componentes", "Medidas"],
-      "createdAt": "2026-11-11T06:17:06.223Z"
+      "variableCollections": ["Palette", "Roles", "Components", "Measures"],
+      "createdAt": "2026-11-16T04:43:23.642Z"
     }
   }
 }

@@ -3,58 +3,86 @@
  */
 
 :root {
-  --ambar-200: #f7c27e; /** Ámbar claro · faceta iluminada */
-  --ambar-300: #f5b565; /** Ámbar luz · franja de brillo */
-  --ambar-400: #f0a24a; /** Ámbar medio */
-  --ambar-500: #e89030; /** Ámbar jaguar · pelaje del jaguar, color de marca */
-  --ambar-600: #d47e25; /** Ámbar sombra */
-  --ambar-700: #c26f1e; /** Ámbar tostado */
-  --ambar-800: #9a5410; /** Ámbar oscuro */
-  --azul-800: #1b3a6b; /** Azul profundo · obsidiana y noche */
-  --crema-50: #f7f3e6; /** Crema orquídea · orquídea nacional Rhyncholaelia digbyana */
-  --maya-500: #1a7088; /** Azul maya · pigmento de índigo y paligorskita */
-  --cafe-700: #7a4e32; /** Café venado · venado cola blanca, animal nacional */
-  --gris-200: #d3d1c7; /** Piedra clara */
-  --gris-300: #b4b2a9; /** Piedra media */
-  --gris-600: #5f5e5a; /** Piedra oscura */
-  --tamano-control: 52px;
-  --boton-extremo: 14px;
-  --boton-anillo: 3px;
-  --boton-chaflan: 10px;
-  --boton-labio-alto: 5px;
-  --espacio-4: 4px;
-  --espacio-8: 8px;
-  --espacio-12: 12px;
-  --espacio-16: 16px;
-  --espacio-24: 24px;
-  --espacio-32: 32px;
-  --texto-principal: var(--azul-800); /** Texto normal sobre el fondo. Contraste 10.2:1 */
-  --superficie-fondo: var(--crema-50); /** Fondo general de las pantallas */
-  --accion-primaria-fondo: var(--ambar-500); /** Fondo del botón principal. Uno por pantalla */
-  --accion-primaria-borde: var(--ambar-800); /** Anillo del botón principal */
-  --accion-primaria-texto: var(--azul-800); /** Texto del botón principal. Contraste 4.5:1, siempre en Bold */
-  --accion-secundaria-fondo: var(--crema-50); /** Fondo del botón de contorno */
-  --accion-secundaria-borde: var(--azul-800); /** Anillo del botón de contorno */
-  --accion-secundaria-texto: var(--azul-800); /** Texto del botón de contorno */
-  --accion-texto: var(--maya-500); /** Botón de solo texto, para acciones menores */
-  --accion-deshabilitada-fondo: var(--gris-200); /** Fondo de cualquier botón deshabilitado */
-  --accion-deshabilitada-borde: var(--gris-300); /** Anillo de cualquier botón deshabilitado */
-  --accion-deshabilitada-texto: var(--gris-600); /** Texto de cualquier botón deshabilitado */
-  --foco-anillo: var(--maya-500); /** Contorno de foco para teclado. 3 px, separado 3 px */
-  --icono-secundario: var(--cafe-700);
-  --decoracion-greca: var(--cafe-700);
-  --separacion-grupos: var(--espacio-24);
-  --separacion-elementos: var(--espacio-16);
-  --separacion-filas: var(--espacio-12);
-  --separacion-icono-texto: var(--espacio-12);
-  --margen-pantalla: var(--espacio-24);
-  --boton-faceta-izq-arriba: var(--ambar-200);
-  --boton-faceta-izq-abajo: var(--ambar-400);
-  --boton-faceta-der-arriba: var(--ambar-600);
-  --boton-faceta-der-abajo: var(--ambar-700);
-  --boton-franja-arriba: var(--ambar-300);
-  --boton-franja-abajo: var(--ambar-700);
-  --boton-labio-primario: var(--cafe-700); /** Sombra sólida de 5 px bajo el botón */
-  --boton-labio-secundario: var(--azul-800); /** Sombra sólida de 5 px bajo el botón */
-  --boton-alto: var(--tamano-control);
+  --amber-200: #f7c27e; /** Light amber · lit facet */
+  --amber-300: #f5b565; /** Bright amber · highlight strip */
+  --amber-400: #f0a24a; /** Medium amber */
+  --amber-500: #e89030; /** Jaguar amber · the jaguar's coat, brand color */
+  --amber-600: #d47e25; /** Shadow amber */
+  --amber-700: #c26f1e; /** Toasted amber */
+  --amber-800: #9a5410; /** Dark amber */
+  --blue-800: #1b3a6b; /** Deep blue · obsidian and night */
+  --cream-50: #f7f3e6; /** Orchid cream · national orchid Rhyncholaelia digbyana */
+  --maya-500: #1a7088; /** Maya blue · indigo and palygorskite pigment */
+  --brown-500: #9c7458; /** Medium deer brown · field border. Contrast 3.7:1 on cream */
+  --brown-700: #7a4e32; /** Deer brown · white-tailed deer, national animal */
+  --gray-200: #d3d1c7; /** Light stone */
+  --gray-300: #b4b2a9; /** Medium stone */
+  --gray-600: #5f5e5a; /** Dark stone */
+  --white: #ffffff; /** White · raised surfaces (fields, QR card) */
+  --pink-50: #fbeaf0; /** Very light macuelizo pink · server error background */
+  --pink-600: #a8406b; /** Macuelizo pink · Tabebuia rosea flower */
+  --size-control: 52px;
+  --font-weight-regular: 400;
+  --font-weight-bold: 700;
+  --font-size-display: 40px;
+  --font-size-title: 22px;
+  --font-size-label-large: 18px;
+  --font-size-body: 16px;
+  --font-size-label: 14px;
+  --font-line-height-display: 48px;
+  --font-line-height-title: 28px;
+  --font-line-height-label-large: 24px;
+  --font-line-height-body: 24px;
+  --font-line-height-label: 20px;
+  --button-end: 14px;
+  --button-ring: 3px;
+  --button-chamfer: 10px;
+  --button-lip-height: 5px;
+  --button-loader-step-height: 6px;
+  --button-loader-step-width: 8px;
+  --button-loader-gap: 3px;
+  --button-loader-duration: 1200ms; /** One full cycle of the pyramid */
+  --button-padding-inline: 28px;
+  --button-facet-width: 11px;
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --duration-fast: 80ms; /** Feedback for a tap: the button sinking */
+  --text-primary: var(--blue-800); /** Body text on the background. Contrast 10.2:1 */
+  --text-secondary: var(--gray-600); /** Placeholders and helper text. Contrast 6.5:1 on white */
+  --surface-background: var(--cream-50); /** Main screen background */
+  --surface-raised: var(--white); /** Background of what sits on the screen: fields and cards */
+  --action-primary-background: var(--amber-500); /** Primary button background. One per screen */
+  --action-primary-border: var(--amber-800); /** Primary button ring */
+  --action-primary-text: var(--blue-800); /** Primary button text. Contrast 4.5:1, always bold */
+  --action-secondary-background: var(--cream-50); /** Secondary (outline) button background */
+  --action-secondary-border: var(--blue-800); /** Secondary (outline) button ring */
+  --action-secondary-text: var(--blue-800); /** Secondary (outline) button text */
+  --action-tertiary-text: var(--maya-500); /** Text-only button, for minor actions */
+  --action-disabled-background: var(--gray-200); /** Background of any disabled control */
+  --action-disabled-border: var(--gray-300); /** Ring of any disabled button */
+  --action-disabled-text: var(--gray-600); /** Text of any disabled button */
+  --focus-ring: var(--maya-500); /** Keyboard focus outline. 3 px wide, 3 px offset */
+  --icon-secondary: var(--brown-700); /** Decorative icons and icons inside fields. Contrast 6.4:1 */
+  --decoration-maya-fret: var(--brown-700); /** Background frets, always at 12% opacity */
+  --spacing-groups: var(--space-24);
+  --spacing-elements: var(--space-16);
+  --spacing-row: var(--space-12);
+  --spacing-text-icon: var(--space-12);
+  --margin-screen: var(--space-24);
+  --feedback-to-correct: var(--pink-600); /** Error border, icon and message. Never red. Contrast 5.2:1 */
+  --alert-error-background: var(--pink-50); /** Server error message background */
+  --field-border: var(--brown-500); /** Field border at rest, 1 px. Contrast 3.7:1 */
+  --button-facet-top-left: var(--amber-200);
+  --button-facet-bottom-left: var(--amber-400);
+  --button-facet-top-right: var(--amber-600);
+  --button-facet-bottom-right: var(--amber-700);
+  --button-strip-top: var(--amber-300);
+  --button-strip-bottom: var(--amber-700);
+  --button-lip-primary: var(--brown-700); /** Solid 5 px shadow under the button */
+  --button-lip-secondary: var(--blue-800); /** Solid 5 px shadow under the button */
+  --button-height: var(--size-control);
 }
