@@ -3,7 +3,7 @@
  * cómo ofrecer la instalación (botón, progreso, confirmación o instrucciones
  * según la plataforma).
  */
-import { BalamBoton } from '../boton/boton.js';
+import { BalamButton } from '../button/button.js';
 import {
   yaSeInstalo,
   sePuedeInstalar,
@@ -87,15 +87,15 @@ export class BalamPieInstalacion extends HTMLElement {
 
   /**
    * Devuelve el botón dibujado dentro del componente.
-   * @returns {BalamBoton}
-   * @throws {Error} Si el estado actual no dibujó un <balam-boton>.
+   * @returns {BalamButton}
+   * @throws {Error} Si el estado actual no dibujó un <balam-button>.
    */
-  get #balamBoton() {
-    const balamBoton = this.querySelector('balam-boton');
-    if (!(balamBoton instanceof BalamBoton)) {
-      throw new Error('No se encontró el elemento <balam-boton>');
+  get #balamButton() {
+    const balamButton = this.querySelector('balam-button');
+    if (!(balamButton instanceof BalamButton)) {
+      throw new Error('No se encontró el elemento <balam-button>');
     }
-    return balamBoton;
+    return balamButton;
   }
 
   /**
@@ -120,9 +120,9 @@ export class BalamPieInstalacion extends HTMLElement {
    * listener va en el botón (no en `window`), así que se va junto con él.
    */
   #conectarBoton() {
-    this.#balamBoton.addEventListener('click', async () => {
-      if (this.#balamBoton.cargando) return;
-      this.#balamBoton.cargando = true;
+    this.#balamButton.addEventListener('click', async () => {
+      if (this.#balamButton.loading) return;
+      this.#balamButton.loading = true;
 
       const resultado = await instalar();
       if (resultado === 'accepted') {
@@ -149,16 +149,16 @@ export class BalamPieInstalacion extends HTMLElement {
       this.innerHTML = instrucciones[plataforma] ?? instrucciones['otro'];
     } else if (this.#estado === 'instalando') {
       this.innerHTML = /* HTML */ `
-        <balam-boton texto="Instalando..."></balam-boton>
+        <balam-button texto="Instalando..."></balam-button>
         <p class="pie-instalacion__nota etiqueta-pequena">
           Esto tarda unos segundos. <br />
           No cierres esta página.
         </p>
       `;
-      this.#balamBoton.cargando = true;
+      this.#balamButton.loading = true;
     } else if (this.#estado === 'instalar') {
       this.innerHTML = /* HTML */ `
-        <balam-boton texto="Instalar"></balam-boton>
+        <balam-button texto="Instalar"></balam-button>
         <p class="pie-instalacion__nota etiqueta-pequena">
           Consume pocos datos y almacenamiento
         </p>

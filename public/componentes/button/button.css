@@ -1,0 +1,225 @@
+/* ==================================================
+   BUTTON
+   .button                          → structure shared by all
+   .button--primary                 → variant: filled colors (with facets)
+   .button--secondary               → variant: outline colors
+   :disabled, :active, [aria-busy]  → native states (no class)
+   ================================================== */
+/* ---------- 1. Structure: the same for every button ---------- */
+balam-button {
+  display: block;
+}
+
+.button {
+  width: 100%;
+  border: none;
+  background: none;
+  padding: 0;
+  margin-bottom: var(--button-lip-height); /* room for the lip */
+  cursor: pointer;
+  filter: drop-shadow(0 var(--button-lip-height) 0 var(--_lip));
+  transition:
+    transform var(--duration-fast),
+    filter var(--duration-fast);
+
+  /* By default, no facets or strips (only primary turns them on) */
+  --_strip-top: transparent;
+  --_strip-bottom: transparent;
+  --_facet-top-left: transparent;
+  --_facet-bottom-left: transparent;
+  --_facet-top-right: transparent;
+  --_facet-bottom-right: transparent;
+}
+
+.button:not(:disabled):active {
+  /* sinks only when enabled */
+  transform: translateY(var(--button-lip-height));
+  filter: none;
+}
+
+.button__body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-text-icon);
+  place-items: center;
+  height: var(--button-height);
+  padding-inline: var(--button-padding-inline);
+  position: relative;
+  isolation: isolate;
+
+  background-color: var(--_ring);
+  color: var(--_text);
+
+  font-size: var(--font-size-label-large);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--font-line-height-label-large);
+
+  clip-path: polygon(
+    var(--button-chamfer) 0,
+    calc(100% - var(--button-chamfer)) 0,
+    100% var(--button-chamfer),
+    100% calc(100% - var(--button-chamfer)),
+    calc(100% - var(--button-chamfer)) 100%,
+    var(--button-chamfer) 100%,
+    0 calc(100% - var(--button-chamfer)),
+    0 var(--button-chamfer)
+  );
+}
+
+.button__body::before {
+  content: '';
+  position: absolute;
+  inset: var(--button-ring);
+  z-index: -1;
+  clip-path: polygon(
+    calc(var(--button-chamfer) - 2px) 0,
+    calc(100% - calc(var(--button-chamfer) - 2px)) 0,
+    100% calc(var(--button-chamfer) - 2px),
+    100% calc(100% - calc(var(--button-chamfer) - 2px)),
+    calc(100% - calc(var(--button-chamfer) - 2px)) 100%,
+    calc(var(--button-chamfer) - 2px) 100%,
+    0 calc(100% - calc(var(--button-chamfer) - 2px)),
+    0 calc(var(--button-chamfer) - 2px)
+  );
+
+  background-color: var(--_background);
+  background-image:
+    linear-gradient(
+      to bottom right,
+      var(--_facet-top-left) 50%,
+      transparent 50%
+    ),
+    linear-gradient(
+      to top right,
+      var(--_facet-bottom-left) 50%,
+      transparent 50%
+    ),
+    linear-gradient(
+      to bottom left,
+      var(--_facet-top-right) 50%,
+      transparent 50%
+    ),
+    linear-gradient(
+      to top left,
+      var(--_facet-bottom-right) 50%,
+      transparent 50%
+    );
+  background-size: var(--button-facet-width) 50%;
+  background-position:
+    left top,
+    left bottom,
+    right top,
+    right bottom;
+  background-repeat: no-repeat;
+
+  box-shadow:
+    inset 0 var(--button-ring) 0 var(--_strip-top),
+    inset 0 calc((--button-ring) * -1) 0 var(--_strip-bottom);
+}
+
+/* ---------- 2. Primary variant ---------- */
+.button--primary {
+  --_ring: var(--action-primary-border);
+  --_background: var(--action-primary-background);
+  --_text: var(--action-primary-text);
+  --_lip: var(--button-lip-primary);
+
+  --_strip-top: var(--button-strip-top);
+  --_strip-bottom: var(--button-strip-bottom);
+  --_facet-top-left: var(--button-facet-top-left);
+  --_facet-bottom-left: var(--button-facet-bottom-left);
+  --_facet-top-right: var(--button-facet-top-right);
+  --_facet-bottom-right: var(--button-facet-bottom-right);
+}
+
+/* ---------- 3. Secondary variant ---------- */
+.button--secondary {
+  --_ring: var(--action-secondary-border);
+  --_background: var(--action-secondary-background);
+  --_text: var(--action-secondary-text);
+  --_lip: var(--button-lip-secondary);
+  /* no facets or strips: uses the transparent ones from .button */
+}
+
+/* ---------- 4. Disabled (for any variant) ---------- */
+.button:disabled {
+  cursor: default;
+  filter: none;
+
+  --_ring: var(--action-disabled-border);
+  --_background: var(--action-disabled-background);
+  --_text: var(--action-disabled-text);
+
+  --_strip-top: transparent;
+  --_strip-bottom: transparent;
+  --_facet-top-left: transparent;
+  --_facet-bottom-left: transparent;
+  --_facet-top-right: transparent;
+  --_facet-bottom-right: transparent;
+}
+
+/* ---------- 5. Loading ---------- */
+
+/* The pyramid: hidden while the button is not loading */
+.button__loader {
+  display: none;
+  flex-direction: column; /* steps stacked on top of each other */
+  align-items: center;
+  gap: var(--button-loader-gap);
+}
+
+/* Each step */
+.button__loader span {
+  height: var(--button-loader-step-height);
+  background-color: currentColor; /* same color as the button text, so it follows the variant */
+  animation: step var(--button-loader-duration) ease-in-out infinite;
+}
+
+/* Top */
+.button__loader span:nth-child(1) {
+  width: var(--button-loader-step-width);
+  animation-delay: calc(var(--button-loader-duration) / 5 * 2);
+}
+
+/* Middle */
+.button__loader span:nth-child(2) {
+  width: calc(var(--button-loader-step-width) * 2);
+  animation-delay: calc(var(--button-loader-duration) / 5);
+}
+
+/* Base: lights up first, so the wave climbs */
+.button__loader span:nth-child(3) {
+  width: calc(var(--button-loader-step-width) * 3);
+  animation-delay: 0s;
+}
+
+/* The animation: each step fades in and out */
+@keyframes step {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  35% {
+    opacity: 1;
+  }
+}
+
+/* The button while loading: sunk, no lip, and the pyramid visible */
+.button[aria-busy='true'] {
+  transform: translateY(var(--button-lip-height));
+  filter: none;
+  cursor: progress;
+}
+
+.button[aria-busy='true'] .button__loader {
+  display: flex;
+}
+
+/* Anyone who turns on "reduce motion" on their phone sees a still pyramid */
+@media (prefers-reduced-motion: reduce) {
+  .button__loader span {
+    animation: none;
+    opacity: 1;
+  }
+}

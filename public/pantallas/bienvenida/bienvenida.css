@@ -41,7 +41,7 @@
   gap: var(--separacion-icono-texto);
 }
 
-.caracteristicas__icono .icono {
+.caracteristicas__icono .icon {
   color: var(--icono-secundario);
   /* Sombra del mismo café, aclarado con el fondo, para que se vea suave. */
   filter: drop-shadow(
@@ -210,7 +210,7 @@
     line-height: 1.3;
   }
 
-  .caracteristicas__icono .icono {
+  .caracteristicas__icono .icon {
     display: block;
     width: 2.5rem;
     height: 2.5rem;

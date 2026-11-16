@@ -3,7 +3,7 @@
  */
 
 import '../../componentes/pie-instalacion/pie-instalacion.js';
-import { icono } from '../../js/iconos.js';
+import { icon } from '../../js/icons.js';
 import { decoraciones } from '../../js/decoraciones.js';
 
 /**
@@ -36,15 +36,15 @@ export function mostrarBienvenida(app) {
           </header>
           <ul class="caracteristicas" role="list">
             <li class="caracteristicas__item">
-              <div class="caracteristicas__icono">${icono('megafono')}</div>
+              <div class="caracteristicas__icono">${icon('megaphone')}</div>
               <p class="caracteristicas__texto">Avisos y notas en tu celular</p>
             </li>
             <li class="caracteristicas__item">
-              <div class="caracteristicas__icono">${icono('calculadora')}</div>
+              <div class="caracteristicas__icono">${icon('calculator')}</div>
               <p class="caracteristicas__texto">Matemáticas a tu ritmo</p>
             </li>
             <li class="caracteristicas__item">
-              <div class="caracteristicas__icono">${icono('candado')}</div>
+              <div class="caracteristicas__icono">${icon('lock')}</div>
               <p class="caracteristicas__texto">
                 Privado, gratis y sin anuncios
               </p>

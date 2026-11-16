@@ -1,0 +1,49 @@
+/* Centered column with a comfortable reading width, so it does not stretch on large screens */
+.playground {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-groups);
+  max-width: 72ch;
+  margin-inline: auto;
+  padding: var(--margin-screen);
+}
+
+.playground__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-elements);
+  padding-top: var(--spacing-groups);
+  border-top: 1px solid var(--gray-200);
+}
+
+/* Width close to a phone's, to see the button as it will look in the app */
+.playground__sample {
+  max-width: 40ch;
+}
+
+/* Grid that adapts to the width: fits as many columns as it can */
+.playground__icons {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(calc(var(--space-32) * 3), 1fr)
+  );
+  gap: var(--spacing-elements);
+}
+
+.playground__icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+/* Dashed outline of the 24×24 area: an off-center icon shows up at once */
+.playground__icon .icon {
+  outline: 1px dashed var(--gray-300);
+}
+
+.playground__name {
+  text-align: center;
+  overflow-wrap: anywhere; /* 'square-rounded-arrow-down' does not fit on one line */
+}

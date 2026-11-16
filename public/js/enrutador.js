@@ -6,7 +6,7 @@
  */
 import { mostrarBienvenida } from '../pantallas/bienvenida/bienvenida.js';
 import { mostrarInicio } from '../pantallas/inicio/inicio.js';
-import { mostrarCatalogo } from '../pantallas/catalogo/catalogo.js';
+import { showPlayground } from '../pantallas/playground/playground.js';
 
 /**
  * Una pantalla de la app: recibe el contenedor y dibuja su contenido dentro.
@@ -25,7 +25,7 @@ import { mostrarCatalogo } from '../pantallas/catalogo/catalogo.js';
 const rutas = {
   '#/bienvenida': mostrarBienvenida,
   '#/inicio': mostrarInicio,
-  '#/catalogo': mostrarCatalogo,
+  '#/playground': showPlayground,
 };
 
 /**

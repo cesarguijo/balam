@@ -35,7 +35,7 @@ balam-pie-instalacion balam-boton {
 }
 
 /* El ícono va dentro de un círculo ámbar; el padding del SVG achica el dibujo dentro del círculo. */
-.pie-instalacion__paso .icono {
+.pie-instalacion__paso .icon {
   width: var(--espacio-32);
   height: var(--espacio-32);
   padding: var(--espacio-8);
@@ -142,7 +142,7 @@ balam-pie-instalacion balam-boton {
   border-right: var(--espacio-4) solid var(--ambar-300);
 }
 
-.pie-instalacion__escanear-icono .icono {
+.pie-instalacion__escanear-icono .icon {
   display: block;
   width: clamp(3rem, 2rem + 3vw, 5.75rem);
   height: clamp(3rem, 2rem + 3vw, 5.75rem);

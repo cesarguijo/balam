@@ -2,7 +2,7 @@
  * @file Plantillas de manual de instalación: relaciona la plataforma con la plantilla de manual de instalación.
  */
 
-import { icono } from '../../js/iconos.js';
+import { icon } from '../../js/icons.js';
 import { decoraciones } from '../../js/decoraciones.js';
 
 /**
@@ -42,7 +42,7 @@ export const instrucciones = {
       >
     </div>
     <div class="pie-instalacion__escanear">
-      <div class="pie-instalacion__escanear-icono">${icono('movil')}</div>
+      <div class="pie-instalacion__escanear-icono">${icon('device-mobile')}</div>
       <div class="pie-instalacion__escanear-texto">
         <p>Escanea este código con la cámara de tu celular</p>
         <p><strong>balam-math.web.app</strong></p>
@@ -55,11 +55,11 @@ export const instrucciones = {
     </div>
     <ol class="pie-instalacion__pasos">
       <li class="pie-instalacion__paso">
-        ${icono('menu-puntos-vertical')}
+        ${icon('dots-vertical')}
         <p class="pie-instalacion__texto">Toca el menú, arriba a la derecha</p>
       </li>
       <li class="pie-instalacion__paso">
-        ${icono('instalar-app')}
+        ${icon('app-install')}
         <p class="pie-instalacion__texto">
           Elige <strong>Instalar y crear acceso directo</strong>
         </p>
@@ -72,21 +72,21 @@ export const instrucciones = {
     </div>
     <ol class="pie-instalacion__pasos">
       <li class="pie-instalacion__paso">
-        ${icono('menu-puntos-vertical')}
+        ${icon('dots-vertical')}
         <p class="pie-instalacion__texto">Toca el menú, arriba a la derecha</p>
       </li>
       <li class="pie-instalacion__paso">
-        ${icono('menu-puntos-horizontal')}
+        ${icon('dots')}
         <p class="pie-instalacion__texto">Toca <strong>Más</strong></p>
       </li>
       <li class="pie-instalacion__paso">
-        ${icono('cuadrado-mas')}
+        ${icon('square-plus')}
         <p class="pie-instalacion__texto">
           Elige <strong>Agregar app a la pantalla de inicio</strong>
         </p>
       </li>
       <li class="pie-instalacion__paso">
-        ${icono('check')}
+        ${icon('check')}
         <p class="pie-instalacion__texto">Toca <strong>Agregar</strong></p>
       </li>
     </ol>
@@ -97,19 +97,19 @@ export const instrucciones = {
     </div>
     <ol class="pie-instalacion__pasos">
       <li class="pie-instalacion__paso">
-        ${icono('compartir')}
+        ${icon('share')}
         <p class="pie-instalacion__texto">
           Toca <strong>Compartir</strong>, en la barra de direcciones
         </p>
       </li>
       <li class="pie-instalacion__paso">
-        ${icono('cuadrado-mas')}
+        ${icon('square-plus')}
         <p class="pie-instalacion__texto">
           Elige <strong>Agregar a la pantalla de inicio</strong>
         </p>
       </li>
       <li class="pie-instalacion__paso">
-        ${icono('check')}
+        ${icon('check')}
         <p class="pie-instalacion__texto">
           Toca <strong>Agregar</strong>, arriba a la derecha
         </p>
@@ -122,19 +122,19 @@ export const instrucciones = {
     </div>
     <ol class="pie-instalacion__pasos">
       <li class="pie-instalacion__paso">
-        ${icono('compartir')}
+        ${icon('share')}
         <p class="pie-instalacion__texto">
           Toca <strong>Compartir</strong>, abajo en el centro
         </p>
       </li>
       <li class="pie-instalacion__paso">
-        ${icono('cuadrado-mas')}
+        ${icon('square-plus')}
         <p class="pie-instalacion__texto">
           Elige <strong>Agregar a la pantalla de inicio</strong>
         </p>
       </li>
       <li class="pie-instalacion__paso">
-        ${icono('check')}
+        ${icon('check')}
         <p class="pie-instalacion__texto">
           Toca <strong>Agregar</strong>, arriba a la derecha
         </p>
@@ -147,23 +147,23 @@ export const instrucciones = {
     </div>
     <ol class="pie-instalacion__pasos">
       <li class="pie-instalacion__paso">
-        ${icono('menu-puntos-horizontal')}
+        ${icon('dots')}
         <p class="pie-instalacion__texto">
           Toca menú, abajo a la derecha, si no lo ves pasa al paso 2
         </p>
       </li>
       <li class="pie-instalacion__paso">
-        ${icono('compartir')}
+        ${icon('share')}
         <p class="pie-instalacion__texto">Toca <strong>Compartir</strong></p>
       </li>
       <li class="pie-instalacion__paso">
-        ${icono('cuadrado-mas')}
+        ${icon('square-plus')}
         <p class="pie-instalacion__texto">
           Elige <strong>Agregar a la pantalla de inicio</strong>
         </p>
       </li>
       <li class="pie-instalacion__paso">
-        ${icono('check')}
+        ${icon('check')}
         <p class="pie-instalacion__texto">
           Toca <strong>Agregar</strong>, arriba a la derecha
         </p>
@@ -176,7 +176,7 @@ export const instrucciones = {
     </div>
     <ol class="pie-instalacion__pasos">
       <li class="pie-instalacion__paso">
-        ${icono('chrome')}
+        ${icon('brand-chrome')}
         <p class="pie-instalacion__texto">
           Para instalar la app, ábrela en Chrome
         </p>
@@ -189,13 +189,13 @@ export const instrucciones = {
     </div>
     <ol class="pie-instalacion__pasos">
       <li class="pie-instalacion__paso">
-        ${icono('cuadro-redondeado-flecha-abajo')}
+        ${icon('square-rounded-arrow-down')}
         <p class="pie-instalacion__texto">
           Toca el ícono de instalar, arriba en la barra
         </p>
       </li>
       <li class="pie-instalacion__paso">
-        ${icono('check')}
+        ${icon('check')}
         <p class="pie-instalacion__texto">Toca <strong>Instalar</strong></p>
       </li>
     </ol>

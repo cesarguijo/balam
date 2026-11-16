@@ -13,7 +13,7 @@
  * Componentes de la aplicación
  * Se importan antes de las pantallas para que puedan usar los tokens y estilos base
  */
-@import url('../componentes/boton/boton.css') layer(componentes);
+@import url('../componentes/button/button.css') layer(componentes);
 @import url('../componentes/pie-instalacion/pie-instalacion.css')
 layer(componentes);
 
@@ -23,4 +23,4 @@ layer(componentes);
  */
 @import url('../pantallas/bienvenida/bienvenida.css') layer(pantallas);
 @import url('../pantallas/inicio/inicio.css') layer(pantallas);
-@import url('../pantallas/catalogo/catalogo.css') layer(pantallas);
+@import url('../pantallas/playground/playground.css') layer(pantallas);
