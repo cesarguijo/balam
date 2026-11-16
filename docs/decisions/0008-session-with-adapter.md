@@ -1,80 +1,80 @@
-# 0008. Sesión con un adaptador: Firebase hoy, PHP mañana
+# 0008. Session with an adapter: Firebase today, PHP tomorrow
 
-- **Fecha:** 2026-11-13
-- **Estado:** aceptada
+- **Date:** 2026-11-13
+- **Status:** accepted
 
-## Contexto
+## Context
 
-El inicio de sesión se hará con Firebase, pero más adelante Balam tendrá un backend en PHP. El cambio no debe obligar a reescribir las pantallas, los componentes ni el enrutador.
+Login will be done with Firebase, but later Balam will have a PHP backend. The change must not force us to rewrite the screens, the components or the router.
 
-También había que decidir cómo son las cuentas. Las condiciones que importaban:
+We also had to decide what the accounts look like. The conditions that mattered:
 
-- El estudiante no tiene celular: la cuenta vive en el celular del padre, y un padre puede tener varios hijos en la clase.
-- Muchos padres no usan correo electrónico, o no lo recuerdan.
-- Solo entran familias de la clase: no hay registro abierto.
-- Hay que ahorrar datos móviles y consultas a Firestore.
+- The student has no phone: the account lives on the parent's phone, and a parent can have several children in the class.
+- Many parents do not use email, or do not remember it.
+- Only the families of the class get in: there is no open sign-up.
+- Mobile data and Firestore reads must be saved.
 
-## Decisión
+## Decision
 
-**Las cuentas:** una cuenta por familia, con sus hijos dentro. El docente crea las cuentas y entrega en papel, a inicio de año, un usuario (por ejemplo `perez.familia`) y una clave. Si alguien la pierde, va a la escuela y el docente genera una clave nueva; la anterior deja de servir. Las claves no vencen.
+**The accounts:** one account per family, with its children inside. The teacher creates the accounts and hands out on paper, at the start of the year, a username (e.g. `perez.familia`) and a password. If someone loses it, they go to the school and the teacher generates a new password; the old one stops working. Passwords do not expire.
 
-**La sesión y el adaptador:** el resto de la app solo importa `js/sesion.js`. Ese archivo delega lo que toca el servidor en un adaptador (`js/firebase/adaptador-sesion.js` hoy, `js/php/adaptador-sesion.js` mañana). Solo la carpeta `js/firebase/` importa Firebase.
+**The session and the adapter:** the rest of the app only imports `js/session.js`. That file hands what touches the server to an adapter (`js/firebase/session-adapter.js` today, `js/php/session-adapter.js` tomorrow). Only the `js/firebase/` folder imports Firebase.
 
-El trabajo se divide así:
+The work is split like this:
 
-- **El adaptador solo habla con el servidor.** Cada adaptador cumple este contrato:
-
-  ```js
-  haySesion(); // → Promise<boolean>, sin internet ni lecturas
-  iniciarSesion(usuario, clave); // → Promise<Familia>, o ErrorDeSesion
-  cerrarSesion(); // → Promise<void>
-  ```
-
-- **`sesion.js` es dueño del teléfono.** Guarda la familia en `localStorage` al iniciar sesión, la lee al abrir la app y la borra al cerrarla. Lo que ofrece a la app:
+- **The adapter only talks to the server.** Every adapter fulfills this contract:
 
   ```js
-  obtenerSesion(); // → Promise<Familia | null>
-  iniciarSesion(usuario, clave); // → Promise<Familia>, o ErrorDeSesion
-  cerrarSesion(); // → Promise<void>
+  hasSession(); // → Promise<boolean>, with no internet or reads
+  logIn(username, password); // → Promise<Family>, or SessionError
+  logOut(); // → Promise<void>
   ```
 
-  Así guardar en el teléfono se escribe una sola vez, y no en cada adaptador.
+- **`session.js` owns the phone.** It stores the family in `localStorage` on login, reads it when the app opens and removes it on logout. What it offers the app:
 
-- **`js/familia.js` es la aduana.** `convertirEnFamilia` valida y limpia todo lo que dice ser una familia, venga del servidor o del teléfono. Es pura, para poder probarla en Node.
+  ```js
+  getSession(); // → Promise<Family | null>
+  logIn(username, password); // → Promise<Family>, or SessionError
+  logOut(); // → Promise<void>
+  ```
 
-Además:
+  This way, storing on the phone is written only once, and not in every adapter.
 
-- `Familia` es un tipo propio (`usuario` y `hijos`, cada hijo con `id`, `nombre` y `grado`). Nunca se devuelve el `User` de Firebase.
-- `ErrorDeSesion` es un error propio con un tipo (`'clave-incorrecta'`, `'sin-conexion'`…), para que la pantalla de login muestre el mensaje correcto sin conocer los errores de Firebase ni de PHP. Cada adaptador traduce sus propios errores (Firebase lo hace en `js/firebase/errores.js`).
-- **La sesión dice quién eres, no todo lo que tienes.** `iniciarSesion` lee el documento de la familia una sola vez y `sesion.js` guarda la lista de hijos en el teléfono. `obtenerSesion` no consulta Firestore. Los datos de cada pantalla (notas, avisos) los pide la pantalla, a través de otro adaptador que se diseñará cuando haga falta.
-- Si la familia guardada está dañada o es de una versión vieja de la app, `obtenerSesion` cierra la sesión y devuelve `null`: el padre vuelve al login en vez de quedar trabado.
-- El hijo que el padre está viendo es una preferencia guardada en el teléfono, no parte de la sesión.
+- **`js/family.js` is the customs checkpoint.** `toFamily` validates and cleans everything that claims to be a family, whether it comes from the server or from the phone. It is pure, so it can be tested in Node.
 
-## Alternativas consideradas
+Also:
 
-- **Usar Firebase directamente en las pantallas:** es más rápido hoy, pero el cambio a PHP tocaría todos los archivos.
-- **Una cuenta por estudiante:** con hermanos habría que cambiar de cuenta, y Firebase maneja una sola sesión a la vez.
-- **Un código de un solo uso que vence en un mes:** Firebase no lo ofrece. Habría que programarlo con Cloud Functions, que necesita el plan de pago.
-- **Entrar con el número de identidad del estudiante:** no es secreto (aparece en muchos documentos) y es un dato sensible de un menor que no conviene guardar.
-- **Recuperar la cuenta con un formulario y una foto del estudiante:** habría que guardar fotos de menores y revisarlas a mano. Ir a la escuela es más simple y más seguro.
-- **Restablecer la clave desde la consola de Firebase:** la consola envía un correo, y estas cuentas usan un correo inventado (`usuario@balam.local`) que nunca lo recibe. Las claves se cambian con un script local que usa el Firebase Admin SDK y es gratis.
+- `Family` is a type of our own (`username` and `children`, each child with `id`, `name` and `grade`). Firebase's `User` is never returned.
+- `SessionError` is an error of our own with a type (`'wrong-credentials'`, `'offline'`…), so the login screen shows the right message without knowing Firebase's or PHP's errors. Each adapter translates its own errors (Firebase does it in `js/firebase/errors.js`).
+- **The session says who you are, not everything you have.** `logIn` reads the family document only once, and `session.js` stores the children list on the phone. `getSession` does not query Firestore. The data of each screen (grades, notices) is requested by the screen, through another adapter that will be designed when needed.
+- If the stored family is damaged or comes from an old version of the app, `getSession` logs out and returns `null`: the parent goes back to the login instead of getting stuck.
+- The child the parent is viewing is a preference stored on the phone, not part of the session.
 
-## Consecuencias
+## Alternatives considered
 
-**Ganamos:**
+- **Use Firebase directly in the screens:** faster today, but the move to PHP would touch every file.
+- **One account per student:** with siblings you would have to switch accounts, and Firebase handles only one session at a time.
+- **A one-time code that expires in a month:** Firebase does not offer it. It would have to be built with Cloud Functions, which needs the paid plan.
+- **Log in with the student's ID number:** it is not secret (it appears on many documents) and it is sensitive data about a minor that is better not stored.
+- **Recover the account with a form and a photo of the student:** photos of minors would have to be stored and checked by hand. Going to the school is simpler and safer.
+- **Reset the password from the Firebase console:** the console sends an email, and these accounts use a made-up email (`username@balam.local`) that never receives it. Passwords are changed with a local script that uses the Firebase Admin SDK, which is free.
 
-- Cambiar a PHP es escribir `js/php/adaptador-sesion.js`, cambiar una línea en `sesion.js` y borrar la carpeta `js/firebase/`.
-- La validación de la familia y el manejo del teléfono no se repiten al migrar: los adaptadores solo traen los datos.
-- La sesión persiste en el teléfono, como en WhatsApp: el padre inicia sesión una sola vez.
-- Abrir la app no gasta lecturas de Firestore.
-- Usuario y clave son el modelo más estándar de PHP: la migración no cambia la experiencia de los padres.
+## Consequences
 
-**Aceptamos:**
+**We gain:**
 
-- Una capa más de código: el adaptador traduce los datos y los errores.
-- Una importación circular: `sesion.js` importa el adaptador y el adaptador importa `ErrorDeSesion` de `sesion.js`. Funciona porque `ErrorDeSesion` solo se usa dentro de las funciones, pero hay que tenerlo presente al mover código.
-- Si el docente agrega un hijo a una familia, el teléfono no se entera hasta que se actualice la lista (pendiente de decidir cómo).
-- Las cuentas no se pueden crear desde la app: se crean con un script en la computadora del docente.
-- Mamá y papá comparten la misma cuenta si cada uno tiene su teléfono.
+- Moving to PHP means writing `js/php/session-adapter.js`, changing one line in `session.js` and deleting the `js/firebase/` folder.
+- Family validation and phone handling are not repeated when migrating: adapters only bring the data.
+- The session persists on the phone, as in WhatsApp: the parent logs in only once.
+- Opening the app costs no Firestore reads.
+- Username and password is the most standard model in PHP: the migration does not change the parents' experience.
 
-**Revisar la decisión si:** Balam se abre a otras escuelas (las cuentas no podrían depender de un solo docente), o si se agregan las llaves de acceso (passkeys), que cambian cómo se inicia sesión pero no el contrato.
+**We accept:**
+
+- One more layer of code: the adapter translates data and errors.
+- A circular import: `session.js` imports the adapter and the adapter imports `SessionError` from `session.js`. It works because `SessionError` is only used inside functions, but it must be kept in mind when moving code.
+- If the teacher adds a child to a family, the phone does not find out until the list is refreshed (how is still to be decided).
+- Accounts cannot be created from the app: they are created with a script on the teacher's computer.
+- Mom and dad share the same account if each has their own phone.
+
+**Revisit the decision if:** Balam opens to other schools (accounts could not depend on a single teacher), or if passkeys are added, which change how login works but not the contract.

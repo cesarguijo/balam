@@ -24,7 +24,7 @@ public/                  → what gets published
   css/                   → styles.css imports everything with @layer; tokens.css is GENERATED
 tests/                   → tests with node:test (*.test.js)
 tokens/                  → DTCG design tokens (source of tokens.css); motion.tokens.json is hand-written
-docs/decisiones/         → numbered ADRs; plantilla.md is the template
+docs/decisions/          → numbered ADRs; template.md is the template
 ```
 
 ## Conventions
@@ -45,7 +45,6 @@ docs/decisiones/         → numbered ADRs; plantilla.md is the template
 - `npm test`: tests
 - `npm run coverage`: coverage with c8 (report in `coverage/`, not committed)
 - `npm run lint`: ESLint + cSpell on identifiers (`public/` and `tests/`; extra words in `code-words.txt`)
-- `npm run docs`: generates `docs/code.md` from JSDoc
 - `npm run tokens`: generates `public/css/tokens.css` (do not edit it by hand)
 - `npm run todos`: generates `docs/todos.md` with the `TODO:` and `FIXME:` in `public/` (with leasot)
 - Live Server with `/public` as root
@@ -55,4 +54,4 @@ docs/decisiones/         → numbered ADRs; plantilla.md is the template
 - **Notion**: planning, to-dos, research.
 - **Figma**: design ("Balam" file). Variants use the same keys as the code (`android-chrome`, `ios-safari`, `desktop`…). Variables are the design tokens; export them to `tokens/balam.tokens.json`.
 - **Firestore**: family data lives in `families/{uid}` (`username`, `children[]` with `id`, `name`, `grade`).
-- **docs/decisiones/**: why each thing was done.
+- **docs/decisions/**: why each thing was done.

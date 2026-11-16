@@ -1,51 +1,51 @@
-# 0007. Flujo de entrada: el navegador instala, la app inicia sesión
+# 0007. Entry flow: the browser installs, the app logs in
 
-- **Fecha:** 2026-11-13
-- **Estado:** aceptada
+- **Date:** 2026-11-13
+- **Status:** accepted
 
-## Contexto
+## Context
 
-Balam debe usarse solo por las familias de la clase, así que necesita inicio de sesión. Había que decidir qué pantalla ve cada persona al abrir Balam: en el navegador o en la app instalada, en celular o en computadora, con sesión o sin ella.
+Balam must be used only by the families of the class, so it needs a login. We had to decide which screen each person sees when opening Balam: in the browser or in the installed app, on a phone or on a computer, with a session or without one.
 
-Las condiciones que importaban:
+The conditions that mattered:
 
-- **Balam es para celular.** El estudiante no tiene celular propio: usa el del padre, que es quien guarda la cuenta. El docente tampoco necesita funciones en la computadora; si prepara algo ahí, lo pasa como archivo (JSON o Excel) y lo carga desde el celular.
-- **Los padres no deben pelear con la tecnología.** Como en WhatsApp, deben iniciar sesión una vez y no volver a hacerlo.
-- **No se puede impedir que alguien instale una PWA.** Cualquiera que abra `balam-math.web.app` puede instalarla desde el menú del navegador, aunque la página no muestre ningún botón. Lo que sí se controla es qué ve al abrirla.
-- **En iPhone, la app instalada no comparte la sesión con Safari.** Si se pidiera la sesión en el navegador, el padre tendría que iniciar sesión dos veces. En Android sí se comparte.
+- **Balam is for phones.** The student has no phone of their own: they use the parent's, and the parent is the one who keeps the account. The teacher does not need features on the computer either; if they prepare something there, they pass it as a file (JSON or Excel) and load it from the phone.
+- **Parents must not fight with technology.** As with WhatsApp, they should log in once and never again.
+- **Nobody can be stopped from installing a PWA.** Anyone who opens `balam-math.web.app` can install it from the browser menu, even if the page shows no button. What we do control is what they see when they open it.
+- **On iPhone, the installed app does not share the session with Safari.** If the session were asked for in the browser, the parent would have to log in twice. On Android it is shared.
 
-## Decisión
+## Decision
 
-El navegador solo sirve para instalar y la app instalada es la única puerta de entrada:
+The browser is only for installing, and the installed app is the only way in:
 
-| Plataforma | Instalada | Sesión | Pantalla       |
-| ---------- | --------- | ------ | -------------- |
-| escritorio | —         | —      | `#/bienvenida` |
-| celular    | no        | —      | `#/bienvenida` |
-| celular    | sí        | no     | `#/login`      |
-| celular    | sí        | sí     | `#/inicio`     |
+| Platform | Installed | Session | Screen      |
+| -------- | --------- | ------- | ----------- |
+| desktop  | —         | —       | `#/welcome` |
+| phone    | no        | —       | `#/welcome` |
+| phone    | yes       | no      | `#/login`   |
+| phone    | yes       | yes     | `#/home`    |
 
-En la computadora siempre se ve la bienvenida, que remite al celular con el QR, **aunque alguien instale la app desde el menú de Chrome o Edge** (la computadora también permite instalar PWA). La ruta escrita a mano no cambia el resultado: la decisión la toma una función pura (`decidirRuta`) que se prueba en Node.
+On the computer the welcome screen is always shown, which points to the phone with the QR code, **even if someone installs the app from the Chrome or Edge menu** (computers can install PWAs too). A route typed by hand does not change the result: the decision is made by a pure function (`decideRoute`) that is tested in Node.
 
-## Alternativas consideradas
+## Alternatives considered
 
-- **Iniciar sesión en el navegador antes de instalar:** obliga a los padres con iPhone a iniciar sesión dos veces, y además no protege nada, porque la instalación no se puede impedir.
-- **Permitir usar Balam en el navegador sin instalar:** algunos padres nunca la instalarían y la usarían desde una pestaña que se cierra o se pierde.
-- **Casos distintos por plataforma (Android, iPhone, escritorio):** funcionaba, pero tenía seis casos en lugar de cuatro y era más difícil de probar y de explicar.
-- **Acceso del docente desde la computadora (con un botón "Soy docente" o con un QR, como WhatsApp Web):** el QR necesita un servidor que cree sesiones (Cloud Functions, plan de pago). Hoy no hay ninguna función de escritorio que lo justifique.
+- **Log in in the browser before installing:** it forces iPhone parents to log in twice, and it protects nothing, because installing cannot be prevented.
+- **Allow using Balam in the browser without installing:** some parents would never install it and would use it from a tab that gets closed or lost.
+- **Different cases per platform (Android, iPhone, desktop):** it worked, but it had six cases instead of four and was harder to test and to explain.
+- **Teacher access from the computer (with an "I am the teacher" button or with a QR code, like WhatsApp Web):** the QR code needs a server that creates sessions (Cloud Functions, paid plan). Today there is no desktop feature that justifies it.
 
-## Consecuencias
+## Consequences
 
-**Ganamos:**
+**We gain:**
 
-- Cuatro casos, fáciles de probar y de explicar a las familias: "instala la app y entra con tu usuario".
-- Entre celulares no hay diferencias: Android y iPhone siguen las mismas reglas.
-- En la computadora no se consulta la sesión.
+- Four cases, easy to test and to explain to families: "install the app and log in with your username".
+- Phones have no differences between them: Android and iPhone follow the same rules.
+- The computer does not check the session.
 
-**Aceptamos:**
+**We accept:**
 
-- La bienvenida y las instrucciones de instalación son públicas. No es un problema: no tienen datos de nadie.
-- **La seguridad no está en el flujo, sino en el servidor.** Las reglas de Firebase (y después PHP) deben negar los datos a quien no tiene sesión, y a cada familia darle solo los suyos. Esconder pantallas no protege nada.
-- El docente no tiene acceso web: trabaja desde el celular.
+- The welcome screen and the install instructions are public. It is not a problem: they hold nobody's data.
+- **Security is not in the flow, but on the server.** Firebase rules (and later PHP) must deny data to anyone without a session, and give each family only its own. Hiding screens protects nothing.
+- The teacher has no web access: they work from the phone.
 
-**Revisar la decisión si:** el docente necesita funciones que no caben en el celular, o si Balam deja de ser solo para la clase.
+**Revisit the decision if:** the teacher needs features that do not fit on the phone, or if Balam stops being only for the class.

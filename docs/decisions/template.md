@@ -1,21 +1,21 @@
-# 000X. Título corto de la decisión
+# 000X. Short title of the decision
 
-- **Fecha:** AAAA-MM-DD
-- **Estado:** propuesta | aceptada | reemplazada por 000Y
+- **Date:** YYYY-MM-DD
+- **Status:** proposed | accepted | superseded by 000Y
 
-## Contexto
+## Context
 
-¿Qué problema o pregunta teníamos? ¿Qué condiciones importaban?
+What problem or question did we have? Which conditions mattered?
 
-## Decisión
+## Decision
 
-¿Qué decidimos hacer? Una o dos oraciones claras.
+What did we decide to do? One or two clear sentences.
 
-## Alternativas consideradas
+## Alternatives considered
 
-- **Alternativa A:** por qué no.
-- **Alternativa B:** por qué no.
+- **Alternative A:** why not.
+- **Alternative B:** why not.
 
-## Consecuencias
+## Consequences
 
-¿Qué ganamos? ¿Qué costos o límites aceptamos? ¿Cuándo convendría revisarla?
+What do we gain? Which costs or limits do we accept? When would it be worth revisiting?

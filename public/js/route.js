@@ -2,7 +2,7 @@
  * @file App route: decides which screen to show based on where Balam was
  * opened and whether there is a session. It is pure (it does not use window
  * or document) so it can be tested in Node.
- * @see docs/decisiones/0007-flujo-de-entrada.md
+ * @see docs/decisions/0007-entry-flow.md
  */
 
 /**

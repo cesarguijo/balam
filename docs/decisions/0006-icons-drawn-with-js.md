@@ -1,39 +1,39 @@
-# 0006. Íconos dibujados con JavaScript
+# 0006. Icons drawn with JavaScript
 
-- **Fecha:** 2026-11-12
-- **Estado:** aceptada
+- **Date:** 2026-11-12
+- **Status:** accepted
 
-## Contexto
+## Context
 
-Los íconos vivían en un sprite (`img/iconos.svg`) y se usaban con `<use href="/img/iconos.svg#nombre">`. Al escribir `iconos.svg#` no había forma de saber qué nombres existían: tenía que abrir el sprite y buscar los `id`. Además, un nombre mal escrito fallaba en silencio: el ícono simplemente no aparecía y no había ningún error.
+Icons lived in a sprite (`img/iconos.svg`) and were used with `<use href="/img/iconos.svg#name">`. When typing `iconos.svg#` there was no way to know which names existed: I had to open the sprite and look for the `id`s. Also, a misspelled name failed silently: the icon just did not show up, and there was no error.
 
-Las condiciones que importaban: son pocos íconos (unos 10), el proyecto no tiene paso de compilación, y los íconos los copio como SVG desde Tabler Icons o desde Figma.
+The conditions that mattered: there are few icons (about 10), the project has no build step, and I copy the icons as SVG from Tabler Icons or from Figma.
 
-## Decisión
+## Decision
 
-Los íconos pasan a un módulo JavaScript (`js/iconos.js`): un objeto guarda el interior de cada ícono (sus `<path>`) y una función `icono(nombre)` devuelve el `<svg>` completo, listo para usarse en las plantillas con `${icono('megafono')}`.
+Icons move to a JavaScript module (`js/icons.js`): an object stores the inside of each icon (its `<path>`s) and an `icon(name)` function returns the full `<svg>`, ready to use in templates with `${icon('megaphone')}`.
 
-## Alternativas consideradas
+## Alternatives considered
 
-- **Mantener el sprite y agregar un snippet de VS Code con la lista de nombres:** es rápido, pero la lista se mantiene a mano y se desactualiza al agregar íconos. Tampoco detecta nombres mal escritos.
-- **Mantener el sprite y generar un tipo JSDoc con un script:** da autocompletado, pero agrega un script y un archivo generado que mantener, demasiado para tan pocos íconos.
-- **Un componente `<balam-icono nombre="...">`:** dentro de una plantilla el atributo es solo texto, así que se pierde el autocompletado. Además, un ícono no tiene comportamiento; no justifica un Custom Element.
-- **Seguir dibujando en `iconos.svg` y generar `iconos.js` con un script:** como copio los íconos como texto SVG, pegarlos directo en el JS es igual de fácil y evita el paso de generación.
+- **Keep the sprite and add a VS Code snippet with the list of names:** it is quick, but the list is kept by hand and goes stale when icons are added. It does not catch misspelled names either.
+- **Keep the sprite and generate a JSDoc type with a script:** it gives autocompletion, but adds a script and a generated file to maintain, too much for so few icons.
+- **A `<balam-icon name="...">` component:** inside a template the attribute is just text, so autocompletion is lost. Also, an icon has no behavior; it does not justify a Custom Element.
+- **Keep drawing in `iconos.svg` and generate `icons.js` with a script:** since I copy the icons as SVG text, pasting them straight into the JS is just as easy and avoids the generation step.
 
-## Consecuencias
+## Consequences
 
-**Ganamos:**
+**We gain:**
 
-- Autocompletado de nombres: el parámetro de `icono()` usa el tipo `keyof typeof` del objeto, así que VS Code sugiere los nombres sin mantener ninguna lista.
-- Detección de nombres mal escritos (con `checkJs`).
-- Todos los íconos salen con los mismos atributos (`viewBox`, trazo, `class="icono"`, `aria-hidden="true"`), porque los pone la función y no cada plantilla.
-- Una petición de red menos: los íconos llegan con el JS.
-- `icono()` es una función pura, así que se puede probar en Node.
+- Name autocompletion: the parameter of `icon()` uses the object's `keyof typeof` type, so VS Code suggests the names without keeping any list.
+- Detection of misspelled names (with `checkJs`).
+- Every icon comes out with the same attributes (`viewBox`, stroke, `class="icon"`, `aria-hidden="true"`), because the function sets them, not each template.
+- One network request less: the icons arrive with the JS.
+- `icon()` is a pure function, so it can be tested in Node.
 
-**Aceptamos:**
+**We accept:**
 
-- Todos los íconos son de línea (`stroke="currentColor"`, 24×24). `instalar-app` y `check` deben rehacerse en Figma o cambiarse por equivalentes de Tabler antes de migrarlos.
-- El dibujo se repite en el HTML cada vez que se usa un ícono.
-- Hay que migrar los usos actuales del sprite y borrar `img/iconos.svg` al terminar.
+- Every icon is a line icon (`stroke="currentColor"`, 24×24). `app-install` and `check` must be redrawn in Figma or replaced with Tabler equivalents before migrating them.
+- The drawing is repeated in the HTML every time an icon is used.
+- The current uses of the sprite must be migrated, and `img/iconos.svg` deleted at the end.
 
-**Revisar la decisión si:** el número de íconos crece mucho (cientos) o un mismo ícono se repite muchas veces en una pantalla, porque entonces el peso del HTML importa y el sprite vuelve a convenir; o si se necesitan íconos rellenos, porque la función tendría que aceptar más de un estilo.
+**Revisit the decision if:** the number of icons grows a lot (hundreds) or the same icon repeats many times on a screen, because then the weight of the HTML matters and the sprite pays off again; or if filled icons are needed, because the function would have to accept more than one style.

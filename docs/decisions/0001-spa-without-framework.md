@@ -1,29 +1,29 @@
-# 0001. SPA con JavaScript puro, sin framework
+# 0001. SPA in plain JavaScript, without a framework
 
-- **Fecha:** 2026-11-10
-- **Estado:** aceptada
+- **Date:** 2026-11-10
+- **Status:** accepted
 
-## Contexto
+## Context
 
-Balam se usará en celulares Android de gama baja, con poca memoria y muchas veces con datos móviles lentos. Además, el proyecto es también un proceso de aprendizaje: su autor quiere dominar los fundamentos de la web.
+Balam will be used on low-end Android phones, with little memory and often on slow mobile data. The project is also a learning process: its author wants to master the fundamentals of the web.
 
-## Decisión
+## Decision
 
-Balam es una aplicación de una sola página (SPA) escrita en **JavaScript puro**, con módulos (`import` / `export`):
+Balam is a single-page application (SPA) written in **plain JavaScript**, with modules (`import` / `export`):
 
-- Un solo `index.html` con un contenedor `<main id="app">`.
-- Cada pantalla vive en `pantallas/nombre/` y exporta una función que la dibuja en `#app`.
-- `js/enrutador.js` decide qué pantalla mostrar según la dirección, usando el **hash** (`#/inicio`, `#/bienvenida`).
+- A single `index.html` with a `<main id="app">` container.
+- Each screen lives in `screens/<name>/` and exports a function that draws it in `#app`.
+- `js/router.js` decides which screen to show from the address, using the **hash** (`#/home`, `#/welcome`).
 
-## Alternativas consideradas
+## Alternatives considered
 
-- **Un framework (React, Vue):** agrega entre 30 y 45 KB que el celular debe descargar y ejecutar antes de mostrar nada, y esconde los fundamentos que se quieren aprender.
-- **Un framework pequeño (Lit, Preact):** ligero, pero innecesario mientras las pantallas sean sencillas.
-- **Un sitio con varias páginas HTML:** cada cambio de pantalla recarga todo y se siente menos como una app.
-- **Rutas sin hash (History API):** direcciones más limpias, pero exigen configurar Firebase y el service worker para entregar siempre `index.html`.
+- **A framework (React, Vue):** it adds 30 to 45 KB that the phone must download and run before showing anything, and it hides the fundamentals we want to learn.
+- **A small framework (Lit, Preact):** light, but unnecessary while the screens stay simple.
+- **A site with several HTML pages:** every screen change reloads everything and feels less like an app.
+- **Routes without a hash (History API):** cleaner addresses, but Firebase and the service worker must be set up to always serve `index.html`.
 
-## Consecuencias
+## Consequences
 
-- La primera carga es mínima y la app funciona bien en celulares sencillos.
-- Mantener sincronizada la pantalla con los datos queda a cargo del código propio.
-- Si en el futuro el panel del docente o la consulta de padres se vuelven difíciles de mantener, se evaluará **Lit** o **Preact**, que se basan en estándares de la web y no obligan a tirar lo hecho.
+- The first load is minimal and the app runs well on simple phones.
+- Keeping the screen in sync with the data is up to our own code.
+- If the teacher's panel or the parents' view become hard to maintain, **Lit** or **Preact** will be evaluated: they are built on web standards and do not force us to throw away what exists.

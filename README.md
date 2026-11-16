@@ -1,14 +1,16 @@
+**English** | [Español](README.es.md)
+
 # Balam 🐆
 
-**La app de la clase del Prof. César.** Una aplicación web progresiva (PWA), gratuita y sin anuncios, para que los alumnos aprendan matemáticas a su ritmo y para mantener comunicadas a las familias con la clase (avisos, notas y asistencia).
+**Prof. César's class app.** A free, ad-free progressive web app (PWA) that helps students learn math at their own pace and keeps families in touch with the class (notices, grades and attendance).
 
-Está pensada para celulares Android sencillos: es ligera, se instala desde el navegador y funciona con poco internet.
+It is built for simple Android phones: it is light, installs from the browser and works with little internet.
 
-> **Estado:** en desarrollo (Sprint 0). Por ahora existen la estructura de la app, el sistema de diseño y el componente de botón.
+> **Status:** in development (Sprint 0). For now there is the app structure, the design system, the button and install footer components, and the session logic.
 
-## Cómo ponerla a funcionar en tu computadora
+## Running it on your computer
 
-Necesitas [Node.js](https://nodejs.org) (versión LTS) y [Git](https://git-scm.com).
+You need [Node.js](https://nodejs.org) (LTS version) and [Git](https://git-scm.com).
 
 ```bash
 git clone https://github.com/cesarguijo/balam.git
@@ -16,56 +18,68 @@ cd balam
 npm install
 ```
 
-Para verla, abre la carpeta `public/` con un servidor local. La forma más sencilla es la extensión **Live Server** de VS Code: abre `public/index.html` y haz clic en **Go Live**.
+To see it, serve the `public/` folder with a local server. The easiest way is the VS Code **Live Server** extension: open `public/index.html` and click **Go Live**.
 
-Pantallas disponibles:
+Available screens:
 
-| Dirección | Pantalla |
-| --- | --- |
-| `#/inicio` | Inicio de la app |
-| `#/bienvenida` | Invitación a instalar la app |
-| `#/catalogo` | Catálogo de componentes (para desarrollo) |
+| Address        | Screen                              |
+| -------------- | ----------------------------------- |
+| `#/home`       | App home                            |
+| `#/welcome`    | Invitation to install the app       |
+| `#/playground` | Component catalog (for development) |
 
-## Cómo actualizar los colores y medidas
+## Useful commands
 
-Los colores y medidas se diseñan en Figma y llegan al código automáticamente. **No edites `public/css/tokens.css` a mano.**
+| Command            | What it does                                                   |
+| ------------------ | -------------------------------------------------------------- |
+| `npm test`         | Runs the tests                                                 |
+| `npm run coverage` | Runs the tests with a coverage report (in `coverage/`)         |
+| `npm run lint`     | Checks the code with ESLint and the spelling of names          |
+| `npm run tokens`   | Generates `public/css/tokens.css` from the design tokens       |
+| `npm run todos`    | Generates `docs/todos.md` with the code's `TODO:` and `FIXME:` |
 
-1. En Figma, exporta las variables con el plugin **TokensBrücke** (formato DTCG, con *Omit collection names* activado).
-2. Reemplaza `tokens/balam.tokens.json` con el archivo exportado.
-3. Genera el CSS:
+## Updating colors and sizes
+
+Colors and sizes are designed in Figma and reach the code automatically. **Do not edit `public/css/tokens.css` by hand.**
+
+1. In Figma, export the variables with the **TokensBrücke** plugin (DTCG format, with _Omit collection names_ turned on).
+2. Replace `tokens/balam.tokens.json` with the exported file.
+3. Generate the CSS:
 
    ```bash
    npm run tokens
    ```
 
-## Cómo publicarla
+## Publishing it
 
-La app se publica en Firebase Hosting:
+The app is published on Firebase Hosting:
 
 ```bash
 firebase deploy
 ```
 
-## Cómo está organizada
+## How it is organized
 
 ```
 public/
-├── index.html        un solo HTML: es una SPA
-├── css/              estilos globales (estilos.css es el índice)
-├── componentes/      un componente por carpeta (boton/, boton-texto/…)
-├── pantallas/        una pantalla por carpeta (inicio/, bienvenida/…)
-├── js/               lógica que no es visual (app.js, enrutador.js…)
-├── fuentes/          Atkinson Hyperlegible Next, auto-alojada
-└── img/              íconos de la app
-tokens/               variables exportadas de Figma
-docs/decisiones/      por qué el proyecto es como es
+├── index.html        a single HTML file: it is an SPA
+├── css/              global styles (styles.css is the index)
+├── components/       one component per folder (button/, install-footer/…)
+├── screens/          one screen per folder (home/, welcome/…)
+├── js/               non-visual logic (app.js, router.js, session.js…)
+│   └── i18n/         the texts the user sees (es.js)
+├── fonts/            Atkinson Hyperlegible Next, self-hosted
+└── img/              app icons and images
+tests/                tests with node:test
+tokens/               variables exported from Figma
+docs/decisions/       why the project is the way it is
 ```
 
-Las convenciones para trabajar en el código están en [CONTRIBUTING.md](CONTRIBUTING.md), y las decisiones importantes, con sus razones, en [docs/decisiones](docs/decisiones/).
+The conventions for working on the code are in [CONTRIBUTING.md](CONTRIBUTING.md), and the important decisions, with their reasons, in [docs/decisions](docs/decisions/).
 
-## Licencias
+## Licenses
 
-- El **código** está bajo la licencia [AGPL-3.0](LICENSE): cualquiera puede usarlo, estudiarlo y mejorarlo, siempre que lo que haga con él siga siendo libre y abierto.
-- El **contenido educativo** (lecciones, ejercicios, textos e imágenes) está bajo [CC BY-NC-SA 4.0](LICENCIA-CONTENIDO.md): se puede adaptar dando crédito, sin venderlo y compartiéndolo con la misma licencia.
+- The **code** is under the [AGPL-3.0](LICENSE) license: anyone can use, study and improve it, as long as what they do with it stays free and open.
+- The **educational content** (lessons, exercises, texts and images) is under [CC BY-NC-SA 4.0](LICENCIA-CONTENIDO.md): it can be adapted with credit, without selling it and sharing it under the same license.
 
-Los materiales de terceros y las referencias están en [CREDITOS.md](CREDITOS.md).
+Third-party materials and references are in [CREDITOS.md](CREDITOS.md).

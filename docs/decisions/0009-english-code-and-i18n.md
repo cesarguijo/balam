@@ -13,14 +13,14 @@ English is the industry standard for source code. It makes the project readable 
 
 **Code, comments and project docs are written in English. Every text the user sees lives in a message catalog, outside the code.**
 
-| What                                                                     | Language                                        |
-| ------------------------------------------------------------------------ | ----------------------------------------------- |
-| Identifiers, files, folders, CSS classes (BEM), Custom Element names     | English                                         |
-| JSDoc, comments, `TODO:` / `FIXME:`                                      | English                                         |
-| Commit messages                                                          | English                                         |
-| ADRs, CLAUDE.md, generated docs (`docs/codigo.md`, `docs/pendientes.md`) | English only                                    |
-| README, CONTRIBUTING                                                     | English (source of truth) + Spanish translation |
-| Text shown in the app                                                    | Spanish, from the catalog                       |
+| What                                                                 | Language                                        |
+| -------------------------------------------------------------------- | ----------------------------------------------- |
+| Identifiers, files, folders, CSS classes (BEM), Custom Element names | English                                         |
+| JSDoc, comments, `TODO:` / `FIXME:`                                  | English                                         |
+| Commit messages                                                      | English                                         |
+| ADRs, CLAUDE.md, generated docs (`docs/todos.md`)                    | English only                                    |
+| README, CONTRIBUTING                                                 | English (source of truth) + Spanish translation |
+| Text shown in the app                                                | Spanish, from the catalog                       |
 
 **Internationalization (i18n):**
 

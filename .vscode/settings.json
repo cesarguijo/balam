@@ -3,7 +3,23 @@
     "/": "${workspaceFolder}/public"
   },
 
-  "cSpell.language": "en,es",
+  // English everywhere (ADR 0009); Spanish only where the user's text lives.
+  "cSpell.language": "en",
+  "cSpell.overrides": [
+    {
+      // The message catalog, the Spanish docs, and the login files whose
+      // examples are Spanish usernames (` MÚÑOZ1990 `).
+      "filename": [
+        "**/public/js/i18n/es.js",
+        "**/*.es.md",
+        "**/CREDITOS.md",
+        "**/LICENCIA-CONTENIDO.md",
+        "**/public/screens/login/validation.js",
+        "**/tests/validation.test.js"
+      ],
+      "language": "en,es"
+    }
+  ],
   "cSpell.languageSettings": [
     {
       "languageId": "javascript",
@@ -11,14 +27,7 @@
       "ignoreRegExpList": ["/class=\"[^\"]*\"/g", "/[.#][a-z][\\w-]*/g"]
     }
   ],
-  "cSpell.words": [
-    "Balam",
-    "beforeinstallprompt",
-    "enrutador",
-    "milisegundos",
-    "redibuja",
-    "sesion"
-  ],
+  "cSpell.words": ["Balam", "beforeinstallprompt"],
   "emmet.includeLanguages": { "javascript": "html" },
   "editor.linkedEditing": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",

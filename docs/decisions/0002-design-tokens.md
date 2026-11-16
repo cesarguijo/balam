@@ -1,30 +1,30 @@
-# 0002. Tokens de diseño en tres niveles, de Figma al código
+# 0002. Design tokens in three levels, from Figma to code
 
-- **Fecha:** 2026-11-09
-- **Estado:** aceptada
+- **Date:** 2026-11-09
+- **Status:** accepted
 
-## Contexto
+## Context
 
-Los colores y medidas se deciden en Figma y deben llegar al código sin errores de copia. El sistema debe permitir cambiar un color en un solo lugar y, en el futuro, agregar un modo oscuro.
+Colors and sizes are decided in Figma and must reach the code without copy mistakes. The system must allow changing a color in a single place and, in the future, adding a dark mode.
 
-## Decisión
+## Decision
 
-1. **Formato:** el estándar W3C Design Tokens (DTCG 2025.10).
-2. **Tres niveles de variables:**
-   - **Paleta / Medidas (primitivos):** qué color o medida es, en escalas (`ambar/500`, `espacio/24`). Nunca se usan directamente en un diseño.
-   - **Roles (semánticos):** para qué se usa (`accion/primaria/fondo`, `margen/pantalla`). Apuntan a los primitivos.
-   - **Componentes:** solo para piezas muy específicas (`boton/faceta/izq-arriba`).
-3. **Nombres:** en español, minúsculas, sin acentos, agrupados con `/`. Un grupo nunca se repite en dos colecciones.
-4. **Cadena automática:** Figma → plugin TokensBrücke → `tokens/balam.tokens.json` → Style Dictionary (`npm run tokens`) → `public/css/tokens.css`.
+1. **Format:** the W3C Design Tokens standard (DTCG 2025.10).
+2. **Three levels of variables:**
+   - **Palette / Measures (primitives):** which color or size it is, in scales (`amber/500`, `space/24`). Never used directly in a design.
+   - **Roles (semantic):** what it is used for (`action/primary/background`, `margin/screen`). They point to the primitives.
+   - **Components:** only for very specific pieces (`button/facet/top-left`).
+3. **Names:** lowercase, without accents, grouped with `/`. A group never repeats in two collections. They were in Spanish until ADR 0009 moved them to English.
+4. **Automatic chain:** Figma → TokensBrücke plugin → `tokens/balam.tokens.json` → Style Dictionary (`npm run tokens`) → `public/css/tokens.css`.
 
-## Alternativas consideradas
+## Alternatives considered
 
-- **Escribir los colores directamente en el CSS:** rápido al principio, pero cada cambio obliga a buscarlos uno por uno.
-- **Dos niveles (Paleta y Roles):** suficiente para colores simples, pero el botón facetado necesita valores muy específicos.
-- **Copiar los valores a mano de Figma a `tokens.css`:** propenso a errores y a que Figma y el código se desincronicen.
+- **Write the colors directly in the CSS:** fast at first, but every change means hunting them down one by one.
+- **Two levels (Palette and Roles):** enough for simple colors, but the faceted button needs very specific values.
+- **Copy the values by hand from Figma to `tokens.css`:** error-prone, and Figma and the code drift apart.
 
-## Consecuencias
+## Consequences
 
-- Cambiar un color es cambiar una variable en Figma y correr `npm run tokens`.
-- `tokens.css` es un archivo generado: no se edita a mano.
-- Agregar un modo oscuro solo requerirá un segundo modo en la colección de Roles.
+- Changing a color means changing a variable in Figma and running `npm run tokens`.
+- `tokens.css` is a generated file: it is not edited by hand.
+- Adding a dark mode will only need a second mode in the Roles collection.

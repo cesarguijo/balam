@@ -1,32 +1,32 @@
-# 0005. Componentes con Custom Elements
+# 0005. Components with Custom Elements
 
-- **Fecha:** 2026-11-10
-- **Estado:** aceptada
+- **Date:** 2026-11-10
+- **Status:** accepted
 
-## Contexto
+## Context
 
-Al usar el componente botón, noté que la lógica del estado «cargando» quedó escrita en `catalogo.js`. Esto es un problema porque otras pantallas, como la bienvenida, también necesitan botones con ese comportamiento. Además, al obtener el botón se obtiene un `HTMLButtonElement` genérico; me hubiera gustado obtener un tipo propio, como `BotonBalam`.
+When using the button component, I noticed that the logic of the "loading" state ended up written in the playground screen (`playground.js`). This is a problem because other screens, such as the welcome screen, also need buttons with that behavior. Also, getting the button returns a generic `HTMLButtonElement`; I would have liked to get a type of its own, such as `BalamButton`.
 
-## Decisión
+## Decision
 
-Los componentes con comportamiento propio se construyen como **Custom Elements** (el estándar del navegador), con una clase que extiende `HTMLElement` y una etiqueta propia, como `<balam-boton>`.
+Components with their own behavior are built as **Custom Elements** (the browser standard), with a class that extends `HTMLElement` and a tag of its own, such as `<balam-button>`.
 
-- **Sin Shadow DOM**, para que `boton.css` y `base.css` sigan aplicándose igual.
-- **Con un `<button>` real por dentro**, para conservar lo que el navegador da gratis: teclado, foco y lectores de pantalla.
+- **Without Shadow DOM**, so that `button.css` and `base.css` keep applying as before.
+- **With a real `<button>` inside**, to keep what the browser gives for free: keyboard, focus and screen readers.
 
-Los componentes que solo tienen estilos, sin comportamiento, siguen siendo HTML con clases BEM.
+Components that only have styles, without behavior, stay as HTML with BEM classes.
 
-## Alternativas consideradas
+## Alternatives considered
 
-- **Funciones sueltas en `boton.js`:** no hay un tipo propio, y cada pantalla tiene que buscar el botón y llamar a las funciones.
-- **Clase envoltorio (`new Boton(elemento)`):** cada pantalla tiene que crear el objeto a mano después del `innerHTML`; si se olvida, el botón no funciona.
-- **Una librería ligera como Lit:** contradice la decisión 0001 (sin frameworks) y agrega una dependencia.
+- **Loose functions in `button.js`:** there is no type of its own, and every screen has to find the button and call the functions.
+- **A wrapper class (`new Button(element)`):** every screen has to create the object by hand after `innerHTML`; if it forgets, the button does not work.
+- **A light library such as Lit:** it goes against decision 0001 (no frameworks) and adds a dependency.
 
-## Consecuencias
+## Consequences
 
-- La lógica de cada componente vive en su carpeta, junto a su CSS, y las pantallas solo le dicen qué hacer (`boton.cargando = true`).
-- Los componentes se activan solos: basta con escribir `<balam-boton>` en un `innerHTML`, sin código extra en la pantalla.
-- Cada componente tiene su propio tipo, que VS Code reconoce y que se puede comprobar con `instanceof`.
-- Hay conceptos nuevos que aprender: clases, `customElements.define` y el ciclo de vida (`connectedCallback`).
-- Las etiquetas propias deben llevar un guion (`balam-boton`), porque el navegador lo exige para distinguirlas de las suyas.
-- Cada componente debe importarse una vez para que el navegador conozca su etiqueta.
+- Each component's logic lives in its folder, next to its CSS, and screens only tell it what to do (`button.loading = true`).
+- Components switch themselves on: writing `<balam-button>` in an `innerHTML` is enough, with no extra code in the screen.
+- Each component has its own type, which VS Code recognizes and which can be checked with `instanceof`.
+- There are new concepts to learn: classes, `customElements.define` and the lifecycle (`connectedCallback`).
+- Custom tags must have a hyphen (`balam-button`), because the browser requires it to tell them apart from its own.
+- Each component must be imported once so the browser knows its tag.
