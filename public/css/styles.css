@@ -15,6 +15,7 @@
  */
 @import url('../components/button/button.css') layer(components);
 @import url('../components/install-footer/install-footer.css') layer(components);
+@import url('../components/text-field/text-field.css') Layer(components);
 
 /**
  * App screens

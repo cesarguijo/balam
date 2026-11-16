@@ -16,6 +16,8 @@ export const messages = {
   'button.default': 'Aceptar',
   'button.loading': 'Cargando…',
 
+  'textField.showPassword': 'Mostrar clave',
+
   // Login errors: short and say what to do, because parents read them on
   // the phone with no help. 60 characters max (room in the Figma design).
   'login.error.wrongCredentials':
@@ -29,6 +31,15 @@ export const messages = {
     'Se permiten letras y números sin espacios ni puntos.',
   'login.error.usernameEmpty': 'Por favor ingrese su usuario.',
 
+  'login.subtitle': 'Inicie sesión para continuar',
+  'login.username.label': 'Usuario',
+  'login.username.placeholder': 'Ej. mariaperez1985',
+  'login.password.label': 'Clave',
+  'login.password.placeholder': 'Su clave',
+  'login.button.default': 'Entrar',
+  'login.button.loading': 'Entrando…',
+  'login.forgotPassword': '¿Olvidó su clave? Pida una nueva al maestro',
+
   // Home screen
   'home.hello': 'Hola mundo',
 
@@ -37,6 +48,7 @@ export const messages = {
   'playground.title': 'Catálogo de componentes',
   'playground.button': 'Botón',
   'playground.icons': 'Íconos',
+  'playground.textField': 'Campo de Texto',
 
   // Welcome screen. "Balam" is not here: a brand name is not translated.
   'welcome.logoAlt': 'Logo de Balam',

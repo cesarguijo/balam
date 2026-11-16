@@ -7,6 +7,7 @@ import { wait } from '../../js/utils.js';
 import { BalamButton } from '../../components/button/button.js';
 import { icon, iconNames } from '../../js/icons.js';
 import { t } from '../../js/i18n/es.js';
+import { BalamTextField } from '../../components/text-field/text-field.js';
 
 /**
  * Shows the playground screen inside the container.
@@ -30,12 +31,67 @@ export function showPlayground(app) {
         <h2 class="text-title">${t('playground.icons')}</h2>
         <div class="playground__icons">${drawIcons()}</div>
       </section>
+
+      <section class="playground__section">
+        <h2 class="text-title">${t('playground.textField')}</h2>
+        <h3>Estado normal</h3>
+        <div class="playground__sample">
+          <balam-text-field
+            label="${t('login.username.label')}"
+            left-icon="user"
+            placeholder="${t('login.username.placeholder')}"
+          ></balam-text-field>
+          <balam-text-field
+            label="${t('login.password.label')}"
+            left-icon="user"
+            type="password"
+            placeholder="${t('login.password.placeholder')}"
+          ></balam-text-field>
+        </div>
+        <div class="playground__sample">
+          <h3>Estado error</h3>
+          <balam-text-field
+            error-message="${t('login.error.usernameEmpty')}"
+            label="${t('login.username.label')}"
+            left-icon="user"
+            placeholder="${t('login.username.placeholder')}"
+          ></balam-text-field>
+          <balam-text-field
+            error-message="${t('login.error.passwordEmpty')}"
+            label="${t('login.password.label')}"
+            left-icon="user"
+            type="password"
+            placeholder="${t('login.password.placeholder')}"
+          ></balam-text-field>
+        </div>
+        <div class="playground__sample">
+          <h3>Estado deshabilitado</h3>
+          <balam-text-field
+            disabled
+            label="${t('login.username.label')}"
+            left-icon="user"
+            placeholder="${t('login.username.placeholder')}"
+          ></balam-text-field>
+          <balam-text-field
+            disabled
+            label="${t('login.password.label')}"
+            left-icon="lock"
+            type="password"
+            placeholder="${t('login.password.placeholder')}"
+          ></balam-text-field>
+        </div>
+      </section>
     </div>
   `;
 
   const button = app.querySelector('balam-button');
   if (!(button instanceof BalamButton)) {
     throw new Error('<balam-button> not found in the playground');
+  }
+
+  const textField = app.querySelector('balam-text-field');
+  if (!(textField instanceof BalamTextField)) {
+    throw new Error('<balam-text-field> not found in the playground');
   }
 
   button.addEventListener('click', async () => {

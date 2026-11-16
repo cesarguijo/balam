@@ -157,6 +157,18 @@
       }
     }
   },
+  "text-field": {
+    "focus": {
+      "border": {
+        "$type": "color",
+        "$value": "#ffffff",
+        "$description": "",
+        "$extensions": {
+          "mode": {}
+        }
+      }
+    }
+  },
   "text": {
     "primary": {
       "$type": "color",
@@ -397,6 +409,14 @@
       "$type": "color",
       "$value": "{brown.500}",
       "$description": "Field border at rest, 1 px. Contrast 3.7:1",
+      "$extensions": {
+        "mode": {}
+      }
+    },
+    "radius": {
+      "$type": "dimension",
+      "$value": "{radius.12}",
+      "$description": "",
       "$extensions": {
         "mode": {}
       }
@@ -791,13 +811,31 @@
       }
     }
   },
+  "radius": {
+    "12": {
+      "$type": "dimension",
+      "$value": {
+        "value": 12,
+        "unit": "px"
+      },
+      "$description": "",
+      "$extensions": {
+        "mode": {}
+      }
+    }
+  },
   "$extensions": {
     "tokens-bruecke-meta": {
       "useDTCG": true,
       "spec": "https://www.designtokens.org/tr/2025.10/format/",
       "colorMode": "hex",
-      "variableCollections": ["Palette", "Roles", "Components", "Measures"],
-      "createdAt": "2026-11-16T04:43:23.642Z"
+      "variableCollections": [
+        "Palette",
+        "Roles",
+        "Components",
+        "Measures"
+      ],
+      "createdAt": "2026-11-16T09:10:15.528Z"
     }
   }
 }

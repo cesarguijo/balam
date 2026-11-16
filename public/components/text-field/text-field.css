@@ -1,0 +1,111 @@
+/*
+ * One column grid: the label goes in the first cell and the error under it.
+ * The toggle button shares the label's cell, so it sits on top of the box
+ * without being inside the <label>.
+ */
+balam-text-field {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.text-field__field {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.text-field__label {
+  font-weight: var(--font-weight-bold);
+  line-height: var(--font-line-height-label);
+}
+
+.text-field__input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  outline: none;
+  font: inherit;
+  color: inherit;
+}
+
+.text-field__input-box {
+  align-items: center;
+  height: var(--size-control);
+  display: flex;
+  flex-direction: row;
+  /* Only sideways: the fixed height already centers the content. */
+  padding-inline: var(--space-16);
+  gap: var(--spacing-text-icon);
+  border: 1px solid var(--field-border);
+
+  border-radius: var(--field-radius);
+}
+
+.text-field__input-box:focus-within {
+  border: 2px solid var(--focus-ring);
+}
+
+.border-error {
+  border: 1px solid var(--feedback-to-correct);
+}
+
+.border-error:focus-within {
+  border: 2px solid var(--feedback-to-correct);
+}
+
+/* The box reads the state of the input inside it, so no extra class is needed. */
+.text-field__input-box:has(:disabled) {
+  background: var(--action-disabled-background);
+  border-color: var(--action-disabled-border);
+  color: var(--action-disabled-text);
+}
+
+/* Leaves room on the right so the text never runs under the toggle button. */
+balam-text-field[type='password'] .text-field__input-box {
+  padding-inline-end: var(--size-control);
+}
+
+/*
+ * Same cell as the label, pinned to the bottom right corner, so it lands on
+ * the box. As tall and wide as the box: an easy target for the finger.
+ */
+.text-field__toggle {
+  grid-area: 1 / 1;
+  align-self: end;
+  justify-self: end;
+  display: grid;
+  place-items: center;
+  width: var(--size-control);
+  height: var(--size-control);
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.text-field__toggle:disabled {
+  color: var(--action-disabled-text);
+  cursor: default;
+}
+
+.text-field__error {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-8);
+  /* Lines the warning icon up with the icon inside the box. */
+  padding-inline: var(--space-16);
+  color: var(--feedback-to-correct);
+  font-size: var(--font-size-label);
+}
+
+.icon {
+  width: 24px;
+}
+
+/* display: flex above beats the browser's [hidden] rule, so it is restored. */
+.text-field__error[hidden] {
+  display: none;
+}

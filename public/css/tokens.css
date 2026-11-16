@@ -21,6 +21,7 @@
   --white: #ffffff; /** White · raised surfaces (fields, QR card) */
   --pink-50: #fbeaf0; /** Very light macuelizo pink · server error background */
   --pink-600: #a8406b; /** Macuelizo pink · Tabebuia rosea flower */
+  --text-field-focus-border: #ffffff;
   --size-control: 52px;
   --font-weight-regular: 400;
   --font-weight-bold: 700;
@@ -50,6 +51,7 @@
   --space-16: 16px;
   --space-24: 24px;
   --space-32: 32px;
+  --radius-12: 12px;
   --duration-fast: 80ms; /** Feedback for a tap: the button sinking */
   --text-primary: var(--blue-800); /** Body text on the background. Contrast 10.2:1 */
   --text-secondary: var(--gray-600); /** Placeholders and helper text. Contrast 6.5:1 on white */
@@ -76,6 +78,7 @@
   --feedback-to-correct: var(--pink-600); /** Error border, icon and message. Never red. Contrast 5.2:1 */
   --alert-error-background: var(--pink-50); /** Server error message background */
   --field-border: var(--brown-500); /** Field border at rest, 1 px. Contrast 3.7:1 */
+  --field-radius: var(--radius-12);
   --button-facet-top-left: var(--amber-200);
   --button-facet-bottom-left: var(--amber-400);
   --button-facet-top-right: var(--amber-600);
