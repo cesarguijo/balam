@@ -49,6 +49,12 @@ export const messages = {
   'playground.button': 'Botón',
   'playground.icons': 'Íconos',
   'playground.textField': 'Campo de Texto',
+  'playground.textField.normal': 'Estado normal',
+  'playground.textField.error': 'Estado error',
+  'playground.textField.disabled': 'Estado deshabilitado',
+  'playground.textField.form': 'Dentro de un formulario',
+  'playground.textField.formHint':
+    'Escriba y toque Entrar: abajo aparece lo que envía el formulario.',
 
   // Welcome screen. "Balam" is not here: a brand name is not translated.
   'welcome.logoAlt': 'Logo de Balam',

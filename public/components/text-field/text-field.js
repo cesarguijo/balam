@@ -22,6 +22,8 @@ import { t } from '../../js/i18n/es.js';
  * - `error-message`: if present, the field shows the error with this text.
  *   Remove it to clear the error.
  * - `disabled`: if present, the field cannot be used (e.g. while loading).
+ * - `name`: passed to the input, so `FormData` finds its value.
+ * - `autocomplete`: passed to the input, e.g. `username` or `current-password`.
  *
  * @example
  * <balam-text-field label="Usuario" left-icon="user"></balam-text-field>
@@ -62,6 +64,8 @@ export class BalamTextField extends HTMLElement {
         <span class="text-field__input-box" data-input-box>
           ${this.#leftIcon}
           <input
+            name="${this.#name}"
+            autocomplete="${this.#autocomplete}"
             class="text-field__input"
             type="${this.#type}"
             placeholder="${this.#placeholder}"
@@ -129,6 +133,23 @@ export class BalamTextField extends HTMLElement {
   /** @returns {string | null} The error text, or `null` if there is no error. */
   get #errorMessage() {
     return this.getAttribute('error-message');
+  }
+
+  /**
+   * Passed to the input so a `<form>` around the field finds its value
+   * with `FormData` (no Shadow DOM, so the input belongs to the form).
+   * @returns {string} The field's name, e.g. `username`.
+   */
+  get #name() {
+    return this.getAttribute('name') ?? '';
+  }
+
+  /**
+   * Passed to the input so the phone offers to save and fill the password.
+   * @returns {string} The autocomplete hint, e.g. `current-password`.
+   */
+  get #autocomplete() {
+    return this.getAttribute('autocomplete') ?? '';
   }
 
   /**
