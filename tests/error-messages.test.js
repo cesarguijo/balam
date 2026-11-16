@@ -1,6 +1,9 @@
 import { describe, test } from 'node:test';
 import assert from 'node:assert/strict';
-import { getErrorMessage } from '../public/screens/login/error-messages.js';
+import {
+  getErrorMessage,
+  getErrorPlace,
+} from '../public/screens/login/error-messages.js';
 
 describe('getErrorMessage (login/error-messages.js)', () => {
   const types = [
@@ -62,6 +65,28 @@ describe('getErrorMessage (login/error-messages.js)', () => {
         test(description, () => {
           assert.equal(getErrorMessage(input), getErrorMessage('unknown'));
         });
+      });
+    });
+  });
+});
+
+describe('getErrorPlace', () => {
+  describe('returns', () => {
+    const cases = [
+      { type: 'wrong-credentials', place: 'banner' },
+      { type: 'offline', place: 'banner' },
+      { type: 'account-disabled', place: 'banner' },
+      { type: 'too-many-attempts', place: 'banner' },
+      { type: 'unknown', place: 'banner' },
+      { type: 'password-empty', place: 'password' },
+      { type: 'username-invalid', place: 'username' },
+      { type: 'username-empty', place: 'username' },
+      { type: undefined, place: 'banner' },
+      { type: 'somthing-strange', place: 'banner' },
+    ];
+    cases.forEach(({ type, place }) => {
+      test(place + ' when the error is ' + type, () => {
+        assert.equal(getErrorPlace(type), place);
       });
     });
   });

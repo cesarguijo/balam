@@ -47,3 +47,21 @@ export function getErrorMessage(type) {
   }
   return t(messageKeys.unknown);
 }
+
+/**
+ * Returns where the login screen shows an error. Validation errors know
+ * which field is wrong, so they go under that field; server errors do not,
+ * so they go in the banner under the button. The field places match the
+ * inputs' `name`, so the screen can find the field without an `if`.
+ * Unknown types go to the banner, next to the `unknown` message that
+ * `getErrorMessage` gives them.
+ * @param {string | undefined} type - The error type, e.g. `password-empty` or `offline`.
+ * @returns {'username' | 'password' | 'banner'} Where the error is shown.
+ */
+export function getErrorPlace(type) {
+  if (type === 'username-invalid' || type === 'username-empty') {
+    return 'username';
+  }
+  if (type === 'password-empty') return 'password';
+  return 'banner';
+}
