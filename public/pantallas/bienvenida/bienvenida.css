@@ -75,75 +75,75 @@
   inset: 0;
 }
 
-/* Solo las decoraciones del fondo se posicionan; las del pie (esquinas del QR) no. */
-.bienvenida__fondo .decoracion {
+/* Only the background decorations are positioned; the footer ones (QR corners) are not. */
+.bienvenida__fondo .decoration {
   position: absolute;
 }
 
-.decoracion__azul {
-  fill: var(--azul-800);
+.decoration__blue {
+  fill: var(--blue-800);
 }
 
-.decoracion__ambar {
-  fill: var(--ambar-400);
+.decoration__amber {
+  fill: var(--amber-400);
 }
 
-/* No hay token para este ámbar tan claro, así que se mezcla con el fondo. */
-.decoracion__ambar-claro {
-  fill: color-mix(in srgb, var(--ambar-200) 50%, var(--superficie-fondo));
+/* There is no token for such a light amber, so it is mixed with the background. */
+.decoration__amber-light {
+  fill: color-mix(in srgb, var(--amber-200) 50%, var(--surface-background));
 }
 
-.decoracion--onda-arriba {
+.decoration--wave-top {
   top: 0;
   left: 0;
   width: clamp(12rem, 35vw, 40rem);
 }
 
-.decoracion--onda-abajo {
+.decoration--wave-bottom {
   right: 0;
   bottom: 0;
   width: clamp(12rem, 50vw, 40rem);
 }
 
-/* Las grecas van muy tenues para no competir con el texto. */
-.decoracion--greca {
-  fill: var(--decoracion-greca);
+/* The frets are very faint so they do not compete with the text. */
+.decoration--fret {
+  fill: var(--decoration-maya-fret);
   opacity: 0.12;
 }
 
-.decoracion--greca-abajo-izquierda {
+.decoration--fret-bottom-left {
   bottom: 0;
   left: 0;
   width: clamp(12rem, 18vw, 24rem);
 }
 
-.decoracion--greca-arriba-izquierda {
+.decoration--fret-top-left {
   top: 10vw;
   left: 0;
   width: clamp(8rem, 12vw, 14rem);
 }
 
-/* En celular solo van las grecas de la izquierda, para que no compitan con el texto. */
-.decoracion--greca-arriba-derecha,
-.decoracion--greca-abajo-derecha {
+/* On phones only the left frets show, so they do not compete with the text. */
+.decoration--fret-top-right,
+.decoration--fret-bottom-right {
   display: none;
 }
 
-.decoracion--greca-arriba-derecha {
+.decoration--fret-top-right {
   top: 0;
   right: 0;
   width: clamp(10rem, 14vw, 18rem);
 }
 
-.decoracion--greca-abajo-derecha {
-  bottom: var(--espacio-32);
+.decoration--fret-bottom-right {
+  bottom: var(--space-32);
   right: 0;
   width: clamp(10rem, 14vw, 18rem);
 }
 
 @media (min-width: 1025px) {
-  .decoracion--greca-arriba-derecha,
-  .decoracion--greca-abajo-derecha {
+  .decoration--fret-top-right,
+  .decoration--fret-bottom-right {
     display: block;
   }
 

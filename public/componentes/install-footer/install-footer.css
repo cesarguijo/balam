@@ -1,0 +1,167 @@
+balam-install-footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-elements);
+  margin-inline: auto;
+  max-width: 100%;
+}
+
+balam-install-footer balam-button {
+  width: 100%;
+}
+
+.install-footer__note {
+  text-align: center;
+}
+
+/* The steps title lines up with them, as in Figma. */
+.install-footer__note:has(+ .install-footer__steps) {
+  text-align: start;
+}
+
+/* Manual install steps (phones). */
+.install-footer__steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-row);
+  padding: 0;
+  list-style: none;
+}
+
+.install-footer__step {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-text-icon);
+}
+
+/* The icon sits inside an amber circle; the SVG padding shrinks the drawing inside the circle. */
+.install-footer__step .icon {
+  width: var(--space-32);
+  height: var(--space-32);
+  padding: var(--space-8);
+  border-radius: 50%;
+  background-color: var(--amber-200);
+}
+
+/*
+ * Desktop variant (QR). Its classes only exist in that template, so they do
+ * not depend on the width: they must also look right in a narrow window.
+ */
+
+/* clamp with a rem part: grows with the screen, but also with zoom. */
+.install-footer__note--large {
+  font-size: clamp(1.5rem, 1rem + 1vw, 2.25rem);
+  line-height: 1.2;
+  /* Spreads the words evenly across lines, so a single word is not left alone at the bottom. */
+  text-wrap: balance;
+}
+
+/*
+ * The curved stroke is drawn with a mask: the SVG only gives the shape and the
+ * color comes from the token, because a data: URL cannot read var(...).
+ */
+.install-footer__underline {
+  position: relative;
+  display: inline-block;
+}
+
+.install-footer__underline::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  bottom: -0.2em;
+  height: 0.3em;
+  background-color: var(--amber-300);
+  --_underline-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 12' preserveAspectRatio='none'%3E%3Cpath d='M4 7.85C36.24 3.12 79.08 2.33 123.5 7.85' stroke-width='8' stroke-linecap='round' stroke='black' fill='none'/%3E%3C/svg%3E");
+  /* Prefixed for old Chromium (old Android, Responsively); without it a plain rectangle shows. */
+  -webkit-mask: var(--_underline-shape) no-repeat center / 100% 100%;
+  mask: var(--_underline-shape) no-repeat center / 100% 100%;
+}
+
+/* The svh cap keeps the content from reaching the wave on short screens. */
+.install-footer__qr {
+  position: relative;
+  width: min(100%, 30rem, 50svh);
+  margin-inline: auto;
+  padding: var(--space-32);
+  /* TODO: create the --surface-card token in Figma and use it here. */
+  background-color: var(--surface-raised);
+}
+
+.install-footer__qr-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.install-footer__corner {
+  position: absolute;
+  width: var(--space-32);
+  stroke: var(--amber-300);
+  fill: none;
+}
+
+.install-footer__corner .decoration {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.install-footer__corner--top-left {
+  top: var(--space-16);
+  left: var(--space-16);
+}
+
+.install-footer__corner--top-right {
+  top: var(--space-16);
+  right: var(--space-16);
+  transform: scaleX(-1);
+}
+
+.install-footer__corner--bottom-left {
+  bottom: var(--space-16);
+  left: var(--space-16);
+  transform: scaleY(-1);
+}
+
+.install-footer__corner--bottom-right {
+  bottom: var(--space-16);
+  right: var(--space-16);
+  transform: rotate(180deg);
+}
+
+.install-footer__scan {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-24);
+}
+
+.install-footer__scan-icon {
+  padding-right: var(--space-24);
+  border-right: var(--space-4) solid var(--amber-300);
+}
+
+.install-footer__scan-icon .icon {
+  display: block;
+  width: clamp(3rem, 2rem + 3vw, 5.75rem);
+  height: clamp(3rem, 2rem + 3vw, 5.75rem);
+}
+
+.install-footer__scan-text {
+  font-size: clamp(1rem, 0.5rem + 1vw, 1.5rem);
+  line-height: 1.3;
+}
+
+/* In a single column (narrow window) the QR goes below everything: smaller, to avoid scrolling. */
+@media (max-width: 1024px) {
+  .install-footer__qr {
+    width: min(100%, 30rem, 30svh);
+  }
+}
+
+@media (min-width: 1025px) {
+  balam-install-footer {
+    gap: var(--space-32);
+  }
+}

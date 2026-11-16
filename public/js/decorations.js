@@ -1,53 +1,53 @@
 /**
- * @file Decoraciones de Balam: guarda los SVG de ondas, grecas y esquinas que
- * usan la bienvenida y el pie de instalación.
+ * @file Balam decorations: holds the wave, fret and corner SVGs used by the
+ * welcome screen and the install footer.
  */
 
 /**
- * SVG decorativos listos para insertar en una plantilla. No llevan colores
- * fijos: el color sale del CSS (`fill` o `stroke`) para poder usar tokens.
- * Todos llevan `aria-hidden="true"` porque no aportan información.
+ * Decorative SVGs ready to insert in a template. They have no fixed colors:
+ * the color comes from the CSS (`fill` or `stroke`) so tokens can be used.
+ * All of them have `aria-hidden="true"` because they carry no information.
  */
-export const decoraciones = {
-  'onda-arriba': /* HTML */ `
+export const decorations = {
+  'wave-top': /* HTML */ `
     <svg
-      class="decoracion decoracion--onda-arriba"
+      class="decoration decoration--wave-top"
       viewBox="0 0 429 173"
       aria-hidden="true"
     >
       <path
-        class="decoracion__ambar"
+        class="decoration__amber"
         d="M429 0C247.524 33.8118 64 80.7333 0 173V0H429Z"
       />
       <path
-        class="decoracion__azul"
+        class="decoration__blue"
         d="M325.5 0C144.024 33.7141 66.6987 60.7162 0 132.5V0H325.5Z"
       />
     </svg>
   `,
-  'onda-abajo': /* HTML */ `
+  'wave-bottom': /* HTML */ `
     <svg
-      class="decoracion decoracion--onda-abajo"
+      class="decoration decoration--wave-bottom"
       viewBox="0 0 721 243"
       aria-hidden="true"
     >
       <path
-        class="decoracion__ambar"
+        class="decoration__amber"
         d="M720.5 242.5V0C675 150.5 294.5 202 56.5 242.5H720.5Z"
       />
       <path
-        class="decoracion__ambar-claro"
+        class="decoration__amber-light"
         d="M0 242.337C189.969 154.918 307.187 152.863 537.5 242.337H0Z"
       />
       <path
-        class="decoracion__azul"
+        class="decoration__blue"
         d="M720 242.5H47C126.617 209.842 174.346 198.373 269 199C543.947 193.178 626.935 157.218 720 71V242.5Z"
       />
     </svg>
   `,
-  'greca-abajo-izquierda': /* HTML */ `
+  'fret-bottom-left': /* HTML */ `
     <svg
-      class="decoracion decoracion--greca decoracion--greca-abajo-izquierda"
+      class="decoration decoration--fret decoration--fret-bottom-left"
       viewBox="0 0 342 461"
       aria-hidden="true"
     >
@@ -56,9 +56,9 @@ export const decoraciones = {
       />
     </svg>
   `,
-  'greca-arriba-izquierda': /* HTML */ `
+  'fret-top-left': /* HTML */ `
     <svg
-      class="decoracion decoracion--greca decoracion--greca-arriba-izquierda"
+      class="decoration decoration--fret decoration--fret-top-left"
       viewBox="0 0 196 230"
       aria-hidden="true"
     >
@@ -67,9 +67,9 @@ export const decoraciones = {
       />
     </svg>
   `,
-  'greca-arriba-derecha': /* HTML */ `
+  'fret-top-right': /* HTML */ `
     <svg
-      class="decoracion decoracion--greca decoracion--greca-arriba-derecha"
+      class="decoration decoration--fret decoration--fret-top-right"
       viewBox="0 0 196 230"
       aria-hidden="true"
     >
@@ -78,9 +78,9 @@ export const decoraciones = {
       />
     </svg>
   `,
-  'greca-abajo-derecha': /* HTML */ `
+  'fret-bottom-right': /* HTML */ `
     <svg
-      class="decoracion decoracion--greca decoracion--greca-abajo-derecha"
+      class="decoration decoration--fret decoration--fret-bottom-right"
       viewBox="0 0 259 562"
       aria-hidden="true"
     >
@@ -89,9 +89,9 @@ export const decoraciones = {
       />
     </svg>
   `,
-  'angulo-redondeado': /* HTML */ `
+  'rounded-corner': /* HTML */ `
     <svg
-      class="decoracion decoracion--angulo-redondeado"
+      class="decoration decoration--rounded-corner"
       aria-hidden="true"
       viewBox="0 0 41 45"
     >

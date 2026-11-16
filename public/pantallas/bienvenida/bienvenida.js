@@ -2,9 +2,9 @@
  * @file Pantalla de bienvenida: describe brevemente la app y muestra el botón de instalación.
  */
 
-import '../../componentes/pie-instalacion/pie-instalacion.js';
+import '../../componentes/install-footer/install-footer.js';
 import { icon } from '../../js/icons.js';
-import { decoraciones } from '../../js/decoraciones.js';
+import { decorations } from '../../js/decorations.js';
 
 /**
  * Muestra la pantalla de bienvenida dentro del contenedor.
@@ -14,11 +14,11 @@ export function mostrarBienvenida(app) {
   app.innerHTML = /* HTML */ `
     <div class="bienvenida">
       <div class="bienvenida__fondo">
-        ${decoraciones['greca-abajo-izquierda']}
-        ${decoraciones['greca-arriba-izquierda']}
-        ${decoraciones['greca-arriba-derecha']}
-        ${decoraciones['greca-abajo-derecha']}
-        ${decoraciones['onda-arriba']} ${decoraciones['onda-abajo']}
+        ${decorations['fret-bottom-left']}
+        ${decorations['fret-top-left']}
+        ${decorations['fret-top-right']}
+        ${decorations['fret-bottom-right']}
+        ${decorations['wave-top']} ${decorations['wave-bottom']}
       </div>
       <div class="bienvenida__contenido">
         <div class="bienvenida__columna-izquierda">
@@ -53,7 +53,7 @@ export function mostrarBienvenida(app) {
         </div>
 
         <footer class="bienvenida__pie">
-          <balam-pie-instalacion></balam-pie-instalacion>
+          <balam-install-footer></balam-install-footer>
         </footer>
       </div>
     </div>

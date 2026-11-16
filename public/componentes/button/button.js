@@ -12,9 +12,12 @@ import { t } from '../../js/i18n/es.js';
  * - `text`: text shown on the button, already translated by the caller.
  *   Default: `t('button.default')`.
  * - `variant`: `primary` or `secondary`. Default: `primary`.
+ * - `loading-text`: text shown while loading, so it can say what is
+ *   happening ("Instalando…"). Default: `t('button.loading')`.
  *
  * @example
  * <balam-button text="Install" variant="secondary"></balam-button>
+ * <balam-button text="Install" loading-text="Installing…"></balam-button>
  */
 export class BalamButton extends HTMLElement {
   connectedCallback() {
@@ -38,6 +41,10 @@ export class BalamButton extends HTMLElement {
     return this.getAttribute('variant') ?? 'primary';
   }
 
+  get #loadingText() {
+    return this.getAttribute('loading-text') ?? t('button.loading');
+  }
+
   get #button() {
     const button = this.querySelector('button');
     if (!(button instanceof HTMLButtonElement)) {
@@ -56,7 +63,7 @@ export class BalamButton extends HTMLElement {
 
   /**
    * Tells whether the button is loading. `true` shows the animation and the
-   * `button.loading` text; `false` restores the original text.
+   * `loading-text`; `false` restores the original text.
    * @type {boolean}
    */
   get loading() {
@@ -67,7 +74,7 @@ export class BalamButton extends HTMLElement {
   set loading(value) {
     if (value) {
       this.#button.setAttribute('aria-busy', 'true');
-      this.#label.textContent = t('button.loading');
+      this.#label.textContent = this.#loadingText;
     } else {
       this.#button.removeAttribute('aria-busy');
       this.#label.textContent = this.#text;
