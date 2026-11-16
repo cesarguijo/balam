@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'Atkinson Hyperlegible Next';
-  src: url('../fuentes/atkinson-hyperlegible-next-latin.woff2') format('woff2');
-  font-weight: 200 800; /* el rango de pesos de la fuente variable */
+  src: url('../fonts/atkinson-hyperlegible-next-latin.woff2') format('woff2');
+  font-weight: 200 800; /* the weight range of the variable font */
   font-style: normal;
-  font-display: swap; /* muestra el texto de inmediato con otra fuente y la cambia al cargar */
+  font-display: swap; /* shows the text right away with another font and swaps it once loaded */
 }
 
 *,
@@ -15,8 +15,8 @@
 
 body {
   margin: 0;
-  background-color: var(--superficie-fondo);
-  color: var(--texto-principal);
+  background-color: var(--surface-background);
+  color: var(--text-primary);
   font-family: 'Atkinson Hyperlegible Next', sans-serif;
 }
 
@@ -32,12 +32,12 @@ img {
 }
 
 :focus-visible {
-  outline: 3px solid var(--foco-anillo);
+  outline: 3px solid var(--focus-ring);
   outline-offset: 3px;
 }
 
 .icon {
   width: 36px;
   height: 36px;
-  flex-shrink: 0; /* en un flex, el ícono no se encoge si el texto es largo */
+  flex-shrink: 0; /* in a flex container, the icon does not shrink when the text is long */
 }

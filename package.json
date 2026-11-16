@@ -5,11 +5,11 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "pendientes": "leasot \"public/**/*.{js,css}\" --reporter markdown > docs/pendientes.md",
-    "cobertura": "c8 node --test --experimental-test-module-mocks",
+    "todos": "leasot \"public/**/*.{js,css}\" --reporter markdown > docs/todos.md",
+    "coverage": "c8 node --test --experimental-test-module-mocks",
     "test": "node --test --experimental-test-module-mocks",
-    "docs": "jsdoc2md --files \"public/**/*.js\" > docs/codigo.md",
-    "lint": "eslint public",
+    "docs": "jsdoc2md --files \"public/**/*.js\" > docs/code.md",
+    "lint": "eslint public tests",
     "tokens": "style-dictionary build --config sd.config.mjs"
   },
   "repository": {

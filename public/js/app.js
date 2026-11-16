@@ -1,20 +1,20 @@
 /**
- * @file Punto de entrada de Balam: arranca el enrutador, registra el
- * service worker y guarda el aviso de instalación para usarlo después.
+ * @file Balam entry point: starts the router, registers the service worker
+ * and keeps the install prompt to use it later.
  */
 
-import './enrutador.js';
-import './instalacion.js';
+import './router.js';
+import './install.js';
 
-// Registrar el service worker, que permitirá usar la app sin internet.
-// Solo si el navegador lo soporta (los muy antiguos no).
+// Registers the service worker, which will let the app work offline.
+// Only if the browser supports it (very old ones do not).
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker
     .register('/sw.js')
-    .then((registro) => {
-      console.log('Service worker registrado en: ', registro.scope);
+    .then((registration) => {
+      console.log('Service worker registered at:', registration.scope);
     })
     .catch((error) => {
-      console.error('Error al registrar el service worker:', error);
+      console.error('Service worker registration failed:', error);
     });
 }

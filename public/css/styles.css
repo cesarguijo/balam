@@ -1,0 +1,25 @@
+/* Balam's style index: new components and screens are added here */
+@layer tokens, base, components, screens;
+
+/**
+ * Design tokens: colors, typography, etc.
+ * Imported first so every other style can use them
+ */
+@import url('tokens.css') layer(tokens);
+@import url('base.css') layer(base);
+@import url('typography.css') layer(base);
+
+/**
+ * App components
+ * Imported before the screens so they can use the tokens and base styles
+ */
+@import url('../components/button/button.css') layer(components);
+@import url('../components/install-footer/install-footer.css') layer(components);
+
+/**
+ * App screens
+ * Imported last so they can use the tokens and base styles
+ */
+@import url('../screens/welcome/welcome.css') layer(screens);
+@import url('../screens/home/home.css') layer(screens);
+@import url('../screens/playground/playground.css') layer(screens);

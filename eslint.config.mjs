@@ -1,30 +1,30 @@
-// Configuración de ESLint (formato "flat config", el estándar desde ESLint 9).
+// ESLint config ("flat config" format, the standard since ESLint 9).
 import js from '@eslint/js';
 import globals from 'globals';
 import cspell from '@cspell/eslint-plugin';
 
 export default [
-  // 1. Reglas recomendadas para cualquier JavaScript.
+  // 1. Recommended rules for any JavaScript.
   js.configs.recommended,
 
-  // 2. Reglas para el código de la app.
+  // 2. Rules for the app code.
   {
     files: ['public/**/*.js'],
 
     languageOptions: {
       ecmaVersion: 2022,
-      sourceType: 'module', // usamos import/export
+      sourceType: 'module', // we use import/export
       globals: {
         ...globals.browser, // window, document, navigator…
-        ...globals.serviceworker, // self, caches… (para sw.js)
+        ...globals.serviceworker, // self, caches… (for sw.js)
       },
     },
 
     plugins: { '@cspell': cspell },
 
     rules: {
-      // Ortografía SOLO de nombres (variables, funciones, propiedades).
-      // Los comentarios y textos los revisa la extensión de VS Code, con tildes.
+      // Spelling of names ONLY (variables, functions, properties).
+      // Comments and strings are checked by the VS Code extension.
       '@cspell/spellchecker': [
         'warn',
         {
@@ -32,14 +32,14 @@ export default [
           checkComments: false,
           checkStrings: false,
           checkStringTemplates: false,
-          customWordListFile: './palabras-codigo.txt',
+          customWordListFile: './code-words.txt',
         },
       ],
     },
   },
-  // 3. Reglas para las pruebas (corren en Node).
+  // 3. Rules for the tests (they run in Node).
   {
-    files: ['pruebas/**/*.js'],
+    files: ['tests/**/*.js'],
     languageOptions: {
       globals: { ...globals.node },
     },

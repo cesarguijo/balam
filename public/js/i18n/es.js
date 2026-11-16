@@ -16,6 +16,35 @@ export const messages = {
   'button.default': 'Aceptar',
   'button.loading': 'Cargando…',
 
+  // Login errors: short and say what to do, because parents read them on
+  // the phone with no help. 60 characters max (room in the Figma design).
+  'login.error.wrongCredentials':
+    'Usuario o clave incorrectos. Revise e intente nuevamente.',
+  'login.error.offline': 'No tiene conexión a internet, conéctese nuevamente.',
+  'login.error.accountDisabled': 'Cuenta deshabilitada. Contacte al maestro.',
+  'login.error.tooManyAttempts': 'Demasiados intentos. Reintente más tarde.',
+  'login.error.unknown': 'Ocurrió un error desconocido, reintente más tarde.',
+  'login.error.passwordEmpty': 'Por favor ingrese su clave.',
+  'login.error.usernameInvalid':
+    'Se permiten letras y números sin espacios ni puntos.',
+  'login.error.usernameEmpty': 'Por favor ingrese su usuario.',
+
+  // Home screen
+  'home.hello': 'Hola mundo',
+
+  // Playground: an internal screen to review components
+  'playground.pageTitle': 'Balam - Catálogo',
+  'playground.title': 'Catálogo de componentes',
+  'playground.button': 'Botón',
+  'playground.icons': 'Íconos',
+
+  // Welcome screen. "Balam" is not here: a brand name is not translated.
+  'welcome.logoAlt': 'Logo de Balam',
+  'welcome.tagline': 'La app de la clase del Prof. César',
+  'welcome.feature.notices': 'Avisos y notas en tu celular',
+  'welcome.feature.math': 'Matemáticas a tu ritmo',
+  'welcome.feature.private': 'Privado, gratis y sin anuncios',
+
   // Install footer: one text per state (install, installing, installed)
   'install.button': 'Instalar',
   'install.buttonNote': 'Consume pocos datos y almacenamiento',
