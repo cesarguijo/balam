@@ -103,6 +103,7 @@ balam-text-field[type='password'] .text-field__input-box {
 
 .icon {
   width: 24px;
+  color: var(--icon-secondary);
 }
 
 /* display: flex above beats the browser's [hidden] rule, so it is restored. */

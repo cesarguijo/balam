@@ -14,8 +14,8 @@ import { t } from '../../js/i18n/es.js';
  */
 export function showWelcome(app) {
   app.innerHTML = /* HTML */ `
-    <div class="welcome">
-      <div class="welcome__background">
+    <div class="outside-layout welcome">
+      <div class="backdrop">
         ${decorations['fret-bottom-left']} ${decorations['fret-top-left']}
         ${decorations['fret-top-right']} ${decorations['fret-bottom-right']}
         ${decorations['wave-top']} ${decorations['wave-bottom']}
@@ -26,7 +26,7 @@ export function showWelcome(app) {
             <div class="identity__logo">
               <img
                 src="/img/icon-192.png"
-                alt="${t('welcome.logoAlt')}"
+                alt="${t('identity.logoAlt')}"
                 width="52"
                 height="52"
               />

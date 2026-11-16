@@ -1,0 +1,80 @@
+/* Decorative background: a fixed layer behind the content; DOM order decides what goes on top. */
+.backdrop {
+  position: fixed;
+  pointer-events: none;
+  z-index: -1;
+  inset: 0;
+}
+
+/* Only the background decorations are positioned; the footer ones (QR corners) are not. */
+.backdrop .decoration {
+  position: absolute;
+}
+
+.decoration__blue {
+  fill: var(--blue-800);
+}
+
+.decoration__amber {
+  fill: var(--amber-400);
+}
+
+/* There is no token for such a light amber, so it is mixed with the background. */
+.decoration__amber-light {
+  fill: color-mix(in srgb, var(--amber-200) 50%, var(--surface-background));
+}
+
+.decoration--wave-top {
+  top: 0;
+  left: 0;
+  width: clamp(12rem, 35vw, 40rem);
+}
+
+.decoration--wave-bottom {
+  right: 0;
+  bottom: 0;
+  width: clamp(12rem, 50vw, 40rem);
+}
+
+/* The frets are very faint so they do not compete with the text. */
+.decoration--fret {
+  fill: var(--decoration-maya-fret);
+  opacity: 0.12;
+}
+
+.decoration--fret-bottom-left {
+  bottom: 0;
+  left: 0;
+  width: clamp(12rem, 18vw, 24rem);
+}
+
+.decoration--fret-top-left {
+  top: 10vw;
+  left: 0;
+  width: clamp(8rem, 12vw, 14rem);
+}
+
+/* On phones only the left frets show, so they do not compete with the text. */
+.decoration--fret-top-right,
+.decoration--fret-bottom-right {
+  display: none;
+}
+
+.decoration--fret-top-right {
+  top: 0;
+  right: 0;
+  width: clamp(10rem, 14vw, 18rem);
+}
+
+.decoration--fret-bottom-right {
+  bottom: var(--space-32);
+  right: 0;
+  width: clamp(10rem, 14vw, 18rem);
+}
+
+@media (min-width: 1025px) {
+  .decoration--fret-top-right,
+  .decoration--fret-bottom-right {
+    display: block;
+  }
+}

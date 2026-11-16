@@ -8,6 +8,7 @@
 import { showWelcome } from '../screens/welcome/welcome.js';
 import { showHome } from '../screens/home/home.js';
 import { showPlayground } from '../screens/playground/playground.js';
+import { showLogin } from '../screens/login/login.js';
 
 /**
  * An app screen: receives the container and draws its content inside.
@@ -27,6 +28,7 @@ const routes = {
   '#/welcome': showWelcome,
   '#/home': showHome,
   '#/playground': showPlayground,
+  '#/login': showLogin,
 };
 
 /**

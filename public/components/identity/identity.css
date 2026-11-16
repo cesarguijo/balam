@@ -1,0 +1,60 @@
+.identity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-elements);
+}
+
+.identity > * {
+  height: fit-content;
+  padding: 0;
+  margin: 0;
+}
+
+.identity__tagline {
+  width: 272px;
+  text-align: center;
+}
+
+.identity__logo {
+  border-radius: 20%;
+  overflow: hidden;
+}
+
+@media (min-width: 1025px) {
+  .identity__name {
+    font-size: clamp(3rem, 2rem + 4vw, 6rem);
+    line-height: 1.1;
+  }
+
+  /* In em, so the line grows along with the name. */
+  .identity__name::after {
+    content: '';
+    display: block;
+    margin-inline: auto;
+    width: 2.2em;
+    height: 0.1em;
+    background-color: var(--amber-300);
+  }
+
+  .identity__logo {
+    width: clamp(6rem, 10vw, 10rem);
+    aspect-ratio: 1;
+  }
+
+  /* Desktop only: on phones the image uses its 52 px size from the HTML. */
+  .identity__logo img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .identity__tagline {
+    width: auto;
+    max-width: 27rem;
+    font-size: clamp(1.25rem, 0.75rem + 1.25vw, 2rem);
+    line-height: 1.2;
+    font-weight: bold;
+    /* Spreads the words evenly across lines, so a single word is not left alone at the bottom. */
+    text-wrap: balance;
+  }
+}

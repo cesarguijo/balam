@@ -1,31 +1,3 @@
-.welcome {
-  position: relative;
-  isolation: isolate;
-  min-height: 100svh;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  padding: var(--margin-screen);
-}
-
-.identity {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--spacing-elements);
-}
-
-.identity > * {
-  height: fit-content;
-  padding: 0;
-  margin: 0;
-}
-
-.identity__tagline {
-  width: 272px;
-  text-align: center;
-}
-
 .features {
   display: flex;
   flex-direction: column;
@@ -62,91 +34,7 @@
   gap: var(--spacing-groups);
 }
 
-.identity__logo {
-  border-radius: 20%;
-  overflow: hidden;
-}
-
-/* Decorative background: a fixed layer behind the content; DOM order decides what goes on top. */
-.welcome__background {
-  position: fixed;
-  pointer-events: none;
-  z-index: -1;
-  inset: 0;
-}
-
-/* Only the background decorations are positioned; the footer ones (QR corners) are not. */
-.welcome__background .decoration {
-  position: absolute;
-}
-
-.decoration__blue {
-  fill: var(--blue-800);
-}
-
-.decoration__amber {
-  fill: var(--amber-400);
-}
-
-/* There is no token for such a light amber, so it is mixed with the background. */
-.decoration__amber-light {
-  fill: color-mix(in srgb, var(--amber-200) 50%, var(--surface-background));
-}
-
-.decoration--wave-top {
-  top: 0;
-  left: 0;
-  width: clamp(12rem, 35vw, 40rem);
-}
-
-.decoration--wave-bottom {
-  right: 0;
-  bottom: 0;
-  width: clamp(12rem, 50vw, 40rem);
-}
-
-/* The frets are very faint so they do not compete with the text. */
-.decoration--fret {
-  fill: var(--decoration-maya-fret);
-  opacity: 0.12;
-}
-
-.decoration--fret-bottom-left {
-  bottom: 0;
-  left: 0;
-  width: clamp(12rem, 18vw, 24rem);
-}
-
-.decoration--fret-top-left {
-  top: 10vw;
-  left: 0;
-  width: clamp(8rem, 12vw, 14rem);
-}
-
-/* On phones only the left frets show, so they do not compete with the text. */
-.decoration--fret-top-right,
-.decoration--fret-bottom-right {
-  display: none;
-}
-
-.decoration--fret-top-right {
-  top: 0;
-  right: 0;
-  width: clamp(10rem, 14vw, 18rem);
-}
-
-.decoration--fret-bottom-right {
-  bottom: var(--space-32);
-  right: 0;
-  width: clamp(10rem, 14vw, 18rem);
-}
-
 @media (min-width: 1025px) {
-  .decoration--fret-top-right,
-  .decoration--fret-bottom-right {
-    display: block;
-  }
-
   .welcome__content {
     flex-direction: row;
     align-items: center;
@@ -167,42 +55,6 @@
   .welcome__footer {
     flex: 1 1 26rem;
     max-width: 33rem;
-  }
-
-  .identity__name {
-    font-size: clamp(3rem, 2rem + 4vw, 6rem);
-    line-height: 1.1;
-  }
-
-  /* In em, so the line grows along with the name. */
-  .identity__name::after {
-    content: '';
-    display: block;
-    margin-inline: auto;
-    width: 2.2em;
-    height: 0.1em;
-    background-color: var(--amber-300);
-  }
-
-  .identity__logo {
-    width: clamp(6rem, 10vw, 10rem);
-    aspect-ratio: 1;
-  }
-
-  /* Desktop only: on phones the image uses its 52 px size from the HTML. */
-  .identity__logo img {
-    width: 100%;
-    height: 100%;
-  }
-
-  .identity__tagline {
-    width: auto;
-    max-width: 27rem;
-    font-size: clamp(1.25rem, 0.75rem + 1.25vw, 2rem);
-    line-height: 1.2;
-    font-weight: bold;
-    /* Spreads the words evenly across lines, so a single word is not left alone at the bottom. */
-    text-wrap: balance;
   }
 
   .features__text {

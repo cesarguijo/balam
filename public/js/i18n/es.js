@@ -56,8 +56,9 @@ export const messages = {
   'playground.textField.formHint':
     'Escriba y toque Entrar: abajo aparece lo que envía el formulario.',
 
+  'identity.logoAlt': 'Logo de Balam',
   // Welcome screen. "Balam" is not here: a brand name is not translated.
-  'welcome.logoAlt': 'Logo de Balam',
+
   'welcome.tagline': 'La app de la clase del Prof. César',
   'welcome.feature.notices': 'Avisos y notas en tu celular',
   'welcome.feature.math': 'Matemáticas a tu ritmo',
