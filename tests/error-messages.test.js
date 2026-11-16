@@ -1,6 +1,7 @@
 import { describe, test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
+  getErrorIcon,
   getErrorMessage,
   getErrorPlace,
 } from '../public/screens/login/error-messages.js';
@@ -53,7 +54,7 @@ describe('getErrorMessage (login/error-messages.js)', () => {
 
     describe('the unknown message when', () => {
       const cases = [
-        { input: 'algo-raro', description: 'the type does not exist' },
+        { input: 'something-strange', description: 'the type does not exist' },
         {
           input: 'constructor',
           description: 'the type is an inherited property (constructor)',
@@ -82,12 +83,24 @@ describe('getErrorPlace', () => {
       { type: 'username-invalid', place: 'username' },
       { type: 'username-empty', place: 'username' },
       { type: undefined, place: 'banner' },
-      { type: 'somthing-strange', place: 'banner' },
+      { type: 'something-strange', place: 'banner' },
     ];
     cases.forEach(({ type, place }) => {
       test(place + ' when the error is ' + type, () => {
         assert.equal(getErrorPlace(type), place);
       });
     });
+  });
+});
+
+describe('getErrorIcon', () => {
+  test('offline returns wifi-off', () => {
+    assert.equal(getErrorIcon('offline'), 'wifi-off');
+  });
+  test('password-empty returns alert-circle', () => {
+    assert.equal(getErrorIcon('password-empty'), 'alert-circle');
+  });
+  test('toString returns alert-circle', () => {
+    assert.equal(getErrorIcon('toString'), 'alert-circle');
   });
 });

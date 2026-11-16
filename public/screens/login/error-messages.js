@@ -65,3 +65,32 @@ export function getErrorPlace(type) {
   if (type === 'password-empty') return 'password';
   return 'banner';
 }
+
+/**
+ * Maps each server error to the icon of its banner, so the parent can tell
+ * the problem at a glance. Validation errors are not here: the text field
+ * already draws its own icon next to the message.
+ * @type {Record<SessionErrorType, string>}
+ */
+const errorIcon = {
+  'wrong-credentials': 'shield-exclamation',
+  offline: 'wifi-off',
+  'account-disabled': 'user-off',
+  'too-many-attempts': 'clock',
+  unknown: 'alert-circle',
+};
+
+/**
+ * Returns the icon the login banner shows for an error type. Uses
+ * `Object.hasOwn` so inherited keys such as `toString` do not return a
+ * function; any type without its own icon gets `alert-circle`.
+ * @param {string | undefined} type - The error type, e.g. `offline`.
+ * @returns {string} The icon name for `icon()`, e.g. `wifi-off`.
+ */
+export function getErrorIcon(type) {
+  if (type) {
+    return Object.hasOwn(errorIcon, type)
+      ? errorIcon[/** @type {SessionErrorType} */ (type)]
+      : 'alert-circle';
+  } else return 'alert-circle';
+}
