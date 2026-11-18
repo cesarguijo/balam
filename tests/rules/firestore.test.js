@@ -64,10 +64,7 @@ async function seedSchool() {
   await seed({
     'families/ana': { username: 'ana', children: [], groupIds: ['7-1'] },
     'families/luis': { username: 'luis', children: [], groupIds: ['9-2'] },
-    'teachers/teacher': {
-      roles: [{ groupId: '7-1', role: 'math-teacher' }],
-      groupIds: ['7-1'],
-    },
+    'teachers/teacher': { groupIds: ['7-1'] },
     'notices/notice71': notice('7-1'),
     'notices/notice92': notice('9-2'),
   });
