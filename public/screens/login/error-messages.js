@@ -9,6 +9,7 @@ import { t } from '../../js/i18n/es.js';
 /** @typedef {import('../../js/session.js').SessionErrorType} SessionErrorType */
 /** @typedef {import('./validation.js').ValidationErrorType} ValidationErrorType */
 /** @typedef {import('../../js/i18n/es.js').MessageKey} MessageKey */
+/** @typedef {import('../../js/icons.js').IconName} IconName */
 
 /**
  * Maps each error type to its catalog key. The types come from session.js
@@ -70,7 +71,7 @@ export function getErrorPlace(type) {
  * Maps each server error to the icon of its banner, so the parent can tell
  * the problem at a glance. Validation errors are not here: the text field
  * already draws its own icon next to the message.
- * @type {Record<SessionErrorType, string>}
+ * @type {Record<SessionErrorType, IconName>}
  */
 const errorIcon = {
   'wrong-credentials': 'shield-exclamation',
@@ -85,7 +86,7 @@ const errorIcon = {
  * `Object.hasOwn` so inherited keys such as `toString` do not return a
  * function; any type without its own icon gets `alert-circle`.
  * @param {string | undefined} type - The error type, e.g. `offline`.
- * @returns {string} The icon name for `icon()`, e.g. `wifi-off`.
+ * @returns {IconName} The icon name for `icon()`, e.g. `wifi-off`.
  */
 export function getErrorIcon(type) {
   if (type) {

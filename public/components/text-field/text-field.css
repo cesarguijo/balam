@@ -101,6 +101,10 @@ balam-text-field[type='password'] .text-field__input-box {
   font-size: var(--font-size-label);
 }
 
+.text-field__error .icon {
+  color: var(--feedback-to-correct);
+}
+
 .icon {
   width: 24px;
   color: var(--icon-secondary);

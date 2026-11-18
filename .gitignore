@@ -4,3 +4,6 @@ firebase-debug.log
 coverage/
 docs/todos.md
 docs/diseno
+
+# Firebase Admin private key: full access to the project
+scripts/service-account.json

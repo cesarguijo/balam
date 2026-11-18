@@ -21,3 +21,31 @@
   text-wrap: balance;
   text-align: center;
 }
+
+.login__banner {
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-8);
+  align-items: center;
+  background-color: var(--alert-error-background);
+  color: var(--feedback-to-correct);
+  padding: var(--space-8);
+}
+
+.login__banner-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+}
+
+.login__banner-icon-container .icon {
+  color: var(--feedback-to-correct);
+  width: 24px;
+  height: 24px;
+}
+
+.login__banner[hidden] {
+  display: none;
+}
