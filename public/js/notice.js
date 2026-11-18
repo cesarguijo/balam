@@ -6,10 +6,6 @@
  * (Firebase today, PHP tomorrow).
  */
 
-// TODO: remove this line once every function below is implemented; it only
-// silences the warnings for the parameters the placeholders do not use yet.
-/* eslint-disable no-unused-vars */
-
 /** @typedef {import('./notices.js').Notice} Notice */
 /** @typedef {import('./notices.js').NoticeLevel} NoticeLevel */
 
@@ -19,6 +15,14 @@
  * goes in the students' notebooks.
  */
 export const RECENT_DAYS = 7;
+
+/**
+ * The only levels a notice can have (see `NoticeLevel`). The JSDoc type
+ * only exists for the editor, so `toNotice` needs this list to check the
+ * level when the code runs.
+ * @type {NoticeLevel[]}
+ */
+const NOTICE_LEVELS = ['urgent', 'emergency'];
 
 /**
  * Title and body of a notice, as the notice card shows them.
@@ -57,11 +61,10 @@ export function splitNotice(text) {
  * @returns {Date} The cutoff date; notices created on or after it are shown.
  */
 export function getCutoffDate(now) {
-  // TODO: implement getCutoffDate.
-  // - Return a new Date; do not change `now` (whoever called still uses it).
-  // - Tests: a notice from 6 days ago is shown, one from 8 days ago is not,
-  //   and exactly 7 days ago is the edge (decide and write it down in a test).
-  throw new Error('Not implemented');
+  const date = new Date(now);
+  const day = date.getDate();
+  date.setDate(day - RECENT_DAYS);
+  return date;
 }
 
 /**
@@ -74,13 +77,42 @@ export function getCutoffDate(now) {
  * @throws {TypeError} If a field is missing or has the wrong type.
  */
 export function toNotice(id, data) {
-  // TODO: implement toNotice, following the style of toFamily in family.js.
-  // - Check that `data` is an object.
-  // - `text`: non-empty string.
-  // - `level`: only 'urgent' or 'emergency'.
-  // - `createdAt`: a valid Date. `updatedAt`: a valid Date or null.
-  // - Return only id, text, level, createdAt and updatedAt (not groupId or
-  //   authorUid: the screens do not use them).
-  // - Tests: a valid notice, each field missing or wrong, an unknown level.
-  throw new Error('Not implemented');
+  if (!(typeof data === 'object' && data !== null)) {
+    throw new TypeError('The notice is not an object');
+  }
+
+  if (typeof data.text !== 'string' || data.text.trim() === '') {
+    throw new TypeError('The notice has no text');
+  }
+
+  if (!NOTICE_LEVELS.includes(data.level)) {
+    throw new TypeError('The notice has an unknown level');
+  }
+
+  if (!isValidDate(data.createdAt)) {
+    throw new TypeError('The notice has no valid creation date');
+  }
+
+  if (!isValidDate(data.updatedAt) && data.updatedAt !== null) {
+    throw new TypeError('The notice has no valid edit date');
+  }
+
+  return {
+    id: id,
+    text: data.text,
+    level: data.level,
+    createdAt: data.createdAt,
+    updatedAt: data.updatedAt,
+  };
+}
+
+/**
+ * Tells whether a value is a real date. `instanceof Date` alone is not
+ * enough: `new Date('hello')` is a Date too, but a broken one (`Invalid
+ * Date`), and its time is `NaN`.
+ * @param {unknown} possibleDate - Any value, e.g. a field of a notice.
+ * @returns {possibleDate is Date} `true` if it is a Date with a valid time.
+ */
+function isValidDate(possibleDate) {
+  return possibleDate instanceof Date && !Number.isNaN(possibleDate.getTime());
 }
