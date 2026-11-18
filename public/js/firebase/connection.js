@@ -25,6 +25,8 @@ import {
   orderBy,
   query,
   getDocs,
+  addDoc,
+  serverTimestamp,
 } from 'https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js';
 
 const firebaseConfig = {
@@ -51,4 +53,6 @@ export {
   orderBy,
   query,
   getDocs,
+  addDoc,
+  serverTimestamp,
 };

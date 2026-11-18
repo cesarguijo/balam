@@ -29,6 +29,9 @@ import {
   orderBy,
   query,
   getDocs,
+  addDoc,
+  serverTimestamp,
+  auth,
 } from './connection.js';
 
 // Circular import on purpose: notices.js imports this file and this one
@@ -91,11 +94,24 @@ export async function getNoticesSince(groupId, cutoff) {
  * @throws {NoticeError} If there is no internet or the rules refuse it.
  */
 export async function addNotice(groupId, draft) {
-  // TODO: implement addNotice.
-  // - addDoc with text, level, groupId, authorUid (auth.currentUser.uid),
-  //   createdAt: serverTimestamp() and updatedAt: null.
-  // - Return the new document's id.
-  throw new Error('Not implemented');
+  const docNotice = {
+    text: draft.text,
+    level: draft.level,
+    groupId,
+    authorUid: auth.currentUser.uid,
+    createdAt: serverTimestamp(),
+    updatedAt: null,
+  };
+
+  return addDoc(collection(db, 'notices'), docNotice)
+    .then((data) => {
+      return data.id;
+    })
+    .catch((error) => {
+      throw new NoticeError(translateNoticeError(error.code), {
+        cause: error,
+      });
+    });
 }
 
 /**
