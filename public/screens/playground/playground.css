@@ -52,3 +52,97 @@
   text-align: center;
   overflow-wrap: anywhere; /* 'square-rounded-arrow-down' does not fit on one line */
 }
+
+/* Developer tools (e.g. the notices test): monospace, plain controls and a
+   terminal-like output, so it is clear at a glance that this is not part
+   of the app. Native controls on purpose: the app's components would make
+   it look like a real screen. */
+.playground__section--dev {
+  font-family: monospace;
+}
+
+.playground__status {
+  padding: var(--space-8) var(--space-12);
+  border: 1px solid var(--gray-300);
+  border-radius: var(--space-4);
+  background-color: var(--surface-raised);
+}
+
+/* Controls next to the console on wide screens, so the result is always
+   in view; stacked on phones */
+.playground__dev {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 32ch), 1fr));
+  gap: var(--spacing-elements);
+  align-items: start;
+}
+
+.playground__panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-elements);
+}
+
+.playground__fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding: var(--space-12);
+  border: 1px solid var(--gray-300);
+  border-radius: var(--space-4);
+}
+
+.playground__control-label {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.playground__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+}
+
+.playground__control,
+.playground__dev-button {
+  font: inherit;
+  padding: var(--space-4) var(--space-8);
+  border: 1px solid var(--gray-300);
+  border-radius: var(--space-4);
+  background-color: var(--white);
+  color: var(--text-primary);
+}
+
+.playground__control {
+  resize: vertical;
+}
+
+.playground__dev-button {
+  cursor: pointer;
+}
+
+.playground__dev-button:hover {
+  background-color: var(--gray-200);
+}
+
+.playground__dev-button:disabled {
+  cursor: progress;
+  opacity: 0.5;
+}
+
+/* Dark box like a terminal; sticky so it stays in view while scrolling the
+   controls; pre-wrap so long JSON does not widen the page */
+.playground__console {
+  position: sticky;
+  top: var(--space-16);
+  min-height: calc(var(--space-32) * 6);
+  max-height: 80vh;
+  overflow: auto;
+  margin: 0;
+  padding: var(--space-12);
+  border-radius: var(--space-4);
+  background-color: var(--blue-800);
+  color: var(--cream-50);
+  white-space: pre-wrap;
+}

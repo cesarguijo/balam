@@ -55,6 +55,14 @@ export const messages = {
   'playground.textField.form': 'Dentro de un formulario',
   'playground.textField.formHint':
     'Escriba y toque Entrar: abajo aparece lo que envía el formulario.',
+  'playground.notices': 'Prueba de avisos (Firestore real)',
+  'playground.notices.account': 'Sesión:',
+  'playground.notices.logout': 'Salir',
+  'playground.notices.group': 'Grupo',
+  'playground.notices.text': 'Texto (la primera línea es el título)',
+  'playground.notices.level': 'Nivel',
+  'playground.notices.publish': 'Publicar',
+  'playground.notices.read': 'Leer avisos del grupo',
 
   'identity.logoAlt': 'Logo de Balam',
   // Welcome screen. "Balam" is not here: a brand name is not translated.
