@@ -112,6 +112,10 @@ await getFirestore()
         groupId,
       },
     ],
+    // Repeats each child's groupId as a plain list because the Firestore
+    // rules have no loops: they cannot search children[], but they can ask
+    // whether a notice's groupId is `in` this list.
+    groupIds: [groupId],
   });
 console.log(
   `Family saved: ${username} / ${childName}, grade ${grade}, ${groupId}.`,

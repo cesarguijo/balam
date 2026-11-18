@@ -1,0 +1,49 @@
+rules_version = '2';
+
+service cloud.firestore {
+
+
+  match /databases/{database}/documents {
+
+    function teacherGroupIds(){
+      return get(/databases/$(database)/documents/teachers/$(request.auth.uid)).data.groupIds;
+    }
+
+    function familyGroupIds(){
+      return get(/databases/$(database)/documents/families/$(request.auth.uid)).data.groupIds;
+    }
+
+
+    match /families/{uid} {
+      allow read: if (request.auth != null && request.auth.uid==uid);
+    }
+
+    match /notices/{noticeId} {
+      allow read: if(
+      request.auth != null &&
+      (
+      resource.data.groupId in familyGroupIds() ||
+      resource.data.groupId in teacherGroupIds()
+      )
+      );
+
+      allow create: if(
+      request.auth != null &&
+      request.resource.data.groupId in teacherGroupIds()
+      );
+
+      allow update: if(
+      request.auth != null &&
+      request.resource.data.groupId in teacherGroupIds() &&
+      resource.data.groupId in teacherGroupIds()
+      );
+
+      allow delete: if(
+      request.auth != null &&
+      resource.data.groupId in teacherGroupIds()
+      );
+    }
+  }
+
+
+}
