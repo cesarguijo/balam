@@ -8,9 +8,11 @@
  * `scripts/service-account.json`, which is ignored by Git.
  *
  * Usage:
- *   node scripts/create-family.js <username> <password> <childName> <grade>
+ *   node scripts/create-family.js <username> <password> <childName> <grade> <section>
  * Example:
- *   node scripts/create-family.js perez1985 secret123 Ana 3
+ *   node scripts/create-family.js perez1985 secret123 Ana 7 1
+ * The child's groupId is built from grade and section ('7-1'), so the two
+ * can never disagree (ADR 0010).
  *
  * If the user already exists, it keeps its uid and only changes the
  * password and the family document; that way it also works to reset a lost
@@ -30,8 +32,13 @@ import { validateCredentials } from '../public/screens/login/validation.js';
  */
 const EMAIL_DOMAIN = 'balam.local';
 
-const [rawUsername = '', password = '', childName = '', rawGrade = ''] =
-  process.argv.slice(2);
+const [
+  rawUsername = '',
+  password = '',
+  childName = '',
+  rawGrade = '',
+  rawSection = '',
+] = process.argv.slice(2);
 
 // The same check as the login screen: a username the app would reject is
 // not created, so no test account is born unusable.
@@ -46,9 +53,17 @@ if (password.length < 6) {
   process.exit(1);
 }
 const grade = Number(rawGrade);
-if (childName === '' || !Number.isInteger(grade)) {
+const section = Number(rawSection);
+if (
+  childName === '' ||
+  !Number.isInteger(grade) ||
+  grade < 1 ||
+  grade > 12 ||
+  !Number.isInteger(section) ||
+  section < 1
+) {
   console.error(
-    'Usage: node scripts/create-family.js <username> <password> <childName> <grade>',
+    'Usage: node scripts/create-family.js <username> <password> <childName> <grade> <section>',
   );
   process.exit(1);
 }
@@ -72,7 +87,9 @@ async function savePassword() {
     console.log(`User existed; password updated (${user.uid}).`);
     return user.uid;
   } catch (error) {
-    if (/** @type {{ code?: string }} */ (error).code !== 'auth/user-not-found') {
+    if (
+      /** @type {{ code?: string }} */ (error).code !== 'auth/user-not-found'
+    ) {
       throw error;
     }
     const user = await getAuth().createUser({ email, password });
@@ -82,10 +99,20 @@ async function savePassword() {
 }
 
 const uid = await savePassword();
+const groupId = `${grade}-${section}`;
 await getFirestore()
   .doc(`families/${uid}`)
   .set({
     username,
-    children: [{ id: randomUUID(), name: childName, grade }],
+    children: [
+      {
+        id: randomUUID(),
+        name: childName,
+        grade,
+        groupId,
+      },
+    ],
   });
-console.log(`Family saved: ${username} / ${childName}, grade ${grade}.`);
+console.log(
+  `Family saved: ${username} / ${childName}, grade ${grade}, ${groupId}.`,
+);
