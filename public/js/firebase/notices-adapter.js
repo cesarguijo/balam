@@ -49,6 +49,7 @@ import { translateNoticeError } from './errors.js';
  * @param {string} groupId - The family's group.
  * @param {Date} cutoff - Oldest creation date to read; computed by notices.js.
  * @returns {Promise<Notice[]>} The notices, already validated by `toNotice`.
+ *   A damaged notice is skipped (and logged), so it does not hide the rest.
  * @throws {NoticeError} If there is no internet or the rules refuse it.
  */
 export async function getNoticesSince(groupId, cutoff) {
@@ -60,13 +61,22 @@ export async function getNoticesSince(groupId, cutoff) {
   );
   return getDocs(noticeQuery)
     .then((querySnapshot) => {
-      return querySnapshot.docs.map((doc) => {
+      return querySnapshot.docs.flatMap((doc) => {
         const data = doc.data();
-        return toNotice(doc.id, {
-          ...data,
-          createdAt: data.createdAt.toDate(),
-          updatedAt: data.updatedAt ? data.updatedAt.toDate() : data.updatedAt,
-        });
+        try {
+          return [
+            toNotice(doc.id, {
+              ...data,
+              createdAt: data.createdAt.toDate(),
+              updatedAt: data.updatedAt
+                ? data.updatedAt.toDate()
+                : data.updatedAt,
+            }),
+          ];
+        } catch (error) {
+          console.warn(doc.id, error);
+          return [];
+        }
       });
     })
     .catch((error) => {
