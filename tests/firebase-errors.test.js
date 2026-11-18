@@ -1,6 +1,9 @@
 import { describe, test } from 'node:test';
 import assert from 'node:assert/strict';
-import { translateFirebaseError } from '../public/js/firebase/errors.js';
+import {
+  translateFirebaseError,
+  translateNoticeError,
+} from '../public/js/firebase/errors.js';
 
 describe('translateFirebaseError (firebase/errors.js)', () => {
   describe('returns', () => {
@@ -37,6 +40,41 @@ describe('translateFirebaseError (firebase/errors.js)', () => {
       cases.forEach(({ input, description }) => {
         test(description, () => {
           assert.equal(translateFirebaseError(input), 'unknown');
+        });
+      });
+    });
+  });
+});
+
+describe('translateNoticeError (firebase/errors.js)', () => {
+  describe('returns', () => {
+    const expected = {
+      unavailable: 'offline',
+      'permission-denied': 'not-allowed',
+      'not-found': 'not-found',
+    };
+    Object.entries(expected).forEach(([code, type]) => {
+      test(type + ' when the error is ' + code, () => {
+        assert.equal(translateNoticeError(code), type);
+      });
+    });
+    describe('unknown when', () => {
+      const cases = [
+        { input: 'something-odd', description: 'the code does not exist' },
+        { input: '', description: 'the text is empty' },
+        { input: undefined, description: 'undefined is passed' },
+        {
+          input: 'constructor',
+          description: 'the code is an inherited property (constructor)',
+        },
+        {
+          input: 'toString',
+          description: 'the code is an inherited property (toString)',
+        },
+      ];
+      cases.forEach(({ input, description }) => {
+        test(description, () => {
+          assert.equal(translateNoticeError(input), 'unknown');
         });
       });
     });
