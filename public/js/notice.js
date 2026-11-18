@@ -20,7 +20,7 @@ export const RECENT_DAYS = 7;
  * The only levels a notice can have (see `NoticeLevel`). The JSDoc type
  * only exists for the editor, so `toNotice` needs this list to check the
  * level when the code runs.
- * @type {NoticeLevel[]}
+ * @type {string[]}
  */
 const NOTICE_LEVELS = ['urgent', 'emergency'];
 
@@ -77,7 +77,7 @@ export function getCutoffDate(now) {
  * @throws {TypeError} If a field is missing or has the wrong type.
  */
 export function toNotice(id, data) {
-  if (!(typeof data === 'object' && data !== null)) {
+  if (!isObject(data)) {
     throw new TypeError('The notice is not an object');
   }
 
@@ -85,7 +85,7 @@ export function toNotice(id, data) {
     throw new TypeError('The notice has no text');
   }
 
-  if (!NOTICE_LEVELS.includes(data.level)) {
+  if (!isNoticeLevel(data.level)) {
     throw new TypeError('The notice has an unknown level');
   }
 
@@ -98,7 +98,7 @@ export function toNotice(id, data) {
   }
 
   return {
-    id: id,
+    id,
     text: data.text,
     level: data.level,
     createdAt: data.createdAt,
@@ -115,4 +115,26 @@ export function toNotice(id, data) {
  */
 function isValidDate(possibleDate) {
   return possibleDate instanceof Date && !Number.isNaN(possibleDate.getTime());
+}
+
+/**
+ * Tells whether a value is an object with properties that can be checked.
+ * The return type teaches TypeScript that, when it is `true`, reading
+ * `data.text` is allowed (its value is still `unknown` until checked).
+ * @param {unknown} data - Any value, e.g. the notice as it came from the server.
+ * @returns {data is Record<string, unknown>} `true` if it is an object (and not `null`).
+ */
+function isObject(data) {
+  return typeof data === 'object' && data !== null;
+}
+
+/**
+ * Tells whether a value is one of the `NOTICE_LEVELS`. Unlike a bare
+ * `includes`, it is a type guard: afterwards TypeScript knows the value is
+ * a `NoticeLevel`, not just `unknown`.
+ * @param {unknown} data - Any value, e.g. the notice's `level` field.
+ * @returns {data is NoticeLevel} `true` if it is `urgent` or `emergency`.
+ */
+function isNoticeLevel(data) {
+  return typeof data === 'string' && NOTICE_LEVELS.includes(data);
 }
