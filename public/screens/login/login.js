@@ -5,7 +5,6 @@
 
 import { decorations } from '../../js/decorations.js';
 import { t } from '../../js/i18n/es.js';
-import '../../components/button/button.js';
 import '../../components/text-field/text-field.js';
 import { validateCredentials } from './validation.js';
 import {
@@ -15,6 +14,7 @@ import {
 } from './error-messages.js';
 import { logIn } from '../../js/session.js';
 import { icon } from '../../js/icons.js';
+import { BalamButton } from '../../components/button/button.js';
 
 /**
  * Shows the login screen inside the container.
@@ -60,6 +60,8 @@ export function showLogin(app) {
             autocomplete="current-password"
           ></balam-text-field>
           <balam-button
+            data-login-button
+            loading-text="${t('login.button.loading')}"
             class="login__button"
             text="${t('login.button.default')}"
           ></balam-button>
@@ -75,6 +77,10 @@ export function showLogin(app) {
       </div>
     </div>
   `;
+  const button = app.querySelector('[data-login-button]');
+  if (!(button instanceof BalamButton)) {
+    throw new Error('[data-login-button] not found in login');
+  }
 
   const banner = app.querySelector('[data-login-banner]');
   if (!(banner instanceof HTMLElement)) {
@@ -83,7 +89,7 @@ export function showLogin(app) {
 
   const iconContainer = app.querySelector('[data-banner-icon]');
   if (!(iconContainer instanceof HTMLElement)) {
-    throw new Error('data-banner-icon not found in login');
+    throw new Error('[data-banner-icon] not found in login');
   }
   const messageContainer = app.querySelector('[data-banner-message]');
   if (!(messageContainer instanceof HTMLElement)) {
@@ -125,6 +131,7 @@ export function showLogin(app) {
       }
       return;
     }
+    button.loading = true;
     logIn(validation.username, password)
       .then(() => {
         location.replace('#/home');
@@ -133,6 +140,9 @@ export function showLogin(app) {
         iconContainer.innerHTML = icon(getErrorIcon(error.type));
         messageContainer.innerHTML = getErrorMessage(error.type);
         banner.removeAttribute('hidden');
+      })
+      .finally(() => {
+        button.loading = false;
       });
   });
 }
