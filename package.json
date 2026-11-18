@@ -6,10 +6,11 @@
   "type": "module",
   "scripts": {
     "todos": "leasot \"public/**/*.{js,css}\" --reporter markdown > docs/todos.md",
-    "coverage": "c8 node --test --experimental-test-module-mocks",
-    "test": "node --test --experimental-test-module-mocks",
+    "coverage": "c8 node --test --experimental-test-module-mocks \"tests/*.test.js\"",
+    "test": "node --test --experimental-test-module-mocks \"tests/*.test.js\"",
     "lint": "eslint public tests",
-    "tokens": "style-dictionary build --config sd.config.mjs"
+    "tokens": "style-dictionary build --config sd.config.mjs",
+    "test:rules": "firebase emulators:exec --only firestore \"node --test \\\"tests/rules/*.test.js\\\"\""
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
   "devDependencies": {
     "@cspell/eslint-plugin": "^10.4.1",
     "@eslint/js": "^10.0.1",
+    "@firebase/rules-unit-testing": "^6.0.0",
     "@prettier/plugin-xml": "^3.4.2",
     "@types/node": "^26.6.6",
     "c8": "^12.0.0",
