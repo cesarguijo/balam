@@ -63,9 +63,6 @@ export class NoticeError extends Error {
   }
 }
 
-// TODO: decide where groupId comes from: today the family document has no
-// group (only children with their grade). Add it to Family and to toFamily,
-// or derive it from the children.
 /**
  * Returns the group's notices from the last `RECENT_DAYS` days, newest
  * first. The cutoff date is computed here, not in the adapter, so the rule
