@@ -42,6 +42,9 @@ The screen asks for the notices of the child the parent is viewing, using that c
 - `toFamily` must validate `groupId`, and the `Child` type must include it.
 - The families already in Firestore need `groupId` added to each child (with the script that creates the accounts).
 - The rules must check that the family has a child in the notice's group.
+- The rules have no loops, so they cannot search `children[]`. The family document repeats each child's `groupId` in a flat list, `groupIds` (e.g. `['7-1']`), and the rules ask whether the notice's `groupId` is `in` it. The script that creates the accounts builds `groupIds` from the children, so the two never disagree.
+- Teachers need their groups too: a `teachers/{uid}` document with only `groupIds`. Being in `teachers` is what makes the account a teacher, so it has no role field. A teacher reads, creates, edits and deletes notices only in those groups. `scripts/create-teacher.js` creates the account and replaces the whole list each time.
+- Each rule check reads the family or teacher document (`get()`), which counts as one more Firestore read per request.
 - Families stored on the phone before this change have no `groupId`: `getSession` treats them as damaged and logs out (ADR 0008).
 
 **Revisit the decision if:** groups need data of their own (a name, a teacher, a school year), which would call for a `groups` collection.
