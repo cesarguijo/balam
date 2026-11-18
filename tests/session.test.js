@@ -44,7 +44,7 @@ globalThis.localStorage = /** @type {Storage} */ ({
 /** A valid family to store as the copy on the phone. */
 const validFamily = {
   username: 'arguijo.reyes',
-  children: [{ id: 'test-ana', grade: 7, name: 'Ana Arguijo' }],
+  children: [{ id: 'test-ana', grade: 7, groupId: '7-1', name: 'Ana Arguijo' }],
 };
 
 const credentials = {

@@ -48,7 +48,8 @@ export class SessionError extends Error {
  * @typedef {object} Child
  * @property {string} id - Identifies the child; screens use it to ask for their data.
  * @property {string} name - The child's name, so the parent can pick them in the app.
- * @property {number} grade - School grade they are enrolled in this year; the home screen uses it to ask for the teacher's notices.
+ * @property {number} grade - School grade they are enrolled in this year, e.g. `7`.
+ * @property {string} groupId - Grade and section, e.g. `'7-1'`; the screens use it to ask for the group's notices (ADR 0010).
  */
 
 /**

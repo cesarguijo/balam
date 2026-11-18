@@ -12,8 +12,8 @@
 /** @typedef {import('./session.js').Child} Child */
 
 /**
- * Checks that an item of the `children` list has a valid id, name and
- * grade. Throws if not, so a mistyped child does not silently disappear
+ * Checks that an item of the `children` list has a valid id, name, groupId
+ * and grade. Throws if not, so a mistyped child does not silently disappear
  * from the app.
  * @param {unknown} childData - An item of the `children` list, as it came.
  * @param {number} position - Its place in the list, from 0 (the Firebase console numbers it the same way).
@@ -29,6 +29,9 @@ function validateChild(childData, position) {
   }
   if (typeof childData.name !== 'string' || childData.name === '') {
     throw new TypeError('Child ' + position + ' has no text name');
+  }
+  if (typeof childData.groupId !== 'string' || childData.groupId === '') {
+    throw new TypeError('Child ' + position + ' has no text groupId');
   }
   // Number.isInteger also rules out NaN and decimals, which typeof would accept as numbers.
   if (!Number.isInteger(childData.grade)) {
@@ -58,13 +61,18 @@ function validateFamily(familyData) {
 
 /**
  * Turns the already validated children list into clean children: builds new
- * objects with only id, name and grade, so extra fields (grades, data the
+ * objects with only id, name, grade and groupId, so extra fields (grades, data the
  * teacher adds on the server) are not stored on the phone.
  * @param {Child[]} children - The children list, already validated by `validateFamily`.
  * @returns {Child[]} A new list, with only the fields the app uses.
  */
 function toChildren(children) {
-  return children.map(({ id, name, grade }) => ({ id, name, grade }));
+  return children.map(({ id, name, grade, groupId }) => ({
+    id,
+    name,
+    grade,
+    groupId,
+  }));
 }
 
 /**
@@ -72,7 +80,7 @@ function toChildren(children) {
  * its shape. It is the app's customs office: everything that claims to be a
  * family goes through here.
  * @param {unknown} data - E.g. `snapshot.data()` from Firestore or `JSON.parse` of what the phone stored.
- * @returns {Family} The family, with only the username and each child's id, name and grade.
+ * @returns {Family} The family, with only the username and each child's id, name, grade and groupId.
  * @throws {TypeError} If the data does not have the shape of a Family.
  */
 export function toFamily(data) {

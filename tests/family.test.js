@@ -2,15 +2,18 @@ import { describe, test } from 'node:test';
 import assert from 'node:assert/strict';
 import { toFamily } from '../public/js/family.js';
 
+const USERNAME = 'arguijo.reyes';
+const CHILDREN = [
+  { id: 'test-ana', grade: 7, groupId: '7-1', name: 'Ana Arguijo' },
+  { id: 'test-luis', grade: 8, groupId: '8-1', name: 'Luis Arguijo' },
+];
+
 describe('toFamily', () => {
   describe('returns:', () => {
     test('an equal family', () => {
       const validFamily = {
-        username: 'arguijo.reyes',
-        children: [
-          { id: 'test-ana', grade: 7, name: 'Ana Arguijo' },
-          { id: 'test-luis', grade: 8, name: 'Luis Arguijo' },
-        ],
+        username: USERNAME,
+        children: CHILDREN,
       };
       assert.deepEqual(toFamily(validFamily), validFamily);
     });
@@ -18,34 +21,54 @@ describe('toFamily', () => {
     test('a family without extra fields', () => {
       const familyWithExtraFields = {
         id: 'fwYpYoeFPFMEporvLl4e1Dr1LNF3',
-        username: 'arguijo.reyes',
+        username: USERNAME,
         children: [
           {
             id: 'test-ana',
             grade: 7,
             name: 'Ana Arguijo',
+            groupId: '7-1',
             extraField: 'text',
           },
           {
             id: 'test-luis',
             grade: 8,
             name: 'Luis Arguijo',
+            groupId: '8-1',
             extraField: 'text',
           },
         ],
       };
       const expected = {
-        username: 'arguijo.reyes',
-        children: [
-          { id: 'test-ana', grade: 7, name: 'Ana Arguijo' },
-          { id: 'test-luis', grade: 8, name: 'Luis Arguijo' },
-        ],
+        username: USERNAME,
+        children: CHILDREN,
       };
       assert.deepEqual(toFamily(familyWithExtraFields), expected);
     });
   });
 
   describe('throws if:', () => {
+    test('the first child has no groupId', () => {
+      assert.throws(
+        () =>
+          toFamily({
+            username: USERNAME,
+            children: [
+              { id: 'test-ana', grade: 7, name: 'Ana Arguijo' },
+              {
+                id: 'test-luis',
+                grade: 8,
+                groupId: '8-1',
+                name: 'Luis Arguijo',
+              },
+            ],
+          }),
+        {
+          name: 'TypeError',
+          message: 'Child 0 has no text groupId',
+        },
+      );
+    });
     test('the family is not an object', () => {
       assert.throws(() => toFamily('not an object'), {
         name: 'TypeError',
@@ -62,10 +85,7 @@ describe('toFamily', () => {
 
     test('the family has no username field', () => {
       const familyWithoutUsername = {
-        children: [
-          { id: 'test-ana', grade: 7, name: 'Ana Arguijo' },
-          { id: 'test-luis', grade: 8, name: 'Luis Arguijo' },
-        ],
+        children: CHILDREN,
       };
       assert.throws(() => toFamily(familyWithoutUsername), {
         name: 'TypeError',
@@ -76,10 +96,7 @@ describe('toFamily', () => {
     test('the username is empty', () => {
       const familyWithEmptyUsername = {
         username: '',
-        children: [
-          { id: 'test-ana', grade: 7, name: 'Ana Arguijo' },
-          { id: 'test-luis', grade: 8, name: 'Luis Arguijo' },
-        ],
+        children: CHILDREN,
       };
       assert.throws(() => toFamily(familyWithEmptyUsername), {
         name: 'TypeError',
@@ -88,7 +105,7 @@ describe('toFamily', () => {
     });
 
     test('the family has no children field', () => {
-      const familyWithoutChildren = { username: 'arguijo.reyes' };
+      const familyWithoutChildren = { username: USERNAME };
       assert.throws(() => toFamily(familyWithoutChildren), {
         name: 'TypeError',
         message: 'The family has no list with at least one child',
@@ -97,7 +114,7 @@ describe('toFamily', () => {
 
     test('the family has an empty children list', () => {
       const familyWithEmptyChildren = {
-        username: 'arguijo.reyes',
+        username: USERNAME,
         children: [],
       };
       assert.throws(() => toFamily(familyWithEmptyChildren), {
@@ -108,7 +125,7 @@ describe('toFamily', () => {
 
     test('the child is not an object', () => {
       const familyWithNonObjectChild = {
-        username: 'arguijo.reyes',
+        username: USERNAME,
         children: ['Ana'],
       };
       assert.throws(() => toFamily(familyWithNonObjectChild), {
@@ -119,10 +136,10 @@ describe('toFamily', () => {
 
     test('the first child has no text id', () => {
       const familyFirstChildWithoutId = {
-        username: 'arguijo.reyes',
+        username: USERNAME,
         children: [
-          { grade: 7, name: 'Ana Arguijo' },
-          { id: 'test-luis', grade: 8, name: 'Luis Arguijo' },
+          { grade: 7, name: 'Ana Arguijo', groupId: '7-1' },
+          { id: 'test-luis', grade: 8, groupId: '8-1', name: 'Luis Arguijo' },
         ],
       };
       assert.throws(() => toFamily(familyFirstChildWithoutId), {
@@ -133,10 +150,10 @@ describe('toFamily', () => {
 
     test('the first child has no text name', () => {
       const familyFirstChildWithoutName = {
-        username: 'arguijo.reyes',
+        username: USERNAME,
         children: [
-          { id: 'test-ana', grade: 7 },
-          { id: 'test-luis', grade: 8, name: 'Luis Arguijo' },
+          { id: 'test-ana', grade: 7, groupId: '7-1' },
+          { id: 'test-luis', grade: 8, groupId: '8-1', name: 'Luis Arguijo' },
         ],
       };
       assert.throws(() => toFamily(familyFirstChildWithoutName), {
@@ -147,10 +164,10 @@ describe('toFamily', () => {
 
     test('the first child has a grade that is not a number', () => {
       const familyFirstChildWithTextGrade = {
-        username: 'arguijo.reyes',
+        username: USERNAME,
         children: [
-          { id: 'test-ana', grade: '7', name: 'Ana Arguijo' },
-          { id: 'test-luis', grade: 8, name: 'Luis Arguijo' },
+          { id: 'test-ana', grade: '7', name: 'Ana Arguijo', groupId: '7-1' },
+          { id: 'test-luis', grade: 8, groupId: '8-1', name: 'Luis Arguijo' },
         ],
       };
       assert.throws(() => toFamily(familyFirstChildWithTextGrade), {
@@ -161,10 +178,10 @@ describe('toFamily', () => {
 
     test('the first child has a decimal grade', () => {
       const familyFirstChildWithDecimalGrade = {
-        username: 'arguijo.reyes',
+        username: USERNAME,
         children: [
-          { id: 'test-ana', grade: 7.5, name: 'Ana Arguijo' },
-          { id: 'test-luis', grade: 8, name: 'Luis Arguijo' },
+          { id: 'test-ana', grade: 7.5, name: 'Ana Arguijo', groupId: '7-1' },
+          { id: 'test-luis', grade: 8, groupId: '8-1', name: 'Luis Arguijo' },
         ],
       };
       assert.throws(() => toFamily(familyFirstChildWithDecimalGrade), {
@@ -175,9 +192,9 @@ describe('toFamily', () => {
 
     test('the second child has no text id', () => {
       const familySecondChildWithoutId = {
-        username: 'arguijo.reyes',
+        username: USERNAME,
         children: [
-          { id: 'test-ana', grade: 7, name: 'Ana Arguijo' },
+          { id: 'test-ana', grade: 7, groupId: '7-1', name: 'Ana Arguijo' },
           { grade: 8, name: 'Luis Arguijo' },
         ],
       };
