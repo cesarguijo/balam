@@ -18,10 +18,6 @@
  * push notification (Sprint 2); editing does not.
  */
 
-// TODO: remove this line once every function below is implemented; it only
-// silences the warnings for the parameters the placeholders do not use yet.
-/* eslint-disable no-unused-vars */
-
 import {
   db,
   collection,
@@ -32,6 +28,9 @@ import {
   addDoc,
   serverTimestamp,
   auth,
+  updateDoc,
+  deleteDoc,
+  doc,
 } from './connection.js';
 
 // Circular import on purpose: notices.js imports this file and this one
@@ -53,15 +52,6 @@ import { translateNoticeError } from './errors.js';
  * @throws {NoticeError} If there is no internet or the rules refuse it.
  */
 export async function getNoticesSince(groupId, cutoff) {
-  // TODO: implement getNoticesSince.
-  // - query(collection(db, 'notices'), where('groupId', '==', groupId),
-  //   where('createdAt', '>=', cutoff), orderBy('createdAt', 'desc')).
-  // - Firestore asks for a composite index (groupId + createdAt) the first
-  //   time: the error message brings the link to create it. Save it in
-  //   firestore.indexes.json so it is in the repository.
-  // - Convert createdAt and updatedAt from Timestamp to Date (.toDate())
-  //   before calling toNotice, so notice.js does not know Firebase.
-  // - Translate the Firebase errors into NoticeError.
   const noticeQuery = query(
     collection(db, 'notices'),
     where('createdAt', '>=', cutoff),
@@ -123,10 +113,16 @@ export async function addNotice(groupId, draft) {
  * @throws {NoticeError} If there is no internet, the notice no longer exists or the rules refuse it.
  */
 export async function updateNotice(id, draft) {
-  // TODO: implement updateNotice.
-  // - updateDoc(doc(db, `notices/${id}`), { text, level, updatedAt: serverTimestamp() }).
-  // - updateDoc fails with 'not-found' if the notice was deleted.
-  throw new Error('Not implemented');
+  const noticeRef = doc(db, 'notices', id);
+  return updateDoc(noticeRef, {
+    text: draft.text,
+    level: draft.level,
+    updatedAt: serverTimestamp(),
+  }).catch((error) => {
+    throw new NoticeError(translateNoticeError(error.code), {
+      cause: error,
+    });
+  });
 }
 
 /**
@@ -136,6 +132,10 @@ export async function updateNotice(id, draft) {
  * @throws {NoticeError} If there is no internet or the rules refuse it.
  */
 export async function removeNotice(id) {
-  // TODO: implement removeNotice with deleteDoc(doc(db, `notices/${id}`)).
-  throw new Error('Not implemented');
+  const noticeRef = doc(db, 'notices', id);
+  return deleteDoc(noticeRef).catch((error) => {
+    throw new NoticeError(translateNoticeError(error.code), {
+      cause: error,
+    });
+  });
 }

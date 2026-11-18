@@ -27,6 +27,8 @@ import {
   getDocs,
   addDoc,
   serverTimestamp,
+  updateDoc,
+  deleteDoc,
 } from 'https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js';
 
 const firebaseConfig = {
@@ -55,4 +57,6 @@ export {
   getDocs,
   addDoc,
   serverTimestamp,
+  updateDoc,
+  deleteDoc,
 };
