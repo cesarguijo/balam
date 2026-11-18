@@ -8,7 +8,6 @@ import { messages } from './es.js';
 
 /** @typedef {import('./es.js').MessageKey} MessageKey */
 
-// TODO: return the text from `messages`, or the key itself if it is missing
 /**
  * Returns the text for a key. If the key is missing, it returns the key
  * itself, so the screen shows exactly which text is missing from the catalog.
@@ -16,5 +15,5 @@ import { messages } from './es.js';
  * @returns {string} The text to show the user, or the key if it is missing.
  */
 export function t(key) {
-  throw new Error('Not implemented');
+  return messages[key] ?? key;
 }
