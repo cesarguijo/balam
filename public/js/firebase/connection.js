@@ -1,6 +1,6 @@
 /**
  * @file Firebase connection: initializes the project and exports what the
- * session adapter uses. Only the Firebase files import it; it is deleted
+ * adapters use. Only the Firebase files import it; it is deleted
  * when moving to PHP (ADR 0008).
  *
  * The config is public by design: security lives in the Firestore rules,
@@ -20,6 +20,11 @@ import {
   doc,
   getDoc,
   getFirestore,
+  collection,
+  where,
+  orderBy,
+  query,
+  getDocs,
 } from 'https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js';
 
 const firebaseConfig = {
@@ -37,4 +42,13 @@ export const auth = getAuth(app);
 export const db = getFirestore(app);
 // Re-exported with Firebase's own names, so the adapter reads like the
 // Firebase docs and only this file knows the CDN URLs.
-export { doc, getDoc, signInWithEmailAndPassword };
+export {
+  doc,
+  getDoc,
+  signInWithEmailAndPassword,
+  collection,
+  where,
+  orderBy,
+  query,
+  getDocs,
+};
