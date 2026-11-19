@@ -18,6 +18,7 @@
   --gray-200: #d3d1c7; /** Light stone */
   --gray-300: #b4b2a9; /** Medium stone */
   --gray-600: #5f5e5a; /** Dark stone */
+  --gray-800: #3d3c38; /** Dark stone · long reading text. Contrast 10.9:1 on white */
   --white: #ffffff; /** White · raised surfaces (fields, QR card) */
   --pink-50: #fbeaf0; /** Very light macuelizo pink · server error background */
   --pink-600: #a8406b; /** Macuelizo pink · Tabebuia rosea flower */
@@ -55,8 +56,11 @@
   --duration-fast: 80ms; /** Feedback for a tap: the button sinking */
   --text-primary: var(--blue-800); /** Body text on the background. Contrast 10.2:1 */
   --text-secondary: var(--gray-600); /** Placeholders and helper text. Contrast 6.5:1 on white */
+  --text-body: var(--gray-800); /** Long text to read, such as a notice body */
+  --text-on-selection: var(--cream-50); /** Text on a selected item, such as the selected chip. Contrast 10.2:1 on blue */
   --surface-background: var(--cream-50); /** Main screen background */
   --surface-raised: var(--white); /** Background of what sits on the screen: fields and cards */
+  --surface-placeholder: var(--gray-200); /** Skeleton blocks while content loads */
   --action-primary-background: var(--amber-500); /** Primary button background. One per screen */
   --action-primary-border: var(--amber-800); /** Primary button ring */
   --action-primary-text: var(--blue-800); /** Primary button text. Contrast 4.5:1, always bold */
@@ -69,6 +73,7 @@
   --action-disabled-text: var(--gray-600); /** Text of any disabled button */
   --focus-ring: var(--maya-500); /** Keyboard focus outline. 3 px wide, 3 px offset */
   --icon-secondary: var(--brown-700); /** Decorative icons and icons inside fields. Contrast 6.4:1 */
+  --icon-on-selection: var(--cream-50); /** Icon on a selected item, such as the active nav item. Contrast 10.2:1 on blue */
   --decoration-maya-fret: var(--brown-700); /** Background frets, always at 12% opacity */
   --spacing-groups: var(--space-24);
   --spacing-elements: var(--space-16);
@@ -79,6 +84,8 @@
   --alert-error-background: var(--pink-50); /** Server error message background */
   --field-border: var(--brown-500); /** Field border at rest, 1 px. Contrast 3.7:1 */
   --field-radius: var(--radius-12);
+  --selection-indicator: var(--blue-800); /** Selected chip and active nav item. Contrast 10.2:1 on cream */
+  --border-subtle: var(--gray-200); /** Dividers between areas, such as under the header */
   --button-facet-top-left: var(--amber-200);
   --button-facet-bottom-left: var(--amber-400);
   --button-facet-top-right: var(--amber-600);
