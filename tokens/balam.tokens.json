@@ -129,6 +129,14 @@
       "$extensions": {
         "mode": {}
       }
+    },
+    "800": {
+      "$type": "color",
+      "$value": "#3d3c38",
+      "$description": "Dark stone · long reading text. Contrast 10.9:1 on white",
+      "$extensions": {
+        "mode": {}
+      }
     }
   },
   "white": {
@@ -185,6 +193,22 @@
       "$extensions": {
         "mode": {}
       }
+    },
+    "body": {
+      "$type": "color",
+      "$value": "{gray.800}",
+      "$description": "Long text to read, such as a notice body",
+      "$extensions": {
+        "mode": {}
+      }
+    },
+    "on-selection": {
+      "$type": "color",
+      "$value": "{cream.50}",
+      "$description": "Text on a selected item, such as the selected chip. Contrast 10.2:1 on blue",
+      "$extensions": {
+        "mode": {}
+      }
     }
   },
   "surface": {
@@ -200,6 +224,14 @@
       "$type": "color",
       "$value": "{white}",
       "$description": "Background of what sits on the screen: fields and cards",
+      "$extensions": {
+        "mode": {}
+      }
+    },
+    "placeholder": {
+      "$type": "color",
+      "$value": "{gray.200}",
+      "$description": "Skeleton blocks while content loads",
       "$extensions": {
         "mode": {}
       }
@@ -310,6 +342,14 @@
       "$type": "color",
       "$value": "{brown.700}",
       "$description": "Decorative icons and icons inside fields. Contrast 6.4:1",
+      "$extensions": {
+        "mode": {}
+      }
+    },
+    "on-selection": {
+      "$type": "color",
+      "$value": "{cream.50}",
+      "$description": "Icon on a selected item, such as the active nav item. Contrast 10.2:1 on blue",
       "$extensions": {
         "mode": {}
       }
@@ -559,6 +599,26 @@
         "$extensions": {
           "mode": {}
         }
+      }
+    }
+  },
+  "selection": {
+    "indicator": {
+      "$type": "color",
+      "$value": "{blue.800}",
+      "$description": "Selected chip and active nav item. Contrast 10.2:1 on cream",
+      "$extensions": {
+        "mode": {}
+      }
+    }
+  },
+  "border": {
+    "subtle": {
+      "$type": "color",
+      "$value": "{gray.200}",
+      "$description": "Dividers between areas, such as under the header",
+      "$extensions": {
+        "mode": {}
       }
     }
   },
@@ -835,7 +895,7 @@
         "Components",
         "Measures"
       ],
-      "createdAt": "2026-11-16T09:10:15.528Z"
+      "createdAt": "2026-11-19T05:02:26.113Z"
     }
   }
 }
