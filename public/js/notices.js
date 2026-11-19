@@ -15,8 +15,9 @@ import { getCutoffDate } from './notice.js';
  * How important a notice is. Both send a push notification.
  * - `urgent`: the family has to know today, e.g. "no classes tomorrow".
  * - `emergency`: the family has to know right now, e.g. "the children
- *   already left". The card stands out and the notification stays on screen
- *   until it is touched (`requireInteraction`, Android and computer only).
+ *   already left". The notification stays on screen until it is touched
+ *   (`requireInteraction`, Android and computer only). The card looks the
+ *   same as an urgent one: every notice matters, only the push differs.
  * @typedef {'urgent' | 'emergency'} NoticeLevel
  */
 
