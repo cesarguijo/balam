@@ -45,9 +45,9 @@ test('In the installed app without a session it shows the login', () => {
   );
 });
 
-test('In the installed app with a session it shows home', () => {
+test('In the installed app with a session it shows notices', () => {
   assert.equal(
     decideRoute({ isDesktop: false, installed: true, hasSession: true }),
-    '#/home',
+    '#/notices',
   );
 });

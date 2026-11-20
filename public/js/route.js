@@ -13,11 +13,11 @@
  * @param {boolean} context.isDesktop - Whether it was opened on a computer.
  * @param {boolean} context.installed - Whether it was opened as an installed app and not in the browser.
  * @param {boolean} context.hasSession - Whether the family has already logged in.
- * @returns {'#/welcome' | '#/login' | '#/home'} The route to show.
+ * @returns {'#/welcome' | '#/login' | '#/notices'} The route to show.
  */
 export function decideRoute({ isDesktop, installed, hasSession }) {
   if (isDesktop) return '#/welcome';
   if (!installed) return '#/welcome';
   if (!hasSession) return '#/login';
-  return '#/home';
+  return '#/notices';
 }

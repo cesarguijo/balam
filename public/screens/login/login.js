@@ -134,7 +134,7 @@ export function showLogin(app) {
     button.loading = true;
     logIn(validation.username, password)
       .then(() => {
-        location.replace('#/home');
+        location.replace('#/notices');
       })
       .catch((error) => {
         iconContainer.innerHTML = icon(getErrorIcon(error.type));

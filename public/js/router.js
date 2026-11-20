@@ -1,14 +1,17 @@
 /**
  * @file Router: shows the screen that matches the current route. If the
- * route does not exist, shows home in the installed app or the welcome
- * screen in the browser; inside the installed app, it never shows the
- * welcome screen.
+ * route does not exist, sends the installed app to the notices and shows
+ * the welcome screen in the browser; inside the installed app, it never
+ * shows the welcome screen.
  */
 
 import { showWelcome } from '../screens/welcome/welcome.js';
-import { showHome } from '../screens/home/home.js';
 import { showPlayground } from '../screens/playground/playground.js';
 import { showLogin } from '../screens/login/login.js';
+import { showNotices } from '../screens/notices/notices.js';
+import { showFamily } from '../screens/family/family.js';
+import { showGrades } from '../screens/grades/grades.js';
+import { showAttendance } from '../screens/attendance/attendance.js';
 
 /**
  * An app screen: receives the container and draws its content inside.
@@ -26,9 +29,11 @@ import { showLogin } from '../screens/login/login.js';
  */
 const routes = {
   '#/welcome': showWelcome,
-  '#/home': showHome,
   '#/playground': showPlayground,
   '#/login': showLogin,
+  '#/notices': (app) => showFamily(app, showNotices),
+  '#/grades': (app) => showFamily(app, showGrades),
+  '#/attendance': (app) => showFamily(app, showAttendance),
 };
 
 /**
@@ -51,14 +56,20 @@ function navigate() {
     throw new Error('#app container not found in index.html');
   }
 
-  // Inside the installed app the welcome screen is not shown: it already did its job.
-  if (isStandalone() && location.hash === '#/welcome') {
-    location.replace('#/home');
+  // The installed app opens on the notices: with no route or an unknown one
+  // (the manifest's start_url has no #), and on the welcome screen, which
+  // already did its job. replace() changes the # so the routes table draws
+  // the notices with their section and the nav marks them as active.
+  if (
+    isStandalone() &&
+    (!routes[location.hash] || location.hash === '#/welcome')
+  ) {
+    location.replace('#/notices');
     return;
   }
 
-  // No route or an unknown one: the installed app goes home; the browser, to the welcome screen.
-  const fallback = isStandalone() ? showHome : showWelcome;
+  // No route or an unknown one in the browser: the welcome screen.
+  const fallback = showWelcome;
   const screen = routes[location.hash] ?? fallback;
   screen(app);
 }
