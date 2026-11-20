@@ -17,7 +17,7 @@ body {
   margin: 0;
   background-color: var(--surface-background);
   color: var(--text-primary);
-  font-family: 'Atkinson Hyperlegible Next', sans-serif;
+  font-family: var(--font-family), sans-serif;
 }
 
 button,

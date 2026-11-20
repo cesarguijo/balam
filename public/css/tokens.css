@@ -23,7 +23,12 @@
   --pink-50: #fbeaf0; /** Very light macuelizo pink · server error background */
   --pink-600: #a8406b; /** Macuelizo pink · Tabebuia rosea flower */
   --text-field-focus-border: #ffffff;
+  --sand-100: #efe6d2;
+  --sand-200: #e2d1ac;
+  --sand-300: #dcc9a3;
   --size-control: 52px;
+  --size-chip: 40px;
+  --size-avatar: 26px;
   --font-weight-regular: 400;
   --font-weight-bold: 700;
   --font-size-display: 40px;
@@ -36,6 +41,7 @@
   --font-line-height-label-large: 24px;
   --font-line-height-body: 24px;
   --font-line-height-label: 20px;
+  --font-family: Atkinson Hyperlegible Next;
   --button-end: 14px;
   --button-ring: 3px;
   --button-chamfer: 10px;
@@ -53,14 +59,17 @@
   --space-24: 24px;
   --space-32: 32px;
   --radius-12: 12px;
+  --radius-full: 9999px;
   --duration-fast: 80ms; /** Feedback for a tap: the button sinking */
   --text-primary: var(--blue-800); /** Body text on the background. Contrast 10.2:1 */
   --text-secondary: var(--gray-600); /** Placeholders and helper text. Contrast 6.5:1 on white */
   --text-body: var(--gray-800); /** Long text to read, such as a notice body */
   --text-on-selection: var(--cream-50); /** Text on a selected item, such as the selected chip. Contrast 10.2:1 on blue */
+  --text-on-header: var(--cream-50);
   --surface-background: var(--cream-50); /** Main screen background */
   --surface-raised: var(--white); /** Background of what sits on the screen: fields and cards */
   --surface-placeholder: var(--gray-200); /** Skeleton blocks while content loads */
+  --surface-header: var(--blue-800);
   --action-primary-background: var(--amber-500); /** Primary button background. One per screen */
   --action-primary-border: var(--amber-800); /** Primary button ring */
   --action-primary-text: var(--blue-800); /** Primary button text. Contrast 4.5:1, always bold */
@@ -74,7 +83,10 @@
   --focus-ring: var(--maya-500); /** Keyboard focus outline. 3 px wide, 3 px offset */
   --icon-secondary: var(--brown-700); /** Decorative icons and icons inside fields. Contrast 6.4:1 */
   --icon-on-selection: var(--cream-50); /** Icon on a selected item, such as the active nav item. Contrast 10.2:1 on blue */
+  --icon-inactive: var(--gray-600);
   --decoration-maya-fret: var(--brown-700); /** Background frets, always at 12% opacity */
+  --decoration-maya-fret-on-dark: [object Object];
+  --decoration-header-strip: var(--amber-500);
   --spacing-groups: var(--space-24);
   --spacing-elements: var(--space-16);
   --spacing-row: var(--space-12);
@@ -86,6 +98,13 @@
   --field-radius: var(--radius-12);
   --selection-indicator: var(--blue-800); /** Selected chip and active nav item. Contrast 10.2:1 on cream */
   --border-subtle: var(--gray-200); /** Dividers between areas, such as under the header */
+  --avatar-background: var(--cream-50);
+  --avatar-background-selected: var(--amber-500);
+  --illustration-ground: var(--sand-100);
+  --illustration-stone: var(--sand-200);
+  --illustration-stone-shade: var(--sand-300);
+  --illustration-shadow: var(--brown-500);
+  --illustration-plant: [object Object];
   --button-facet-top-left: var(--amber-200);
   --button-facet-bottom-left: var(--amber-400);
   --button-facet-top-right: var(--amber-600);
