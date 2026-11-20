@@ -117,6 +117,28 @@ describe('getRecentNotices', () => {
     });
   });
 
+  test('there is no internet and the copy is not valid JSON so throws a NoticeError("offline")', () => {
+    globalThis.localStorage.setItem(NOTICES_KEY, '[{"id":"x"');
+    getNoticesSince.mock.mockImplementationOnce(() =>
+      Promise.reject(new NoticeError('offline')),
+    );
+    return assert.rejects(getRecentNotices('any-id'), {
+      name: 'NoticeError',
+      type: 'offline',
+    });
+  });
+
+  test('there is no internet and the copy has a damaged notice so throws a NoticeError("offline")', () => {
+    globalThis.localStorage.setItem(NOTICES_KEY, '[{"id":"x","text":42}]');
+    getNoticesSince.mock.mockImplementationOnce(() =>
+      Promise.reject(new NoticeError('offline')),
+    );
+    return assert.rejects(getRecentNotices('any-id'), {
+      name: 'NoticeError',
+      type: 'offline',
+    });
+  });
+
   test('there is another error so throws the same error and does not use the copy', () => {
     getNoticesSince.mock.mockImplementationOnce(() =>
       Promise.reject(new NoticeError('not-allowed')),

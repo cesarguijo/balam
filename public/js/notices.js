@@ -93,13 +93,15 @@ export async function getRecentNotices(groupId) {
 
         if (noticesString === null) throw noticeError;
 
-        const notices = fromArrayJsonToNotice(noticesString);
-        const today = new Date();
-        const filteredNotices = notices.filter(
-          (notice) => notice.createdAt >= getCutoffDate(today),
-        );
-
-        return { notices: filteredNotices, offline: true };
+        try {
+          const notices = fromArrayJsonToNotice(noticesString);
+          const filteredNotices = notices.filter(
+            (notice) => notice.createdAt >= cutoff,
+          );
+          return { notices: filteredNotices, offline: true };
+        } catch {
+          throw noticeError;
+        }
       }
       throw noticeError;
     });
