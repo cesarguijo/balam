@@ -60,7 +60,6 @@ export const messages = {
   'playground.notices.logout': 'Salir',
   'playground.notices.group': 'Grupo',
   'playground.notices.text': 'Texto (la primera línea es el título)',
-  'playground.notices.level': 'Nivel',
   'playground.notices.publish': 'Publicar',
   'playground.notices.read': 'Leer avisos del grupo',
 

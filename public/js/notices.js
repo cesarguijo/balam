@@ -12,21 +12,10 @@ import * as adapter from './firebase/notices-adapter.js';
 import { getCutoffDate } from './notice.js';
 
 /**
- * How important a notice is. Both send a push notification.
- * - `urgent`: the family has to know today, e.g. "no classes tomorrow".
- * - `emergency`: the family has to know right now, e.g. "the children
- *   already left". The notification stays on screen until it is touched
- *   (`requireInteraction`, Android and computer only). The card looks the
- *   same as an urgent one: every notice matters, only the push differs.
- * @typedef {'urgent' | 'emergency'} NoticeLevel
- */
-
-/**
  * A notice from the teacher to the families of a group.
  * @typedef {object} Notice
  * @property {string} id - Identifies the notice; used to edit or delete it.
  * @property {string} text - Full text; the first line is the title (see `splitNotice`).
- * @property {NoticeLevel} level - Whether it is urgent or an emergency.
  * @property {Date} createdAt - When it was published; sorts the list and decides whether it is recent.
  * @property {Date | null} updatedAt - When it was last edited, or `null` if never; the card shows "Editado".
  */
@@ -36,7 +25,6 @@ import { getCutoffDate } from './notice.js';
  * group, author) is added by the adapter.
  * @typedef {object} NoticeDraft
  * @property {string} text - Full text; the first line is the title.
- * @property {NoticeLevel} level - Whether it is urgent or an emergency.
  */
 
 /**
@@ -83,7 +71,7 @@ export async function getRecentNotices(groupId) {
  * Publishes a new notice for the group. Creating it is what sends the push
  * notification to the families.
  * @param {string} groupId - The group the notice is for.
- * @param {NoticeDraft} draft - Text and level typed by the teacher.
+ * @param {NoticeDraft} draft - Text typed by the teacher.
  * @returns {Promise<string>} The id of the new notice.
  * @throws {NoticeError} If there is no internet or the account is not the teacher's.
  */
@@ -92,11 +80,11 @@ export async function publishNotice(groupId, draft) {
 }
 
 /**
- * Changes the text or the level of a notice. Does not send a new push
+ * Changes the text of a notice. Does not send a new push
  * notification: if the correction is critical, the teacher publishes a new
  * notice instead.
  * @param {string} id - The notice to edit.
- * @param {NoticeDraft} draft - The new text and level.
+ * @param {NoticeDraft} draft - The new text.
  * @returns {Promise<void>} Fulfills when the server saved it.
  * @throws {NoticeError} If there is no internet, the notice no longer exists or the account is not the teacher's.
  */
@@ -114,3 +102,5 @@ export async function editNotice(id, draft) {
 export async function deleteNotice(id) {
   return adapter.removeNotice(id);
 }
+
+export function clearNotices() {}

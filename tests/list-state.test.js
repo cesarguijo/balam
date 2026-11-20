@@ -9,14 +9,12 @@ const cases = [
       {
         id: 'first-id',
         text: 'Hi\nThis is a message',
-        level: 'urgent',
         createdAt: new Date(),
         updatedAt: null,
       },
       {
         id: 'second-id',
         text: 'Hi\nThis is another message',
-        level: 'urgent',
         createdAt: new Date(),
         updatedAt: null,
       },

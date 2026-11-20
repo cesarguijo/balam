@@ -100,7 +100,6 @@ describe('getCutoffDate', () => {
 describe('toNotice', () => {
   const validData = {
     text: 'Classes suspended.\nThere are no classes tomorrow.',
-    level: 'urgent',
     createdAt: new Date(2026, 10, 10, 10, 0, 0, 0),
     updatedAt: null,
     groupId: 'id-group',
@@ -111,7 +110,6 @@ describe('toNotice', () => {
     const expected = {
       id: 'an-id',
       text: 'Classes suspended.\nThere are no classes tomorrow.',
-      level: 'urgent',
       createdAt: new Date(2026, 10, 10, 10, 0, 0, 0),
       updatedAt: null,
     };
@@ -142,16 +140,6 @@ describe('toNotice', () => {
         name: 'TypeError',
         message: 'The notice has no text',
       });
-    });
-
-    test('level has no a valid NoticeLevel', () => {
-      assert.throws(
-        () => toNotice('an-id', { ...validData, level: 'something-strange' }),
-        {
-          name: 'TypeError',
-          message: 'The notice has an unknown level',
-        },
-      );
     });
 
     test('createdAt is not a date', () => {

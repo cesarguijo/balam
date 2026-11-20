@@ -6,7 +6,6 @@
  *
  * Each notice is a document in the `notices` collection:
  * - `text` (string): full text; the first line is the title.
- * - `level` ('urgent' | 'emergency').
  * - `groupId` (string): the group it is for; the Firestore rules use it so
  *   each family reads only its group's notices.
  * - `authorUid` (string): who published it.
@@ -89,14 +88,13 @@ export async function getNoticesSince(groupId, cutoff) {
 /**
  * Creates a notice with the server's date and the teacher as author.
  * @param {string} groupId - The group the notice is for.
- * @param {NoticeDraft} draft - Text and level typed by the teacher.
+ * @param {NoticeDraft} draft - Text typed by the teacher.
  * @returns {Promise<string>} The id Firestore gave the new notice.
  * @throws {NoticeError} If there is no internet or the rules refuse it.
  */
 export async function addNotice(groupId, draft) {
   const docNotice = {
     text: draft.text,
-    level: draft.level,
     groupId,
     authorUid: auth.currentUser.uid,
     createdAt: serverTimestamp(),
@@ -115,10 +113,10 @@ export async function addNotice(groupId, draft) {
 }
 
 /**
- * Saves the new text and level of a notice and marks when it was edited.
+ * Saves the new text of a notice and marks when it was edited.
  * Does not touch createdAt, groupId or authorUid.
  * @param {string} id - The notice to edit.
- * @param {NoticeDraft} draft - The new text and level.
+ * @param {NoticeDraft} draft - The new text.
  * @returns {Promise<void>} Fulfills when Firestore saved it.
  * @throws {NoticeError} If there is no internet, the notice no longer exists or the rules refuse it.
  */
@@ -126,7 +124,6 @@ export async function updateNotice(id, draft) {
   const noticeRef = doc(db, 'notices', id);
   return updateDoc(noticeRef, {
     text: draft.text,
-    level: draft.level,
     updatedAt: serverTimestamp(),
   }).catch((error) => {
     throw new NoticeError(translateNoticeError(error.code), {

@@ -78,7 +78,6 @@ async function seedSchool() {
 function notice(groupId) {
   return {
     text: 'Classes suspended',
-    level: 'urgent',
     groupId,
     authorUid: 'teacher',
     createdAt: new Date(),

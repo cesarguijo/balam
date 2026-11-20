@@ -165,13 +165,6 @@ export function showPlayground(app) {
                   rows="3"
                 ></textarea>
               </label>
-              <label class="playground__control-label">
-                ${t('playground.notices.level')}
-                <select class="playground__control" name="level">
-                  <option value="urgent">urgent</option>
-                  <option value="emergency">emergency</option>
-                </select>
-              </label>
               <div class="playground__actions">
                 <button class="playground__dev-button">
                   ${t('playground.notices.publish')}
@@ -304,17 +297,10 @@ function setUpNoticesTest(app) {
   publishForm.addEventListener('submit', (event) => {
     event.preventDefault();
     if (!(event.submitter instanceof HTMLButtonElement)) return;
-    const { groupId, text, level } = Object.fromEntries(
-      new FormData(publishForm),
-    );
+    const { groupId, text } = Object.fromEntries(new FormData(publishForm));
     whileLoading(
       event.submitter,
-      publishNotice(String(groupId), {
-        text: String(text),
-        level: /** @type {import('../../js/notices.js').NoticeLevel} */ (
-          String(level)
-        ),
-      }).then((id) => ({ published: id })),
+      publishNotice(String(groupId), { text: String(text) }).then((id) => ({ published: id })),
     );
   });
 

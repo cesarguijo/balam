@@ -7,7 +7,6 @@
  */
 
 /** @typedef {import('./notices.js').Notice} Notice */
-/** @typedef {import('./notices.js').NoticeLevel} NoticeLevel */
 
 /**
  * How many days back the families see notices. Notices are urgent by
@@ -15,14 +14,6 @@
  * goes in the students' notebooks.
  */
 export const RECENT_DAYS = 7;
-
-/**
- * The only levels a notice can have (see `NoticeLevel`). The JSDoc type
- * only exists for the editor, so `toNotice` needs this list to check the
- * level when the code runs.
- * @type {string[]}
- */
-const NOTICE_LEVELS = ['urgent', 'emergency'];
 
 /**
  * Title and body of a notice, as the notice card shows them.
@@ -85,10 +76,6 @@ export function toNotice(id, data) {
     throw new TypeError('The notice has no text');
   }
 
-  if (!isNoticeLevel(data.level)) {
-    throw new TypeError('The notice has an unknown level');
-  }
-
   if (!isValidDate(data.createdAt)) {
     throw new TypeError('The notice has no valid creation date');
   }
@@ -100,7 +87,6 @@ export function toNotice(id, data) {
   return {
     id,
     text: data.text,
-    level: data.level,
     createdAt: data.createdAt,
     updatedAt: data.updatedAt,
   };
@@ -126,15 +112,4 @@ function isValidDate(possibleDate) {
  */
 function isObject(data) {
   return typeof data === 'object' && data !== null;
-}
-
-/**
- * Tells whether a value is one of the `NOTICE_LEVELS`. Unlike a bare
- * `includes`, it is a type guard: afterwards TypeScript knows the value is
- * a `NoticeLevel`, not just `unknown`.
- * @param {unknown} data - Any value, e.g. the notice's `level` field.
- * @returns {data is NoticeLevel} `true` if it is `urgent` or `emergency`.
- */
-function isNoticeLevel(data) {
-  return typeof data === 'string' && NOTICE_LEVELS.includes(data);
 }
