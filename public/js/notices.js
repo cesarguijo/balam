@@ -12,6 +12,12 @@ import * as adapter from './firebase/notices-adapter.js';
 import { getCutoffDate } from './notice.js';
 
 /**
+ * Name the copy of the notices is stored under in `localStorage`, so they
+ * can be seen without internet (same pattern as the family in session.js).
+ */
+const NOTICES_KEY = 'notices';
+
+/**
  * A notice from the teacher to the families of a group.
  * @typedef {object} Notice
  * @property {string} id - Identifies the notice; used to edit or delete it.
@@ -53,16 +59,50 @@ export class NoticeError extends Error {
 }
 
 /**
+ * What `getRecentNotices` returns: the notices and where they came from.
+ * @typedef {object} RecentNotices
+ * @property {Notice[]} notices - The recent notices, newest first; empty if there are none.
+ * @property {boolean} offline - `true` if they came from the copy on the phone
+ *   because there is no internet; the screen warns they may be out of date.
+ */
+
+/**
  * Returns the group's notices from the last `RECENT_DAYS` days, newest
- * first. The cutoff date is computed here, not in the adapter, so the rule
- * is not repeated when moving to PHP.
+ * first, and saves a copy on the phone so they can be seen without
+ * internet. The cutoff date is computed here, not in the adapter, so the
+ * rule is not repeated when moving to PHP.
+ *
+ * Only the `offline` error uses the copy: any other error (e.g.
+ * `not-allowed`, the family left the group) is thrown, so old notices are
+ * never shown to someone who should no longer see them.
  * @param {string} groupId - The family's group.
- * @returns {Promise<Notice[]>} The recent notices; empty if there are none.
- * @throws {NoticeError} If there is no internet or the server refuses it.
+ * @returns {Promise<RecentNotices>} The notices, fresh from the server or from the copy.
+ * @throws {NoticeError} If the server refuses it, or there is no internet and no copy.
  */
 export async function getRecentNotices(groupId) {
   const cutoff = getCutoffDate(new Date());
-  return adapter.getNoticesSince(groupId, cutoff);
+  return adapter
+    .getNoticesSince(groupId, cutoff)
+    .then((notices) => {
+      localStorage.setItem(NOTICES_KEY, JSON.stringify(notices));
+      return { notices, offline: false };
+    })
+    .catch((noticeError) => {
+      if (noticeError.type === 'offline') {
+        const noticesString = localStorage.getItem(NOTICES_KEY);
+
+        if (noticesString === null) throw noticeError;
+
+        const notices = fromArrayJsonToNotice(noticesString);
+        const today = new Date();
+        const filteredNotices = notices.filter(
+          (notice) => notice.createdAt >= getCutoffDate(today),
+        );
+
+        return { notices: filteredNotices, offline: true };
+      }
+      throw noticeError;
+    });
 }
 
 // TODO: decide whether the text is checked before sending (not empty, maximum
@@ -103,4 +143,41 @@ export async function deleteNotice(id) {
   return adapter.removeNotice(id);
 }
 
-export function clearNotices() {}
+/**
+ * Removes the copy of the notices saved on the phone. `logOut` calls it, so
+ * the next family that logs in on the same phone never sees another
+ * family's notices.
+ */
+export function clearNotices() {
+  localStorage.removeItem(NOTICES_KEY);
+}
+
+/**
+ *
+ * @param {string} json
+ * @returns {Notice[]}
+ * @throws {TypeError}
+ */
+function fromArrayJsonToNotice(json) {
+  console.log(json);
+  const newJson = JSON.parse(json);
+  if (Array.isArray(newJson)) {
+    return newJson.map(fromJsonToNotice);
+  } else {
+    throw new TypeError('The JSON is not a Notice[]');
+  }
+}
+
+/**
+ *
+ * @param {Record<string,string>} json
+ * @returns {Notice}
+ */
+function fromJsonToNotice(json) {
+  return {
+    id: json.id ?? '',
+    text: json.text ?? '',
+    createdAt: new Date(json.createdAt),
+    updatedAt: json.updatedAt ? new Date(json.updatedAt) : null,
+  };
+}
