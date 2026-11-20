@@ -140,6 +140,7 @@ describe('getRecentNotices', () => {
   });
 
   test('there is another error so throws the same error and does not use the copy', () => {
+    globalThis.localStorage.setItem(NOTICES_KEY, JSON.stringify(validNotices));
     getNoticesSince.mock.mockImplementationOnce(() =>
       Promise.reject(new NoticeError('not-allowed')),
     );
