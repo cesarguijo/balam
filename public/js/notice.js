@@ -68,6 +68,24 @@ export function getCutoffDate(now) {
  * @throws {TypeError} If a field is missing or has the wrong type.
  */
 export function toNotice(id, data) {
+  const validData = validateNotice(data);
+
+  return {
+    id,
+    ...validData,
+  };
+}
+
+/**
+ * Checks the fields of a notice and copies only the ones the app uses, so
+ * extra fields from the server (`groupId`, `authorUid`) do not leak into
+ * the screens. Shared by `toNotice` and `fromJsonToNotice`, so the server
+ * data and the offline copy follow the same rules.
+ * @param {unknown} data - The notice's fields, with the dates already as `Date`.
+ * @returns {Omit<Notice, 'id'>} The validated fields, without the id.
+ * @throws {TypeError} If a field is missing or has the wrong type.
+ */
+function validateNotice(data) {
   if (!isObject(data)) {
     throw new TypeError('The notice is not an object');
   }
@@ -85,7 +103,6 @@ export function toNotice(id, data) {
   }
 
   return {
-    id,
     text: data.text,
     createdAt: data.createdAt,
     updatedAt: data.updatedAt,
@@ -112,4 +129,53 @@ function isValidDate(possibleDate) {
  */
 function isObject(data) {
   return typeof data === 'object' && data !== null;
+}
+
+/**
+ * Turns the offline copy of the notices (the text saved in `localStorage`)
+ * back into Notices. It throws if the copy is damaged, so the caller can
+ * treat it the same as having no copy.
+ * @param {string} json - The copy, as `JSON.stringify(notices)` saved it.
+ * @returns {Notice[]} The validated notices.
+ * @throws {SyntaxError} If the text is not valid JSON.
+ * @throws {TypeError} If it is not an array or a notice is wrong.
+ */
+export function fromArrayJsonToNotice(json) {
+  const newJson = JSON.parse(json);
+  if (Array.isArray(newJson)) {
+    return newJson.map(fromJsonToNotice);
+  } else {
+    throw new TypeError('The JSON is not a Notice[]');
+  }
+}
+
+/**
+ * Turns one notice of the offline copy back into a Notice. `JSON.stringify`
+ * saved the dates as text, so they are turned into `Date` before checking
+ * them. `updatedAt` stays `null` when it is `null`: `new Date(null)` would
+ * give January 1, 1970, a valid date.
+ * @param {unknown} json - One element of the parsed array.
+ * @returns {Notice} The validated notice.
+ * @throws {TypeError} If a field is missing or has the wrong type.
+ */
+function fromJsonToNotice(json) {
+  if (!isObject(json)) {
+    throw new TypeError('The notice is not an object');
+  }
+
+  if (typeof json.id !== 'string' || json.id === '') {
+    throw new TypeError('The notice has no id');
+  }
+
+  const data = {
+    ...json,
+    createdAt: new Date(String(json.createdAt)),
+    updatedAt:
+      json.updatedAt === null ? null : new Date(String(json.updatedAt)),
+  };
+  const validNotice = validateNotice(data);
+  return {
+    ...validNotice,
+    id: json.id,
+  };
 }

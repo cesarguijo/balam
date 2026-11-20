@@ -9,7 +9,7 @@
  */
 
 import * as adapter from './firebase/notices-adapter.js';
-import { getCutoffDate } from './notice.js';
+import { fromArrayJsonToNotice, getCutoffDate } from './notice.js';
 
 /**
  * Name the copy of the notices is stored under in `localStorage`, so they
@@ -150,34 +150,4 @@ export async function deleteNotice(id) {
  */
 export function clearNotices() {
   localStorage.removeItem(NOTICES_KEY);
-}
-
-/**
- *
- * @param {string} json
- * @returns {Notice[]}
- * @throws {TypeError}
- */
-function fromArrayJsonToNotice(json) {
-  console.log(json);
-  const newJson = JSON.parse(json);
-  if (Array.isArray(newJson)) {
-    return newJson.map(fromJsonToNotice);
-  } else {
-    throw new TypeError('The JSON is not a Notice[]');
-  }
-}
-
-/**
- *
- * @param {Record<string,string>} json
- * @returns {Notice}
- */
-function fromJsonToNotice(json) {
-  return {
-    id: json.id ?? '',
-    text: json.text ?? '',
-    createdAt: new Date(json.createdAt),
-    updatedAt: json.updatedAt ? new Date(json.updatedAt) : null,
-  };
 }

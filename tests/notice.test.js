@@ -1,6 +1,11 @@
 import { describe, test } from 'node:test';
 import assert from 'node:assert/strict';
-import { getCutoffDate, splitNotice, toNotice } from '../public/js/notice.js';
+import {
+  fromArrayJsonToNotice,
+  getCutoffDate,
+  splitNotice,
+  toNotice,
+} from '../public/js/notice.js';
 
 describe('splitNotice', () => {
   test('One line text', () => {
@@ -175,6 +180,52 @@ describe('toNotice', () => {
           message: 'The notice has no valid edit date',
         },
       );
+    });
+  });
+});
+
+describe('fromArrayJsonToNotice', () => {
+  test('Returns the same notices that were saved', () => {
+    const validNotices = [
+      {
+        id: 'first-id-notice',
+        text: 'This is a message',
+        createdAt: new Date(2026, 10, 10, 10, 0, 0, 0),
+        updatedAt: new Date(2026, 10, 11, 10, 0, 0, 0),
+      },
+      {
+        id: 'second-id-notice',
+        text: 'This is another message',
+        createdAt: new Date(2026, 10, 12, 10, 0, 0, 0),
+        updatedAt: null,
+      },
+    ];
+
+    const noticesString = JSON.stringify(validNotices);
+    const result = fromArrayJsonToNotice(noticesString);
+    assert.deepEqual(result, validNotices);
+  });
+
+  test('Throw error if the json is not an array', () => {
+    const notAnArray = { object: 'not an array' };
+
+    const noticesString = JSON.stringify(notAnArray);
+    assert.throws(() => fromArrayJsonToNotice(noticesString), {
+      name: 'TypeError',
+      message: 'The JSON is not a Notice[]',
+    });
+  });
+
+  test('Throw error if the json is broken', () => {
+    assert.throws(() => fromArrayJsonToNotice('[{"id":"x"'), {
+      name: 'SyntaxError',
+    });
+  });
+
+  test('Throw error if the content is not a Notice[]', () => {
+    assert.throws(() => fromArrayJsonToNotice('[{"text": 42}]'), {
+      name: 'TypeError',
+      message: 'The notice has no id',
     });
   });
 });
