@@ -55,23 +55,28 @@ const credentials = {
 const adapterLogIn = mock.fn(() => Promise.resolve(validFamily));
 
 const hasSession = mock.fn(() => Promise.resolve(true));
-const logOut = mock.fn(() => Promise.resolve());
+const adapterLogOut = mock.fn(() => Promise.resolve());
 
 mock.module('../public/js/firebase/session-adapter.js', {
   namedExports: {
     hasSession,
-    logOut,
+    logOut: adapterLogOut,
     logIn: adapterLogIn,
   },
 });
-const { getSession, SessionError, logIn } =
+
+mock.module('../public/js/firebase/notices-adapter.js');
+
+const { getSession, SessionError, logIn, logOut } =
   await import('../public/js/session.js');
+
+const { NOTICES_KEY } = await import('../public/js/notices.js');
 
 describe('getSession (session.js)', () => {
   beforeEach(() => {
     storage.clear();
     hasSession.mock.resetCalls();
-    logOut.mock.resetCalls();
+    adapterLogOut.mock.resetCalls();
   });
 
   describe('returns null without logging out when', () => {
@@ -79,14 +84,14 @@ describe('getSession (session.js)', () => {
       hasSession.mock.mockImplementationOnce(() => Promise.resolve(false));
       return getSession().then((result) => {
         assert.equal(result, null);
-        assert.equal(logOut.mock.callCount(), 0);
+        assert.equal(adapterLogOut.mock.callCount(), 0);
       });
     });
 
     test('there is a session but no stored family', () => {
       return getSession().then((result) => {
         assert.equal(result, null);
-        assert.equal(logOut.mock.callCount(), 0);
+        assert.equal(adapterLogOut.mock.callCount(), 0);
       });
     });
   });
@@ -95,7 +100,7 @@ describe('getSession (session.js)', () => {
     globalThis.localStorage.setItem('family', JSON.stringify(validFamily));
     return getSession().then((result) => {
       assert.deepEqual(result, validFamily);
-      assert.equal(logOut.mock.callCount(), 0);
+      assert.equal(adapterLogOut.mock.callCount(), 0);
     });
   });
 
@@ -106,7 +111,7 @@ describe('getSession (session.js)', () => {
       globalThis.localStorage.setItem('family', input);
       return getSession().then((result) => {
         assert.equal(result, null);
-        assert.equal(logOut.mock.callCount(), 1);
+        assert.equal(adapterLogOut.mock.callCount(), 1);
         assert.equal(globalThis.localStorage.getItem('family'), null);
         assert.equal(warning.mock.callCount(), 1);
       });
@@ -118,7 +123,7 @@ describe('getSession (session.js)', () => {
       globalThis.localStorage.setItem('family', input);
       return getSession().then((result) => {
         assert.equal(result, null);
-        assert.equal(logOut.mock.callCount(), 1);
+        assert.equal(adapterLogOut.mock.callCount(), 1);
         assert.equal(globalThis.localStorage.getItem('family'), null);
         assert.equal(warning.mock.callCount(), 1);
       });
@@ -131,7 +136,7 @@ describe('getSession (session.js)', () => {
       );
       return getSession().then((result) => {
         assert.equal(result, null);
-        assert.equal(logOut.mock.callCount(), 1);
+        assert.equal(adapterLogOut.mock.callCount(), 1);
         assert.equal(warning.mock.callCount(), 1);
       });
     });
@@ -213,6 +218,15 @@ describe('logIn (session.js)', () => {
         .then(() => {
           assert.equal(globalThis.localStorage.getItem('family'), null);
         });
+    });
+  });
+});
+
+describe('logOut (session.js)', () => {
+  test('removes the copy of the notices', () => {
+    globalThis.localStorage.setItem(NOTICES_KEY, '[]');
+    return logOut().then(() => {
+      assert.equal(globalThis.localStorage.getItem(NOTICES_KEY), null);
     });
   });
 });

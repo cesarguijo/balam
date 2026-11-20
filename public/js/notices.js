@@ -15,7 +15,7 @@ import { fromArrayJsonToNotice, getCutoffDate } from './notice.js';
  * Name the copy of the notices is stored under in `localStorage`, so they
  * can be seen without internet (same pattern as the family in session.js).
  */
-const NOTICES_KEY = 'notices';
+export const NOTICES_KEY = 'notices';
 
 /**
  * A notice from the teacher to the families of a group.

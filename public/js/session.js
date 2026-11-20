@@ -6,6 +6,7 @@
 
 import * as adapter from './firebase/session-adapter.js';
 import { toFamily } from './family.js';
+import { clearNotices } from './notices.js';
 
 /**
  * Name the family is stored under in `localStorage`. It is a constant
@@ -62,14 +63,16 @@ export class SessionError extends Error {
  */
 
 /**
- * Logs out on this phone and removes the stored family. The next time the
- * app opens, it shows the login. Removes the copy only after the adapter
- * logged out, so there is never a session without a family.
- * @returns {Promise<void>} Fulfills when the session and the copy are gone.
+ * Logs out on this phone and removes the stored family and the copy of the
+ * notices, so the next family on the same phone never sees them. The next
+ * time the app opens, it shows the login. Removes the copies only after the
+ * adapter logged out, so there is never a session without a family.
+ * @returns {Promise<void>} Fulfills when the session and the copies are gone.
  */
 export function logOut() {
   return adapter.logOut().then(() => {
     localStorage.removeItem(FAMILY_KEY);
+    clearNotices();
   });
 }
 
