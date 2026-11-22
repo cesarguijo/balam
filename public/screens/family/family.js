@@ -10,6 +10,7 @@ import { getNoticeTabs } from './tabs.js';
 import { t } from '../../js/i18n/es.js';
 import { BalamMenu } from '../../components/menu/menu.js';
 import { drawAppBar } from '../../components/app-bar/app-bar.js';
+import { avatar } from '../../components/avatar/avatar.js';
 
 // TODO: draw one tab per child with getNoticeTabs(getSession().children)
 // instead of the fixed names; with a single child, show only the name.
@@ -45,7 +46,7 @@ export async function showFamily(app, section) {
         role="tab"
         aria-selected="${index === 0}"
       >
-        <span class="family__avatar">${tab.initial}</span>${tab.label}
+        ${avatar(tab.label, index + 1)} ${tab.label}
       </button>
     `;
   });

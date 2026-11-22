@@ -1,0 +1,38 @@
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+}
+
+.avatar--child {
+  width: var(--size-avatar-child);
+  height: var(--size-avatar-child);
+}
+
+.avatar--family {
+  width: var(--size-avatar-family);
+  height: var(--size-avatar-family);
+  background-color: var(--avatar-user-background);
+  color: var(--avatar-user-text);
+}
+
+.avatar--child-1 {
+  background-color: var(--avatar-child-1-background);
+  color: var(--avatar-child-1-text);
+}
+
+.avatar--child-2 {
+  background-color: var(--avatar-child-2-background);
+  color: var(--avatar-child-2-text);
+}
+
+.avatar--child-3 {
+  background-color: var(--avatar-child-3-background);
+  color: var(--avatar-child-3-text);
+}
+
+.avatar--child-4 {
+  background-color: var(--avatar-child-4-background);
+  color: var(--avatar-child-4-text);
+}

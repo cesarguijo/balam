@@ -51,33 +51,11 @@
   cursor: pointer;
 }
 
-.family .family__avatar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--size-avatar);
-  height: var(--size-avatar);
-  background-color: var(--avatar-background);
-  border-radius: var(--radius-full);
-  color: var(--text-primary);
-  font-size: var(--font-size-label);
-  font-weight: var(--font-weight-bold);
-}
-
 .family .family__tab_selected {
   background-color: var(--selection-indicator);
   border-color: var(--selection-indicator);
   color: var(--text-on-selection);
   font-weight: var(--font-weight-bold);
-}
-
-.family .family__tab_selected .family__avatar {
-  background-color: var(--avatar-background-selected);
-  color: var(--text-on-selection);
-}
-
-.family .family__tabpanel {
-  padding: var(--space-12);
 }
 
 .family .family__nav {

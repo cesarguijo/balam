@@ -1,9 +1,30 @@
 /**
- *
- * @param {string} name
- * @param {number} order
+ * @file Avatar component: draws the circle with the initial of a family or
+ * a child. Style-only (no Custom Element); its pure helpers are tested in Node.
  */
-export function avatar(name, order) {}
+
+/**
+ * Draws the avatar: a circle with the initial of a name. With an order it is
+ * a child's avatar, colored by their place in the family; without one it is
+ * the family's own avatar, bigger and in amber.
+ * @param {string | null | undefined} name Name or username, as stored.
+ * @param {number} [order] Place of the child in the family, starting at 1.
+ * @returns {string} HTML of the avatar.
+ */
+export function avatar(name, order) {
+  if (order) {
+    return /* HTML */ `
+      <span
+        class="avatar avatar--child avatar--child-${getColorNumber(order)} text-label"
+      >
+        ${getInitial(name)}
+      </span>
+    `;
+  }
+  return /* HTML */ `
+    <span class="avatar avatar--family text-title"> ${getInitial(name)} </span>
+  `;
+}
 
 /**
  * Gets the uppercase first letter of a name, without its accent.

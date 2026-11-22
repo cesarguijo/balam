@@ -37,7 +37,8 @@
   --sand-300: #dcc9a3; /** Dark sand · stone in shade in illustrations */
   --size-control: 52px; /** Minimum height of tappable controls: buttons, fields, rows */
   --size-chip: 40px; /** Height of the child chips */
-  --size-avatar: 26px; /** Diameter of the child avatar */
+  --size-avatar-child: 26px; /** Diameter of the child avatar */
+  --size-avatar-family: 46px;
   --font-weight-regular: 400; /** Regular weight for body text */
   --font-weight-bold: 700; /** Bold weight for titles, labels and buttons */
   --font-size-display: 40px; /** Display size · big numbers and hero titles */

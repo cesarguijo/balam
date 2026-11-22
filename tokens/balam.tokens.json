@@ -648,14 +648,27 @@
       }
     },
     "avatar": {
-      "$type": "dimension",
-      "$value": {
-        "value": 26,
-        "unit": "px"
+      "child": {
+        "$type": "dimension",
+        "$value": {
+          "value": 26,
+          "unit": "px"
+        },
+        "$description": "Diameter of the child avatar",
+        "$extensions": {
+          "mode": {}
+        }
       },
-      "$description": "Diameter of the child avatar",
-      "$extensions": {
-        "mode": {}
+      "family": {
+        "$type": "dimension",
+        "$value": {
+          "value": 46,
+          "unit": "px"
+        },
+        "$description": "",
+        "$extensions": {
+          "mode": {}
+        }
       }
     }
   },
@@ -1351,7 +1364,7 @@
         "Components",
         "Measures"
       ],
-      "createdAt": "2026-11-22T02:35:10.201Z"
+      "createdAt": "2026-11-22T02:57:29.735Z"
     }
   }
 }

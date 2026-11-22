@@ -24,6 +24,7 @@
 @import url('../components/app-bar/app-bar.css') layer(components);
 @import url('../components/icon-button/icon-button.css') layer(components);
 @import url('../components/ripple/ripple.css') layer(components);
+@import url('../components/avatar/avatar.css') layer(components);
 
 /**
  * App screens
