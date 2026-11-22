@@ -17,6 +17,7 @@ describe('translateFirebaseError (firebase/errors.js)', () => {
       'auth/timeout': 'offline',
       'auth/user-disabled': 'account-disabled',
       'auth/too-many-requests': 'too-many-attempts',
+      unavailable: 'offline',
     };
     Object.entries(expected).forEach(([code, type]) => {
       test(type + ' when the error is ' + code, () => {

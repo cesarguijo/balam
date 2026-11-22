@@ -37,6 +37,25 @@ export async function hasSession() {
 }
 
 /**
+ * Reads the family of the open session again from Firestore, so the phone
+ * gets the changes the teacher made (a new child, another group). Waits for
+ * Firebase to restore the session first, like `hasSession`.
+ * @returns {Promise<Family>} The family, already validated by `toFamily`.
+ */
+export function getFamily() {
+  return auth.authStateReady().then(() => {
+    if (auth.currentUser === null) {
+      throw new SessionError('unknown');
+    }
+    return readFamily(auth.currentUser.uid).catch((error) => {
+      throw new SessionError(translateFirebaseError(error.code), {
+        cause: error,
+      });
+    });
+  });
+}
+
+/**
  * Logs in to Firebase with username and password, and reads the family
  * document (`families/{uid}`) only once. The username becomes a made-up
  * email (`username@balam.local`) because Firebase Auth asks for an email.
@@ -52,14 +71,7 @@ export async function logIn(username, password) {
     .then((userCredential) => {
       const uid = userCredential.user.uid;
 
-      const documentRef = doc(db, `families/${uid}`);
-      return getDoc(documentRef).then((snapshot) => {
-        if (snapshot.exists()) {
-          return toFamily(snapshot.data());
-        } else {
-          throw new SessionError('unknown');
-        }
-      });
+      return readFamily(uid);
     })
     .catch((error) => {
       return auth.signOut().then(() => {
@@ -77,4 +89,22 @@ export async function logIn(username, password) {
  */
 export async function logOut() {
   return auth.signOut();
+}
+
+/**
+ * Reads the family document (`families/{uid}`) and validates it. Shared by
+ * `logIn` and `getFamily` so both read and check the family the same way.
+ * @param {string} uid - Firebase Auth id of the family account.
+ * @returns {Promise<Family>} The family, already validated by `toFamily`.
+ * @throws {SessionError} If the document is missing (`unknown`).
+ */
+function readFamily(uid) {
+  const documentRef = doc(db, `families/${uid}`);
+  return getDoc(documentRef).then((snapshot) => {
+    if (snapshot.exists()) {
+      return toFamily(snapshot.data());
+    } else {
+      throw new SessionError('unknown');
+    }
+  });
 }

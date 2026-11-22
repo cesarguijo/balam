@@ -25,6 +25,9 @@ const errorTypes = {
   'auth/timeout': 'offline',
   'auth/user-disabled': 'account-disabled',
   'auth/too-many-requests': 'too-many-attempts',
+  // Firestore code (no `auth/` prefix): reading the family document can
+  // fail offline too, both on login and when refreshing it.
+  unavailable: 'offline',
 };
 
 /**

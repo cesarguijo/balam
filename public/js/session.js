@@ -115,3 +115,17 @@ export async function logIn(username, password) {
   localStorage.setItem(FAMILY_KEY, JSON.stringify(family));
   return family;
 }
+
+/**
+ * Asks the server for the family again and replaces the stored copy, so the
+ * phone gets the changes the teacher made (a new child, another group)
+ * without logging out.
+ * @returns {Promise<Family>} The updated family.
+ * @throws {SessionError} If there is no internet or the family document is
+ * missing or malformed.
+ */
+export async function refreshFamily() {
+  const family = await adapter.getFamily();
+  localStorage.setItem(FAMILY_KEY, JSON.stringify(family));
+  return family;
+}
