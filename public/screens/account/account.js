@@ -112,14 +112,30 @@ export async function showAccount(app) {
   backButton?.addEventListener('click', () => location.replace('#/notices'));
 
   const refreshButton = app.querySelector('[data-account-refresh]');
+  if (!(refreshButton instanceof HTMLButtonElement)) {
+    throw new Error('[data-account-refresh] not found');
+  }
 
   refreshButton?.addEventListener('click', async () => {
-    await refreshFamily();
+    refreshButton.classList.add('account__refresh--loading');
+    refreshButton.disabled = true;
     const date = app.querySelector('[data-refresh-date]');
     if (!(date instanceof HTMLElement)) {
       throw new Error('[data-refresh-date] not found');
     }
-    date.innerHTML = `${t('account.refresh.lastTime')} ${getLastUpdate()}`;
+    try {
+      date.classList.remove('account__update-time--error');
+      await refreshFamily();
+      // Draws the whole screen again: the children may have changed too, not
+      // only the date. getSession reads the family refreshFamily just stored.
+      await showAccount(app);
+    } catch {
+      date.innerHTML = t('account.refresh.error');
+      date.classList.add('account__update-time--error');
+    } finally {
+      refreshButton.classList.remove('account__refresh--loading');
+      refreshButton.disabled = false;
+    }
   });
 }
 

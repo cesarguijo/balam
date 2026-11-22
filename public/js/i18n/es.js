@@ -106,6 +106,7 @@ export const messages = {
   'account.family': 'Mi familia',
   'account.app': 'App',
   'account.refresh': 'Actualizar datos',
+  'account.refresh.error': 'Ocurrió un error, vuelva a intentar',
   'account.whatsapp': 'Canal de WhatsApp',
   'account.requests': 'Solicitudes y consultas',
   'account.logout': 'Cerrar sesión',

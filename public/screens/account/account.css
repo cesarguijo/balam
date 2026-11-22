@@ -21,3 +21,30 @@
   color: var(--text-secondary);
   font-weight: var(--font-weight-regular);
 }
+
+/* One full turn; `linear` in the animation keeps the speed even */
+@keyframes spin {
+  from {
+    rotate: 0;
+  }
+  to {
+    rotate: 360deg;
+  }
+}
+
+/* While the family is being read again, the refresh icon spins */
+.account__refresh--loading .list-item__leading svg {
+  animation: spin var(--icon-spin-duration) linear infinite;
+}
+
+/* Anyone who turns on "reduce motion" on their phone sees a still icon */
+@media (prefers-reduced-motion: reduce) {
+  .account__refresh--loading .list-item__leading svg {
+    animation: none;
+  }
+}
+
+/* Two classes, like the rule above, so the error color wins over the gray */
+.account .account__update-time--error {
+  color: var(--feedback-to-correct);
+}
