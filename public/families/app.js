@@ -4,8 +4,8 @@
  * every screen.
  */
 
-import './router.js';
-import './install.js';
+import '../js/router.js';
+import '../js/install.js';
 import { listenRipples } from '../components/ripple/ripple.js';
 
 // Here and not in a screen, so it runs once and works on any first screen
@@ -15,7 +15,7 @@ listenRipples();
 // Only if the browser supports it (very old ones do not).
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker
-    .register('/sw.js')
+    .register('sw.js')
     .then((registration) => {
       console.log('Service worker registered at:', registration.scope);
     })

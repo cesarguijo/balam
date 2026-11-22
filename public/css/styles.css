@@ -33,9 +33,9 @@
  * App screens
  * Imported last so they can use the tokens and base styles
  */
-@import url('../screens/welcome/welcome.css') layer(screens);
-@import url('../screens/playground/playground.css') layer(screens);
-@import url('../screens/login/login.css') layer(screens);
-@import url('../screens/family/family.css') layer(screens);
-@import url('../screens//notices/notices.css') layer(screens);
-@import url('../screens/account/account.css') layer(screens);
+@import url('../families/screens/welcome/welcome.css') layer(screens);
+@import url('../families/screens/playground/playground.css') layer(screens);
+@import url('../families/screens/login/login.css') layer(screens);
+@import url('../families/screens/family/family.css') layer(screens);
+@import url('../families/screens/notices/notices.css') layer(screens);
+@import url('../families/screens/account/account.css') layer(screens);

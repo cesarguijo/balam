@@ -3,18 +3,18 @@
  * password.
  */
 
-import { decorations } from '../../js/decorations.js';
-import { t } from '../../js/i18n/es.js';
-import '../../components/text-field/text-field.js';
+import { decorations } from '../../../js/decorations.js';
+import { t } from '../../../js/i18n/es.js';
+import '../../../components/text-field/text-field.js';
 import { validateCredentials } from './validation.js';
 import {
   getErrorIcon,
   getErrorMessage,
   getErrorPlace,
 } from './error-messages.js';
-import { logIn } from '../../js/session.js';
-import { icon } from '../../js/icons.js';
-import { BalamButton } from '../../components/button/button.js';
+import { logIn } from '../../../js/session.js';
+import { icon } from '../../../js/icons.js';
+import { BalamButton } from '../../../components/button/button.js';
 
 /**
  * Shows the login screen inside the container.

@@ -4,12 +4,12 @@
  * pure (it does not touch the DOM) so it can be tested in Node.
  */
 
-import { t } from '../../js/i18n/es.js';
+import { t } from '../../../js/i18n/es.js';
 
-/** @typedef {import('../../js/session.js').SessionErrorType} SessionErrorType */
+/** @typedef {import('../../../js/session.js').SessionErrorType} SessionErrorType */
 /** @typedef {import('./validation.js').ValidationErrorType} ValidationErrorType */
-/** @typedef {import('../../js/i18n/es.js').MessageKey} MessageKey */
-/** @typedef {import('../../js/icons.js').IconName} IconName */
+/** @typedef {import('../../../js/i18n/es.js').MessageKey} MessageKey */
+/** @typedef {import('../../../js/icons.js').IconName} IconName */
 
 /**
  * Maps each error type to its catalog key. The types come from session.js

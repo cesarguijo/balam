@@ -5,34 +5,34 @@
  * covers user-facing text). The samples keep t() to show the real texts.
  */
 
-import { wait } from '../../js/utils.js';
-import { BalamButton } from '../../components/button/button.js';
-import { icon, iconNames } from '../../js/icons.js';
-import { t } from '../../js/i18n/es.js';
-import { BalamTextField } from '../../components/text-field/text-field.js';
-import { BalamMenu } from '../../components/menu/menu.js';
-import { avatar } from '../../components/avatar/avatar.js';
-import { card } from '../../components/card/card.js';
-import { splitNotice } from '../../js/notice.js';
-import { list } from '../../components/list/list.js';
-import { drawSwitch } from '../../components/switch/switch.js';
+import { wait } from '../../../js/utils.js';
+import { BalamButton } from '../../../components/button/button.js';
+import { icon, iconNames } from '../../../js/icons.js';
+import { t } from '../../../js/i18n/es.js';
+import { BalamTextField } from '../../../components/text-field/text-field.js';
+import { BalamMenu } from '../../../components/menu/menu.js';
+import { avatar } from '../../../components/avatar/avatar.js';
+import { card } from '../../../components/card/card.js';
+import { splitNotice } from '../../../js/notice.js';
+import { list } from '../../../components/list/list.js';
+import { drawSwitch } from '../../../components/switch/switch.js';
 // TODO: remove these two imports and the notices section once the notices
 // screen exists. The playground talks to Firebase directly only because a
 // teacher cannot log in through session.js (it requires a families/{uid}).
 import {
   auth,
   signInWithEmailAndPassword,
-} from '../../js/firebase/connection.js';
-import { getRecentNotices, publishNotice } from '../../js/notices.js';
+} from '../../../js/firebase/connection.js';
+import { getRecentNotices, publishNotice } from '../../../js/notices.js';
 
-/** @typedef {import('../../js/icons.js').IconName} IconName */
+/** @typedef {import('../../../js/icons.js').IconName} IconName */
 
 /**
  * Code to copy for each sample, written exactly as it goes in a screen's
  * template. `\${` keeps `${t('…')}` as text instead of running it here.
  */
 const code = {
-  buttonVariants: `import '../../components/button/button.js';
+  buttonVariants: `import '../../../components/button/button.js';
 
 <!-- default-primary: one per screen -->
 <balam-button text="\${t('install.button')}"></balam-button>
@@ -53,7 +53,7 @@ if (!(button instanceof BalamButton)) throw new Error('…');
 button.loading = true;   // shows loading-text and the pyramid
 button.loading = false;  // back to text`,
 
-  icons: `import { icon } from '../../js/icons.js';
+  icons: `import { icon } from '../../../js/icons.js';
 
 <span class="my-screen__icon">\${icon('megaphone')}</span>
 
@@ -64,7 +64,7 @@ button.loading = false;  // back to text`,
   color: var(--text-secondary);
 }`,
 
-  textFieldNormal: `import '../../components/text-field/text-field.js';
+  textFieldNormal: `import '../../../components/text-field/text-field.js';
 
 <balam-text-field
   label="\${t('login.username.label')}"
@@ -100,7 +100,7 @@ form.addEventListener('submit', (event) => {
   const username = String(formData.get('username') ?? '');
 });`,
 
-  menu: `import '../../components/menu/menu.js';
+  menu: `import '../../../components/menu/menu.js';
 
 // items before append: connectedCallback draws them on entering the page
 const menu = document.createElement('balam-menu');
@@ -111,7 +111,7 @@ menu.items = [
 ];
 container.append(menu);`,
 
-  avatar: `import { avatar } from '../../components/avatar/avatar.js';
+  avatar: `import { avatar } from '../../../components/avatar/avatar.js';
 
 <!-- Family: no order, bigger and amber -->
 \${avatar(family.username)}
@@ -119,7 +119,7 @@ container.append(menu);`,
 <!-- Child: the order (from 1) picks one of 4 colors, then they repeat -->
 \${family.children.map((child, index) => avatar(child.name, index + 1)).join('')}`,
 
-  card: `import { card } from '../../components/card/card.js';
+  card: `import { card } from '../../../components/card/card.js';
 
 <!-- Default (with border): groups settings, as in the account screen -->
 \${card(/* HTML */ \`
@@ -130,7 +130,7 @@ container.append(menu);`,
 \`)}
 
 <!-- borderless: content to read, one card per notice -->
-import { splitNotice } from '../../js/notice.js';
+import { splitNotice } from '../../../js/notice.js';
 
 \${notices
   .map((notice) => {
@@ -145,7 +145,7 @@ import { splitNotice } from '../../js/notice.js';
   })
   .join('')}`,
 
-  list: `import { list } from '../../components/list/list.js';
+  list: `import { list } from '../../../components/list/list.js';
 
 // One object per row; list() draws the <ul> and a <li> for each
 \${card(

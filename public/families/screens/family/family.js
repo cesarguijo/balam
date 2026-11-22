@@ -3,15 +3,15 @@
  * (notices, grades, attendance) and lets each section fill its middle.
  */
 
-import { icon } from '../../js/icons.js';
-import { getSession } from '../../js/session.js';
-import '../../components/install-banner/install-banner.js';
+import { icon } from '../../../js/icons.js';
+import { getSession } from '../../../js/session.js';
+import '../../../components/install-banner/install-banner.js';
 import { getNoticeTabs } from './tabs.js';
-import { t } from '../../js/i18n/es.js';
-import { BalamMenu } from '../../components/menu/menu.js';
-import { drawAppBar } from '../../components/app-bar/app-bar.js';
-import { avatar } from '../../components/avatar/avatar.js';
-import { install, isInstalled } from '../../js/install.js';
+import { t } from '../../../js/i18n/es.js';
+import { BalamMenu } from '../../../components/menu/menu.js';
+import { drawAppBar } from '../../../components/app-bar/app-bar.js';
+import { avatar } from '../../../components/avatar/avatar.js';
+import { install, isInstalled } from '../../../js/install.js';
 
 /**
  * Shows that Chrome is installing Balam, until the family closes it with
@@ -75,7 +75,7 @@ export async function showFamily(app, section) {
   const installed =
     matchMedia('(display-mode: standalone)').matches || isInstalled();
 
-  /** @type {import('../../components/menu/menu.js').BalamMenuItem} */
+  /** @type {import('../../../components/menu/menu.js').BalamMenuItem} */
   const installItem = {
     icon: 'device-mobile-down',
     text: t('family.menu.install'),
@@ -96,7 +96,7 @@ export async function showFamily(app, section) {
     },
   };
 
-  /** @type {import('../../components/menu/menu.js').BalamMenuItem[]} */
+  /** @type {import('../../../components/menu/menu.js').BalamMenuItem[]} */
   const menuItems = [
     {
       icon: 'books',

@@ -1,6 +1,6 @@
 import { describe, test } from 'node:test';
 import assert from 'node:assert/strict';
-import { getListState } from '../public/screens/notices/list-state.js';
+import { getListState } from '../../public/families/screens/notices/list-state.js';
 
 const notices = [
   {

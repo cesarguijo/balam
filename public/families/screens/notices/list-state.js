@@ -4,9 +4,9 @@
  * browser) so it can be tested in Node.
  */
 
-/** @typedef {import('../../js/notices.js').Notice} Notice */
-/** @typedef {import('../../js/notices.js').NoticeError} NoticeError */
-/** @typedef {import('../../js/notices.js').RecentNotices} RecentNotices */
+/** @typedef {import('../../../js/notices.js').Notice} Notice */
+/** @typedef {import('../../../js/notices.js').NoticeError} NoticeError */
+/** @typedef {import('../../../js/notices.js').RecentNotices} RecentNotices */
 
 /**
  * What the notices list of one tab shows.

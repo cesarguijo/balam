@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { formatLastRefresh } from '../public/screens/account/last-refresh.js';
+import { formatLastRefresh } from '../../public/families/screens/account/last-refresh.js';
 
 // Months start at 0: 10 is November, 11 is December, 0 is January.
 const cases = [

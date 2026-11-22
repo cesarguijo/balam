@@ -3,19 +3,19 @@
  * app settings.
  */
 
-import { drawAppBar } from '../../components/app-bar/app-bar.js';
-import { avatar } from '../../components/avatar/avatar.js';
-import { BalamButton } from '../../components/button/button.js';
-import { card } from '../../components/card/card.js';
-import { list } from '../../components/list/list.js';
-import { t } from '../../js/i18n/es.js';
-import { icon } from '../../js/icons.js';
+import { drawAppBar } from '../../../components/app-bar/app-bar.js';
+import { avatar } from '../../../components/avatar/avatar.js';
+import { BalamButton } from '../../../components/button/button.js';
+import { card } from '../../../components/card/card.js';
+import { list } from '../../../components/list/list.js';
+import { t } from '../../../js/i18n/es.js';
+import { icon } from '../../../js/icons.js';
 import {
   getLastRefreshDate,
   getSession,
   logOut,
   refreshFamily,
-} from '../../js/session.js';
+} from '../../../js/session.js';
 import { formatLastRefresh } from './last-refresh.js';
 
 /** Start of the app bar: a back button and the screen title. */
@@ -39,7 +39,7 @@ export async function showAccount(app) {
   );
   const userAvatar = avatar(session?.username);
 
-  /** @type {import('../../components/list/list.js').ListItemOptions} */
+  /** @type {import('../../../components/list/list.js').ListItemOptions} */
   const userItemOption = {
     leading: userAvatar,
     content: /* HTML */ `<p class="text-body">
@@ -48,7 +48,7 @@ export async function showAccount(app) {
   };
   const userItem = list([userItemOption]);
 
-  /** @type {import('../../components/list/list.js').ListItemOptions[]} */
+  /** @type {import('../../../components/list/list.js').ListItemOptions[]} */
   const familyItemOption = children.map((child, index) => {
     return {
       leading: avatar(child.name, index + 1),
@@ -74,7 +74,7 @@ export async function showAccount(app) {
 
   const familyItem = list(familyItemOption);
 
-  /** @type {import('../../components/list/list.js').ListItemOptions[]} */
+  /** @type {import('../../../components/list/list.js').ListItemOptions[]} */
   const appItemOption = [
     {
       leading: icon('brand-whatsapp'),

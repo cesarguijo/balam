@@ -4,7 +4,7 @@ import {
   getErrorIcon,
   getErrorMessage,
   getErrorPlace,
-} from '../public/screens/login/error-messages.js';
+} from '../../public/families/screens/login/error-messages.js';
 
 describe('getErrorMessage (login/error-messages.js)', () => {
   const types = [

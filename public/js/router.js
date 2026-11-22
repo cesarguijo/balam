@@ -8,14 +8,14 @@
 import { decideRoute } from './route.js';
 import { detectPlatform } from './platform.js';
 import { getSession } from './session.js';
-import { showWelcome } from '../screens/welcome/welcome.js';
-import { showPlayground } from '../screens/playground/playground.js';
-import { showLogin } from '../screens/login/login.js';
-import { showNotices } from '../screens/notices/notices.js';
-import { showFamily } from '../screens/family/family.js';
-import { showGrades } from '../screens/grades/grades.js';
-import { showAttendance } from '../screens/attendance/attendance.js';
-import { showAccount } from '../screens/account/account.js';
+import { showWelcome } from '../families/screens/welcome/welcome.js';
+import { showPlayground } from '../families/screens/playground/playground.js';
+import { showLogin } from '../families/screens/login/login.js';
+import { showNotices } from '../families/screens/notices/notices.js';
+import { showFamily } from '../families/screens/family/family.js';
+import { showGrades } from '../families/screens/grades/grades.js';
+import { showAttendance } from '../families/screens/attendance/attendance.js';
+import { showAccount } from '../families/screens/account/account.js';
 
 /**
  * An app screen: receives the container and draws its content inside.

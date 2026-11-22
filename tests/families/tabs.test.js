@@ -1,6 +1,6 @@
 import { describe, test } from 'node:test';
 import assert from 'node:assert/strict';
-import { getNoticeTabs } from '../public/screens/family/tabs.js';
+import { getNoticeTabs } from '../../public/families/screens/family/tabs.js';
 
 describe('getNoticeTabs returns', () => {
   test('one tab per child, in order, with their first name', () => {
@@ -36,10 +36,10 @@ describe('getNoticeTabs returns', () => {
   });
 
   test('no tabs when there are no children', () => {
-    /** @type {import('../public/js/family.js').Child[]} */
+    /** @type {import('../../public/js/family.js').Child[]} */
     const children = [];
 
-    /** @type {import('../public/js/family.js').Child[]} */
+    /** @type {import('../../public/js/family.js').Child[]} */
     const expectedResult = [];
     assert.deepEqual(getNoticeTabs(children), expectedResult);
   });

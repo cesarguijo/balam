@@ -3,7 +3,7 @@
  * child, inside the content area of the family layout (screens/family).
  */
 
-//import { getSession } from '../../js/session.js';
+//import { getSession } from '../../../js/session.js';
 
 //const family = await getSession();
 

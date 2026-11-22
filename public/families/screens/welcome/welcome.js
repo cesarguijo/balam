@@ -3,10 +3,10 @@
  * button.
  */
 
-import '../../components/install-footer/install-footer.js';
-import { icon } from '../../js/icons.js';
-import { decorations } from '../../js/decorations.js';
-import { t } from '../../js/i18n/es.js';
+import '../../../components/install-footer/install-footer.js';
+import { icon } from '../../../js/icons.js';
+import { decorations } from '../../../js/decorations.js';
+import { t } from '../../../js/i18n/es.js';
 
 /**
  * Shows the welcome screen inside the container.

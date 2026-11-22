@@ -4,7 +4,7 @@
  * tested in Node.
  */
 
-import { t } from '../../js/i18n/es.js';
+import { t } from '../../../js/i18n/es.js';
 
 // is the day before, and 'D mmm' for older dates. Write the tests first.
 /**
