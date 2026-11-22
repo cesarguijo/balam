@@ -1,7 +1,7 @@
 # 0007. Entry flow: the browser installs, the app logs in
 
 - **Date:** 2026-11-13
-- **Status:** accepted
+- **Status:** superseded by [0011](0011-use-without-installing.md)
 
 ## Context
 

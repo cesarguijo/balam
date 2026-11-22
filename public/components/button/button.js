@@ -11,7 +11,9 @@ import { t } from '../../js/i18n/es.js';
  * Attributes:
  * - `text`: text shown on the button, already translated by the caller.
  *   Default: `t('button.default')`.
- * - `variant`: `primary` or `secondary`. Default: `primary`.
+ * - `variant`: `default-primary`, `secondary`, `danger-primary` or
+ *   `danger-secondary`; it becomes the `button--{variant}` class. The danger
+ *   ones are only for destructive actions. Default: `default-primary`.
  * - `loading-text`: text shown while loading, so it can say what is
  *   happening ("Instalando…"). Default: `t('button.loading')`.
  *
@@ -38,7 +40,7 @@ export class BalamButton extends HTMLElement {
   }
 
   get #variant() {
-    return this.getAttribute('variant') ?? 'primary';
+    return this.getAttribute('variant') ?? 'default-primary';
   }
 
   get #loadingText() {

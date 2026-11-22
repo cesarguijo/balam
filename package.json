@@ -10,6 +10,7 @@
     "test": "node --test --experimental-test-module-mocks \"tests/*.test.js\"",
     "lint": "eslint public tests",
     "tokens": "style-dictionary build --config sd.config.mjs",
+    "phone": "\"%LOCALAPPDATA%\\Android\\Sdk\\platform-tools\\adb.exe\" reverse tcp:5500 tcp:5500",
     "test:rules": "firebase emulators:exec --only firestore \"node --test \\\"tests/rules/*.test.js\\\"\""
   },
   "repository": {

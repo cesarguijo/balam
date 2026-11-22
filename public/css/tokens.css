@@ -3,6 +3,9 @@
  */
 
 :root {
+  --blue-100: #d5e1f0; /** Pale blue · background of the 1st child avatar */
+  --blue-800: #1b3a6b; /** Deep blue · obsidian and night */
+  --amber-100: #fbe4c6; /** Pale amber · background of the 4th child avatar */
   --amber-200: #f7c27e; /** Light amber · lit facet */
   --amber-300: #f5b565; /** Bright amber · highlight strip */
   --amber-400: #f0a24a; /** Medium amber */
@@ -10,9 +13,10 @@
   --amber-600: #d47e25; /** Shadow amber */
   --amber-700: #c26f1e; /** Toasted amber */
   --amber-800: #9a5410; /** Dark amber */
-  --blue-800: #1b3a6b; /** Deep blue · obsidian and night */
   --cream-50: #f7f3e6; /** Orchid cream · national orchid Rhyncholaelia digbyana */
+  --maya-100: #d1e7ed; /** Pale maya blue · background of the 2nd child avatar */
   --maya-500: #1a7088; /** Maya blue · indigo and palygorskite pigment */
+  --maya-700: #11505f; /** Deep maya blue · letter of the 2nd child avatar. Contrast 7.0:1 on maya.100 */
   --brown-500: #9c7458; /** Medium deer brown · field border. Contrast 3.7:1 on cream */
   --brown-700: #7a4e32; /** Deer brown · white-tailed deer, national animal */
   --gray-200: #d3d1c7; /** Light stone */
@@ -21,97 +25,126 @@
   --gray-800: #3d3c38; /** Dark stone · long reading text. Contrast 10.9:1 on white */
   --white: #ffffff; /** White · raised surfaces (fields, QR card) */
   --pink-50: #fbeaf0; /** Very light macuelizo pink · server error background */
+  --pink-200: #e8a6c1; /** Light macuelizo pink · lit facet of the danger button */
+  --pink-300: #db8aac; /** Bright macuelizo pink · highlight strip of the danger button */
+  --pink-400: #c4628c; /** Medium macuelizo pink · lower-left facet of the danger button */
   --pink-600: #a8406b; /** Macuelizo pink · Tabebuia rosea flower */
-  --text-field-focus-border: #ffffff;
-  --sand-100: #efe6d2;
-  --sand-200: #e2d1ac;
-  --sand-300: #dcc9a3;
-  --size-control: 52px;
-  --size-chip: 40px;
-  --size-avatar: 26px;
-  --font-weight-regular: 400;
-  --font-weight-bold: 700;
-  --font-size-display: 40px;
-  --font-size-title: 22px;
-  --font-size-label-large: 18px;
-  --font-size-body: 16px;
-  --font-size-label: 14px;
-  --font-line-height-display: 48px;
-  --font-line-height-title: 28px;
-  --font-line-height-label-large: 24px;
-  --font-line-height-body: 24px;
-  --font-line-height-label: 20px;
-  --font-family: Atkinson Hyperlegible Next;
-  --button-end: 14px;
-  --button-ring: 3px;
-  --button-chamfer: 10px;
-  --button-lip-height: 5px;
-  --button-loader-step-height: 6px;
-  --button-loader-step-width: 8px;
-  --button-loader-gap: 3px;
+  --pink-700: #943660; /** Shadow macuelizo pink · upper-right facet of the danger button */
+  --pink-800: #812f53; /** Toasted macuelizo pink · bottom-right facet and bottom strip of the danger button */
+  --pink-900: #6e2845; /** Solid lip under the danger button */
+  --sand-100: #efe6d2; /** Pale sand · ground in illustrations */
+  --sand-200: #e2d1ac; /** Sand · lit stone in illustrations, background of the 3rd child avatar */
+  --sand-300: #dcc9a3; /** Dark sand · stone in shade in illustrations */
+  --size-control: 52px; /** Minimum height of tappable controls: buttons, fields, rows */
+  --size-chip: 40px; /** Height of the child chips */
+  --size-avatar: 26px; /** Diameter of the child avatar */
+  --font-weight-regular: 400; /** Regular weight for body text */
+  --font-weight-bold: 700; /** Bold weight for titles, labels and buttons */
+  --font-size-display: 40px; /** Display size · big numbers and hero titles */
+  --font-size-title: 22px; /** Screen and card titles */
+  --font-size-label-large: 18px; /** Large labels, such as empty-state titles */
+  --font-size-body: 16px; /** Body text */
+  --font-size-label: 14px; /** Small labels, helper text and nav items */
+  --font-line-height-display: 48px; /** Line height for display text */
+  --font-line-height-title: 28px; /** Line height for titles */
+  --font-line-height-label-large: 24px; /** Line height for large labels */
+  --font-line-height-body: 24px; /** Line height for body text */
+  --font-line-height-label: 20px; /** Line height for labels */
+  --font-family: Atkinson Hyperlegible Next; /** Typeface for all text, chosen for legibility. Self-hosted woff2 */
+  --button-end: 14px; /** ⚠ Width of the pointed end of the button */
+  --button-ring: 3px; /** Width of the button ring */
+  --button-chamfer: 10px; /** Size of the cut corners */
+  --button-lip-height: 5px; /** Height of the solid shadow; the button sinks this much when pressed */
+  --button-loader-step-height: 6px; /** Height of each step in the pyramid loader */
+  --button-loader-step-width: 8px; /** Width each step grows in the pyramid loader */
+  --button-loader-gap: 3px; /** Gap between steps in the pyramid loader */
   --button-loader-duration: 1200ms; /** One full cycle of the pyramid */
-  --button-padding-inline: 28px;
-  --button-facet-width: 11px;
-  --space-4: 4px;
-  --space-8: 8px;
-  --space-12: 12px;
-  --space-16: 16px;
-  --space-24: 24px;
-  --space-32: 32px;
-  --radius-12: 12px;
-  --radius-full: 9999px;
+  --button-padding-inline: 28px; /** Side padding between the ends and the label */
+  --button-facet-width: 11px; /** Width of the side facets */
+  --space-4: 4px; /** Base spacing step · 4 px */
+  --space-8: 8px; /** Spacing step · 8 px */
+  --space-12: 12px; /** Spacing step · 12 px */
+  --space-16: 16px; /** Spacing step · 16 px */
+  --space-24: 24px; /** Spacing step · 24 px */
+  --space-32: 32px; /** Spacing step · 32 px */
+  --radius-12: 12px; /** Corner radius of fields and cards */
+  --radius-full: 9999px; /** Fully round corners: chips, avatars, toggles */
   --duration-fast: 80ms; /** Feedback for a tap: the button sinking */
+  --text-field-focus-border: var(--maya-500); /** Field border while typing. Contrast 5.6:1 on white */
   --text-primary: var(--blue-800); /** Body text on the background. Contrast 10.2:1 */
   --text-secondary: var(--gray-600); /** Placeholders and helper text. Contrast 6.5:1 on white */
   --text-body: var(--gray-800); /** Long text to read, such as a notice body */
   --text-on-selection: var(--cream-50); /** Text on a selected item, such as the selected chip. Contrast 10.2:1 on blue */
-  --text-on-header: var(--cream-50);
+  --text-on-header: var(--cream-50); /** Text and icons on the header. Contrast 10.2:1 on blue */
   --surface-background: var(--cream-50); /** Main screen background */
   --surface-raised: var(--white); /** Background of what sits on the screen: fields and cards */
   --surface-placeholder: var(--gray-200); /** Skeleton blocks while content loads */
-  --surface-header: var(--blue-800);
-  --action-primary-background: var(--amber-500); /** Primary button background. One per screen */
-  --action-primary-border: var(--amber-800); /** Primary button ring */
-  --action-primary-text: var(--blue-800); /** Primary button text. Contrast 4.5:1, always bold */
-  --action-secondary-background: var(--cream-50); /** Secondary (outline) button background */
-  --action-secondary-border: var(--blue-800); /** Secondary (outline) button ring */
-  --action-secondary-text: var(--blue-800); /** Secondary (outline) button text */
-  --action-tertiary-text: var(--maya-500); /** Text-only button, for minor actions */
+  --surface-header: var(--blue-800); /** Header background */
+  --action-default-primary-background: var(--amber-500); /** Primary button background. One per screen */
+  --action-default-primary-border: var(--amber-800); /** Primary button ring */
+  --action-default-primary-text: var(--blue-800); /** Primary button text. Contrast 4.5:1, always bold */
+  --action-default-secondary-background: var(--cream-50); /** Secondary (outline) button background */
+  --action-default-secondary-border: var(--blue-800); /** Secondary (outline) button ring */
+  --action-default-secondary-text: var(--blue-800); /** Secondary (outline) button text */
+  --action-default-tertiary-text: var(--maya-500); /** Text-only button, for minor actions */
   --action-disabled-background: var(--gray-200); /** Background of any disabled control */
   --action-disabled-border: var(--gray-300); /** Ring of any disabled button */
   --action-disabled-text: var(--gray-600); /** Text of any disabled button */
+  --action-danger-secondary-background: var(--cream-50); /** Danger (outline) button background. Only for destructive actions */
+  --action-danger-secondary-border: var(--pink-600); /** Danger (outline) button ring. Never red */
+  --action-danger-secondary-text: var(--pink-600); /** Danger (outline) button text and icon. Contrast 5.2:1 on cream, always bold */
+  --action-danger-primary-background: var(--pink-600); /** Danger (filled) button background. Only to confirm a destructive action */
+  --action-danger-primary-border: var(--pink-900); /** Danger (filled) button ring */
+  --action-danger-primary-text: var(--cream-50); /** Danger (filled) button text and icon. Contrast 5.2:1 on pink, always bold */
   --focus-ring: var(--maya-500); /** Keyboard focus outline. 3 px wide, 3 px offset */
   --icon-secondary: var(--brown-700); /** Decorative icons and icons inside fields. Contrast 6.4:1 */
   --icon-on-selection: var(--cream-50); /** Icon on a selected item, such as the active nav item. Contrast 10.2:1 on blue */
-  --icon-inactive: var(--gray-600);
+  --icon-inactive: var(--gray-600); /** Icon of an inactive nav item. Contrast 6.5:1 on white */
+  --icon-primary: var(--blue-800); /** Icons next to text in rows and menus. Contrast 10.2:1 on cream */
   --decoration-maya-fret: var(--brown-700); /** Background frets, always at 12% opacity */
-  --decoration-maya-fret-on-dark: [object Object];
-  --decoration-header-strip: var(--amber-500);
-  --spacing-groups: var(--space-24);
-  --spacing-elements: var(--space-16);
-  --spacing-row: var(--space-12);
-  --spacing-text-icon: var(--space-12);
-  --margin-screen: var(--space-24);
+  --decoration-maya-fret-on-dark: [object Object]; /** Background frets on dark surfaces such as the header, at 8% opacity */
+  --decoration-header-strip: var(--amber-500); /** Amber strip under the header wave */
+  --spacing-groups: var(--space-24); /** Space between groups, such as two cards or sections */
+  --spacing-elements: var(--space-16); /** Space between elements inside a group */
+  --spacing-row: var(--space-12); /** Vertical padding inside a list row */
+  --spacing-text-icon: var(--space-12); /** Gap between an icon and its text */
+  --margin-screen: var(--space-24); /** Side margin of every screen */
   --feedback-to-correct: var(--pink-600); /** Error border, icon and message. Never red. Contrast 5.2:1 */
   --alert-error-background: var(--pink-50); /** Server error message background */
   --field-border: var(--brown-500); /** Field border at rest, 1 px. Contrast 3.7:1 */
-  --field-radius: var(--radius-12);
+  --field-radius: var(--radius-12); /** Corner radius of fields and cards */
   --selection-indicator: var(--blue-800); /** Selected chip and active nav item. Contrast 10.2:1 on cream */
   --border-subtle: var(--gray-200); /** Dividers between areas, such as under the header */
-  --avatar-background: var(--cream-50);
-  --avatar-background-selected: var(--amber-500);
-  --illustration-ground: var(--sand-100);
-  --illustration-stone: var(--sand-200);
-  --illustration-stone-shade: var(--sand-300);
-  --illustration-shadow: var(--brown-500);
-  --illustration-plant: [object Object];
-  --button-facet-top-left: var(--amber-200);
-  --button-facet-bottom-left: var(--amber-400);
-  --button-facet-top-right: var(--amber-600);
-  --button-facet-bottom-right: var(--amber-700);
-  --button-strip-top: var(--amber-300);
-  --button-strip-bottom: var(--amber-700);
-  --button-lip-primary: var(--brown-700); /** Solid 5 px shadow under the button */
-  --button-lip-secondary: var(--blue-800); /** Solid 5 px shadow under the button */
-  --button-height: var(--size-control);
+  --avatar-background: var(--cream-50); /** Neutral avatar background, used until the data loads */
+  --avatar-user-background: var(--amber-500); /** Avatar of the signed-in parent */
+  --avatar-user-text: var(--blue-800); /** Letter of the parent avatar. Contrast 4.6:1 on amber */
+  --avatar-child-1-background: var(--blue-100); /** Avatar of the 1st child, by family order */
+  --avatar-child-1-text: var(--blue-800); /** Letter of the 1st child avatar. Contrast 8.6:1 */
+  --avatar-child-2-background: var(--maya-100); /** Avatar of the 2nd child, by family order */
+  --avatar-child-2-text: var(--maya-700); /** Letter of the 2nd child avatar. Contrast 7.0:1 */
+  --avatar-child-3-background: var(--sand-200); /** Avatar of the 3rd child, by family order */
+  --avatar-child-3-text: var(--brown-700); /** Letter of the 3rd child avatar. Contrast 4.7:1 */
+  --avatar-child-4-background: var(--amber-100); /** Avatar of the 4th child; a 5th starts over at 1 */
+  --avatar-child-4-text: var(--amber-800); /** Letter of the 4th child avatar. Contrast 4.6:1 */
+  --illustration-ground: var(--sand-100); /** Ground and clouds in illustrations */
+  --illustration-stone: var(--sand-200); /** Lit faces of the pyramid */
+  --illustration-stone-shade: var(--sand-300); /** Shaded faces of the pyramid */
+  --illustration-shadow: var(--brown-500); /** Doorways and shadows in illustrations */
+  --illustration-plant: [object Object]; /** Plants in illustrations, at 35% opacity */
+  --button-default-facet-top-left: var(--amber-200); /** Primary button · upper-left facet, the most lit */
+  --button-default-facet-bottom-left: var(--amber-400); /** Primary button · lower-left facet */
+  --button-default-facet-top-right: var(--amber-600); /** Primary button · upper-right facet, in shade */
+  --button-default-facet-bottom-right: var(--amber-700); /** Primary button · lower-right facet, the darkest */
+  --button-default-strip-top: var(--amber-300); /** Primary button · highlight strip along the top edge */
+  --button-default-strip-bottom: var(--amber-700); /** Primary button · shadow strip along the bottom edge */
+  --button-default-lip-primary: var(--brown-700); /** Solid 5 px shadow under the button */
+  --button-default-lip-secondary: var(--blue-800); /** Solid 5 px shadow under the button */
+  --button-danger-lip: var(--pink-900); /** Solid 5 px shadow under both danger buttons */
+  --button-danger-facet-top-left: var(--pink-200); /** Danger button · upper-left facet, the most lit */
+  --button-danger-facet-bottom-left: var(--pink-400); /** Danger button · lower-left facet */
+  --button-danger-facet-top-right: var(--pink-700); /** Danger button · upper-right facet, in shade */
+  --button-danger-facet-bottom-right: var(--pink-800); /** Danger button · lower-right facet, the darkest */
+  --button-danger-strip-top: var(--pink-300); /** Danger button · highlight strip along the top edge */
+  --button-danger-strip-bottom: var(--pink-800); /** Danger button · shadow strip along the bottom edge */
+  --button-height: var(--size-control); /** Button height, same as any control */
 }

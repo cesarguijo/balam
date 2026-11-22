@@ -5,6 +5,11 @@
 
 import { icon } from '../../js/icons.js';
 import { getSession } from '../../js/session.js';
+import '../../components/install-banner/install-banner.js';
+import { getNoticeTabs } from './tabs.js';
+import { t } from '../../js/i18n/es.js';
+import { BalamMenu } from '../../components/menu/menu.js';
+import { drawAppBar } from '../../components/app-bar/app-bar.js';
 
 // TODO: draw one tab per child with getNoticeTabs(getSession().children)
 // instead of the fixed names; with a single child, show only the name.
@@ -25,46 +30,69 @@ import { getSession } from '../../js/session.js';
 export async function showFamily(app, section) {
   let family = await getSession();
   console.log(family);
+  if (!family) {
+    location.replace('#/login');
+    return; // Don't draw
+  }
+
+  const tabs = getNoticeTabs(family.children);
+  let htmlTabs = ``;
+  tabs.forEach((tab, index) => {
+    const classSelected = index === 0 ? 'family__tab_selected' : '';
+    htmlTabs += /* HTML */ `
+      <button
+        class="family__tab ${classSelected}"
+        role="tab"
+        aria-selected="${index === 0}"
+      >
+        <span class="family__avatar">${tab.initial}</span>${tab.label}
+      </button>
+    `;
+  });
+
+  /** @type {import('../../components/menu/menu.js').BalamMenuItem[]} */
+  const menuItems = [
+    {
+      icon: 'books',
+      text: t('family.menu.books'),
+      action: () => {
+        console.log('clic on books');
+      },
+    },
+    {
+      icon: 'user-circle',
+      text: t('family.menu.account'),
+      action: () => {
+        location.replace('#/account');
+      },
+    },
+    {
+      icon: 'device-mobile-down',
+      text: t('family.menu.install'),
+      action: () => {
+        console.log('clic on install');
+      },
+    },
+  ];
+
+  const start = /* HTML */ `
+    <div class="family__logo">
+      <img class="family__logo" src="/img/icon-512.png" alt="" />
+    </div>
+    <h1>Balam</h1>
+  `;
+
+  const end = /* HTML */ `
+    <balam-menu class="family__menu" data-balam-menu></balam-menu>
+  `;
 
   app.innerHTML = /* HTML */ `
     <div class="family">
-      <div class="family__app-bar-content">
-        <div class="family__app-bar">
-          <div class="family__logo">
-            <img class="family__logo" src="/img/icon-512.png" alt="" />
-          </div>
-          <h1 class="family__app-name">Balam</h1>
-        </div>
-        <div class="family__pyramid"></div>
-        <svg
-          class="family__curve"
-          viewBox="0 0 320 16"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <path class="family__curve-fill" d="M0 4 Q160 16 320 4 V16 H0 Z" />
-          <path
-            class="family__curve-line"
-            d="M0 4 Q160 16 320 4"
-            vector-effect="non-scaling-stroke"
-          />
-        </svg>
-      </div>
+      ${drawAppBar(start, end)}
 
-      <div class="family__tabs" role="tablist">
-        <button class="family__tab family__tab_selected" role="tab">
-          <span class="family__avatar">A</span>Ana
-        </button>
-        <button class="family__tab" role="tab">
-          <span class="family__avatar">L</span>Luis
-        </button>
-        <button class="family__tab" role="tab">
-          <span class="family__avatar">S</span>Sofia
-        </button>
-        <button class="family__tab" role="tab">
-          <span class="family__avatar">M</span>Maximiliano
-        </button>
-      </div>
+      <balam-install-banner></balam-install-banner>
+
+      <div class="family__tabs" role="tablist">${htmlTabs}</div>
 
       <div class="family__tabpanel" role="tabpanel">
         <main class="family__content"></main>
@@ -86,7 +114,11 @@ export async function showFamily(app, section) {
     </div>
   `;
 
-  if (!family) location.replace('#/login');
+  const menu = app.querySelector('[data-balam-menu]');
+  if (!(menu instanceof BalamMenu)) {
+    throw new Error('[data-balam-menu] not found in app');
+  }
+  menu.items = menuItems;
 
   const main = app.querySelector('main');
   if (!(main instanceof HTMLElement)) {

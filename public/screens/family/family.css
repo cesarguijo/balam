@@ -7,83 +7,15 @@
   padding-bottom: calc(70px + var(--space-16));
 }
 
-/*
- * The blue lives here and not on the app bar, so it also shows through the
- * transparent top of the curve. overflow: hidden keeps the pyramid from
- * sticking out below the curve.
- *
- * The blue stops 4px before the bottom edge: when the browser smooths the
- * edge of the scaled curve, the blue under it showed as a thin line. That
- * strip is always below the curve, so the screen background covers it.
- */
-.family .family__app-bar-content {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  background: linear-gradient(var(--surface-header), var(--surface-header))
-    top / 100% calc(100% - var(--space-4)) no-repeat;
-}
-
-.family .family__app-name {
-  color: var(--text-on-header);
-  font-size: var(--font-size-title);
-  line-height: var(--font-line-height-title);
-  font-weight: var(--font-weight-bold);
-}
-
-.family .family__app-bar {
-  height: 80px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 0 var(--space-16);
-  gap: var(--space-16);
-}
-
-/*
- * The pyramid is drawn with a mask: the SVG only gives the shape (and its
- * opacity) and the color comes from the token. Its base sits under the curve,
- * which hides the rest.
- */
-.family .family__pyramid {
-  position: absolute;
-  right: 0;
-  bottom: var(--space-8);
-  width: 103px;
-  aspect-ratio: 103 / 55;
-  background-color: var(--text-on-header);
-  /* Prefixed for old Chromium (old Android, Responsively); without it a plain rectangle shows. */
-  -webkit-mask: url('/img/pyramid.svg') no-repeat center / contain;
-  mask: url('/img/pyramid.svg') no-repeat center / contain;
-}
-
-/*
- * The curved bottom edge of the app bar: transparent above the curve (the blue
- * and the pyramid show through), an amber line on the curve, and the screen
- * background below it, which covers the blue and the base of the pyramid.
- * position: relative paints it in front of the pyramid.
- */
-.family .family__curve {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: var(--space-16);
-}
-
-.family .family__curve-fill {
-  fill: var(--surface-background);
-}
-
-.family .family__curve-line {
-  fill: none;
-  stroke: var(--amber-400);
-  stroke-width: var(--space-4);
-}
-
 .family .family__logo {
   width: 40px;
   height: 40px;
   border-radius: var(--radius-12);
+}
+
+.family .family__menu {
+  background-color: transparent;
+  border: none;
 }
 
 /*
@@ -199,4 +131,8 @@
 
 .family .family__nav-item_active .family__nav-icon .icon {
   color: var(--icon-on-selection);
+}
+
+.family .family__menu {
+  color: inherit;
 }

@@ -26,6 +26,21 @@
   max-width: 40ch;
 }
 
+/* Code to copy below each sample: monospace on a light box, scrolling
+   sideways so long lines do not widen the page on a phone */
+.playground__code {
+  margin: 0;
+  padding: var(--space-12);
+  overflow-x: auto;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--space-4);
+  background-color: var(--surface-raised);
+  color: var(--text-primary);
+  font-family: monospace;
+  font-size: var(--font-size-label);
+  line-height: var(--font-line-height-label);
+}
+
 /* Grid that adapts to the width: fits as many columns as it can */
 .playground__icons {
   display: grid;
@@ -145,4 +160,12 @@
   background-color: var(--blue-800);
   color: var(--cream-50);
   white-space: pre-wrap;
+}
+
+/* Log that only grows: short and in the flow (not sticky), so it scrolls
+   inside instead of taking the whole screen */
+.playground__console--log {
+  position: static;
+  min-height: auto;
+  height: calc(var(--space-32) * 4);
 }

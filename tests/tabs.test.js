@@ -1,6 +1,6 @@
 import { describe, test } from 'node:test';
 import assert from 'node:assert/strict';
-import { getNoticeTabs } from '../public/screens/notices/tabs.js';
+import { getNoticeTabs } from '../public/screens/family/tabs.js';
 
 describe('getNoticeTabs returns', () => {
   test('one tab per child, in order, with their first name', () => {
@@ -22,11 +22,13 @@ describe('getNoticeTabs returns', () => {
       {
         id: 'first-child-id',
         label: 'Argelia',
+        initial: 'A',
         groupId: '7-1',
       },
       {
         id: 'second-child-id',
         label: 'Carlos',
+        initial: 'C',
         groupId: '8-2',
       },
     ];
@@ -34,7 +36,10 @@ describe('getNoticeTabs returns', () => {
   });
 
   test('no tabs when there are no children', () => {
+    /** @type {import('../public/js/family.js').Child[]} */
     const children = [];
+
+    /** @type {import('../public/js/family.js').Child[]} */
     const expectedResult = [];
     assert.deepEqual(getNoticeTabs(children), expectedResult);
   });
@@ -52,6 +57,7 @@ describe('getNoticeTabs returns', () => {
       {
         id: 'first-child-id',
         label: 'Ana',
+        initial: 'A',
         groupId: '7-1',
       },
     ];

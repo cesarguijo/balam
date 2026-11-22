@@ -1,0 +1,43 @@
+/*
+ * Ripple component: a wave that grows from the center when an element is
+ * pressed. It runs with a class set by JavaScript on pointerdown and not with
+ * :active, because on phones the browser applies :active late (it waits to
+ * see if the touch is a scroll), and the wave showed after the action.
+ */
+
+/* Starts small and visible, and fades while it grows, like a drop in water */
+@keyframes ripple {
+  from {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0.2;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+  }
+}
+
+/* The animation runs whole each time the class is set, without waiting for release */
+.ripple_active::after {
+  animation: ripple 0.6s ease-out;
+}
+
+.ripple {
+  position: relative;
+  overflow: hidden; /* Keeps the ripple inside the element */
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ripple::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200%;
+  height: 70px;
+  background-color: currentColor;
+  border-radius: var(--radius-full);
+  /* Resting state: invisible and fully grown */
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 0;
+}

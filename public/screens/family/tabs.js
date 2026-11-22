@@ -12,6 +12,7 @@
  * @typedef {object} NoticeTab
  * @property {string} id - The child's id, so each tab has a stable key.
  * @property {string} label - The child's first name, e.g. `Ana` for `Ana Reyes`; the full name does not fit in a tab.
+ * @property {string} initial
  * @property {string} groupId - Group whose notices the tab shows, e.g. `'7-1'`.
  */
 
@@ -26,10 +27,12 @@
 export function getNoticeTabs(children) {
   return children.map((child) => {
     const [firstName] = child.name.split(' ');
+    const initial = firstName.slice(0, 1);
 
     return {
       id: child.id,
       label: firstName,
+      initial,
       groupId: child.groupId,
     };
   });

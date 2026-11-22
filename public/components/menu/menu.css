@@ -1,0 +1,54 @@
+/* menu.css: replaces the old trigger rules */
+balam-menu .menu__trigger {
+  anchor-name: --menu-trigger; /* The panel opens below this button */
+}
+
+balam-menu .menu__panel {
+  background-color: var(--surface-raised);
+  width: fit-content;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-12);
+  margin: 0;
+  position-anchor: --menu-trigger;
+  inset: auto; /* Undoes the browser centering every popover */
+  /* Below the trigger, a bit up and to the left, growing leftwards */
+  top: calc(anchor(bottom) - var(--space-8));
+  right: calc(anchor(right) + var(--space-8));
+  /* If it does not fit (trigger near the left edge), grows rightwards */
+  position-try-fallbacks:
+    flip-inline,
+    flip-block,
+    flip-block flip-inline;
+}
+
+balam-menu .menu__panel ul {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+balam-menu .menu__panel li {
+  padding: 4px;
+  list-style: none;
+  background-color: var(--surface-raised);
+  width: fit-content;
+  border-radius: var(--radius-12);
+  width: 100%;
+}
+
+balam-menu .menu__item {
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  height: var(--size-control);
+  flex-direction: row;
+  gap: var(--spacing-text-icon);
+  background-color: transparent;
+  width: 100%;
+  border: none;
+  border-radius: var(--radius-12);
+}
+
+balam-menu .menu__icon-container .icon {
+  color: var(--icon-primary);
+}

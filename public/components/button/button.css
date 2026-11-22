@@ -115,31 +115,52 @@ balam-button {
 
   box-shadow:
     inset 0 var(--button-ring) 0 var(--_strip-top),
-    inset 0 calc((--button-ring) * -1) 0 var(--_strip-bottom);
+    inset 0 calc((var(--button-ring)) * -1) 0 var(--_strip-bottom);
 }
 
 /* ---------- 2. Primary variant ---------- */
-.button--primary {
-  --_ring: var(--action-primary-border);
-  --_background: var(--action-primary-background);
-  --_text: var(--action-primary-text);
-  --_lip: var(--button-lip-primary);
+.button--default-primary {
+  --_ring: var(--action-default-primary-border);
+  --_background: var(--action-default-primary-background);
+  --_text: var(--action-default-primary-text);
+  --_lip: var(--button-default-lip-primary);
 
-  --_strip-top: var(--button-strip-top);
-  --_strip-bottom: var(--button-strip-bottom);
-  --_facet-top-left: var(--button-facet-top-left);
-  --_facet-bottom-left: var(--button-facet-bottom-left);
-  --_facet-top-right: var(--button-facet-top-right);
-  --_facet-bottom-right: var(--button-facet-bottom-right);
+  --_strip-top: var(--button-default-strip-top);
+  --_strip-bottom: var(--button-default-strip-bottom);
+  --_facet-top-left: var(--button-default-facet-top-left);
+  --_facet-bottom-left: var(--button-default-facet-bottom-left);
+  --_facet-top-right: var(--button-default-facet-top-right);
+  --_facet-bottom-right: var(--button-default-facet-bottom-right);
+}
+
+.button--danger-primary {
+  --_ring: var(--action-danger-primary-border);
+  --_background: var(--action-danger-primary-background);
+  --_text: var(--action-danger-primary-text);
+  --_lip: var(--button-danger-lip);
+
+  --_strip-top: var(--button-danger-strip-top);
+  --_strip-bottom: var(--button-danger-strip-bottom);
+  --_facet-top-left: var(--button-danger-facet-top-left);
+  --_facet-bottom-left: var(--button-danger-facet-bottom-left);
+  --_facet-top-right: var(--button-danger-facet-top-right);
+  --_facet-bottom-right: var(--button-danger-facet-bottom-right);
 }
 
 /* ---------- 3. Secondary variant ---------- */
 .button--secondary {
-  --_ring: var(--action-secondary-border);
-  --_background: var(--action-secondary-background);
-  --_text: var(--action-secondary-text);
-  --_lip: var(--button-lip-secondary);
+  --_ring: var(--action-default-secondary-border);
+  --_background: var(--action-default-secondary-background);
+  --_text: var(--action-default-secondary-text);
+  --_lip: var(--button-default-lip-secondary);
   /* no facets or strips: uses the transparent ones from .button */
+}
+
+.button--danger-secondary {
+  --_ring: var(--action-danger-secondary-border);
+  --_background: var(--action-danger-secondary-background);
+  --_text: var(--action-danger-secondary-text);
+  --_lip: var(--button-danger-lip);
 }
 
 /* ---------- 4. Disabled (for any variant) ---------- */

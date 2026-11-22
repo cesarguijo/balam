@@ -1,5 +1,31 @@
 {
+  "blue": {
+    "100": {
+      "$type": "color",
+      "$value": "#d5e1f0",
+      "$description": "Pale blue · background of the 1st child avatar",
+      "$extensions": {
+        "mode": {}
+      }
+    },
+    "800": {
+      "$type": "color",
+      "$value": "#1b3a6b",
+      "$description": "Deep blue · obsidian and night",
+      "$extensions": {
+        "mode": {}
+      }
+    }
+  },
   "amber": {
+    "100": {
+      "$type": "color",
+      "$value": "#fbe4c6",
+      "$description": "Pale amber · background of the 4th child avatar",
+      "$extensions": {
+        "mode": {}
+      }
+    },
     "200": {
       "$type": "color",
       "$value": "#f7c27e",
@@ -57,16 +83,6 @@
       }
     }
   },
-  "blue": {
-    "800": {
-      "$type": "color",
-      "$value": "#1b3a6b",
-      "$description": "Deep blue · obsidian and night",
-      "$extensions": {
-        "mode": {}
-      }
-    }
-  },
   "cream": {
     "50": {
       "$type": "color",
@@ -78,10 +94,26 @@
     }
   },
   "maya": {
+    "100": {
+      "$type": "color",
+      "$value": "#d1e7ed",
+      "$description": "Pale maya blue · background of the 2nd child avatar",
+      "$extensions": {
+        "mode": {}
+      }
+    },
     "500": {
       "$type": "color",
       "$value": "#1a7088",
       "$description": "Maya blue · indigo and palygorskite pigment",
+      "$extensions": {
+        "mode": {}
+      }
+    },
+    "700": {
+      "$type": "color",
+      "$value": "#11505f",
+      "$description": "Deep maya blue · letter of the 2nd child avatar. Contrast 7.0:1 on maya.100",
       "$extensions": {
         "mode": {}
       }
@@ -156,10 +188,58 @@
         "mode": {}
       }
     },
+    "200": {
+      "$type": "color",
+      "$value": "#e8a6c1",
+      "$description": "Light macuelizo pink · lit facet of the danger button",
+      "$extensions": {
+        "mode": {}
+      }
+    },
+    "300": {
+      "$type": "color",
+      "$value": "#db8aac",
+      "$description": "Bright macuelizo pink · highlight strip of the danger button",
+      "$extensions": {
+        "mode": {}
+      }
+    },
+    "400": {
+      "$type": "color",
+      "$value": "#c4628c",
+      "$description": "Medium macuelizo pink · lower-left facet of the danger button",
+      "$extensions": {
+        "mode": {}
+      }
+    },
     "600": {
       "$type": "color",
       "$value": "#a8406b",
       "$description": "Macuelizo pink · Tabebuia rosea flower",
+      "$extensions": {
+        "mode": {}
+      }
+    },
+    "700": {
+      "$type": "color",
+      "$value": "#943660",
+      "$description": "Shadow macuelizo pink · upper-right facet of the danger button",
+      "$extensions": {
+        "mode": {}
+      }
+    },
+    "800": {
+      "$type": "color",
+      "$value": "#812f53",
+      "$description": "Toasted macuelizo pink · bottom-right facet and bottom strip of the danger button",
+      "$extensions": {
+        "mode": {}
+      }
+    },
+    "900": {
+      "$type": "color",
+      "$value": "#6e2845",
+      "$description": "Solid lip under the danger button",
       "$extensions": {
         "mode": {}
       }
@@ -169,8 +249,8 @@
     "focus": {
       "border": {
         "$type": "color",
-        "$value": "#ffffff",
-        "$description": "",
+        "$value": "{maya.500}",
+        "$description": "Field border while typing. Contrast 5.6:1 on white",
         "$extensions": {
           "mode": {}
         }
@@ -181,7 +261,7 @@
     "100": {
       "$type": "color",
       "$value": "#efe6d2",
-      "$description": "",
+      "$description": "Pale sand · ground in illustrations",
       "$extensions": {
         "mode": {}
       }
@@ -189,7 +269,7 @@
     "200": {
       "$type": "color",
       "$value": "#e2d1ac",
-      "$description": "",
+      "$description": "Sand · lit stone in illustrations, background of the 3rd child avatar",
       "$extensions": {
         "mode": {}
       }
@@ -197,7 +277,7 @@
     "300": {
       "$type": "color",
       "$value": "#dcc9a3",
-      "$description": "",
+      "$description": "Dark sand · stone in shade in illustrations",
       "$extensions": {
         "mode": {}
       }
@@ -239,7 +319,7 @@
     "on-header": {
       "$type": "color",
       "$value": "{cream.50}",
-      "$description": "",
+      "$description": "Text and icons on the header. Contrast 10.2:1 on blue",
       "$extensions": {
         "mode": {}
       }
@@ -273,72 +353,74 @@
     "header": {
       "$type": "color",
       "$value": "{blue.800}",
-      "$description": "",
+      "$description": "Header background",
       "$extensions": {
         "mode": {}
       }
     }
   },
   "action": {
-    "primary": {
-      "background": {
-        "$type": "color",
-        "$value": "{amber.500}",
-        "$description": "Primary button background. One per screen",
-        "$extensions": {
-          "mode": {}
+    "default": {
+      "primary": {
+        "background": {
+          "$type": "color",
+          "$value": "{amber.500}",
+          "$description": "Primary button background. One per screen",
+          "$extensions": {
+            "mode": {}
+          }
+        },
+        "border": {
+          "$type": "color",
+          "$value": "{amber.800}",
+          "$description": "Primary button ring",
+          "$extensions": {
+            "mode": {}
+          }
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{blue.800}",
+          "$description": "Primary button text. Contrast 4.5:1, always bold",
+          "$extensions": {
+            "mode": {}
+          }
         }
       },
-      "border": {
-        "$type": "color",
-        "$value": "{amber.800}",
-        "$description": "Primary button ring",
-        "$extensions": {
-          "mode": {}
+      "secondary": {
+        "background": {
+          "$type": "color",
+          "$value": "{cream.50}",
+          "$description": "Secondary (outline) button background",
+          "$extensions": {
+            "mode": {}
+          }
+        },
+        "border": {
+          "$type": "color",
+          "$value": "{blue.800}",
+          "$description": "Secondary (outline) button ring",
+          "$extensions": {
+            "mode": {}
+          }
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{blue.800}",
+          "$description": "Secondary (outline) button text",
+          "$extensions": {
+            "mode": {}
+          }
         }
       },
-      "text": {
-        "$type": "color",
-        "$value": "{blue.800}",
-        "$description": "Primary button text. Contrast 4.5:1, always bold",
-        "$extensions": {
-          "mode": {}
-        }
-      }
-    },
-    "secondary": {
-      "background": {
-        "$type": "color",
-        "$value": "{cream.50}",
-        "$description": "Secondary (outline) button background",
-        "$extensions": {
-          "mode": {}
-        }
-      },
-      "border": {
-        "$type": "color",
-        "$value": "{blue.800}",
-        "$description": "Secondary (outline) button ring",
-        "$extensions": {
-          "mode": {}
-        }
-      },
-      "text": {
-        "$type": "color",
-        "$value": "{blue.800}",
-        "$description": "Secondary (outline) button text",
-        "$extensions": {
-          "mode": {}
-        }
-      }
-    },
-    "tertiary": {
-      "text": {
-        "$type": "color",
-        "$value": "{maya.500}",
-        "$description": "Text-only button, for minor actions",
-        "$extensions": {
-          "mode": {}
+      "tertiary": {
+        "text": {
+          "$type": "color",
+          "$value": "{maya.500}",
+          "$description": "Text-only button, for minor actions",
+          "$extensions": {
+            "mode": {}
+          }
         }
       }
     },
@@ -365,6 +447,60 @@
         "$description": "Text of any disabled button",
         "$extensions": {
           "mode": {}
+        }
+      }
+    },
+    "danger": {
+      "secondary": {
+        "background": {
+          "$type": "color",
+          "$value": "{cream.50}",
+          "$description": "Danger (outline) button background. Only for destructive actions",
+          "$extensions": {
+            "mode": {}
+          }
+        },
+        "border": {
+          "$type": "color",
+          "$value": "{pink.600}",
+          "$description": "Danger (outline) button ring. Never red",
+          "$extensions": {
+            "mode": {}
+          }
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{pink.600}",
+          "$description": "Danger (outline) button text and icon. Contrast 5.2:1 on cream, always bold",
+          "$extensions": {
+            "mode": {}
+          }
+        }
+      },
+      "primary": {
+        "background": {
+          "$type": "color",
+          "$value": "{pink.600}",
+          "$description": "Danger (filled) button background. Only to confirm a destructive action",
+          "$extensions": {
+            "mode": {}
+          }
+        },
+        "border": {
+          "$type": "color",
+          "$value": "{pink.900}",
+          "$description": "Danger (filled) button ring",
+          "$extensions": {
+            "mode": {}
+          }
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{cream.50}",
+          "$description": "Danger (filled) button text and icon. Contrast 5.2:1 on pink, always bold",
+          "$extensions": {
+            "mode": {}
+          }
         }
       }
     }
@@ -399,7 +535,15 @@
     "inactive": {
       "$type": "color",
       "$value": "{gray.600}",
-      "$description": "",
+      "$description": "Icon of an inactive nav item. Contrast 6.5:1 on white",
+      "$extensions": {
+        "mode": {}
+      }
+    },
+    "primary": {
+      "$type": "color",
+      "$value": "{blue.800}",
+      "$description": "Icons next to text in rows and menus. Contrast 10.2:1 on cream",
       "$extensions": {
         "mode": {}
       }
@@ -420,7 +564,7 @@
         "components": "{cream.50}",
         "alpha": 0.08
       },
-      "$description": "",
+      "$description": "Background frets on dark surfaces such as the header, at 8% opacity",
       "$extensions": {
         "mode": {}
       }
@@ -429,7 +573,7 @@
       "strip": {
         "$type": "color",
         "$value": "{amber.500}",
-        "$description": "",
+        "$description": "Amber strip under the header wave",
         "$extensions": {
           "mode": {}
         }
@@ -440,7 +584,7 @@
     "groups": {
       "$type": "dimension",
       "$value": "{space.24}",
-      "$description": "",
+      "$description": "Space between groups, such as two cards or sections",
       "$extensions": {
         "mode": {}
       }
@@ -448,7 +592,7 @@
     "elements": {
       "$type": "dimension",
       "$value": "{space.16}",
-      "$description": "",
+      "$description": "Space between elements inside a group",
       "$extensions": {
         "mode": {}
       }
@@ -456,7 +600,7 @@
     "row": {
       "$type": "dimension",
       "$value": "{space.12}",
-      "$description": "",
+      "$description": "Vertical padding inside a list row",
       "$extensions": {
         "mode": {}
       }
@@ -464,7 +608,7 @@
     "text-icon": {
       "$type": "dimension",
       "$value": "{space.12}",
-      "$description": "",
+      "$description": "Gap between an icon and its text",
       "$extensions": {
         "mode": {}
       }
@@ -474,7 +618,7 @@
     "screen": {
       "$type": "dimension",
       "$value": "{space.24}",
-      "$description": "",
+      "$description": "Side margin of every screen",
       "$extensions": {
         "mode": {}
       }
@@ -487,7 +631,7 @@
         "value": 52,
         "unit": "px"
       },
-      "$description": "",
+      "$description": "Minimum height of tappable controls: buttons, fields, rows",
       "$extensions": {
         "mode": {}
       }
@@ -498,7 +642,7 @@
         "value": 40,
         "unit": "px"
       },
-      "$description": "",
+      "$description": "Height of the child chips",
       "$extensions": {
         "mode": {}
       }
@@ -509,7 +653,7 @@
         "value": 26,
         "unit": "px"
       },
-      "$description": "",
+      "$description": "Diameter of the child avatar",
       "$extensions": {
         "mode": {}
       }
@@ -549,7 +693,7 @@
     "radius": {
       "$type": "dimension",
       "$value": "{radius.12}",
-      "$description": "",
+      "$description": "Corner radius of fields and cards",
       "$extensions": {
         "mode": {}
       }
@@ -563,7 +707,7 @@
           "value": 400,
           "unit": "px"
         },
-        "$description": "",
+        "$description": "Regular weight for body text",
         "$extensions": {
           "mode": {}
         }
@@ -574,7 +718,7 @@
           "value": 700,
           "unit": "px"
         },
-        "$description": "",
+        "$description": "Bold weight for titles, labels and buttons",
         "$extensions": {
           "mode": {}
         }
@@ -587,7 +731,7 @@
           "value": 40,
           "unit": "px"
         },
-        "$description": "",
+        "$description": "Display size · big numbers and hero titles",
         "$extensions": {
           "mode": {}
         }
@@ -598,7 +742,7 @@
           "value": 22,
           "unit": "px"
         },
-        "$description": "",
+        "$description": "Screen and card titles",
         "$extensions": {
           "mode": {}
         }
@@ -609,7 +753,7 @@
           "value": 18,
           "unit": "px"
         },
-        "$description": "",
+        "$description": "Large labels, such as empty-state titles",
         "$extensions": {
           "mode": {}
         }
@@ -620,7 +764,7 @@
           "value": 16,
           "unit": "px"
         },
-        "$description": "",
+        "$description": "Body text",
         "$extensions": {
           "mode": {}
         }
@@ -631,7 +775,7 @@
           "value": 14,
           "unit": "px"
         },
-        "$description": "",
+        "$description": "Small labels, helper text and nav items",
         "$extensions": {
           "mode": {}
         }
@@ -644,7 +788,7 @@
           "value": 48,
           "unit": "px"
         },
-        "$description": "",
+        "$description": "Line height for display text",
         "$extensions": {
           "mode": {}
         }
@@ -655,7 +799,7 @@
           "value": 28,
           "unit": "px"
         },
-        "$description": "",
+        "$description": "Line height for titles",
         "$extensions": {
           "mode": {}
         }
@@ -666,7 +810,7 @@
           "value": 24,
           "unit": "px"
         },
-        "$description": "",
+        "$description": "Line height for large labels",
         "$extensions": {
           "mode": {}
         }
@@ -677,7 +821,7 @@
           "value": 24,
           "unit": "px"
         },
-        "$description": "",
+        "$description": "Line height for body text",
         "$extensions": {
           "mode": {}
         }
@@ -688,7 +832,7 @@
           "value": 20,
           "unit": "px"
         },
-        "$description": "",
+        "$description": "Line height for labels",
         "$extensions": {
           "mode": {}
         }
@@ -697,7 +841,7 @@
     "family": {
       "$type": "string",
       "$value": "Atkinson Hyperlegible Next",
-      "$description": "",
+      "$description": "Typeface for all text, chosen for legibility. Self-hosted woff2",
       "$extensions": {
         "mode": {}
       }
@@ -727,17 +871,101 @@
     "background": {
       "$type": "color",
       "$value": "{cream.50}",
-      "$description": "",
+      "$description": "Neutral avatar background, used until the data loads",
       "$extensions": {
         "mode": {}
       }
     },
-    "background-selected": {
-      "$type": "color",
-      "$value": "{amber.500}",
-      "$description": "",
-      "$extensions": {
-        "mode": {}
+    "user": {
+      "background": {
+        "$type": "color",
+        "$value": "{amber.500}",
+        "$description": "Avatar of the signed-in parent",
+        "$extensions": {
+          "mode": {}
+        }
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{blue.800}",
+        "$description": "Letter of the parent avatar. Contrast 4.6:1 on amber",
+        "$extensions": {
+          "mode": {}
+        }
+      }
+    },
+    "child": {
+      "1": {
+        "background": {
+          "$type": "color",
+          "$value": "{blue.100}",
+          "$description": "Avatar of the 1st child, by family order",
+          "$extensions": {
+            "mode": {}
+          }
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{blue.800}",
+          "$description": "Letter of the 1st child avatar. Contrast 8.6:1",
+          "$extensions": {
+            "mode": {}
+          }
+        }
+      },
+      "2": {
+        "background": {
+          "$type": "color",
+          "$value": "{maya.100}",
+          "$description": "Avatar of the 2nd child, by family order",
+          "$extensions": {
+            "mode": {}
+          }
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{maya.700}",
+          "$description": "Letter of the 2nd child avatar. Contrast 7.0:1",
+          "$extensions": {
+            "mode": {}
+          }
+        }
+      },
+      "3": {
+        "background": {
+          "$type": "color",
+          "$value": "{sand.200}",
+          "$description": "Avatar of the 3rd child, by family order",
+          "$extensions": {
+            "mode": {}
+          }
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{brown.700}",
+          "$description": "Letter of the 3rd child avatar. Contrast 4.7:1",
+          "$extensions": {
+            "mode": {}
+          }
+        }
+      },
+      "4": {
+        "background": {
+          "$type": "color",
+          "$value": "{amber.100}",
+          "$description": "Avatar of the 4th child; a 5th starts over at 1",
+          "$extensions": {
+            "mode": {}
+          }
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{amber.800}",
+          "$description": "Letter of the 4th child avatar. Contrast 4.6:1",
+          "$extensions": {
+            "mode": {}
+          }
+        }
       }
     }
   },
@@ -745,7 +973,7 @@
     "ground": {
       "$type": "color",
       "$value": "{sand.100}",
-      "$description": "",
+      "$description": "Ground and clouds in illustrations",
       "$extensions": {
         "mode": {}
       }
@@ -753,7 +981,7 @@
     "stone": {
       "$type": "color",
       "$value": "{sand.200}",
-      "$description": "",
+      "$description": "Lit faces of the pyramid",
       "$extensions": {
         "mode": {}
       }
@@ -761,7 +989,7 @@
     "stone-shade": {
       "$type": "color",
       "$value": "{sand.300}",
-      "$description": "",
+      "$description": "Shaded faces of the pyramid",
       "$extensions": {
         "mode": {}
       }
@@ -769,7 +997,7 @@
     "shadow": {
       "$type": "color",
       "$value": "{brown.500}",
-      "$description": "",
+      "$description": "Doorways and shadows in illustrations",
       "$extensions": {
         "mode": {}
       }
@@ -780,87 +1008,151 @@
         "components": "{maya.500}",
         "alpha": 0.35
       },
-      "$description": "",
+      "$description": "Plants in illustrations, at 35% opacity",
       "$extensions": {
         "mode": {}
       }
     }
   },
   "button": {
-    "facet": {
-      "top-left": {
-        "$type": "color",
-        "$value": "{amber.200}",
-        "$description": "",
-        "$extensions": {
-          "mode": {}
+    "default": {
+      "facet": {
+        "top-left": {
+          "$type": "color",
+          "$value": "{amber.200}",
+          "$description": "Primary button · upper-left facet, the most lit",
+          "$extensions": {
+            "mode": {}
+          }
+        },
+        "bottom-left": {
+          "$type": "color",
+          "$value": "{amber.400}",
+          "$description": "Primary button · lower-left facet",
+          "$extensions": {
+            "mode": {}
+          }
+        },
+        "top-right": {
+          "$type": "color",
+          "$value": "{amber.600}",
+          "$description": "Primary button · upper-right facet, in shade",
+          "$extensions": {
+            "mode": {}
+          }
+        },
+        "bottom-right": {
+          "$type": "color",
+          "$value": "{amber.700}",
+          "$description": "Primary button · lower-right facet, the darkest",
+          "$extensions": {
+            "mode": {}
+          }
         }
       },
-      "bottom-left": {
-        "$type": "color",
-        "$value": "{amber.400}",
-        "$description": "",
-        "$extensions": {
-          "mode": {}
+      "strip": {
+        "top": {
+          "$type": "color",
+          "$value": "{amber.300}",
+          "$description": "Primary button · highlight strip along the top edge",
+          "$extensions": {
+            "mode": {}
+          }
+        },
+        "bottom": {
+          "$type": "color",
+          "$value": "{amber.700}",
+          "$description": "Primary button · shadow strip along the bottom edge",
+          "$extensions": {
+            "mode": {}
+          }
         }
       },
-      "top-right": {
-        "$type": "color",
-        "$value": "{amber.600}",
-        "$description": "",
-        "$extensions": {
-          "mode": {}
-        }
-      },
-      "bottom-right": {
-        "$type": "color",
-        "$value": "{amber.700}",
-        "$description": "",
-        "$extensions": {
-          "mode": {}
+      "lip": {
+        "primary": {
+          "$type": "color",
+          "$value": "{brown.700}",
+          "$description": "Solid 5 px shadow under the button",
+          "$extensions": {
+            "mode": {}
+          }
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "{blue.800}",
+          "$description": "Solid 5 px shadow under the button",
+          "$extensions": {
+            "mode": {}
+          }
         }
       }
     },
-    "strip": {
-      "top": {
+    "danger": {
+      "lip": {
         "$type": "color",
-        "$value": "{amber.300}",
-        "$description": "",
+        "$value": "{pink.900}",
+        "$description": "Solid 5 px shadow under both danger buttons",
         "$extensions": {
           "mode": {}
         }
       },
-      "bottom": {
-        "$type": "color",
-        "$value": "{amber.700}",
-        "$description": "",
-        "$extensions": {
-          "mode": {}
-        }
-      }
-    },
-    "lip": {
-      "primary": {
-        "$type": "color",
-        "$value": "{brown.700}",
-        "$description": "Solid 5 px shadow under the button",
-        "$extensions": {
-          "mode": {}
+      "facet": {
+        "top-left": {
+          "$type": "color",
+          "$value": "{pink.200}",
+          "$description": "Danger button · upper-left facet, the most lit",
+          "$extensions": {
+            "mode": {}
+          }
+        },
+        "bottom-left": {
+          "$type": "color",
+          "$value": "{pink.400}",
+          "$description": "Danger button · lower-left facet",
+          "$extensions": {
+            "mode": {}
+          }
+        },
+        "top-right": {
+          "$type": "color",
+          "$value": "{pink.700}",
+          "$description": "Danger button · upper-right facet, in shade",
+          "$extensions": {
+            "mode": {}
+          }
+        },
+        "bottom-right": {
+          "$type": "color",
+          "$value": "{pink.800}",
+          "$description": "Danger button · lower-right facet, the darkest",
+          "$extensions": {
+            "mode": {}
+          }
         }
       },
-      "secondary": {
-        "$type": "color",
-        "$value": "{blue.800}",
-        "$description": "Solid 5 px shadow under the button",
-        "$extensions": {
-          "mode": {}
+      "strip": {
+        "top": {
+          "$type": "color",
+          "$value": "{pink.300}",
+          "$description": "Danger button · highlight strip along the top edge",
+          "$extensions": {
+            "mode": {}
+          }
+        },
+        "bottom": {
+          "$type": "color",
+          "$value": "{pink.800}",
+          "$description": "Danger button · shadow strip along the bottom edge",
+          "$extensions": {
+            "mode": {}
+          }
         }
       }
     },
     "height": {
       "$type": "dimension",
       "$value": "{size.control}",
-      "$description": "",
+      "$description": "Button height, same as any control",
       "$extensions": {
         "mode": {}
       }
@@ -871,7 +1163,7 @@
         "value": 14,
         "unit": "px"
       },
-      "$description": "",
+      "$description": "⚠ Width of the pointed end of the button",
       "$extensions": {
         "mode": {}
       }
@@ -882,7 +1174,7 @@
         "value": 3,
         "unit": "px"
       },
-      "$description": "",
+      "$description": "Width of the button ring",
       "$extensions": {
         "mode": {}
       }
@@ -893,7 +1185,7 @@
         "value": 10,
         "unit": "px"
       },
-      "$description": "",
+      "$description": "Size of the cut corners",
       "$extensions": {
         "mode": {}
       }
@@ -904,7 +1196,7 @@
         "value": 5,
         "unit": "px"
       },
-      "$description": "",
+      "$description": "Height of the solid shadow; the button sinks this much when pressed",
       "$extensions": {
         "mode": {}
       }
@@ -916,7 +1208,7 @@
           "value": 6,
           "unit": "px"
         },
-        "$description": "",
+        "$description": "Height of each step in the pyramid loader",
         "$extensions": {
           "mode": {}
         }
@@ -927,7 +1219,7 @@
           "value": 8,
           "unit": "px"
         },
-        "$description": "",
+        "$description": "Width each step grows in the pyramid loader",
         "$extensions": {
           "mode": {}
         }
@@ -938,7 +1230,7 @@
           "value": 3,
           "unit": "px"
         },
-        "$description": "",
+        "$description": "Gap between steps in the pyramid loader",
         "$extensions": {
           "mode": {}
         }
@@ -950,7 +1242,7 @@
         "value": 28,
         "unit": "px"
       },
-      "$description": "",
+      "$description": "Side padding between the ends and the label",
       "$extensions": {
         "mode": {}
       }
@@ -961,7 +1253,7 @@
         "value": 11,
         "unit": "px"
       },
-      "$description": "",
+      "$description": "Width of the side facets",
       "$extensions": {
         "mode": {}
       }
@@ -974,7 +1266,7 @@
         "value": 4,
         "unit": "px"
       },
-      "$description": "",
+      "$description": "Base spacing step · 4 px",
       "$extensions": {
         "mode": {}
       }
@@ -985,7 +1277,7 @@
         "value": 8,
         "unit": "px"
       },
-      "$description": "",
+      "$description": "Spacing step · 8 px",
       "$extensions": {
         "mode": {}
       }
@@ -996,7 +1288,7 @@
         "value": 12,
         "unit": "px"
       },
-      "$description": "",
+      "$description": "Spacing step · 12 px",
       "$extensions": {
         "mode": {}
       }
@@ -1007,7 +1299,7 @@
         "value": 16,
         "unit": "px"
       },
-      "$description": "",
+      "$description": "Spacing step · 16 px",
       "$extensions": {
         "mode": {}
       }
@@ -1018,7 +1310,7 @@
         "value": 24,
         "unit": "px"
       },
-      "$description": "",
+      "$description": "Spacing step · 24 px",
       "$extensions": {
         "mode": {}
       }
@@ -1029,7 +1321,7 @@
         "value": 32,
         "unit": "px"
       },
-      "$description": "",
+      "$description": "Spacing step · 32 px",
       "$extensions": {
         "mode": {}
       }
@@ -1042,7 +1334,7 @@
         "value": 12,
         "unit": "px"
       },
-      "$description": "",
+      "$description": "Corner radius of fields and cards",
       "$extensions": {
         "mode": {}
       }
@@ -1053,7 +1345,7 @@
         "value": 9999,
         "unit": "px"
       },
-      "$description": "",
+      "$description": "Fully round corners: chips, avatars, toggles",
       "$extensions": {
         "mode": {}
       }
@@ -1070,7 +1362,7 @@
         "Components",
         "Measures"
       ],
-      "createdAt": "2026-11-20T09:05:25.175Z"
+      "createdAt": "2026-11-21T07:07:11.664Z"
     }
   }
 }

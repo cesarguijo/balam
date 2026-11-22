@@ -1,0 +1,68 @@
+/*
+ * The blue lives here and not on the app bar, so it also shows through the
+ * transparent top of the curve. overflow: hidden keeps the pyramid from
+ * sticking out below the curve.
+ *
+ * The blue stops 4px before the bottom edge: when the browser smooths the
+ * edge of the scaled curve, the blue under it showed as a thin line. That
+ * strip is always below the curve, so the screen background covers it.
+ */
+.app-bar {
+  color: var(--text-on-header);
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: linear-gradient(var(--surface-header), var(--surface-header))
+    top / 100% calc(100% - var(--space-4)) no-repeat;
+}
+
+.app-bar .app-bar__start {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-16);
+}
+
+.app-bar .app-bar__start h1 {
+  color: var(--text-on-header);
+  font-size: var(--font-size-title);
+  line-height: var(--font-line-height-title);
+  font-weight: var(--font-weight-bold);
+}
+
+.app-bar .icon {
+  color: var(--text-on-header);
+}
+
+.app-bar .app-bar__app-bar {
+  height: 80px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-16);
+  gap: var(--space-16);
+}
+
+/*
+ * The curved bottom edge of the app bar: transparent above the curve (the blue
+ * and the pyramid show through), an amber line on the curve, and the screen
+ * background below it, which covers the blue and the base of the pyramid.
+ * position: relative paints it in front of the pyramid.
+ */
+.app-bar .app-bar__curve {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: var(--space-16);
+}
+
+.app-bar .app-bar__curve-fill {
+  fill: var(--surface-background);
+}
+
+.app-bar .app-bar__curve-line {
+  fill: none;
+  stroke: var(--amber-400);
+  stroke-width: var(--space-4);
+}

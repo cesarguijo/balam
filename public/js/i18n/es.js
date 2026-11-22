@@ -43,26 +43,6 @@ export const messages = {
   // Home screen
   'home.hello': 'Hola mundo',
 
-  // Playground: an internal screen to review components
-  'playground.pageTitle': 'Balam - Catálogo',
-  'playground.title': 'Catálogo de componentes',
-  'playground.button': 'Botón',
-  'playground.icons': 'Íconos',
-  'playground.textField': 'Campo de Texto',
-  'playground.textField.normal': 'Estado normal',
-  'playground.textField.error': 'Estado error',
-  'playground.textField.disabled': 'Estado deshabilitado',
-  'playground.textField.form': 'Dentro de un formulario',
-  'playground.textField.formHint':
-    'Escriba y toque Entrar: abajo aparece lo que envía el formulario.',
-  'playground.notices': 'Prueba de avisos (Firestore real)',
-  'playground.notices.account': 'Sesión:',
-  'playground.notices.logout': 'Salir',
-  'playground.notices.group': 'Grupo',
-  'playground.notices.text': 'Texto (la primera línea es el título)',
-  'playground.notices.publish': 'Publicar',
-  'playground.notices.read': 'Leer avisos del grupo',
-
   'identity.logoAlt': 'Logo de Balam',
   // Welcome screen. "Balam" is not here: a brand name is not translated.
 
@@ -80,6 +60,13 @@ export const messages = {
   'install.installed':
     '¡Listo! Balam ya está instalada <br />Ábrela desde tu pantalla de inicio',
   'install.title': 'Instala desde tu navegador',
+
+  // Install banner: optional, inside the app (ADR 0011)
+  'installBanner.label': 'Instalar Balam',
+  'installBanner.text':
+    'Instala Balam para abrirla con un toque desde tu pantalla de inicio.',
+  'installBanner.install': 'Instalar',
+  'installBanner.dismiss': 'Ahora no',
 
   // Desktop: the person is sent to their phone with a QR code
   'install.desktop.title':
@@ -110,6 +97,11 @@ export const messages = {
   'install.step.installIcon': 'Toca el ícono de instalar, arriba en la barra',
   'install.step.install': 'Toca <strong>Instalar</strong>',
   'install.step.openInChrome': 'Para instalar la app, ábrela en Chrome',
+  'family.menu.books': 'Libros',
+  'family.menu.account': 'Cuenta',
+  'family.menu.install': 'Instalar app',
+
+  'account.title': 'Cuenta',
 };
 
 /**
