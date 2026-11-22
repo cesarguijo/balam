@@ -101,7 +101,8 @@ export const messages = {
   'family.menu.account': 'Cuenta',
   'family.menu.install': 'Instalar app',
   'family.installing':
-    'Chrome está instalando Balam. Cuando termine, la verás en tu pantalla de inicio.',
+    'Chrome está instalando Balam. Puede tardar un poco; después búscala entre tus apps.',
+  'family.installClose': 'Cerrar mensaje',
 
   'account.title': 'Cuenta',
   'account.user': '<strong>Usuario:</strong>',

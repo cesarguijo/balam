@@ -8,16 +8,34 @@
 }
 
 /*
- * Quiet install message ("Installing…", then "installed"): a raised card
- * like the notices, not an alert, because nothing went wrong.
+ * Install message. It uses the header's dark blue, not the cream of the
+ * notices, so it never looks like one more notice. It stays until the
+ * family closes it with the X.
+ * TODO: confirm the colors in Figma; there is no "info" token yet.
  */
 .family .family__install-status {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
   margin: var(--space-8) var(--space-12) 0;
-  padding: var(--space-12);
-  background-color: var(--surface-raised);
-  border: 1px solid var(--border-subtle);
+  padding: var(--space-4) var(--space-4) var(--space-4) var(--space-16);
+  background-color: var(--surface-header);
   border-radius: var(--radius-12);
-  color: var(--text-primary);
+  color: var(--text-on-selection);
+}
+
+/* display: flex above would beat the hidden attribute without this. */
+.family .family__install-status[hidden] {
+  display: none;
+}
+
+.family .family__install-text {
+  flex: 1;
+}
+
+.family .family__install-close {
+  flex-shrink: 0;
+  color: var(--icon-on-selection);
 }
 
 .family .family__logo {

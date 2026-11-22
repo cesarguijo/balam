@@ -13,23 +13,23 @@ import { drawAppBar } from '../../components/app-bar/app-bar.js';
 import { avatar } from '../../components/avatar/avatar.js';
 import { install, isInstalled } from '../../js/install.js';
 
-/** How long the install message stays on screen, in milliseconds. */
-const INSTALL_MESSAGE_MS = 10000;
-
 /**
- * Shows for a few seconds that Chrome is installing Balam. There is a single
- * message because the web cannot know when the install ends: on Android,
- * `appinstalled` fires when it starts, while Chrome keeps building the app.
- * It is a `role="status"` so screen readers announce it without moving the
- * focus.
+ * Shows that Chrome is installing Balam, until the family closes it with
+ * the X. There is a single message because the web cannot know when the
+ * install ends: on Android, `appinstalled` fires when it starts, while
+ * Chrome keeps building the app.
  * @param {HTMLElement} app - Container where the family screen is drawn.
  */
 function showInstallMessage(app) {
   const message = app.querySelector('.family__install-status');
-  if (!(message instanceof HTMLElement)) return;
-  message.textContent = t('family.installing');
+  const text = app.querySelector('.family__install-text');
+  if (!(message instanceof HTMLElement) || !(text instanceof HTMLElement)) {
+    return;
+  }
   message.hidden = false;
-  setTimeout(() => (message.hidden = true), INSTALL_MESSAGE_MS);
+  // The text is written after showing the box: a `role="status"` region is
+  // announced by screen readers only when its content changes.
+  text.textContent = t('family.installing');
 }
 
 // TODO: draw one tab per child with getNoticeTabs(getSession().children)
@@ -130,7 +130,17 @@ export async function showFamily(app, section) {
     <div class="family">
       ${drawAppBar(start, end)}
 
-      <p class="family__install-status text-body" role="status" hidden></p>
+      <div class="family__install-status" hidden>
+        <p class="family__install-text text-body" role="status"></p>
+        <button
+          class="family__install-close icon-button ripple"
+          type="button"
+          aria-label="${t('family.installClose')}"
+          data-install-close
+        >
+          ${icon('x')}
+        </button>
+      </div>
 
       <div class="family__tabs" role="tablist">${htmlTabs}</div>
 
@@ -166,6 +176,11 @@ export async function showFamily(app, section) {
   }
 
   section(main);
+
+  app.querySelector('[data-install-close]')?.addEventListener('click', () => {
+    const message = app.querySelector('.family__install-status');
+    if (message instanceof HTMLElement) message.hidden = true;
+  });
 
   for (const link of app.querySelectorAll('.family__nav-item')) {
     if (link.getAttribute('href') === location.hash) {

@@ -70,11 +70,12 @@ export class BalamMenu extends HTMLElement {
       if (!(button instanceof HTMLButtonElement)) return;
       // data-index is text; it points to the option in #items
       const item = this.#items[Number(button.dataset.index)];
+      // Closed before the action, as any menu does, so it is not left open
+      // behind the browser's install dialog or the next screen.
+      panel.hidePopover();
       if (item.action) {
         item.action();
       }
-      // TODO: close the panel with hidePopover() after the action, as any
-      // menu does.
     });
   }
 

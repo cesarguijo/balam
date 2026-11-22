@@ -195,6 +195,10 @@ const icons = {
     <path d="M19 16v6" />
     <path d="M22 19l-3 3l-3 -3" />
   `,
+  x: /* HTML */ `
+    <path d="M18 6l-12 12" />
+    <path d="M6 6l12 12" />
+  `,
   'arrow-left': /* HTML */ `
     <path d="M5 12l14 0" />
     <path d="M5 12l6 6" />
