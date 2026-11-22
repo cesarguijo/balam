@@ -6,7 +6,6 @@
 
 import { t } from '../../js/i18n/es.js';
 
-// TODO: return 'hoy, H:MM' if date is the same day as now, 'ayer, H:MM' if it
 // is the day before, and 'D mmm' for older dates. Write the tests first.
 /**
  * Formats the date of the last refresh relative to now.

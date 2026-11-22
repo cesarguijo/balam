@@ -5,6 +5,7 @@
 
 import { drawAppBar } from '../../components/app-bar/app-bar.js';
 import { avatar } from '../../components/avatar/avatar.js';
+import { BalamButton } from '../../components/button/button.js';
 import { card } from '../../components/card/card.js';
 import { list } from '../../components/list/list.js';
 import { t } from '../../js/i18n/es.js';
@@ -12,6 +13,7 @@ import { icon } from '../../js/icons.js';
 import {
   getLastRefreshDate,
   getSession,
+  logOut,
   refreshFamily,
 } from '../../js/session.js';
 import { formatLastRefresh } from './last-refresh.js';
@@ -100,6 +102,7 @@ export async function showAccount(app) {
         ${card(list(appItemOption))}
       </div>
       <balam-button
+        data-logout
         class="account__logout-button"
         text="${t('account.logout')}"
         variant="danger-secondary"
@@ -136,6 +139,17 @@ export async function showAccount(app) {
       refreshButton.classList.remove('account__refresh--loading');
       refreshButton.disabled = false;
     }
+  });
+
+  const logoutButton = app.querySelector('[data-logout]');
+  if (!(logoutButton instanceof BalamButton)) {
+    throw new Error('[data-logout] not found');
+  }
+
+  logoutButton.addEventListener('click', () => {
+    logOut().then(() => {
+      location.replace('#/login');
+    });
   });
 }
 
