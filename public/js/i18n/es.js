@@ -102,6 +102,13 @@ export const messages = {
   'family.menu.install': 'Instalar app',
 
   'account.title': 'Cuenta',
+  'account.user': '<strong>Usuario:</strong>',
+  'account.family': 'Mi familia',
+  'account.app': 'App',
+  'account.refresh': 'Actualizar datos',
+  'account.whatsapp': 'Canal de WhatsApp',
+  'account.requests': 'Solicitudes y consultas',
+  'account.logout': 'Cerrar sesión',
 };
 
 /**

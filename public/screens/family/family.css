@@ -8,8 +8,8 @@
 }
 
 .family .family__logo {
-  width: 40px;
-  height: 40px;
+  width: var(--size-control);
+  height: var(--size-control);
   border-radius: var(--radius-12);
 }
 

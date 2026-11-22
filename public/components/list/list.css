@@ -13,6 +13,12 @@
   align-items: center;
   background-color: transparent;
   border: none;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.list-item .icon {
+  color: var(--icon-primary);
 }
 
 .list-item__leading {
