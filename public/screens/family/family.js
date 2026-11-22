@@ -11,6 +11,37 @@ import { t } from '../../js/i18n/es.js';
 import { BalamMenu } from '../../components/menu/menu.js';
 import { drawAppBar } from '../../components/app-bar/app-bar.js';
 import { avatar } from '../../components/avatar/avatar.js';
+import { install, isInstalled } from '../../js/install.js';
+
+/** How long the "installed" message stays on screen, in milliseconds. */
+const INSTALLED_MESSAGE_MS = 6000;
+
+/**
+ * Shows "Installing…" and, when the browser finishes, changes it to "Balam
+ * is installed" for a few seconds. Accepting the dialog does not mean the
+ * install is done: only `appinstalled` says so. It is a `role="status"` so
+ * screen readers announce each change without moving the focus.
+ * @param {HTMLElement} app - Container where the family screen is drawn.
+ */
+function showInstallProgress(app) {
+  const message = app.querySelector('.family__install-status');
+  if (!(message instanceof HTMLElement)) return;
+
+  const showInstalled = () => {
+    message.textContent = t('family.installed');
+    setTimeout(() => (message.hidden = true), INSTALLED_MESSAGE_MS);
+  };
+
+  message.hidden = false;
+  // install.js writes the flag on `appinstalled`; if it is already there,
+  // the event fired before we started listening.
+  if (isInstalled()) {
+    showInstalled();
+    return;
+  }
+  message.textContent = t('family.installing');
+  window.addEventListener('appinstalled', showInstalled, { once: true });
+}
 
 // TODO: draw one tab per child with getNoticeTabs(getSession().children)
 // instead of the fixed names; with a single child, show only the name.
@@ -51,6 +82,31 @@ export async function showFamily(app, section) {
     `;
   });
 
+  // Opened as the app, or installed from this browser: nothing to install.
+  const installed =
+    matchMedia('(display-mode: standalone)').matches || isInstalled();
+
+  /** @type {import('../../components/menu/menu.js').BalamMenuItem} */
+  const installItem = {
+    icon: 'device-mobile-down',
+    text: t('family.menu.install'),
+    action: async () => {
+      const result = await install();
+      // No browser dialog (iPhone, Firefox, or already used once): the
+      // welcome screen has the manual steps for this phone.
+      if (result === 'unavailable') {
+        location.hash = '#/welcome';
+        return;
+      }
+      if (result === 'accepted') {
+        if (menu instanceof BalamMenu) {
+          menu.items = menuItems.filter((item) => item !== installItem);
+        }
+        showInstallProgress(app);
+      }
+    },
+  };
+
   /** @type {import('../../components/menu/menu.js').BalamMenuItem[]} */
   const menuItems = [
     {
@@ -67,13 +123,7 @@ export async function showFamily(app, section) {
         location.replace('#/account');
       },
     },
-    {
-      icon: 'device-mobile-down',
-      text: t('family.menu.install'),
-      action: () => {
-        console.log('clic on install');
-      },
-    },
+    ...(installed ? [] : [installItem]),
   ];
 
   const start = /* HTML */ `
@@ -91,7 +141,7 @@ export async function showFamily(app, section) {
     <div class="family">
       ${drawAppBar(start, end)}
 
-      <balam-install-banner></balam-install-banner>
+      <p class="family__install-status text-body" role="status" hidden></p>
 
       <div class="family__tabs" role="tablist">${htmlTabs}</div>
 
