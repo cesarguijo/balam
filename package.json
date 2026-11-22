@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "todos": "leasot \"public/**/*.{js,css}\" --reporter markdown > docs/todos.md",
-    "coverage": "c8 node --test --experimental-test-module-mocks \"tests/*.test.js\"",
-    "test": "node --test --experimental-test-module-mocks \"tests/*.test.js\"",
+    "coverage": "c8 node --test --experimental-test-module-mocks \"tests/*.test.js\" \"tests/families/*.test.js\"",
+    "test": "node --test --experimental-test-module-mocks \"tests/*.test.js\"  \"tests/families/*.test.js\"",
     "lint": "eslint public tests",
     "tokens": "style-dictionary build --config sd.config.mjs",
     "phone": "\"%LOCALAPPDATA%\\Android\\Sdk\\platform-tools\\adb.exe\" reverse tcp:5500 tcp:5500",
