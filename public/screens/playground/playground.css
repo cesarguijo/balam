@@ -26,6 +26,14 @@
   max-width: 40ch;
 }
 
+/* Small samples side by side, like the avatars of one family */
+.playground__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-row);
+}
+
 /* Code to copy below each sample: monospace on a light box, scrolling
    sideways so long lines do not widen the page on a phone */
 .playground__code {

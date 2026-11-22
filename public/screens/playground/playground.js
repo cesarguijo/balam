@@ -11,6 +11,9 @@ import { icon, iconNames } from '../../js/icons.js';
 import { t } from '../../js/i18n/es.js';
 import { BalamTextField } from '../../components/text-field/text-field.js';
 import { BalamMenu } from '../../components/menu/menu.js';
+import { avatar } from '../../components/avatar/avatar.js';
+import { card } from '../../components/card/card.js';
+import { splitNotice } from '../../js/notice.js';
 // TODO: remove these two imports and the notices section once the notices
 // screen exists. The playground talks to Firebase directly only because a
 // teacher cannot log in through session.js (it requires a families/{uid}).
@@ -106,6 +109,40 @@ menu.items = [
 ];
 container.append(menu);`,
 
+  avatar: `import { avatar } from '../../components/avatar/avatar.js';
+
+<!-- Family: no order, bigger and amber -->
+\${avatar(family.username)}
+
+<!-- Child: the order (from 1) picks one of 4 colors, then they repeat -->
+\${family.children.map((child, index) => avatar(child.name, index + 1)).join('')}`,
+
+  card: `import { card } from '../../components/card/card.js';
+
+<!-- Default (with border): groups settings, as in the account screen -->
+\${card(/* HTML */ \`
+  <div class="account__profile">
+    \${avatar(family.username)}
+    <p class="text-body">@\${family.username}</p>
+  </div>
+\`)}
+
+<!-- borderless: content to read, one card per notice -->
+import { splitNotice } from '../../js/notice.js';
+
+\${notices
+  .map((notice) => {
+    const { title, body } = splitNotice(notice.text);
+    return card(
+      /* HTML */ \`
+        <h2 class="text-title">\${title}</h2>
+        <p class="text-body">\${body}</p>
+      \`,
+      'borderless',
+    );
+  })
+  .join('')}`,
+
   textFieldDisabled: `<balam-text-field
   disabled
   label="\${t('login.username.label')}"
@@ -151,6 +188,55 @@ export function showPlayground(app) {
           <balam-button text="Delete" variant="danger-secondary"></balam-button>
         </div>
         ${drawCode(code.buttonVariants)} ${drawCode(code.buttonLoading)}
+      </section>
+
+      <section class="playground__section">
+        <h2 class="text-title">Avatar</h2>
+        <div class="playground__sample">
+          <h3>Family</h3>
+          <div class="playground__row">${avatar('arguijoreyes')}</div>
+          <h3>Children (the 5th repeats color 1)</h3>
+          <div class="playground__row">
+            ${['Ana', 'Luis', 'Óscar', 'Emma', 'Iris']
+              .map((name, index) => avatar(name, index + 1))
+              .join('')}
+          </div>
+          <h3>Edge cases: accent and empty name</h3>
+          <div class="playground__row">
+            ${avatar('Ángel', 1)} ${avatar('', 2)} ${avatar(null)}
+          </div>
+        </div>
+        ${drawCode(code.avatar)}
+      </section>
+
+      <section class="playground__section">
+        <h2 class="text-title">Card</h2>
+        <div class="playground__sample">
+          <h3>Default (with border): account profile</h3>
+          ${card(/* HTML */ `
+            <div class="playground__row">
+              ${avatar('arguijoreyes')}
+              <p class="text-body"><strong>User:</strong> @arguijoreyes</p>
+            </div>
+          `)}
+          <h3>Borderless: notices</h3>
+          ${[
+            'Early dismissal\nToday, March 10, students leave at 3:00 PM to decorate for Father’s Day.',
+            'Parent meeting\nReminder: the parent meeting is on Thursday at 6:00 PM.',
+          ]
+            .map((text) => {
+              const { title, body } = splitNotice(text);
+              return card(
+                /* HTML */ `
+                  <h4 class="text-title">${title}</h4>
+                  <p class="text-body">${body}</p>
+                `,
+                'borderless',
+              );
+            })
+            .join('')}
+        </div>
+        ${drawCode(code.card)}
       </section>
 
       <section class="playground__section">
