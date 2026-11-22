@@ -14,6 +14,7 @@ import { BalamMenu } from '../../components/menu/menu.js';
 import { avatar } from '../../components/avatar/avatar.js';
 import { card } from '../../components/card/card.js';
 import { splitNotice } from '../../js/notice.js';
+import { list } from '../../components/list/list.js';
 // TODO: remove these two imports and the notices section once the notices
 // screen exists. The playground talks to Firebase directly only because a
 // teacher cannot log in through session.js (it requires a families/{uid}).
@@ -143,6 +144,35 @@ import { splitNotice } from '../../js/notice.js';
   })
   .join('')}`,
 
+  list: `import { list } from '../../components/list/list.js';
+
+// One object per row; list() draws the <ul> and a <li> for each
+\${card(
+  list([
+    // div (default): only shows data
+    ...family.children.map((child, index) => ({
+      leading: avatar(child.name, index + 1),
+      content: child.name,
+      trailing: child.grade,
+    })),
+
+    // button: does something when tapped
+    {
+      leading: icon('refresh'),
+      content: t('account.refresh'),
+      tag: 'button',
+    },
+
+    // label: tapping anywhere on the row flips the switch
+    {
+      leading: icon('bell'),
+      content: t('account.notifications'),
+      trailing: '<input type="checkbox" role="switch" />',
+      tag: 'label',
+    },
+  ]),
+)}`,
+
   textFieldDisabled: `<balam-text-field
   disabled
   label="\${t('login.username.label')}"
@@ -237,6 +267,44 @@ export function showPlayground(app) {
             .join('')}
         </div>
         ${drawCode(code.card)}
+      </section>
+
+      <section class="playground__section">
+        <h2 class="text-title">List</h2>
+        <div class="playground__sample">
+          <h3>Account rows, inside a card</h3>
+          ${card(
+            list([
+              {
+                leading: avatar('Ana', 1),
+                content: 'Ana Smith',
+                trailing: '7-1',
+              },
+              {
+                leading: avatar('Luis', 2),
+                content: 'Luis Smith',
+                trailing: '8-1',
+              },
+              {
+                leading: icon('clock'),
+                content: 'Refresh data',
+                tag: 'button',
+              },
+              {
+                leading: icon('megaphone'),
+                content: 'Notifications',
+                trailing: '<input type="checkbox" role="switch" />',
+                tag: 'label',
+              },
+              {
+                leading: icon('share'),
+                content: 'Requests and questions',
+                tag: 'button',
+              },
+            ]),
+          )}
+        </div>
+        ${drawCode(code.list)}
       </section>
 
       <section class="playground__section">

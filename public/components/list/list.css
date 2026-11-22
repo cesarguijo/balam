@@ -1,0 +1,27 @@
+.list {
+  list-style: none;
+  padding: 0 var(--space-12);
+}
+
+.list-item {
+  height: var(--size-control);
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-12);
+  padding: var(--space-8) 0;
+  width: 100%;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+}
+
+.list-item__leading {
+}
+
+.list-item__content {
+  flex: 1;
+  text-align: left;
+}
+
+.list-item__trailing {
+}
