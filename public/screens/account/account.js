@@ -9,7 +9,11 @@ import { card } from '../../components/card/card.js';
 import { list } from '../../components/list/list.js';
 import { t } from '../../js/i18n/es.js';
 import { icon } from '../../js/icons.js';
-import { getLastRefreshDate, getSession } from '../../js/session.js';
+import {
+  getLastRefreshDate,
+  getSession,
+  refreshFamily,
+} from '../../js/session.js';
 import { formatLastRefresh } from './last-refresh.js';
 
 /** Start of the app bar: a back button and the screen title. */
@@ -56,13 +60,14 @@ export async function showAccount(app) {
     content: /* HTML */ `
       <div class="account__update-content">
         <p>${t('account.refresh')}</p>
-        <p class="account__update-time text-label">
+        <p data-refresh-date class="account__update-time text-label">
           ${t('account.refresh.lastTime')} ${getLastUpdate()}
         </p>
       </div>
     `,
     trailing: ``,
     tag: 'button',
+    selector: 'data-account-refresh',
   });
 
   const familyItem = list(familyItemOption);
@@ -105,6 +110,17 @@ export async function showAccount(app) {
   const backButton = app.querySelector('[data-account-back]');
 
   backButton?.addEventListener('click', () => location.replace('#/notices'));
+
+  const refreshButton = app.querySelector('[data-account-refresh]');
+
+  refreshButton?.addEventListener('click', async () => {
+    await refreshFamily();
+    const date = app.querySelector('[data-refresh-date]');
+    if (!(date instanceof HTMLElement)) {
+      throw new Error('[data-refresh-date] not found');
+    }
+    date.innerHTML = `${t('account.refresh.lastTime')} ${getLastUpdate()}`;
+  });
 }
 
 /**
