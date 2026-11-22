@@ -871,7 +871,7 @@
     "background": {
       "$type": "color",
       "$value": "{cream.50}",
-      "$description": "Neutral avatar background, used until the data loads",
+      "$description": "Neutral avatar of the family tabs",
       "$extensions": {
         "mode": {}
       }
@@ -1157,17 +1157,6 @@
         "mode": {}
       }
     },
-    "end": {
-      "$type": "dimension",
-      "$value": {
-        "value": 14,
-        "unit": "px"
-      },
-      "$description": "⚠ Width of the pointed end of the button",
-      "$extensions": {
-        "mode": {}
-      }
-    },
     "ring": {
       "$type": "dimension",
       "$value": {
@@ -1362,7 +1351,7 @@
         "Components",
         "Measures"
       ],
-      "createdAt": "2026-11-21T07:07:11.664Z"
+      "createdAt": "2026-11-22T02:35:10.201Z"
     }
   }
 }

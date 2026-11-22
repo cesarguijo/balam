@@ -51,7 +51,6 @@
   --font-line-height-body: 24px; /** Line height for body text */
   --font-line-height-label: 20px; /** Line height for labels */
   --font-family: Atkinson Hyperlegible Next; /** Typeface for all text, chosen for legibility. Self-hosted woff2 */
-  --button-end: 14px; /** ⚠ Width of the pointed end of the button */
   --button-ring: 3px; /** Width of the button ring */
   --button-chamfer: 10px; /** Size of the cut corners */
   --button-lip-height: 5px; /** Height of the solid shadow; the button sinks this much when pressed */
@@ -115,7 +114,7 @@
   --field-radius: var(--radius-12); /** Corner radius of fields and cards */
   --selection-indicator: var(--blue-800); /** Selected chip and active nav item. Contrast 10.2:1 on cream */
   --border-subtle: var(--gray-200); /** Dividers between areas, such as under the header */
-  --avatar-background: var(--cream-50); /** Neutral avatar background, used until the data loads */
+  --avatar-background: var(--cream-50); /** Neutral avatar of the family tabs */
   --avatar-user-background: var(--amber-500); /** Avatar of the signed-in parent */
   --avatar-user-text: var(--blue-800); /** Letter of the parent avatar. Contrast 4.6:1 on amber */
   --avatar-child-1-background: var(--blue-100); /** Avatar of the 1st child, by family order */
