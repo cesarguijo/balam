@@ -61,6 +61,7 @@
   --button-loader-duration: 1200ms; /** One full cycle of the pyramid */
   --button-padding-inline: 28px; /** Side padding between the ends and the label */
   --button-facet-width: 11px; /** Width of the side facets */
+  --control-switch-track-width: 44px;
   --space-4: 4px; /** Base spacing step · 4 px */
   --space-8: 8px; /** Spacing step · 8 px */
   --space-12: 12px; /** Spacing step · 12 px */
@@ -147,4 +148,10 @@
   --button-danger-strip-top: var(--pink-300); /** Danger button · highlight strip along the top edge */
   --button-danger-strip-bottom: var(--pink-800); /** Danger button · shadow strip along the bottom edge */
   --button-height: var(--size-control); /** Button height, same as any control */
+  --control-switch-track-off: var(--brown-500);
+  --control-switch-track-height: var(--space-24);
+  --control-switch-thumb: var(--cream-50);
+  --control-switch-thumb-size: var(--space-16);
+  --control-switch-track-on: var(--selection-indicator);
+  --control-switch-track-disable: var(--action-disabled-background);
 }

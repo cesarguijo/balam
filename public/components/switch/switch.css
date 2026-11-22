@@ -1,0 +1,36 @@
+.switch {
+  appearance: none;
+  width: var(--control-switch-track-width);
+  height: var(--control-switch-track-height);
+  border-radius: var(--radius-full);
+  background-color: var(--control-switch-track-off);
+  position: relative;
+}
+
+.switch:checked {
+  background-color: var(--control-switch-track-on);
+  position: relative;
+}
+
+.switch:disabled {
+  background-color: var(--control-switch-track-disable);
+}
+
+.switch::before {
+  content: '';
+  position: absolute;
+  width: var(--control-switch-thumb-size);
+  height: var(--control-switch-thumb-size);
+  border-radius: 50%;
+  background-color: var(--control-switch-thumb);
+
+  /* The translate puts the thumb's center on top/left, so left is measured
+     to its center: 12 px leaves a 4 px gap with a 16 px thumb */
+  top: 50%;
+  left: var(--space-12);
+  transform: translate(-50%, -50%);
+}
+
+.switch:checked::before {
+  left: calc(var(--control-switch-track-width) - var(--space-12));
+}

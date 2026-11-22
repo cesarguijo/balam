@@ -15,6 +15,7 @@ import { avatar } from '../../components/avatar/avatar.js';
 import { card } from '../../components/card/card.js';
 import { splitNotice } from '../../js/notice.js';
 import { list } from '../../components/list/list.js';
+import { drawSwitch } from '../../components/switch/switch.js';
 // TODO: remove these two imports and the notices section once the notices
 // screen exists. The playground talks to Firebase directly only because a
 // teacher cannot log in through session.js (it requires a families/{uid}).
@@ -305,6 +306,18 @@ export function showPlayground(app) {
           )}
         </div>
         ${drawCode(code.list)}
+      </section>
+
+      <section class="playground__section">
+        <h2 class="text-title">Switch</h2>
+        <div class="playground__sample">
+          <h3>Tap it to turn it on and off</h3>
+          <div class="playground__row">${drawSwitch(false, false)}</div>
+          <h3>Disabled: off and on</h3>
+          <div class="playground__row">
+            ${drawSwitch(false, true)} ${drawSwitch(true, true)}
+          </div>
+        </div>
       </section>
 
       <section class="playground__section">

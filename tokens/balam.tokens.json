@@ -1261,6 +1261,73 @@
       }
     }
   },
+  "control": {
+    "switch": {
+      "track": {
+        "off": {
+          "$type": "color",
+          "$value": "{brown.500}",
+          "$description": "",
+          "$extensions": {
+            "mode": {}
+          }
+        },
+        "on": {
+          "$type": "color",
+          "$value": "{selection.indicator}",
+          "$description": "",
+          "$extensions": {
+            "mode": {}
+          }
+        },
+        "disable": {
+          "$type": "color",
+          "$value": "{action.disabled.background}",
+          "$description": "",
+          "$extensions": {
+            "mode": {}
+          }
+        },
+        "width": {
+          "$type": "dimension",
+          "$value": {
+            "value": 44,
+            "unit": "px"
+          },
+          "$description": "",
+          "$extensions": {
+            "mode": {}
+          }
+        },
+        "height": {
+          "$type": "dimension",
+          "$value": "{space.24}",
+          "$description": "",
+          "$extensions": {
+            "mode": {}
+          }
+        }
+      },
+      "thumb": {
+        "$root": {
+          "$type": "color",
+          "$value": "{cream.50}",
+          "$description": "",
+          "$extensions": {
+            "mode": {}
+          }
+        },
+        "size": {
+          "$type": "dimension",
+          "$value": "{space.16}",
+          "$description": "",
+          "$extensions": {
+            "mode": {}
+          }
+        }
+      }
+    }
+  },
   "space": {
     "4": {
       "$type": "dimension",
@@ -1364,7 +1431,7 @@
         "Components",
         "Measures"
       ],
-      "createdAt": "2026-11-22T02:57:29.735Z"
+      "createdAt": "2026-11-22T07:22:33.880Z"
     }
   }
 }
