@@ -14,6 +14,12 @@ import { clearNotices } from './notices.js';
  * would throw no error, it would just find nothing.
  */
 const FAMILY_KEY = 'family';
+/**
+ * Name the date of the last family read is stored under, in milliseconds
+ * (`Date.now()`). Kept apart from the family because `toFamily` validates
+ * that object and the date is not family data.
+ */
+const LAST_REFRESH_KEY = 'last-refresh-date';
 
 /**
  * Login error types. The login screen shows a different message for each.
@@ -72,6 +78,7 @@ export class SessionError extends Error {
 export function logOut() {
   return adapter.logOut().then(() => {
     localStorage.removeItem(FAMILY_KEY);
+    localStorage.removeItem(LAST_REFRESH_KEY);
     clearNotices();
   });
 }
@@ -113,6 +120,7 @@ export function getSession() {
 export async function logIn(username, password) {
   const family = await adapter.logIn(username, password);
   localStorage.setItem(FAMILY_KEY, JSON.stringify(family));
+  localStorage.setItem(LAST_REFRESH_KEY, String(Date.now()));
   return family;
 }
 
@@ -127,5 +135,19 @@ export async function logIn(username, password) {
 export async function refreshFamily() {
   const family = await adapter.getFamily();
   localStorage.setItem(FAMILY_KEY, JSON.stringify(family));
+  localStorage.setItem(LAST_REFRESH_KEY, String(Date.now()));
   return family;
+}
+
+/**
+ * Returns when the family was last read from the server (on login or on
+ * refresh). It is stored as milliseconds but returned as a `Date`, so the
+ * screens do not depend on how it is stored.
+ * @returns {Date | null} The date, or `null` if it was never stored (e.g. a
+ * session opened before this date existed).
+ */
+export function getLastRefreshDate() {
+  if (localStorage.getItem(LAST_REFRESH_KEY) === null) return null;
+  const dateNumber = Number(localStorage.getItem(LAST_REFRESH_KEY));
+  return new Date(dateNumber);
 }
