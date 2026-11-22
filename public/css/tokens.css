@@ -35,6 +35,7 @@
   --sand-100: #efe6d2; /** Pale sand · ground in illustrations */
   --sand-200: #e2d1ac; /** Sand · lit stone in illustrations, background of the 3rd child avatar */
   --sand-300: #dcc9a3; /** Dark sand · stone in shade in illustrations */
+  --icon-spin-duration: 1000ms; /** One full turn of an icon that spins while loading */
   --size-control: 52px; /** Minimum height of tappable controls: buttons, fields, rows */
   --size-chip: 40px; /** Height of the child chips */
   --size-avatar-child: 26px; /** Diameter of the child avatar */

@@ -14,5 +14,14 @@
         "$description": "One full cycle of the pyramid"
       }
     }
+  },
+  "icon": {
+    "spin": {
+      "duration": {
+        "$type": "duration",
+        "$value": { "value": 1000, "unit": "ms" },
+        "$description": "One full turn of an icon that spins while loading"
+      }
+    }
   }
 }

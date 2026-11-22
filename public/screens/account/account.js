@@ -9,7 +9,8 @@ import { card } from '../../components/card/card.js';
 import { list } from '../../components/list/list.js';
 import { t } from '../../js/i18n/es.js';
 import { icon } from '../../js/icons.js';
-import { getSession } from '../../js/session.js';
+import { getLastRefreshDate, getSession } from '../../js/session.js';
+import { formatLastRefresh } from './last-refresh.js';
 
 /** Start of the app bar: a back button and the screen title. */
 const start = /* HTML */ `
@@ -55,7 +56,9 @@ export async function showAccount(app) {
     content: /* HTML */ `
       <div class="account__update-content">
         <p>${t('account.refresh')}</p>
-        <p class="account__update-time text-label">Ultima vez: hoy, 8:15</p>
+        <p class="account__update-time text-label">
+          ${t('account.refresh.lastTime')} ${getLastUpdate()}
+        </p>
       </div>
     `,
     trailing: ``,
@@ -102,4 +105,18 @@ export async function showAccount(app) {
   const backButton = app.querySelector('[data-account-back]');
 
   backButton?.addEventListener('click', () => location.replace('#/notices'));
+}
+
+/**
+ * Returns the text of the last time the family was read from the server.
+ * It reads the clock here, not in `formatLastRefresh`, so that one stays pure.
+ * @returns {string} The formatted date, or "sin registro" for sessions opened
+ * before the date was stored.
+ */
+function getLastUpdate() {
+  const lastRefresh = getLastRefreshDate();
+  if (lastRefresh instanceof Date) {
+    return formatLastRefresh(lastRefresh, new Date());
+  }
+  return t('account.refresh.noDate');
 }

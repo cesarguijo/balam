@@ -111,6 +111,8 @@ export const messages = {
   'account.logout': 'Cerrar sesión',
   'account.refresh.today': 'hoy',
   'account.refresh.yesterday': 'ayer',
+  'account.refresh.lastTime': 'Última vez:',
+  'account.refresh.noDate': 'sin registro',
 };
 
 /**
