@@ -109,6 +109,8 @@ export const messages = {
   'account.whatsapp': 'Canal de WhatsApp',
   'account.requests': 'Solicitudes y consultas',
   'account.logout': 'Cerrar sesión',
+  'account.refresh.today': 'hoy',
+  'account.refresh.yesterday': 'ayer',
 };
 
 /**
