@@ -25,7 +25,16 @@ import { showAccount } from '../screens/account/account.js';
  * @type {Record<string, Screen>}
  */
 export const routes = {
-  '#/welcome': showWelcome,
+  // Inside the installed app the welcome screen already did its job, so it
+  // goes to the default route. In the phone's browser it is still shown: the
+  // install banner sends the family there for the instructions. On an
+  // installed desktop app the default is the welcome screen itself, and
+  // replace() to the same # would leave the screen blank.
+  '#/welcome': async (app) => {
+    const route = isStandalone() ? await pickFamilyDefault() : '#/welcome';
+    if (route === '#/welcome') showWelcome(app);
+    else location.replace(route);
+  },
   '#/playground': showPlayground,
   '#/login': showLogin,
   '#/notices': (app) => showFamily(app, showNotices),
@@ -33,6 +42,15 @@ export const routes = {
   '#/attendance': (app) => showFamily(app, showAttendance),
   '#/account': showAccount,
 };
+
+/**
+ * Tells whether the app was opened installed, in its own window, and not in
+ * the browser.
+ * @returns {boolean}
+ */
+function isStandalone() {
+  return matchMedia('(display-mode: standalone)').matches;
+}
 
 /**
  * Picks the families' default route: the welcome screen on desktop, and the
