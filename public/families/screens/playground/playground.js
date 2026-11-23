@@ -16,6 +16,7 @@ import { card } from '../../../components/card/card.js';
 import { splitNotice } from '../../../js/notice.js';
 import { list } from '../../../components/list/list.js';
 import { drawSwitch } from '../../../components/switch/switch.js';
+import '../../../components/login-form/login-form.js';
 // TODO: remove these two imports and the notices section once the notices
 // screen exists. The playground talks to Firebase directly only because a
 // teacher cannot log in through session.js (it requires a families/{uid}).
@@ -168,11 +169,20 @@ import { splitNotice } from '../../../js/notice.js';
     {
       leading: icon('bell'),
       content: t('account.notifications'),
-      trailing: '<input type="checkbox" role="switch" />',
+      trailing: drawSwitch(false, false),
       tag: 'label',
     },
   ]),
 )}`,
+
+  loginForm: `import '../../../components/login-form/login-form.js';
+
+<balam-login-form></balam-login-form>
+
+// Fires login-submit only when the data is valid
+loginForm.addEventListener('login-submit', (event) => {
+  const { username, password } = event.detail;
+});`,
 
   textFieldDisabled: `<balam-text-field
   disabled
@@ -197,6 +207,65 @@ function drawCode(text) {
 }
 
 /**
+ * Builds one button of the nav tree that scrolls to its title. They are
+ * buttons, not `#id` links: changing the # would make the router look for
+ * another screen.
+ * @param {Element} title - The h2 or h3 the button scrolls to.
+ * @returns {HTMLButtonElement} The button.
+ */
+function navButton(title) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'playground__nav-link';
+  button.textContent = title.textContent;
+  button.addEventListener('click', () => {
+    title.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+  return button;
+}
+
+/**
+ * Fills the side nav with a tree read from the titles: each section (h2)
+ * and, below it, its samples (h3). A new section shows up in the nav without
+ * touching it.
+ * @param {HTMLElement} app - Container where the playground is drawn.
+ * @throws {Error} If the nav is missing from the template.
+ */
+function drawNav(app) {
+  const nav = app.querySelector('[data-playground-nav]');
+  if (!(nav instanceof HTMLElement)) {
+    throw new Error('[data-playground-nav] not found in the playground');
+  }
+
+  const tree = document.createElement('ul');
+  tree.className = 'playground__tree';
+
+  for (const section of app.querySelectorAll('.playground__section')) {
+    const title = section.querySelector(':scope > h2');
+    if (!title) continue;
+
+    const item = document.createElement('li');
+    item.append(navButton(title));
+
+    const subtitles = section.querySelectorAll('h3');
+    if (subtitles.length > 0) {
+      const branch = document.createElement('ul');
+      branch.className = 'playground__tree playground__tree--branch';
+      for (const subtitle of subtitles) {
+        const leaf = document.createElement('li');
+        leaf.append(navButton(subtitle));
+        branch.append(leaf);
+      }
+      item.append(branch);
+    }
+
+    tree.append(item);
+  }
+
+  nav.append(tree);
+}
+
+/**
  * Shows the playground screen inside the container.
  * @param {HTMLElement} app - Container where the screen is drawn.
  */
@@ -204,285 +273,333 @@ export function showPlayground(app) {
   document.title = 'Balam - Catalog';
 
   app.innerHTML = /* HTML */ `
-    <div class="playground">
-      <h1 class="text-display">Component catalog</h1>
+    <div class="playground-layout">
+      <nav
+        class="playground__nav"
+        data-playground-nav
+        aria-label="Sections"
+      ></nav>
+      <div class="playground">
+        <h1 class="text-display">Component catalog</h1>
 
-      <section class="playground__section">
-        <h2 class="text-title">Button</h2>
-        <div class="playground__sample">
-          <balam-button text="${t('install.button')}"></balam-button>
-          <balam-button
-            text="${t('install.button')}"
-            variant="secondary"
-          ></balam-button>
-          <balam-button text="Delete" variant="danger-primary"></balam-button>
-          <balam-button text="Delete" variant="danger-secondary"></balam-button>
-        </div>
-        ${drawCode(code.buttonVariants)} ${drawCode(code.buttonLoading)}
-      </section>
+        <section class="playground__section">
+          <h2 class="text-title">Button</h2>
+          <div class="playground__sample">
+            <balam-button text="${t('install.button')}"></balam-button>
+            <balam-button
+              text="${t('install.button')}"
+              variant="secondary"
+            ></balam-button>
+            <balam-button text="Delete" variant="danger-primary"></balam-button>
+            <balam-button
+              text="Delete"
+              variant="danger-secondary"
+            ></balam-button>
+          </div>
+          ${drawCode(code.buttonVariants)} ${drawCode(code.buttonLoading)}
+        </section>
 
-      <section class="playground__section">
-        <h2 class="text-title">Avatar</h2>
-        <div class="playground__sample">
-          <h3>Family</h3>
-          <div class="playground__row">${avatar('arguijoreyes')}</div>
-          <h3>Children (the 5th repeats color 1)</h3>
-          <div class="playground__row">
-            ${['Ana', 'Luis', 'Óscar', 'Emma', 'Iris']
-              .map((name, index) => avatar(name, index + 1))
+        <section class="playground__section">
+          <h2 class="text-title">Avatar</h2>
+          <div class="playground__sample">
+            <h3>Family</h3>
+            <div class="playground__row">${avatar('arguijoreyes')}</div>
+            <h3>Children (the 5th repeats color 1)</h3>
+            <div class="playground__row">
+              ${['Ana', 'Luis', 'Óscar', 'Emma', 'Iris']
+                .map((name, index) => avatar(name, index + 1))
+                .join('')}
+            </div>
+            <h3>Edge cases: accent and empty name</h3>
+            <div class="playground__row">
+              ${avatar('Ángel', 1)} ${avatar('', 2)} ${avatar(null)}
+            </div>
+          </div>
+          ${drawCode(code.avatar)}
+        </section>
+
+        <section class="playground__section">
+          <h2 class="text-title">Card</h2>
+          <div class="playground__sample">
+            <h3>Default (with border): account profile</h3>
+            ${card(/* HTML */ `
+              <div class="playground__row">
+                ${avatar('arguijoreyes')}
+                <p class="text-body"><strong>User:</strong> @arguijoreyes</p>
+              </div>
+            `)}
+            <h3>Borderless: notices</h3>
+            ${[
+              'Early dismissal\nToday, March 10, students leave at 3:00 PM to decorate for Father’s Day.',
+              'Parent meeting\nReminder: the parent meeting is on Thursday at 6:00 PM.',
+            ]
+              .map((text) => {
+                const { title, body } = splitNotice(text);
+                return card(
+                  /* HTML */ `
+                    <h4 class="text-title">${title}</h4>
+                    <p class="text-body">${body}</p>
+                  `,
+                  'borderless',
+                );
+              })
               .join('')}
           </div>
-          <h3>Edge cases: accent and empty name</h3>
-          <div class="playground__row">
-            ${avatar('Ángel', 1)} ${avatar('', 2)} ${avatar(null)}
-          </div>
-        </div>
-        ${drawCode(code.avatar)}
-      </section>
+          ${drawCode(code.card)}
+        </section>
 
-      <section class="playground__section">
-        <h2 class="text-title">Card</h2>
-        <div class="playground__sample">
-          <h3>Default (with border): account profile</h3>
-          ${card(/* HTML */ `
+        <section class="playground__section">
+          <h2 class="text-title">List</h2>
+          <div class="playground__sample">
+            <h3>Account rows, inside a card</h3>
+            ${card(
+              list([
+                {
+                  leading: avatar('Ana', 1),
+                  content: 'Ana Smith',
+                  trailing: '7-1',
+                },
+                {
+                  leading: avatar('Luis', 2),
+                  content: 'Luis Smith',
+                  trailing: '8-1',
+                },
+                {
+                  leading: icon('clock'),
+                  content: 'Refresh data',
+                  tag: 'button',
+                },
+                {
+                  leading: icon('megaphone'),
+                  content: 'Notifications',
+                  trailing: drawSwitch(false, false),
+                  tag: 'label',
+                },
+                {
+                  leading: icon('share'),
+                  content: 'Requests and questions',
+                  tag: 'button',
+                },
+              ]),
+            )}
+          </div>
+          ${drawCode(code.list)}
+        </section>
+
+        <section class="playground__section">
+          <h2 class="text-title">Switch</h2>
+          <div class="playground__sample">
+            <h3>Tap it to turn it on and off</h3>
+            <div class="playground__row">${drawSwitch(false, false)}</div>
+            <h3>Disabled: off and on</h3>
             <div class="playground__row">
-              ${avatar('arguijoreyes')}
-              <p class="text-body"><strong>User:</strong> @arguijoreyes</p>
+              ${drawSwitch(false, true)} ${drawSwitch(true, true)}
             </div>
-          `)}
-          <h3>Borderless: notices</h3>
-          ${[
-            'Early dismissal\nToday, March 10, students leave at 3:00 PM to decorate for Father’s Day.',
-            'Parent meeting\nReminder: the parent meeting is on Thursday at 6:00 PM.',
-          ]
-            .map((text) => {
-              const { title, body } = splitNotice(text);
-              return card(
-                /* HTML */ `
-                  <h4 class="text-title">${title}</h4>
-                  <p class="text-body">${body}</p>
-                `,
-                'borderless',
-              );
-            })
-            .join('')}
-        </div>
-        ${drawCode(code.card)}
-      </section>
-
-      <section class="playground__section">
-        <h2 class="text-title">List</h2>
-        <div class="playground__sample">
-          <h3>Account rows, inside a card</h3>
-          ${card(
-            list([
-              {
-                leading: avatar('Ana', 1),
-                content: 'Ana Smith',
-                trailing: '7-1',
-              },
-              {
-                leading: avatar('Luis', 2),
-                content: 'Luis Smith',
-                trailing: '8-1',
-              },
-              {
-                leading: icon('clock'),
-                content: 'Refresh data',
-                tag: 'button',
-              },
-              {
-                leading: icon('megaphone'),
-                content: 'Notifications',
-                trailing: '<input type="checkbox" role="switch" />',
-                tag: 'label',
-              },
-              {
-                leading: icon('share'),
-                content: 'Requests and questions',
-                tag: 'button',
-              },
-            ]),
-          )}
-        </div>
-        ${drawCode(code.list)}
-      </section>
-
-      <section class="playground__section">
-        <h2 class="text-title">Switch</h2>
-        <div class="playground__sample">
-          <h3>Tap it to turn it on and off</h3>
-          <div class="playground__row">${drawSwitch(false, false)}</div>
-          <h3>Disabled: off and on</h3>
-          <div class="playground__row">
-            ${drawSwitch(false, true)} ${drawSwitch(true, true)}
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section class="playground__section">
-        <h2 class="text-title">Menu</h2>
-        <div class="playground__sample" data-menu-sample></div>
-        <p>Open the menu and tap an option: its action shows up below.</p>
-        <pre
-          class="playground__console playground__console--log"
-          data-menu-output
-        ></pre>
-        ${drawCode(code.menu)}
-      </section>
+        <section class="playground__section">
+          <h2 class="text-title">Menu</h2>
+          <div class="playground__sample" data-menu-sample></div>
+          <p>Open the menu and tap an option: its action shows up below.</p>
+          <pre
+            class="playground__console playground__console--log"
+            data-menu-output
+          ></pre>
+          ${drawCode(code.menu)}
+        </section>
 
-      <section class="playground__section">
-        <h2 class="text-title">Icons</h2>
-        ${drawCode(code.icons)}
-        <div class="playground__icons">${drawIcons()}</div>
-      </section>
+        <section class="playground__section">
+          <h2 class="text-title">Icons</h2>
+          ${drawCode(code.icons)}
+          <div class="playground__icons">${drawIcons()}</div>
+        </section>
 
-      <section class="playground__section">
-        <h2 class="text-title">Text field</h2>
-        <div class="playground__sample">
-          <h3>Normal state</h3>
-          <balam-text-field
-            label="${t('login.username.label')}"
-            left-icon="user"
-            placeholder="${t('login.username.placeholder')}"
-          ></balam-text-field>
-          <balam-text-field
-            label="${t('login.password.label')}"
-            left-icon="lock"
-            type="password"
-            placeholder="${t('login.password.placeholder')}"
-          ></balam-text-field>
-        </div>
-        ${drawCode(code.textFieldNormal)}
-        <div class="playground__sample">
-          <h3>Error state</h3>
-          <balam-text-field
-            error-message="${t('login.error.usernameEmpty')}"
-            label="${t('login.username.label')}"
-            left-icon="user"
-            placeholder="${t('login.username.placeholder')}"
-          ></balam-text-field>
-          <balam-text-field
-            error-message="${t('login.error.passwordEmpty')}"
-            label="${t('login.password.label')}"
-            left-icon="lock"
-            type="password"
-            placeholder="${t('login.password.placeholder')}"
-          ></balam-text-field>
-        </div>
-        ${drawCode(code.textFieldError)}
-        <form class="playground__sample" data-form-sample>
-          <h3>Inside a form</h3>
-          <p>Type and tap Entrar: what the form sends shows up below.</p>
-          <balam-text-field
-            name="username"
-            autocomplete="username"
-            label="${t('login.username.label')}"
-            left-icon="user"
-            placeholder="${t('login.username.placeholder')}"
-          ></balam-text-field>
-          <balam-text-field
-            name="password"
-            autocomplete="current-password"
-            label="${t('login.password.label')}"
-            left-icon="lock"
-            type="password"
-            placeholder="${t('login.password.placeholder')}"
-          ></balam-text-field>
-          <balam-button text="${t('login.button.default')}"></balam-button>
-          <pre data-form-output></pre>
-        </form>
-        ${drawCode(code.textFieldForm)}
-        <div class="playground__sample">
-          <h3>Disabled state</h3>
-          <balam-text-field
-            disabled
-            label="${t('login.username.label')}"
-            left-icon="user"
-            placeholder="${t('login.username.placeholder')}"
-          ></balam-text-field>
-          <balam-text-field
-            disabled
-            label="${t('login.password.label')}"
-            left-icon="lock"
-            type="password"
-            placeholder="${t('login.password.placeholder')}"
-          ></balam-text-field>
-        </div>
-        ${drawCode(code.textFieldDisabled)}
-      </section>
-
-      <section class="playground__section playground__section--dev">
-        <h2 class="text-title">Notices test (real Firestore)</h2>
-        <p class="playground__status">
-          Session:
-          <strong data-notices-account>—</strong>
-        </p>
-        <div class="playground__dev">
-          <div class="playground__panel">
-            <form class="playground__fieldset" data-notices-login>
-              <label class="playground__control-label">
-                ${t('login.username.label')}
-                <input
-                  class="playground__control"
-                  name="username"
-                  autocomplete="username"
-                />
-              </label>
-              <label class="playground__control-label">
-                ${t('login.password.label')}
-                <input
-                  class="playground__control"
-                  name="password"
-                  type="password"
-                  autocomplete="current-password"
-                />
-              </label>
-              <div class="playground__actions">
-                <button class="playground__dev-button">
-                  ${t('login.button.default')}
-                </button>
-                <button
-                  class="playground__dev-button"
-                  type="button"
-                  data-notices-logout
-                >
-                  Log out
-                </button>
-              </div>
-            </form>
-            <form class="playground__fieldset" data-notices-publish>
-              <label class="playground__control-label">
-                Group
-                <input class="playground__control" name="groupId" value="7-1" />
-              </label>
-              <label class="playground__control-label">
-                Text (the first line is the title)
-                <textarea
-                  class="playground__control"
-                  name="text"
-                  rows="3"
-                ></textarea>
-              </label>
-              <div class="playground__actions">
-                <button class="playground__dev-button">Publish</button>
-                <button
-                  class="playground__dev-button"
-                  type="button"
-                  data-notices-read
-                >
-                  Read the group's notices
-                </button>
-              </div>
-            </form>
+        <section class="playground__section">
+          <h2 class="text-title">Text field</h2>
+          <div class="playground__sample">
+            <h3>Normal state</h3>
+            <balam-text-field
+              label="${t('login.username.label')}"
+              left-icon="user"
+              placeholder="${t('login.username.placeholder')}"
+            ></balam-text-field>
+            <balam-text-field
+              label="${t('login.password.label')}"
+              left-icon="lock"
+              type="password"
+              placeholder="${t('login.password.placeholder')}"
+            ></balam-text-field>
           </div>
-          <pre class="playground__console" data-notices-output></pre>
-        </div>
-      </section>
+          ${drawCode(code.textFieldNormal)}
+          <div class="playground__sample">
+            <h3>Error state</h3>
+            <balam-text-field
+              error-message="${t('login.error.usernameEmpty')}"
+              label="${t('login.username.label')}"
+              left-icon="user"
+              placeholder="${t('login.username.placeholder')}"
+            ></balam-text-field>
+            <balam-text-field
+              error-message="${t('login.error.passwordEmpty')}"
+              label="${t('login.password.label')}"
+              left-icon="lock"
+              type="password"
+              placeholder="${t('login.password.placeholder')}"
+            ></balam-text-field>
+          </div>
+          ${drawCode(code.textFieldError)}
+          <form class="playground__sample" data-form-sample>
+            <h3>Inside a form</h3>
+            <p>Type and tap Entrar: what the form sends shows up below.</p>
+            <balam-text-field
+              name="username"
+              autocomplete="username"
+              label="${t('login.username.label')}"
+              left-icon="user"
+              placeholder="${t('login.username.placeholder')}"
+            ></balam-text-field>
+            <balam-text-field
+              name="password"
+              autocomplete="current-password"
+              label="${t('login.password.label')}"
+              left-icon="lock"
+              type="password"
+              placeholder="${t('login.password.placeholder')}"
+            ></balam-text-field>
+            <balam-button text="${t('login.button.default')}"></balam-button>
+            <pre data-form-output></pre>
+          </form>
+          ${drawCode(code.textFieldForm)}
+          <div class="playground__sample">
+            <h3>Disabled state</h3>
+            <balam-text-field
+              disabled
+              label="${t('login.username.label')}"
+              left-icon="user"
+              placeholder="${t('login.username.placeholder')}"
+            ></balam-text-field>
+            <balam-text-field
+              disabled
+              label="${t('login.password.label')}"
+              left-icon="lock"
+              type="password"
+              placeholder="${t('login.password.placeholder')}"
+            ></balam-text-field>
+          </div>
+          ${drawCode(code.textFieldDisabled)}
+        </section>
+
+        <section class="playground__section">
+          <h2 class="text-title">Login form</h2>
+          <div class="playground__sample">
+            <balam-login-form data-login-form-sample></balam-login-form>
+          </div>
+          <p>
+            Send the form with valid data: the login-submit event shows up
+            below.
+          </p>
+          <pre
+            class="playground__console playground__console--log"
+            data-login-form-output
+          ></pre>
+          ${drawCode(code.loginForm)}
+        </section>
+
+        <section class="playground__section playground__section--dev">
+          <h2 class="text-title">Notices test (real Firestore)</h2>
+          <p class="playground__status">
+            Session:
+            <strong data-notices-account>—</strong>
+          </p>
+          <div class="playground__dev">
+            <div class="playground__panel">
+              <form class="playground__fieldset" data-notices-login>
+                <label class="playground__control-label">
+                  ${t('login.username.label')}
+                  <input
+                    class="playground__control"
+                    name="username"
+                    autocomplete="username"
+                  />
+                </label>
+                <label class="playground__control-label">
+                  ${t('login.password.label')}
+                  <input
+                    class="playground__control"
+                    name="password"
+                    type="password"
+                    autocomplete="current-password"
+                  />
+                </label>
+                <div class="playground__actions">
+                  <button class="playground__dev-button">
+                    ${t('login.button.default')}
+                  </button>
+                  <button
+                    class="playground__dev-button"
+                    type="button"
+                    data-notices-logout
+                  >
+                    Log out
+                  </button>
+                </div>
+              </form>
+              <form class="playground__fieldset" data-notices-publish>
+                <label class="playground__control-label">
+                  Group
+                  <input
+                    class="playground__control"
+                    name="groupId"
+                    value="7-1"
+                  />
+                </label>
+                <label class="playground__control-label">
+                  Text (the first line is the title)
+                  <textarea
+                    class="playground__control"
+                    name="text"
+                    rows="3"
+                  ></textarea>
+                </label>
+                <div class="playground__actions">
+                  <button class="playground__dev-button">Publish</button>
+                  <button
+                    class="playground__dev-button"
+                    type="button"
+                    data-notices-read
+                  >
+                    Read the group's notices
+                  </button>
+                </div>
+              </form>
+            </div>
+            <pre class="playground__console" data-notices-output></pre>
+          </div>
+        </section>
+      </div>
     </div>
   `;
 
+  drawNav(app);
   setUpNoticesTest(app);
+
+  const loginForm = app.querySelector('[data-login-form-sample]');
+  const loginFormOutput = app.querySelector('[data-login-form-output]');
+  if (!loginForm || !loginFormOutput) {
+    throw new Error('Login form sample not found in the playground');
+  }
+
+  // Prints each event with the time, so the history stays visible. The
+  // password is printed too: it is a fake one, typed only to test.
+  loginForm.addEventListener('login-submit', (event) => {
+    if (!(event instanceof CustomEvent)) return;
+    const time = new Date().toLocaleTimeString();
+    const detail = JSON.stringify(event.detail);
+    loginFormOutput.textContent += `[${time}] login-submit ${detail}
+`;
+    loginFormOutput.scrollTop = loginFormOutput.scrollHeight;
+  });
 
   // The menu is created in JS, not in the template: its items must be set
   // before it enters the page, because connectedCallback draws them.

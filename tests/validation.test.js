@@ -1,6 +1,6 @@
 import { describe, test } from 'node:test';
 import assert from 'node:assert/strict';
-import { validateCredentials } from '../../public/families/screens/login/validation.js';
+import { validateCredentials } from '../public/components/login-form/validation.js';
 
 describe('validateCredentials', () => {
   describe('valid usernames (normalization)', () => {

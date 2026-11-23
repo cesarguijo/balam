@@ -28,6 +28,7 @@
 @import url('../components/card/card.css') layer(components);
 @import url('../components/list/list.css') layer(components);
 @import url('../components/switch/switch.css') layer(components);
+@import url('../components/login-form/login-form.css') layer(components);
 
 /**
  * App screens
@@ -39,3 +40,5 @@
 @import url('../families/screens/family/family.css') layer(screens);
 @import url('../families/screens/notices/notices.css') layer(screens);
 @import url('../families/screens/account/account.css') layer(screens);
+@import url('../families/screens/install/install.css') layer(screens);
+@import url('../home/home.css') layer(screens);

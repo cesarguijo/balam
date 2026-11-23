@@ -82,9 +82,9 @@ export async function showFamily(app, section) {
     action: async () => {
       const result = await install();
       // No browser dialog (iPhone, Firefox, or already used once): the
-      // welcome screen has the manual steps for this phone.
+      // install screen has the manual steps for this phone.
       if (result === 'unavailable') {
-        location.hash = '#/welcome';
+        location.hash = '#/install';
         return;
       }
       if (result === 'accepted') {

@@ -19,7 +19,7 @@ const DISMISSED_KEY = 'balam-install-banner-dismissed';
  *
  * Takes no attributes: it works out by itself whether to show (see
  * `shouldShowInstallBanner`). "Instalar" opens the browser's install dialog
- * when the browser offers one; if not, it goes to the welcome screen, which
+ * when the browser offers one; if not, it goes to the install screen, which
  * has the steps for each phone. "Ahora no" closes it for good.
  */
 export class BalamInstallBanner extends HTMLElement {
@@ -93,14 +93,14 @@ export class BalamInstallBanner extends HTMLElement {
   /**
    * Opens the browser's install dialog; if the browser does not offer one
    * (iPhone, Firefox, or the family cancelled it before), goes to the
-   * welcome screen, which shows the manual steps for this phone.
+   * install screen, which shows the manual steps for this phone.
    */
   async #install() {
     if (canInstall()) {
       const result = await install();
       if (result !== 'unavailable') return;
     }
-    location.hash = '#/welcome';
+    location.hash = '#/install';
   }
 
   /**

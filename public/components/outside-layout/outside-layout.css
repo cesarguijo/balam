@@ -7,3 +7,10 @@
   flex-direction: column;
   padding: var(--margin-screen);
 }
+
+/* Back arrow of the screens outside the app (logins): top left corner. */
+.outside-layout .outside-layout__back {
+  position: absolute;
+  top: var(--space-16);
+  left: var(--space-16);
+}

@@ -1,0 +1,64 @@
+/* Home page (/): the logo on top and the two links below, centered. */
+.home__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-groups);
+}
+
+.home__links {
+  width: 100%;
+  max-width: 25rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.home {
+  justify-content: start;
+  padding-top: 20vh;
+}
+
+/* The links borrow the button look; these undo the link defaults. */
+.home .home__link {
+  display: block;
+  text-decoration: none;
+}
+
+.home .identity__name {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/*
+ * Ornament under the name: a line on each side and a small square fret in
+ * the middle. Every piece is a background layer, so it needs no extra HTML.
+ * In em, so it grows along with the name; it replaces the desktop underline
+ * from identity.css.
+ */
+.home .identity__name::after {
+  --_color: var(--amber-500);
+  --_stroke: 0.05em;
+  --_square: 0.3em;
+  --_bar: linear-gradient(var(--_color), var(--_color));
+  content: '';
+  display: block;
+  width: 4em;
+  height: var(--_square);
+  margin: 0.15em auto 0;
+  background:
+    /* dot in the middle of the square */
+    var(--_bar) center / 0.1em 0.1em no-repeat,
+    /* the square: top, bottom, left and right sides */ var(--_bar) center top /
+      var(--_square) var(--_stroke) no-repeat,
+    var(--_bar) center bottom / var(--_square) var(--_stroke) no-repeat,
+    var(--_bar) calc(50% - 0.125em) center / var(--_stroke) var(--_square)
+      no-repeat,
+    var(--_bar) calc(50% + 0.125em) center / var(--_stroke) var(--_square)
+      no-repeat,
+    /* the lines, with a gap on each side of the square */ var(--_bar) left
+      center / calc(50% - var(--_square)) var(--_stroke) no-repeat,
+    var(--_bar) right center / calc(50% - var(--_square)) var(--_stroke)
+      no-repeat;
+}

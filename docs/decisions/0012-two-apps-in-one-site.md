@@ -23,7 +23,7 @@ public/
 tests/                              → shared; families/ and teachers/ for each app
 ```
 
-- **Root:** `/` redirects to `/families/` with a `redirect` in `firebase.json`.
+- **Root:** `/` is a home page outside both apps (`index.html` and `home/`) that asks "Soy familia" or "Soy docente" and links to each app's login. Each login has a back arrow to `/`, except inside the installed families' app. (Changed on 2026-11-22: it used to redirect to `/families/`.)
 - **Manifests:** each one sets its own `id` (`/families/`, `/teachers/`), name and icon, so they look different on the home screen.
 - **Service workers:** each one has its own cache name (`balam-families-…`, `balam-teachers-…`) and only precaches its own files plus the shared ones it uses.
 - **Router:** `js/router.js` becomes generic; each `app.js` passes its own route table. The welcome screen (ADR 0011) is only for families; the teacher app opens on the login.
@@ -58,7 +58,7 @@ tests/                              → shared; families/ and teachers/ for each
 
 - Moving the current screens, `index.html`, `manifest.json` and `sw.js` into `families/`, and splitting `router.js`, `connection.js` and the catalog.
 - A change in shared code can break both apps.
-- The families' URL becomes `/families/` (the root redirects there). Live Server does not read `firebase.json`, so locally we open `/families/` directly.
+- The families' URL becomes `/families/`; the home page at `/` links to it.
 - `npm test` must also find the tests in `tests/families/` and `tests/teachers/`, without including `tests/rules/`.
 
 **Revisit the decision if:** the teacher app needs its own domain (move to two Hosting sites, adding a copy step) or many teachers use it (custom claims, Play Store).

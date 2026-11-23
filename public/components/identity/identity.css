@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--spacing-elements);
+  gap: 2px;
 }
 
 .identity > * {
@@ -14,11 +14,25 @@
 .identity__tagline {
   width: 272px;
   text-align: center;
+  font-size: 16px;
 }
 
 .identity__logo {
   border-radius: 20%;
+  width: 52px;
+  height: 52px;
   overflow: hidden;
+}
+
+/* Desktop only: on phones the image uses its 52 px size from the HTML. */
+.identity__logo img {
+  width: 100%;
+  height: 100%;
+}
+
+.identity__name {
+  font-size: 40px;
+  line-height: 1.1;
 }
 
 @media (min-width: 1025px) {
@@ -38,7 +52,8 @@
   }
 
   .identity__logo {
-    width: clamp(6rem, 10vw, 10rem);
+    width: clamp(7rem, 10vh, 10rem);
+    height: clamp(7rem, 10vh, 10rem);
     aspect-ratio: 1;
   }
 

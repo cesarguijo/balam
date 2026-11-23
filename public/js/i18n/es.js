@@ -61,6 +61,10 @@ export const messages = {
     '¡Listo! Balam ya está instalada <br />Ábrela desde tu pantalla de inicio',
   'install.title': 'Instala desde tu navegador',
 
+  // Install screen (#/install): manual steps when the browser has no dialog
+  'install.screen.title': 'Instalar Balam',
+  'install.screen.back': 'Volver',
+
   // Install banner: optional, inside the app (ADR 0011)
   'installBanner.label': 'Instalar Balam',
   'installBanner.text':
@@ -117,6 +121,14 @@ export const messages = {
   'account.refresh.yesterday': 'ayer',
   'account.refresh.lastTime': 'Última vez:',
   'account.refresh.noDate': 'sin registro',
+
+  // Home (/): the person picks their app before logging in
+  'home.question': '¿Cómo quiere entrar?',
+  'home.family': 'Entrar como familia',
+  'home.teacher': 'Entrar como docente',
+
+  // Back arrow on the screens outside the app (logins)
+  'outside.back': 'Volver',
 };
 
 /**

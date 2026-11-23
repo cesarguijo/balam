@@ -1,51 +1,139 @@
-.login__content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-16);
-}
+/*
+ * Phones: the waves stay still and only the band between them
+ * scrolls, so the text never goes over a wave. The band is fixed to the
+ * screen and starts and ends where the waves do; their height is worked out
+ * from the width they have in backdrop.css and the proportions of their SVGs
+ * (429 × 173 and 721 × 243). If the waves change size there, change it here.
+ *
+ * The backdrop inside is position: fixed, so this overflow does not cut it.
+ */
+@media (max-width: 600px) {
+  .outside-layout.login {
+    --_wave-top: calc(clamp(12rem, 35vw, 40rem) * 173 / 429);
+    --_wave-bottom: calc(clamp(12rem, 50vw, 40rem) * 243 / 721);
+    position: fixed;
+    inset: var(--_wave-top) 0 var(--_wave-bottom);
+    min-height: 0;
+    overflow-y: auto;
+    justify-content: flex-start;
+    padding-block: var(--space-16);
+  }
 
-.login__form {
-  width: 100%;
-  max-width: 25rem;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-12);
-}
-
-.login__button {
-  margin-block-start: var(--space-12);
+  /*
+   * Auto margins center it when it fits, and when it does not they become 0,
+   * so the top can still be reached by scrolling (justify-content: center
+   * would cut it off).
+   */
+  .outside-layout.login .login__content {
+    margin-block: auto;
+  }
 }
 
 .login__forgot {
-  text-wrap: balance;
+  width: 80%;
   text-align: center;
+  max-width: 198px;
 }
 
-.login__banner {
+/*
+ * One centered column. The height comes from .outside-layout, which already
+ * fills the screen and centers it; a 100vh here plus that padding made the
+ * page scroll.
+ */
+.login__content {
+  width: 100%;
+  max-width: 25rem;
+  margin-inline: auto;
   display: flex;
-  flex-direction: row;
-  gap: var(--space-8);
+  flex-direction: column;
   align-items: center;
-  background-color: var(--alert-error-background);
-  color: var(--feedback-to-correct);
-  padding: var(--space-8);
+  gap: 2vh;
 }
 
-.login__banner-icon-container {
-  display: flex;
+/*
+ * identity.css gives the tagline a fixed 272 px; on a 280 px phone that is
+ * wider than the column, so here it takes the column's width instead.
+ */
+.login__content .identity__tagline {
+  width: auto;
+  max-width: 100%;
+}
+
+/*
+ * Very small phones (about 320 px wide or less): everything a little smaller
+ * and closer, so the form and the "¿Olvidó su clave?" fit on the screen.
+ */
+@media (max-width: 340px) {
+  .login__content {
+    gap: 2vh;
+  }
+
+  .login__content .identity {
+    gap: var(--space-8);
+  }
+
+  .login__content .identity__logo {
+    width: 56px;
+    height: 56px;
+  }
+
+  .login__content .identity__name {
+    font-size: var(--font-size-display);
+  }
+
+  .login__content .identity__tagline {
+    font-size: var(--font-size-label-large);
+  }
+}
+
+/*
+ * From tablets up the column would float alone in a wide screen, so it
+ * becomes a card: the white groups the back link, the logo and the form, and
+ * the decorations stay around it. Here the waves are too tall to leave a
+ * band between them (on a 950 × 768 window only ~470 px were left).
+ */
+@media (min-width: 601px) {
+  .login__content {
+    max-width: 28rem;
+    gap: 4vh;
+    padding: var(--space-24) var(--space-32) var(--space-32);
+    background-color: var(--surface-raised);
+    border-radius: var(--radius-12);
+    box-shadow: 0 var(--space-4) var(--space-24)
+      color-mix(in srgb, var(--text-primary) 12%, transparent);
+  }
+
+  /* The card already sets it apart from the edges; less room so it fits. */
+  .outside-layout.login {
+    padding-block: var(--space-32);
+  }
+
+  /* Smaller than on the welcome screen, so the form fits without scrolling. */
+  .login__content .identity__logo {
+    width: clamp(4.5rem, 9vh, 6rem);
+    height: clamp(4.5rem, 9vh, 6rem);
+  }
+
+  .login__content .identity__name {
+    font-size: clamp(3rem, 2rem + 2vw, 4rem);
+  }
+
+  .login__content .identity__tagline {
+    font-size: var(--font-size-title);
+  }
+}
+
+/* Back link to the home page: arrow and text, on the left of the column. */
+.login__back {
+  align-self: flex-start;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
+  gap: var(--spacing-text-icon);
+  min-height: var(--size-control);
+  color: var(--text-primary);
+  text-decoration: none;
 }
 
-.login__banner-icon-container .icon {
-  color: var(--feedback-to-correct);
-  width: 24px;
-  height: 24px;
-}
-
-.login__banner[hidden] {
-  display: none;
+.login__back .icon {
+  color: var(--icon-primary);
 }

@@ -10,6 +10,81 @@
   padding: var(--margin-screen);
 }
 
+/*
+ * Two columns: the nav tree on the left, fixed while the catalog scrolls,
+ * and the catalog on the right. On a phone the tree goes on top.
+ */
+.playground-layout {
+  background-color: var(--surface-background);
+}
+
+.playground__nav {
+  padding: var(--margin-screen);
+  border-bottom: 1px solid var(--gray-200);
+}
+
+@media (min-width: 900px) {
+  .playground-layout {
+    display: grid;
+    grid-template-columns: 15rem minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .playground__nav {
+    position: sticky;
+    top: 0;
+    max-height: 100svh;
+    overflow-y: auto;
+    border-bottom: none;
+    border-right: 1px solid var(--gray-200);
+  }
+}
+
+/* The tree: the sections, and their samples indented below with a line. */
+.playground__tree {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.playground__tree--branch {
+  margin-block: var(--space-4);
+  margin-inline-start: var(--space-12);
+  padding-inline-start: var(--space-8);
+  border-left: 1px solid var(--gray-300);
+}
+
+.playground__nav-link {
+  width: 100%;
+  padding: var(--space-4) var(--space-8);
+  border: none;
+  border-radius: var(--space-4);
+  background: none;
+  color: var(--text-primary);
+  font: inherit;
+  font-weight: var(--font-weight-bold);
+  text-align: start;
+  cursor: pointer;
+}
+
+.playground__tree--branch .playground__nav-link {
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-regular);
+}
+
+.playground__nav-link:hover {
+  background-color: var(--gray-200);
+}
+
+/* A little room above the title the nav scrolls to. */
+.playground__section h2,
+.playground__section h3 {
+  scroll-margin-top: var(--space-16);
+}
+
 .playground__section {
   display: flex;
   flex-direction: column;

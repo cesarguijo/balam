@@ -1,0 +1,13 @@
+/* Install screen: the steps sit below the app bar, with the screen margins. */
+.install {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-12) var(--margin-screen);
+}
+
+/* Same column as the steps component, so they read top to bottom. */
+.install .install__steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-elements);
+}
