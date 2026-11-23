@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { decideRoute } from '../public/js/route.js';
+import { decideRoute } from '../public/families/js/route.js';
 
 test('On desktop it always shows the welcome screen', () => {
   assert.equal(

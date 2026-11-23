@@ -4,12 +4,14 @@
  * every screen.
  */
 
-import '../js/router.js';
+import { startRouter } from '../js/router.js';
+import { routes, pickFamilyDefault } from './js/router.js';
 import '../js/install.js';
 import { listenRipples } from '../components/ripple/ripple.js';
 
 // Here and not in a screen, so it runs once and works on any first screen
 listenRipples();
+startRouter(routes, pickFamilyDefault);
 
 // Registers the service worker, which will let the app work offline.
 // Only if the browser supports it (very old ones do not).

@@ -1,21 +1,9 @@
 /**
- * @file Router: shows the screen that matches the current route. If the
- * route does not exist, `decideRoute` picks one: the welcome screen on
- * desktop, and the login or the notices on the phone, installed or not
- * (ADR 0011). Inside the installed app, it never shows the welcome screen.
+ * @file Shared router: shows the screen that matches the current route. It
+ * knows no screens of its own: each app passes its route table and how to
+ * pick the default route to `startRouter`. Inside the installed app, it
+ * never shows the welcome screen.
  */
-
-import { decideRoute } from './route.js';
-import { detectPlatform } from './platform.js';
-import { getSession } from './session.js';
-import { showWelcome } from '../families/screens/welcome/welcome.js';
-import { showPlayground } from '../families/screens/playground/playground.js';
-import { showLogin } from '../families/screens/login/login.js';
-import { showNotices } from '../families/screens/notices/notices.js';
-import { showFamily } from '../families/screens/family/family.js';
-import { showGrades } from '../families/screens/grades/grades.js';
-import { showAttendance } from '../families/screens/attendance/attendance.js';
-import { showAccount } from '../families/screens/account/account.js';
 
 /**
  * An app screen: receives the container and draws its content inside.
@@ -23,23 +11,6 @@ import { showAccount } from '../families/screens/account/account.js';
  * @param {HTMLElement} app - Container where the screen is drawn.
  * @returns {void}
  */
-
-/**
- * The app's route table: maps each route to the function that shows its
- * screen. To add a new screen:
- * 1. Import the screen's function.
- * 2. Add a line of the form `'#/route': showScreen,`.
- * @type {Record<string, Screen>}
- */
-const routes = {
-  '#/welcome': showWelcome,
-  '#/playground': showPlayground,
-  '#/login': showLogin,
-  '#/notices': (app) => showFamily(app, showNotices),
-  '#/grades': (app) => showFamily(app, showGrades),
-  '#/attendance': (app) => showFamily(app, showAttendance),
-  '#/account': showAccount,
-};
 
 /**
  * Tells whether the app was opened installed, in its own window, and not in
@@ -51,11 +22,20 @@ function isStandalone() {
 }
 
 /**
+ * Picks the route to show when the current one does not exist. Each app has
+ * its own rule.
+ * @callback PickDefault
+ * @returns {Promise<string>} The route, for example `'#/login'`.
+ */
+
+/**
  * Shows the screen that matches the current route; if the route does not
- * exist, asks `decideRoute` for the default one.
+ * exist, asks `pickDefault` for the default one.
+ * @param {Record<string, Screen>} routes - The app's route table.
+ * @param {PickDefault} pickDefault - The app's rule for the default route.
  * @throws {Error} If the #app container does not exist in index.html.
  */
-async function navigate() {
+async function navigate(routes, pickDefault) {
   const app = document.getElementById('app');
   if (!app) {
     throw new Error('#app container not found in index.html');
@@ -73,11 +53,7 @@ async function navigate() {
     return;
   }
 
-  const isDesktop =
-    detectPlatform(navigator.userAgent, navigator.maxTouchPoints) === 'desktop';
-  // Desktop never needs the session, so it does not wait for Firebase.
-  const hasSession = !isDesktop && (await getSession()) !== null;
-  const route = decideRoute({ isDesktop, hasSession });
+  const route = await pickDefault();
 
   // replace() changes the # so the routes table draws the screen (and the
   // nav marks it as active). If the # is already that route, hashchange
@@ -89,8 +65,16 @@ async function navigate() {
   }
 }
 
-// Every time the # changes
-window.addEventListener('hashchange', navigate);
-// When the tab becomes the installed app
-matchMedia('(display-mode: standalone)').addEventListener('change', navigate);
-navigate();
+/**
+ * Starts the router for one app: shows the first screen and shows it again
+ * every time the # changes or the tab becomes the installed app.
+ * @param {Record<string, Screen>} routes - The app's route table.
+ * @param {PickDefault} pickDefault - The app's rule for the default route.
+ */
+export function startRouter(routes, pickDefault) {
+  // navigate needs the app's data; the events only call it with an Event
+  const go = () => navigate(routes, pickDefault);
+  window.addEventListener('hashchange', go);
+  matchMedia('(display-mode: standalone)').addEventListener('change', go);
+  go();
+}
