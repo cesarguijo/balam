@@ -18,7 +18,7 @@
  */
 
 import {
-  db,
+  getConnection,
   collection,
   where,
   orderBy,
@@ -26,7 +26,6 @@ import {
   getDocs,
   addDoc,
   serverTimestamp,
-  auth,
   updateDoc,
   deleteDoc,
   doc,
@@ -52,6 +51,7 @@ import { translateNoticeError } from './errors.js';
  * @throws {NoticeError} If there is no internet or the rules refuse it.
  */
 export async function getNoticesSince(groupId, cutoff) {
+  const { db } = getConnection();
   const noticeQuery = query(
     collection(db, 'notices'),
     where('createdAt', '>=', cutoff),
@@ -93,6 +93,10 @@ export async function getNoticesSince(groupId, cutoff) {
  * @throws {NoticeError} If there is no internet or the rules refuse it.
  */
 export async function addNotice(groupId, draft) {
+  const { db, auth } = getConnection();
+  if (auth.currentUser === null) {
+    throw new Error('There is not a session in this device');
+  }
   const docNotice = {
     text: draft.text,
     groupId,
@@ -121,6 +125,7 @@ export async function addNotice(groupId, draft) {
  * @throws {NoticeError} If there is no internet, the notice no longer exists or the rules refuse it.
  */
 export async function updateNotice(id, draft) {
+  const { db } = getConnection();
   const noticeRef = doc(db, 'notices', id);
   return updateDoc(noticeRef, {
     text: draft.text,
@@ -139,6 +144,7 @@ export async function updateNotice(id, draft) {
  * @throws {NoticeError} If there is no internet or the rules refuse it.
  */
 export async function removeNotice(id) {
+  const { db } = getConnection();
   const noticeRef = doc(db, 'notices', id);
   return deleteDoc(noticeRef).catch((error) => {
     throw new NoticeError(translateNoticeError(error.code), {

@@ -21,7 +21,7 @@ import '../../../components/login-form/login-form.js';
 // screen exists. The playground talks to Firebase directly only because a
 // teacher cannot log in through session.js (it requires a families/{uid}).
 import {
-  auth,
+  getConnection,
   signInWithEmailAndPassword,
 } from '../../../js/firebase/connection.js';
 import { getRecentNotices, publishNotice } from '../../../js/notices.js';
@@ -692,6 +692,7 @@ function setUpNoticesTest(app) {
   ) {
     throw new Error('Notices test not found in the playground');
   }
+  const { auth } = getConnection();
 
   // The account line is always visible, so it is clear which rules apply
   // (teacher or family) before pressing anything.

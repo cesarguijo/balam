@@ -13,11 +13,10 @@
 // used inside the functions, when both modules have finished loading.
 import { SessionError } from '../session.js';
 import {
-  auth,
-  db,
   doc,
   getDoc,
   signInWithEmailAndPassword,
+  getConnection,
 } from './connection.js';
 import { translateFirebaseError } from './errors.js';
 import { toFamily } from '../family.js';
@@ -31,6 +30,7 @@ import { toFamily } from '../family.js';
  * @returns {Promise<boolean>} `true` if there is a session; `false` if the login must be shown.
  */
 export async function hasSession() {
+  const { auth } = getConnection();
   return auth.authStateReady().then(() => {
     return auth.currentUser !== null;
   });
@@ -43,6 +43,7 @@ export async function hasSession() {
  * @returns {Promise<Family>} The family, already validated by `toFamily`.
  */
 export function getFamily() {
+  const { auth } = getConnection();
   return auth.authStateReady().then(() => {
     if (auth.currentUser === null) {
       throw new SessionError('unknown');
@@ -67,6 +68,7 @@ export function getFamily() {
  */
 export async function logIn(username, password) {
   const email = `${username}@balam.local`;
+  const { auth } = getConnection();
   return signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const uid = userCredential.user.uid;
@@ -88,6 +90,7 @@ export async function logIn(username, password) {
  * @returns {Promise<void>} Fulfills when Firebase finished logging out.
  */
 export async function logOut() {
+  const { auth } = getConnection();
   return auth.signOut();
 }
 
@@ -99,6 +102,7 @@ export async function logOut() {
  * @throws {SessionError} If the document is missing (`unknown`).
  */
 function readFamily(uid) {
+  const { db } = getConnection();
   const documentRef = doc(db, `families/${uid}`);
   return getDoc(documentRef).then((snapshot) => {
     if (snapshot.exists()) {

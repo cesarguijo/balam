@@ -8,9 +8,13 @@ import { startRouter } from '../js/router.js';
 import { routes, pickFamilyDefault } from './js/router.js';
 import '../js/install.js';
 import { listenRipples } from '../components/ripple/ripple.js';
+import { connect } from '../js/firebase/connection.js';
 
 // Here and not in a screen, so it runs once and works on any first screen
 listenRipples();
+// Before the router: its first screen already asks the adapters for the
+// session, and they need the connection (ADR 0012).
+connect('families');
 startRouter(routes, pickFamilyDefault);
 
 // Registers the service worker, which will let the app work offline.
