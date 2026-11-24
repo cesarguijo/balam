@@ -1,13 +1,14 @@
 /**
- * @file Teachers' login screen. For now it only has the back arrow to the
- * home page; the form will come with the shared <login-form> (ADR 0012).
+ * @file Teachers' login screen: the shared <balam-login-form> plus a back
+ * arrow to the home page (hidden in the installed app). It logs in with the
+ * teachers' session, not the families' one (ADR 0012).
  */
 
 import { BalamLoginForm } from '../../../components/login-form/login-form.js';
 import { decorations } from '../../../js/decorations.js';
 import { t } from '../../../js/i18n/es.js';
 import { icon } from '../../../js/icons.js';
-import { logIn } from '../../../js/session.js';
+import { teacherSession } from '../../js/teacher-session.js';
 
 /**
  * Shows the teachers' login screen inside the container.
@@ -59,9 +60,10 @@ export function showLogin(app) {
     loginForm.setLoading(true);
     if (!(event instanceof CustomEvent)) return;
     const { username, password } = event.detail;
-    logIn(username, password)
+    teacherSession
+      .logIn(username, password)
       .then(() => {
-        location.replace('#/notices');
+        location.replace('#/grades');
       })
       .catch((error) => {
         loginForm.showError(error.type);

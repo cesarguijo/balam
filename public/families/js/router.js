@@ -6,7 +6,6 @@
 import { decideRoute } from './route.js';
 import { detectPlatform } from '../../js/platform.js';
 import { showWelcome } from '../screens/welcome/welcome.js';
-import { getSession } from '../../js/session.js';
 import { showPlayground } from '../screens/playground/playground.js';
 import { showLogin } from '../screens/login/login.js';
 import { showNotices } from '../screens/notices/notices.js';
@@ -15,6 +14,7 @@ import { showGrades } from '../screens/grades/grades.js';
 import { showAttendance } from '../screens/attendance/attendance.js';
 import { showAccount } from '../screens/account/account.js';
 import { showInstall } from '../screens/install/install.js';
+import { familySession } from './family-session.js';
 
 /** @typedef {import('../../js/router.js').Screen} Screen */
 
@@ -53,7 +53,7 @@ export async function pickFamilyDefault() {
   const isDesktop =
     detectPlatform(navigator.userAgent, navigator.maxTouchPoints) === 'desktop';
   // Desktop never needs the session, so it does not wait for Firebase.
-  const hasSession = !isDesktop && (await getSession()) !== null;
+  const hasSession = !isDesktop && (await familySession.getSession()) !== null;
   const route = decideRoute({ isDesktop, hasSession });
   return route;
 }

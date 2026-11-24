@@ -4,7 +4,6 @@
  */
 
 import { icon } from '../../../js/icons.js';
-import { getSession } from '../../../js/session.js';
 import '../../../components/install-banner/install-banner.js';
 import { getNoticeTabs } from './tabs.js';
 import { t } from '../../../js/i18n/es.js';
@@ -12,6 +11,8 @@ import { BalamMenu } from '../../../components/menu/menu.js';
 import { drawAppBar } from '../../../components/app-bar/app-bar.js';
 import { avatar } from '../../../components/avatar/avatar.js';
 import { install, isInstalled } from '../../../js/install.js';
+import { drawNavbar } from '../../../components/nav-bar/nav-bar.js';
+import { familySession } from '../../js/family-session.js';
 
 /**
  * Shows that Chrome is installing Balam, until the family closes it with
@@ -32,7 +33,7 @@ function showInstallMessage(app) {
   text.textContent = t('family.installing');
 }
 
-// TODO: draw one tab per child with getNoticeTabs(getSession().children)
+// TODO: draw one tab per child with getNoticeTabs(family.children)
 // instead of the fixed names; with a single child, show only the name.
 // TODO: when a tab is clicked, mark it (aria-selected, family__tab_selected)
 // and redraw the section with that child's groupId.
@@ -49,8 +50,8 @@ function showInstallMessage(app) {
  * @param {(container: HTMLElement) => void} section - Function that draws the section inside the layout's `<main>`, e.g. `showNotices`.
  */
 export async function showFamily(app, section) {
-  let family = await getSession();
-  console.log(family);
+  let family = await familySession.getSession();
+
   if (!family) {
     location.replace('#/login');
     return; // Don't draw
@@ -126,6 +127,27 @@ export async function showFamily(app, section) {
     <balam-menu class="family__menu" data-balam-menu></balam-menu>
   `;
 
+  /**
+   * @type {import('../../../components/nav-bar/nav-bar.js').NavItem[]}
+   */
+  const navItems = [
+    {
+      href: '#/notices',
+      icon: 'megaphone',
+      label: 'Avisos',
+    },
+    {
+      href: '#/grades',
+      icon: 'alert-circle',
+      label: 'Notas',
+    },
+    {
+      href: '#/attendance',
+      icon: 'calculator',
+      label: 'Asistencia',
+    },
+  ];
+
   app.innerHTML = /* HTML */ `
     <div class="family">
       ${drawAppBar(start, end)}
@@ -148,19 +170,7 @@ export async function showFamily(app, section) {
         <main class="family__content"></main>
       </div>
 
-      <nav class="family__nav">
-        <a class="family__nav-item" href="#/notices">
-          <span class="family__nav-icon">${icon('megaphone')}</span> Avisos
-        </a>
-        <a class="family__nav-item" href="#/grades">
-          <span class="family__nav-icon">${icon('alert-circle')}</span>
-          Notas
-        </a>
-        <a class="family__nav-item" href="#/attendance">
-          <span class="family__nav-icon">${icon('calculator')}</span>
-          Asistencia
-        </a>
-      </nav>
+      ${drawNavbar(navItems)}
     </div>
   `;
 
@@ -181,11 +191,4 @@ export async function showFamily(app, section) {
     const message = app.querySelector('.family__install-status');
     if (message instanceof HTMLElement) message.hidden = true;
   });
-
-  for (const link of app.querySelectorAll('.family__nav-item')) {
-    if (link.getAttribute('href') === location.hash) {
-      link.setAttribute('aria-current', 'page');
-      link.classList.add('family__nav-item_active');
-    }
-  }
 }

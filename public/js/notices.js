@@ -110,15 +110,15 @@ export async function getRecentNotices(groupId) {
 // TODO: decide whether the text is checked before sending (not empty, maximum
 // length), with a pure function in notice.js and its tests.
 /**
- * Publishes a new notice for the group. Creating it is what sends the push
- * notification to the families.
- * @param {string} groupId - The group the notice is for.
+ * Publishes one notice for one or more groups. Creating it is what sends
+ * the push notification to the families.
+ * @param {string[]} groupIds - The groups the notice is for, e.g. `['7-1', '8-2']`.
  * @param {NoticeDraft} draft - Text typed by the teacher.
  * @returns {Promise<string>} The id of the new notice.
  * @throws {NoticeError} If there is no internet or the account is not the teacher's.
  */
-export async function publishNotice(groupId, draft) {
-  return adapter.addNotice(groupId, draft);
+export async function publishNotice(groupIds, draft) {
+  return adapter.addNotice(groupIds, draft);
 }
 
 /**

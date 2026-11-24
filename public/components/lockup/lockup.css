@@ -1,0 +1,5 @@
+.lockup__logo {
+  width: var(--size-control);
+  height: var(--size-control);
+  border-radius: var(--radius-12);
+}

@@ -5,6 +5,10 @@ service cloud.firestore {
 
   match /databases/{database}/documents {
 
+    match /teachers/{uid} {
+      allow read: if (request.auth != null && request.auth.uid == uid);
+    }
+
     function teacherGroupIds(){
       return get(/databases/$(database)/documents/teachers/$(request.auth.uid)).data.groupIds;
     }
@@ -22,25 +26,27 @@ service cloud.firestore {
       allow read: if(
       request.auth != null &&
       (
-      resource.data.groupId in familyGroupIds() ||
-      resource.data.groupId in teacherGroupIds()
+      resource.data.groupIds.hasAny(familyGroupIds()) ||
+      resource.data.groupIds.hasAny(teacherGroupIds())
       )
       );
 
       allow create: if(
       request.auth != null &&
-      request.resource.data.groupId in teacherGroupIds()
+      request.resource.data.groupIds.size() > 0 &&
+      request.resource.data.groupIds.hasOnly(teacherGroupIds())
       );
 
       allow update: if(
       request.auth != null &&
-      request.resource.data.groupId in teacherGroupIds() &&
-      resource.data.groupId in teacherGroupIds()
+      request.resource.data.groupIds.size() > 0 &&
+      request.resource.data.groupIds.hasOnly(teacherGroupIds()) &&
+      resource.data.groupIds.hasOnly(teacherGroupIds())
       );
 
       allow delete: if(
       request.auth != null &&
-      resource.data.groupId in teacherGroupIds()
+      resource.data.groupIds.hasOnly(teacherGroupIds())
       );
     }
   }

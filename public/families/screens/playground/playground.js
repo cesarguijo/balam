@@ -547,10 +547,10 @@ export function showPlayground(app) {
               </form>
               <form class="playground__fieldset" data-notices-publish>
                 <label class="playground__control-label">
-                  Group
+                  Groups (separated by commas; "Read" uses the first)
                   <input
                     class="playground__control"
-                    name="groupId"
+                    name="groupIds"
                     value="7-1"
                   />
                 </label>
@@ -715,6 +715,17 @@ function setUpNoticesTest(app) {
   };
 
   /**
+   * Turns the "Groups" field ("7-1, 8-2") into a clean list (['7-1', '8-2']).
+   * @param {FormDataEntryValue | null} value - What was typed.
+   * @returns {string[]} The groups, without spaces or empty items.
+   */
+  const toGroupIds = (value) =>
+    String(value ?? '')
+      .split(',')
+      .map((groupId) => groupId.trim())
+      .filter((groupId) => groupId !== '');
+
+  /**
    * Disables a button while a request runs, so a second tap does not send
    * it twice (e.g. publishing the same notice twice).
    * @param {HTMLButtonElement} button - The button that started the request.
@@ -747,18 +758,18 @@ function setUpNoticesTest(app) {
   publishForm.addEventListener('submit', (event) => {
     event.preventDefault();
     if (!(event.submitter instanceof HTMLButtonElement)) return;
-    const { groupId, text } = Object.fromEntries(new FormData(publishForm));
+    const { groupIds, text } = Object.fromEntries(new FormData(publishForm));
     whileLoading(
       event.submitter,
-      publishNotice(String(groupId), { text: String(text) }).then((id) => ({
-        published: id,
-      })),
+      publishNotice(toGroupIds(groupIds), { text: String(text) }).then(
+        (id) => ({ published: id }),
+      ),
     );
   });
 
   readButton.addEventListener('click', () => {
-    const groupId = new FormData(publishForm).get('groupId');
-    whileLoading(readButton, getRecentNotices(String(groupId)));
+    const [groupId] = toGroupIds(new FormData(publishForm).get('groupIds'));
+    whileLoading(readButton, getRecentNotices(groupId));
   });
 
   logoutButton.addEventListener('click', () => {

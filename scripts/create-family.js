@@ -24,7 +24,7 @@ import { randomUUID } from 'node:crypto';
 import { initializeApp, cert } from 'firebase-admin/app';
 import { getAuth } from 'firebase-admin/auth';
 import { getFirestore } from 'firebase-admin/firestore';
-import { validateCredentials } from '../public/screens/login/validation.js';
+import { validateCredentials } from '../public/components/login-form/validation.js';
 
 /**
  * Domain of the made-up emails. It must match the one in

@@ -33,6 +33,10 @@ async function navigate(routes, pickDefault) {
 
   const screen = routes[location.hash];
 
+  // TODO: when the route changes inside the same layout (family or
+  // teacher), redraw only its <main> instead of the whole screen. Do it
+  // once there is a real symptom (flicker, lost scroll, a cut animation);
+  // the nav bar would then need to update its active item on hashchange.
   const needsDefault = !screen;
 
   if (!needsDefault) {

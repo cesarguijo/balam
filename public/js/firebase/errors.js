@@ -5,7 +5,7 @@
  * Firebase files when moving to PHP (ADR 0008).
  */
 
-/** @typedef {import('../session.js').SessionErrorType} SessionErrorType */
+/** @typedef {import('../create-session.js').SessionErrorType} SessionErrorType */
 /** @typedef {import('../notices.js').NoticeErrorType} NoticeErrorType */
 
 /**

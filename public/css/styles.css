@@ -29,6 +29,8 @@
 @import url('../components/list/list.css') layer(components);
 @import url('../components/switch/switch.css') layer(components);
 @import url('../components/login-form/login-form.css') layer(components);
+@import url('../components/nav-bar/nav-bar.css') layer(components);
+@import url('../components/lockup/lockup.css') layer(components);
 
 /**
  * App screens
@@ -42,3 +44,4 @@
 @import url('../families/screens/account/account.css') layer(screens);
 @import url('../families/screens/install/install.css') layer(screens);
 @import url('../home/home.css') layer(screens);
+@import url('../teachers/screens/groups/groups.css') layer(screens);

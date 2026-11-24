@@ -4,6 +4,7 @@
 
 :root {
   --blue-100: #d5e1f0; /** Pale blue · background of the 1st child avatar */
+  --blue-200: #b9cce6;
   --blue-800: #1b3a6b; /** Deep blue · obsidian and night */
   --amber-100: #fbe4c6; /** Pale amber · background of the 4th child avatar */
   --amber-200: #f7c27e; /** Light amber · lit facet */
@@ -15,10 +16,13 @@
   --amber-800: #9a5410; /** Dark amber */
   --cream-50: #f7f3e6; /** Orchid cream · national orchid Rhyncholaelia digbyana */
   --maya-100: #d1e7ed; /** Pale maya blue · background of the 2nd child avatar */
+  --maya-200: #a8d3de;
   --maya-500: #1a7088; /** Maya blue · indigo and palygorskite pigment */
   --maya-700: #11505f; /** Deep maya blue · letter of the 2nd child avatar. Contrast 7.0:1 on maya.100 */
+  --brown-100: #f1e6dc;
   --brown-500: #9c7458; /** Medium deer brown · field border. Contrast 3.7:1 on cream */
   --brown-700: #7a4e32; /** Deer brown · white-tailed deer, national animal */
+  --brown-800: #5a3822;
   --gray-200: #d3d1c7; /** Light stone */
   --gray-300: #b4b2a9; /** Medium stone */
   --gray-600: #5f5e5a; /** Dark stone */
@@ -38,8 +42,8 @@
   --icon-spin-duration: 1000ms; /** One full turn of an icon that spins while loading */
   --size-control: 52px; /** Minimum height of tappable controls: buttons, fields, rows */
   --size-chip: 40px; /** Height of the child chips */
-  --size-avatar-child: 26px; /** Diameter of the child avatar */
-  --size-avatar-family: 46px;
+  --size-avatar-small: 26px; /** Diameter of the child avatar */
+  --size-avatar-large: 46px;
   --font-weight-regular: 400; /** Regular weight for body text */
   --font-weight-bold: 700; /** Bold weight for titles, labels and buttons */
   --font-size-display: 40px; /** Display size · big numbers and hero titles */
@@ -118,16 +122,30 @@
   --selection-indicator: var(--blue-800); /** Selected chip and active nav item. Contrast 10.2:1 on cream */
   --border-subtle: var(--gray-200); /** Dividers between areas, such as under the header */
   --avatar-background: var(--cream-50); /** Neutral avatar of the family tabs */
+  --avatar-all-background: var(--blue-800);
+  --avatar-all-text: var(--white);
+  --avatar-variant-1-background: var(--blue-100); /** Avatar of the 1st child, by family order */
+  --avatar-variant-1-text: var(--blue-800); /** Letter of the 1st child avatar. Contrast 8.6:1 */
+  --avatar-variant-2-background: var(--maya-100); /** Avatar of the 2nd child, by family order */
+  --avatar-variant-2-text: var(--maya-700); /** Letter of the 2nd child avatar. Contrast 7.0:1 */
+  --avatar-variant-3-background: var(--sand-200); /** Avatar of the 3rd child, by family order */
+  --avatar-variant-3-text: var(--brown-700); /** Letter of the 3rd child avatar. Contrast 4.7:1 */
+  --avatar-variant-4-background: var(--amber-100); /** Avatar of the 4th child; a 5th starts over at 1 */
+  --avatar-variant-4-text: var(--amber-800); /** Letter of the 4th child avatar. Contrast 4.6:1 */
+  --avatar-variant-5-background: var(--pink-50); /** Avatar of the 4th child; a 5th starts over at 1 */
+  --avatar-variant-5-text: var(--pink-800); /** Letter of the 4th child avatar. Contrast 4.6:1 */
+  --avatar-variant-6-background: var(--blue-200); /** Avatar of the 4th child; a 5th starts over at 1 */
+  --avatar-variant-6-text: var(--blue-800); /** Letter of the 4th child avatar. Contrast 4.6:1 */
+  --avatar-variant-7-background: var(--maya-200); /** Avatar of the 4th child; a 5th starts over at 1 */
+  --avatar-variant-7-text: var(--maya-700); /** Letter of the 4th child avatar. Contrast 4.6:1 */
+  --avatar-variant-8-background: var(--brown-100); /** Avatar of the 4th child; a 5th starts over at 1 */
+  --avatar-variant-8-text: var(--brown-700); /** Letter of the 4th child avatar. Contrast 4.6:1 */
+  --avatar-variant-9-background: var(--sand-100); /** Avatar of the 4th child; a 5th starts over at 1 */
+  --avatar-variant-9-text: var(--brown-800); /** Letter of the 4th child avatar. Contrast 4.6:1 */
+  --avatar-variant-10-background: var(--pink-200); /** Avatar of the 4th child; a 5th starts over at 1 */
+  --avatar-variant-10-text: var(--pink-900); /** Letter of the 4th child avatar. Contrast 4.6:1 */
   --avatar-user-background: var(--amber-500); /** Avatar of the signed-in parent */
   --avatar-user-text: var(--blue-800); /** Letter of the parent avatar. Contrast 4.6:1 on amber */
-  --avatar-child-1-background: var(--blue-100); /** Avatar of the 1st child, by family order */
-  --avatar-child-1-text: var(--blue-800); /** Letter of the 1st child avatar. Contrast 8.6:1 */
-  --avatar-child-2-background: var(--maya-100); /** Avatar of the 2nd child, by family order */
-  --avatar-child-2-text: var(--maya-700); /** Letter of the 2nd child avatar. Contrast 7.0:1 */
-  --avatar-child-3-background: var(--sand-200); /** Avatar of the 3rd child, by family order */
-  --avatar-child-3-text: var(--brown-700); /** Letter of the 3rd child avatar. Contrast 4.7:1 */
-  --avatar-child-4-background: var(--amber-100); /** Avatar of the 4th child; a 5th starts over at 1 */
-  --avatar-child-4-text: var(--amber-800); /** Letter of the 4th child avatar. Contrast 4.6:1 */
   --illustration-ground: var(--sand-100); /** Ground and clouds in illustrations */
   --illustration-stone: var(--sand-200); /** Lit faces of the pyramid */
   --illustration-stone-shade: var(--sand-300); /** Shaded faces of the pyramid */

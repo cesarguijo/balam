@@ -10,12 +10,7 @@ import { card } from '../../../components/card/card.js';
 import { list } from '../../../components/list/list.js';
 import { t } from '../../../js/i18n/es.js';
 import { icon } from '../../../js/icons.js';
-import {
-  getLastRefreshDate,
-  getSession,
-  logOut,
-  refreshFamily,
-} from '../../../js/session.js';
+import { familySession } from '../../js/family-session.js';
 import { formatLastRefresh } from './last-refresh.js';
 
 /** Start of the app bar: a back button and the screen title. */
@@ -32,7 +27,7 @@ const start = /* HTML */ `
  * @param {HTMLElement} app - Container where the screen is drawn.
  */
 export async function showAccount(app) {
-  const session = await getSession();
+  const session = await familySession.getSession();
   const username = /** @type {string} */ (session?.username);
   const children = /** @type {import('../family/tabs.js').Child[]} */ (
     session?.children ?? []
@@ -128,9 +123,9 @@ export async function showAccount(app) {
     }
     try {
       date.classList.remove('account__update-time--error');
-      await refreshFamily();
+      await familySession.refresh();
       // Draws the whole screen again: the children may have changed too, not
-      // only the date. getSession reads the family refreshFamily just stored.
+      // only the date. getSession reads the family refresh just stored.
       await showAccount(app);
     } catch {
       date.innerHTML = t('account.refresh.error');
@@ -147,7 +142,7 @@ export async function showAccount(app) {
   }
 
   logoutButton.addEventListener('click', () => {
-    logOut().then(() => {
+    familySession.logOut().then(() => {
       location.replace('#/login');
     });
   });
@@ -160,7 +155,7 @@ export async function showAccount(app) {
  * before the date was stored.
  */
 function getLastUpdate() {
-  const lastRefresh = getLastRefreshDate();
+  const lastRefresh = familySession.getLastRefreshDate();
   if (lastRefresh instanceof Date) {
     return formatLastRefresh(lastRefresh, new Date());
   }

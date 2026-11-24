@@ -8,23 +8,24 @@
  * `scripts/service-account.json`, which is ignored by Git.
  *
  * Usage:
- *   node scripts/create-teacher.js <username> <password> <groupId...>
+ *   node scripts/create-teacher.js <username> <password> [--homeroom <groupId>] <subject:groupId...>
  * Example:
- *   node scripts/create-teacher.js arguijo secret123 7-1 8-2
- * Each groupId is "grade-section". It is rebuilt from its numbers, so
- * '07-1' is saved as '7-1' and always matches the families' groupId
- * (ADR 0010).
+ *   node scripts/create-teacher.js arguijo secret123 --homeroom 7-1 math:7-1 math:7-2 science:8-1
+ * Each class is "subject:grade-section". The subject is lowercase letters
+ * (`math`, `science`). The groupId is rebuilt from its numbers, so '07-1'
+ * is saved as '7-1' and always matches the families' groupId (ADR 0010).
+ * `--homeroom` is optional: only teachers with a homeroom group use it.
  *
  * If the user already exists, it keeps its uid and only changes the
  * password and the teacher document; that way it also works to reset a lost
- * password or to change the teacher's groups.
+ * password or to change the teacher's classes.
  */
 
 import { readFileSync } from 'node:fs';
 import { initializeApp, cert } from 'firebase-admin/app';
 import { getAuth } from 'firebase-admin/auth';
 import { getFirestore } from 'firebase-admin/firestore';
-import { validateCredentials } from '../public/screens/login/validation.js';
+import { validateCredentials } from '../public/components/login-form/validation.js';
 
 /**
  * Domain of the made-up emails. It must match the one in
@@ -33,10 +34,20 @@ import { validateCredentials } from '../public/screens/login/validation.js';
 const EMAIL_DOMAIN = 'balam.local';
 
 const USAGE =
-  'Usage: node scripts/create-teacher.js <username> <password> <groupId...>';
+  'Usage: node scripts/create-teacher.js <username> <password> [--homeroom <groupId>] <subject:groupId...>';
 
-const [rawUsername = '', password = '', ...rawGroupIds] =
-  process.argv.slice(2);
+const [rawUsername = '', password = '', ...rest] = process.argv.slice(2);
+
+// `--homeroom <groupId>` can go anywhere after the password; it is taken
+// out so the rest are only classes.
+const homeroomIndex = rest.indexOf('--homeroom');
+/** @type {string | null} */
+let rawHomeroom = null;
+if (homeroomIndex !== -1) {
+  rawHomeroom = rest[homeroomIndex + 1] ?? '';
+  rest.splice(homeroomIndex, 2);
+}
+const rawClasses = rest;
 
 // The same check as the login screen: a username the app would reject is
 // not created, so no test account is born unusable.
@@ -50,7 +61,7 @@ if (password.length < 6) {
   console.error('The password must have at least 6 characters.');
   process.exit(1);
 }
-if (rawGroupIds.length === 0) {
+if (rawClasses.length === 0) {
   console.error(USAGE);
   process.exit(1);
 }
@@ -71,17 +82,54 @@ function toGroupId(raw) {
   return `${grade}-${section}`;
 }
 
-/** @type {string[]} */
-const groupIds = [];
-for (const raw of rawGroupIds) {
-  const groupId = toGroupId(raw);
-  if (groupId === null) {
-    console.error(`Invalid groupId "${raw}". Use grade-section, e.g. 7-1.`);
+/**
+ * A class the teacher teaches: one subject in one group.
+ * @typedef {object} TeacherClass
+ * @property {string} id - Subject and group together, e.g. `'math-7-1'`.
+ * @property {string} subject - Lowercase subject, e.g. `'math'`.
+ * @property {string} groupId - Grade and section, e.g. `'7-1'`.
+ */
+
+/** @type {TeacherClass[]} */
+const classes = [];
+for (const raw of rawClasses) {
+  const [subject = '', rawGroupId = ''] = raw.split(':');
+  const groupId = toGroupId(rawGroupId);
+  if (!/^[a-z]+$/.test(subject) || groupId === null) {
+    console.error(
+      `Invalid class "${raw}". Use subject:grade-section, e.g. math:7-1.`,
+    );
     process.exit(1);
   }
-  // A repeated group would not break the rules, but it is noise in the data.
-  if (!groupIds.includes(groupId)) groupIds.push(groupId);
+  const id = `${subject}-${groupId}`;
+  // A repeated class would show twice in the app.
+  if (!classes.some((teacherClass) => teacherClass.id === id)) {
+    classes.push({ id, subject, groupId });
+  }
 }
+
+/** @type {string | null} */
+let homeroomGroupId = null;
+if (rawHomeroom !== null) {
+  homeroomGroupId = toGroupId(rawHomeroom);
+  if (homeroomGroupId === null) {
+    console.error(
+      `Invalid homeroom "${rawHomeroom}". Use grade-section, e.g. 7-1.`,
+    );
+    process.exit(1);
+  }
+}
+
+// Repeats the groups as a plain list because the Firestore rules have no
+// loops: they cannot search classes[], but they can ask whether a notice's
+// groupId is `in` this list. The homeroom group is included so the teacher
+// can also send notices to it. A Set drops the repeated groups.
+const groupIds = [
+  ...new Set([
+    ...classes.map((teacherClass) => teacherClass.groupId),
+    ...(homeroomGroupId === null ? [] : [homeroomGroupId]),
+  ]),
+];
 
 const keyUrl = new URL('./service-account.json', import.meta.url);
 initializeApp({ credential: cert(JSON.parse(readFileSync(keyUrl, 'utf8'))) });
@@ -125,7 +173,10 @@ async function savePassword() {
 }
 
 const uid = await savePassword();
-// Being in `teachers` is what makes the account a teacher, so the document
-// only needs the groups the rules check.
-await getFirestore().doc(`teachers/${uid}`).set({ groupIds });
-console.log(`Teacher saved: ${username}, groups ${groupIds.join(', ')}.`);
+// Being in `teachers` is what makes the account a teacher.
+await getFirestore()
+  .doc(`teachers/${uid}`)
+  .set({ classes, homeroomGroupId, groupIds });
+console.log(
+  `Teacher saved: ${username}, classes ${classes.map((c) => c.id).join(', ')}, homeroom ${homeroomGroupId ?? 'none'}.`,
+);

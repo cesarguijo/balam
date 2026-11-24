@@ -89,59 +89,6 @@
   font-weight: var(--font-weight-bold);
 }
 
-.family .family__nav {
-  position: fixed;
-  inset-inline: 0;
-  bottom: 0;
-  height: 70px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  background-color: var(--surface-raised);
-  border-top: 1px solid var(--border-subtle);
-  border-radius: var(--space-24) var(--space-24) 0 0;
-}
-
-.family .family__nav-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-4);
-  color: var(--icon-inactive);
-  font-size: var(--font-size-label);
-  line-height: var(--font-line-height-label);
-  font-weight: var(--font-weight-bold);
-  text-decoration: none;
-}
-
-/* The pill behind the icon only gets a color on the active item. */
-.family .family__nav-icon {
-  display: flex;
-  justify-content: center;
-  padding: var(--space-4) var(--space-16);
-  border-radius: var(--radius-full);
-}
-
-.family .family__nav-icon .icon {
-  width: var(--space-24);
-  height: var(--space-24);
-  color: var(--text-secondary);
-}
-
-.family .family__nav-item_active {
-  color: var(--text-primary);
-}
-
-.family .family__nav-item_active .family__nav-icon {
-  background-color: var(--selection-indicator);
-  color: var(--icon-on-selection);
-}
-
-.family .family__nav-item_active .family__nav-icon .icon {
-  color: var(--icon-on-selection);
-}
-
 .family .family__menu {
   color: inherit;
 }

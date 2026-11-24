@@ -3,7 +3,7 @@
  * child. It is pure (no Firebase, no browser) so it can be tested in Node.
  */
 
-/** @typedef {import('../../../js/session.js').Child} Child */
+/** @typedef {import('../../js/family-session.js').Child} Child */
 
 /**
  * One tab of the notices screen. The parent sees the child's name, not the

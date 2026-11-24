@@ -3,26 +3,28 @@
  * a child. Style-only (no Custom Element); its pure helpers are tested in Node.
  */
 
+import { icon } from '../../js/icons.js';
+
 /**
- * Draws the avatar: a circle with the initial of a name. With an order it is
- * a child's avatar, colored by their place in the family; without one it is
- * the family's own avatar, bigger and in amber.
- * @param {string | null | undefined} name Name or username, as stored.
- * @param {number} [order] Place of the child in the family, starting at 1.
+ * Draws the avatar: a circle with a short text or an icon.
+ * With an order it takes one of the 10 colors (child or group); with an
+ * icon it is the "All my groups" avatar; without either, the user's own.
+ * @param {object} options
+ * @param {string} [options.text] Text inside the circle: an initial or "7°-1".
+ * @param {import("../../js/icons").IconName} [options.iconName] Icon name, for the "All my groups" avatar.
+ * @param {'small' | 'large'} [options.size] Only the child avatar is small.
+ * @param {number} [options.order] Place in the list, starting at 1.
  * @returns {string} HTML of the avatar.
  */
-export function avatar(name, order) {
-  if (order) {
-    return /* HTML */ `
-      <span
-        class="avatar avatar--child avatar--child-${getColorNumber(order)} text-label"
-      >
-        ${getInitial(name)}
-      </span>
-    `;
-  }
+export function avatar({ text, iconName, size = 'large', order }) {
+  const color = order ? getColorNumber(order) : iconName ? 'group' : 'user';
+  const font = size === 'small' ? 'text-label' : 'text-title';
+  const content = iconName ? icon(iconName) : text;
+
   return /* HTML */ `
-    <span class="avatar avatar--family text-title"> ${getInitial(name)} </span>
+    <span class="avatar avatar--${size} avatar--${color} ${font}">
+      ${content}
+    </span>
   `;
 }
 
@@ -43,5 +45,5 @@ export function getInitial(name) {
  * @returns {number} Color number, from 1 to 4.
  */
 export function getColorNumber(order) {
-  return ((order - 1) % 4) + 1;
+  return ((order - 1) % 10) + 1;
 }

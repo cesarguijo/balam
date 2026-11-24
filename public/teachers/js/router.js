@@ -3,7 +3,12 @@
  * the teachers' app passes to the shared router (`startRouter`).
  */
 
+import { showAtendance } from '../screens/attendance/atendance.js';
+import { showFinals } from '../screens/finals/finals.js';
+import { showGrades } from '../screens/grades/grades.js';
 import { showLogin } from '../screens/login/login.js';
+import { showGroups } from '../screens/groups/groups.js';
+import { showTeacher } from '../screens/teachers/teacher.js';
 
 /** @typedef {import('../../js/router.js').Screen} Screen */
 
@@ -14,6 +19,10 @@ import { showLogin } from '../screens/login/login.js';
  */
 export const routes = {
   '#/login': showLogin,
+  '#/grades': (app) => showTeacher(app, showGrades),
+  '#/groups': (app) => showTeacher(app, showGroups),
+  '#/finals': (app) => showTeacher(app, showFinals),
+  '#/attendance': (app) => showTeacher(app, showAtendance),
 };
 
 /**

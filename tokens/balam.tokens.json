@@ -8,6 +8,14 @@
         "mode": {}
       }
     },
+    "200": {
+      "$type": "color",
+      "$value": "#b9cce6",
+      "$description": "",
+      "$extensions": {
+        "mode": {}
+      }
+    },
     "800": {
       "$type": "color",
       "$value": "#1b3a6b",
@@ -102,6 +110,14 @@
         "mode": {}
       }
     },
+    "200": {
+      "$type": "color",
+      "$value": "#a8d3de",
+      "$description": "",
+      "$extensions": {
+        "mode": {}
+      }
+    },
     "500": {
       "$type": "color",
       "$value": "#1a7088",
@@ -120,6 +136,14 @@
     }
   },
   "brown": {
+    "100": {
+      "$type": "color",
+      "$value": "#f1e6dc",
+      "$description": "",
+      "$extensions": {
+        "mode": {}
+      }
+    },
     "500": {
       "$type": "color",
       "$value": "#9c7458",
@@ -132,6 +156,14 @@
       "$type": "color",
       "$value": "#7a4e32",
       "$description": "Deer brown · white-tailed deer, national animal",
+      "$extensions": {
+        "mode": {}
+      }
+    },
+    "800": {
+      "$type": "color",
+      "$value": "#5a3822",
+      "$description": "",
       "$extensions": {
         "mode": {}
       }
@@ -648,7 +680,7 @@
       }
     },
     "avatar": {
-      "child": {
+      "small": {
         "$type": "dimension",
         "$value": {
           "value": 26,
@@ -659,7 +691,7 @@
           "mode": {}
         }
       },
-      "family": {
+      "large": {
         "$type": "dimension",
         "$value": {
           "value": 46,
@@ -889,25 +921,25 @@
         "mode": {}
       }
     },
-    "user": {
+    "all": {
       "background": {
         "$type": "color",
-        "$value": "{amber.500}",
-        "$description": "Avatar of the signed-in parent",
+        "$value": "{blue.800}",
+        "$description": "",
         "$extensions": {
           "mode": {}
         }
       },
       "text": {
         "$type": "color",
-        "$value": "{blue.800}",
-        "$description": "Letter of the parent avatar. Contrast 4.6:1 on amber",
+        "$value": "{white}",
+        "$description": "",
         "$extensions": {
           "mode": {}
         }
       }
     },
-    "child": {
+    "variant": {
       "1": {
         "background": {
           "$type": "color",
@@ -978,6 +1010,132 @@
           "$extensions": {
             "mode": {}
           }
+        }
+      },
+      "5": {
+        "background": {
+          "$type": "color",
+          "$value": "{pink.50}",
+          "$description": "Avatar of the 4th child; a 5th starts over at 1",
+          "$extensions": {
+            "mode": {}
+          }
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{pink.800}",
+          "$description": "Letter of the 4th child avatar. Contrast 4.6:1",
+          "$extensions": {
+            "mode": {}
+          }
+        }
+      },
+      "6": {
+        "background": {
+          "$type": "color",
+          "$value": "{blue.200}",
+          "$description": "Avatar of the 4th child; a 5th starts over at 1",
+          "$extensions": {
+            "mode": {}
+          }
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{blue.800}",
+          "$description": "Letter of the 4th child avatar. Contrast 4.6:1",
+          "$extensions": {
+            "mode": {}
+          }
+        }
+      },
+      "7": {
+        "background": {
+          "$type": "color",
+          "$value": "{maya.200}",
+          "$description": "Avatar of the 4th child; a 5th starts over at 1",
+          "$extensions": {
+            "mode": {}
+          }
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{maya.700}",
+          "$description": "Letter of the 4th child avatar. Contrast 4.6:1",
+          "$extensions": {
+            "mode": {}
+          }
+        }
+      },
+      "8": {
+        "background": {
+          "$type": "color",
+          "$value": "{brown.100}",
+          "$description": "Avatar of the 4th child; a 5th starts over at 1",
+          "$extensions": {
+            "mode": {}
+          }
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{brown.700}",
+          "$description": "Letter of the 4th child avatar. Contrast 4.6:1",
+          "$extensions": {
+            "mode": {}
+          }
+        }
+      },
+      "9": {
+        "background": {
+          "$type": "color",
+          "$value": "{sand.100}",
+          "$description": "Avatar of the 4th child; a 5th starts over at 1",
+          "$extensions": {
+            "mode": {}
+          }
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{brown.800}",
+          "$description": "Letter of the 4th child avatar. Contrast 4.6:1",
+          "$extensions": {
+            "mode": {}
+          }
+        }
+      },
+      "10": {
+        "background": {
+          "$type": "color",
+          "$value": "{pink.200}",
+          "$description": "Avatar of the 4th child; a 5th starts over at 1",
+          "$extensions": {
+            "mode": {}
+          }
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{pink.900}",
+          "$description": "Letter of the 4th child avatar. Contrast 4.6:1",
+          "$extensions": {
+            "mode": {}
+          }
+        }
+      }
+    },
+    "user": {
+      "background": {
+        "$type": "color",
+        "$value": "{amber.500}",
+        "$description": "Avatar of the signed-in parent",
+        "$extensions": {
+          "mode": {}
+        }
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{blue.800}",
+        "$description": "Letter of the parent avatar. Contrast 4.6:1 on amber",
+        "$extensions": {
+          "mode": {}
         }
       }
     }
@@ -1431,7 +1589,7 @@
         "Components",
         "Measures"
       ],
-      "createdAt": "2026-11-22T07:22:33.880Z"
+      "createdAt": "2026-11-23T15:24:38.667Z"
     }
   }
 }

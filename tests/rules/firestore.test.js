@@ -14,7 +14,17 @@ import {
   assertSucceeds,
   initializeTestEnvironment,
 } from '@firebase/rules-unit-testing';
-import { deleteDoc, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  setDoc,
+  updateDoc,
+  where,
+} from 'firebase/firestore';
 
 /** @type {import('@firebase/rules-unit-testing').RulesTestEnvironment} */
 let testEnv;
@@ -56,8 +66,9 @@ async function seed(documents) {
 }
 
 /**
- * A server with two families, one teacher and one notice per group: 'ana'
- * is in 7-1, 'luis' in 9-2 and the teacher 'teacher' only teaches 7-1.
+ * A server with two families, one teacher, one notice per group and one
+ * notice for both groups: 'ana' is in 7-1, 'luis' in 9-2 and the teacher
+ * 'teacher' only teaches 7-1.
  * @returns {Promise<void>} Fulfills when everything is saved.
  */
 async function seedSchool() {
@@ -65,20 +76,21 @@ async function seedSchool() {
     'families/ana': { username: 'ana', children: [], groupIds: ['7-1'] },
     'families/luis': { username: 'luis', children: [], groupIds: ['9-2'] },
     'teachers/teacher': { groupIds: ['7-1'] },
-    'notices/notice71': notice('7-1'),
-    'notices/notice92': notice('9-2'),
+    'notices/notice71': notice(['7-1']),
+    'notices/notice92': notice(['9-2']),
+    'notices/shared': notice(['7-1', '9-2']),
   });
 }
 
 /**
  * Builds a notice with the shape the notices adapter saves.
- * @param {string} groupId - The group it is for.
+ * @param {string[]} groupIds - The groups it is for, e.g. `['7-1', '8-2']`.
  * @returns {object} The notice data.
  */
-function notice(groupId) {
+function notice(groupIds) {
   return {
     text: 'Classes suspended',
-    groupId,
+    groupIds,
     authorUid: 'teacher',
     createdAt: new Date(),
     updatedAt: null,
@@ -140,6 +152,30 @@ describe('notices: read', () => {
     await assertFails(getDoc(doc(signedIn('ana'), 'notices/notice92')));
   });
 
+  test('Both families read a notice for both of their groups', async () => {
+    await seedSchool();
+    await assertSucceeds(getDoc(doc(signedIn('ana'), 'notices/shared')));
+    await assertSucceeds(getDoc(doc(signedIn('luis'), 'notices/shared')));
+  });
+
+  // The rules use `hasAny` and the screen asks with `array-contains`:
+  // Firestore must accept that the query only returns allowed notices.
+  test("A family asks for its group's notices", async () => {
+    await seedSchool();
+    const notices = collection(signedIn('ana'), 'notices');
+    await assertSucceeds(
+      getDocs(query(notices, where('groupIds', 'array-contains', '7-1'))),
+    );
+  });
+
+  test("A family cannot ask for another group's notices", async () => {
+    await seedSchool();
+    const notices = collection(signedIn('ana'), 'notices');
+    await assertFails(
+      getDocs(query(notices, where('groupIds', 'array-contains', '9-2'))),
+    );
+  });
+
   test('A teacher reads a notice of one of their groups', async () => {
     await seedSchool();
     await assertSucceeds(getDoc(doc(signedIn('teacher'), 'notices/notice71')));
@@ -166,21 +202,35 @@ describe('notices: write', () => {
   test('A teacher creates a notice in one of their groups', async () => {
     await seedSchool();
     await assertSucceeds(
-      setDoc(doc(signedIn('teacher'), 'notices/new'), notice('7-1')),
+      setDoc(doc(signedIn('teacher'), 'notices/new'), notice(['7-1'])),
     );
   });
 
   test('A teacher cannot create a notice in another group', async () => {
     await seedSchool();
     await assertFails(
-      setDoc(doc(signedIn('teacher'), 'notices/new'), notice('9-2')),
+      setDoc(doc(signedIn('teacher'), 'notices/new'), notice(['9-2'])),
+    );
+  });
+
+  test('A teacher cannot create a notice with one group that is not theirs', async () => {
+    await seedSchool();
+    await assertFails(
+      setDoc(doc(signedIn('teacher'), 'notices/new'), notice(['7-1', '9-2'])),
+    );
+  });
+
+  test('A teacher cannot create a notice without groups', async () => {
+    await seedSchool();
+    await assertFails(
+      setDoc(doc(signedIn('teacher'), 'notices/new'), notice([])),
     );
   });
 
   test('A family cannot create a notice', async () => {
     await seedSchool();
     await assertFails(
-      setDoc(doc(signedIn('ana'), 'notices/new'), notice('7-1')),
+      setDoc(doc(signedIn('ana'), 'notices/new'), notice(['7-1'])),
     );
   });
 
@@ -197,7 +247,7 @@ describe('notices: write', () => {
     await seedSchool();
     await assertFails(
       updateDoc(doc(signedIn('teacher'), 'notices/notice71'), {
-        groupId: '9-2',
+        groupIds: ['9-2'],
       }),
     );
   });
@@ -206,6 +256,24 @@ describe('notices: write', () => {
     await seedSchool();
     await assertFails(
       updateDoc(doc(signedIn('teacher'), 'notices/notice92'), {
+        text: 'Changed',
+      }),
+    );
+  });
+
+  test('A teacher cannot leave a notice without groups', async () => {
+    await seedSchool();
+    await assertFails(
+      updateDoc(doc(signedIn('teacher'), 'notices/notice71'), {
+        groupIds: [],
+      }),
+    );
+  });
+
+  test('A teacher cannot update a notice that also goes to another group', async () => {
+    await seedSchool();
+    await assertFails(
+      updateDoc(doc(signedIn('teacher'), 'notices/shared'), {
         text: 'Changed',
       }),
     );
@@ -228,6 +296,11 @@ describe('notices: write', () => {
   test('A teacher cannot delete a notice of another group', async () => {
     await seedSchool();
     await assertFails(deleteDoc(doc(signedIn('teacher'), 'notices/notice92')));
+  });
+
+  test('A teacher cannot delete a notice that also goes to another group', async () => {
+    await seedSchool();
+    await assertFails(deleteDoc(doc(signedIn('teacher'), 'notices/shared')));
   });
 
   test('A family cannot delete a notice of its group', async () => {

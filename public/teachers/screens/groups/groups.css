@@ -1,0 +1,37 @@
+.group__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.group__last-message {
+  color: var(--text-secondary);
+}
+
+.teacher__content .list-item {
+  height: 64px;
+}
+
+.teacher__content .list-item__leading {
+  height: 62px;
+  width: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.teacher__content {
+  padding: var(--space-12);
+}
+
+.teacher__content .list > :first-child {
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.teacher__content .list > :first-child(n + 2) > .list-item__content {
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.teacher__content .ist-item {
+  height: 100%;
+  padding: 0;
+}

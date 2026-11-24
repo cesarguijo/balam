@@ -6,8 +6,8 @@
  *
  * Each notice is a document in the `notices` collection:
  * - `text` (string): full text; the first line is the title.
- * - `groupId` (string): the group it is for; the Firestore rules use it so
- *   each family reads only its group's notices.
+ * - `groupIds` (string[]): the groups it is for, e.g. `['7-1', '8-2']`; the
+ *   Firestore rules use it so each family reads only its groups' notices.
  * - `authorUid` (string): who published it.
  * - `createdAt` (Timestamp): set by the server, not the phone, so a phone
  *   with the wrong clock cannot change the order.
@@ -55,7 +55,7 @@ export async function getNoticesSince(groupId, cutoff) {
   const noticeQuery = query(
     collection(db, 'notices'),
     where('createdAt', '>=', cutoff),
-    where('groupId', '==', groupId),
+    where('groupIds', 'array-contains', groupId),
     orderBy('createdAt', 'desc'),
   );
   return getDocs(noticeQuery)
@@ -87,19 +87,19 @@ export async function getNoticesSince(groupId, cutoff) {
 
 /**
  * Creates a notice with the server's date and the teacher as author.
- * @param {string} groupId - The group the notice is for.
+ * @param {string[]} groupIds - The groups the notice is for, e.g. `['7-1', '8-2']`.
  * @param {NoticeDraft} draft - Text typed by the teacher.
  * @returns {Promise<string>} The id Firestore gave the new notice.
  * @throws {NoticeError} If there is no internet or the rules refuse it.
  */
-export async function addNotice(groupId, draft) {
+export async function addNotice(groupIds, draft) {
   const { db, auth } = getConnection();
   if (auth.currentUser === null) {
     throw new Error('There is not a session in this device');
   }
   const docNotice = {
     text: draft.text,
-    groupId,
+    groupIds,
     authorUid: auth.currentUser.uid,
     createdAt: serverTimestamp(),
     updatedAt: null,
@@ -118,7 +118,7 @@ export async function addNotice(groupId, draft) {
 
 /**
  * Saves the new text of a notice and marks when it was edited.
- * Does not touch createdAt, groupId or authorUid.
+ * Does not touch createdAt, groupIds or authorUid.
  * @param {string} id - The notice to edit.
  * @param {NoticeDraft} draft - The new text.
  * @returns {Promise<void>} Fulfills when Firestore saved it.

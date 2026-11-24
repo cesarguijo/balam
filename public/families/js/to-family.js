@@ -8,8 +8,15 @@
  * checks the console; the parent only sees an `unknown` error.
  */
 
-/** @typedef {import('./session.js').Family} Family */
-/** @typedef {import('./session.js').Child} Child */
+import {
+  assertInteger,
+  assertItems,
+  assertObject,
+  assertText,
+} from '../../js/utils.js';
+
+/** @typedef {import('../js/family-session.js').Family} Family */
+/** @typedef {import('../js/family-session.js').Child} Child */
 
 /**
  * Checks that an item of the `children` list has a valid id, name, groupId
@@ -21,22 +28,14 @@
  * @throws {TypeError} If a field is missing or has the wrong type.
  */
 function validateChild(childData, position) {
-  if (!isObject(childData)) {
-    throw new TypeError('Child ' + position + ' is not an object');
+  assertObject(childData, `Child ${position} is not an object`);
+  for (const key of ['id', 'name', 'groupId']) {
+    assertText(childData[key], `Child ${position} has no text ${key}`);
   }
-  if (typeof childData.id !== 'string' || childData.id === '') {
-    throw new TypeError('Child ' + position + ' has no text id');
-  }
-  if (typeof childData.name !== 'string' || childData.name === '') {
-    throw new TypeError('Child ' + position + ' has no text name');
-  }
-  if (typeof childData.groupId !== 'string' || childData.groupId === '') {
-    throw new TypeError('Child ' + position + ' has no text groupId');
-  }
-  // Number.isInteger also rules out NaN and decimals, which typeof would accept as numbers.
-  if (!Number.isInteger(childData.grade)) {
-    throw new TypeError('Child ' + position + ' has no whole-number grade');
-  }
+  assertInteger(
+    childData.grade,
+    'Child ' + position + ' has no whole-number grade',
+  );
 }
 
 /**
@@ -47,15 +46,15 @@ function validateChild(childData, position) {
  * @throws {TypeError} If a field is missing or has the wrong type.
  */
 function validateFamily(familyData) {
-  if (!isObject(familyData)) {
-    throw new TypeError('The family is not an object');
-  }
-  if (typeof familyData.username !== 'string' || familyData.username === '') {
-    throw new TypeError('The family has no text username');
-  }
-  if (!Array.isArray(familyData.children) || familyData.children.length === 0) {
-    throw new TypeError('The family has no list with at least one child');
-  }
+  assertObject(familyData, 'The family is not an object');
+
+  assertText(familyData.username, 'The family has no text username');
+
+  assertItems(
+    familyData.children,
+    'The family has no list with at least one child',
+  );
+
   familyData.children.forEach(validateChild);
 }
 
@@ -89,14 +88,4 @@ export function toFamily(data) {
     username: data.username,
     children: toChildren(data.children),
   };
-}
-
-/**
- * Tells whether a value is an object with properties that can be checked.
- * It does not throw: each validation decides its own message.
- * @param {unknown} x - Any value, e.g. what `JSON.parse` returns.
- * @returns {x is Record<string, unknown>} `true` if it is an object (and not `null`).
- */
-function isObject(x) {
-  return typeof x === 'object' && x !== null;
 }

@@ -7,7 +7,9 @@
 import { startRouter } from '../js/router.js';
 import { routes, pickTeacherDefault } from './js/router.js';
 import { listenRipples } from '../components/ripple/ripple.js';
+import { connect } from '../js/firebase/connection.js';
 
 // Here and not in a screen, so it runs once and works on any first screen
 listenRipples();
+connect('teachers');
 startRouter(routes, pickTeacherDefault);

@@ -6,7 +6,7 @@
 
 import { t } from '../../js/i18n/es.js';
 
-/** @typedef {import('../../js/session.js').SessionErrorType} SessionErrorType */
+/** @typedef {import('../../js/create-session.js').SessionErrorType} SessionErrorType */
 /** @typedef {import('./validation.js').ValidationErrorType} ValidationErrorType */
 /** @typedef {import('../../js/i18n/es.js').MessageKey} MessageKey */
 /** @typedef {import('../../js/icons.js').IconName} IconName */

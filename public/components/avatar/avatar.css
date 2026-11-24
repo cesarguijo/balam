@@ -5,34 +5,70 @@
   border-radius: var(--radius-full);
 }
 
-.avatar--child {
-  width: var(--size-avatar-child);
-  height: var(--size-avatar-child);
+.avatar--small {
+  width: var(--size-avatar-small);
+  height: var(--size-avatar-small);
 }
 
-.avatar--family {
-  width: var(--size-avatar-family);
-  height: var(--size-avatar-family);
+.avatar--large {
+  width: var(--size-avatar-large);
+  height: var(--size-avatar-large);
+}
+
+.avatar--user {
   background-color: var(--avatar-user-background);
   color: var(--avatar-user-text);
 }
 
-.avatar--child-1 {
-  background-color: var(--avatar-child-1-background);
-  color: var(--avatar-child-1-text);
+.avatar--group {
+  background-color: var(--avatar-all-background);
+  color: var(--avatar-all-text);
 }
 
-.avatar--child-2 {
-  background-color: var(--avatar-child-2-background);
-  color: var(--avatar-child-2-text);
+.avatar--group .icon {
+  color: var(--avatar-all-text);
 }
 
-.avatar--child-3 {
-  background-color: var(--avatar-child-3-background);
-  color: var(--avatar-child-3-text);
+.avatar--1 {
+  background-color: var(--avatar-variant-1-background);
+  color: var(--avatar-variant-1-text);
 }
 
-.avatar--child-4 {
-  background-color: var(--avatar-child-4-background);
-  color: var(--avatar-child-4-text);
+.avatar--2 {
+  background-color: var(--avatar-variant-2-background);
+  color: var(--avatar-variant-2-text);
+}
+
+.avatar--3 {
+  background-color: var(--avatar-variant-3-background);
+  color: var(--avatar-variant-3-text);
+}
+
+.avatar--4 {
+  background-color: var(--avatar-variant-4-background);
+  color: var(--avatar-variant-4-text);
+}
+.avatar--5 {
+  background-color: var(--avatar-variant-5-background);
+  color: var(--avatar-variant-5-text);
+}
+.avatar--6 {
+  background-color: var(--avatar-variant-6-background);
+  color: var(--avatar-variant-6-text);
+}
+.avatar--7 {
+  background-color: var(--avatar-variant-7-background);
+  color: var(--avatar-variant-7-text);
+}
+.avatar--8 {
+  background-color: var(--avatar-variant-8-background);
+  color: var(--avatar-variant-8-text);
+}
+.avatar--9 {
+  background-color: var(--avatar-variant-9-background);
+  color: var(--avatar-variant-9-text);
+}
+.avatar--10 {
+  background-color: var(--avatar-variant-10-background);
+  color: var(--avatar-variant-10-text);
 }

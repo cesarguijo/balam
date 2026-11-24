@@ -6,9 +6,9 @@
 import { decorations } from '../../../js/decorations.js';
 import { t } from '../../../js/i18n/es.js';
 import '../../../components/text-field/text-field.js';
-import { logIn } from '../../../js/session.js';
 import { icon } from '../../../js/icons.js';
 import { BalamLoginForm } from '../../../components/login-form/login-form.js';
+import { familySession } from '../../js/family-session.js';
 
 /**
  * Shows the login screen inside the container.
@@ -62,7 +62,8 @@ export function showLogin(app) {
     loginForm.setLoading(true);
     if (!(event instanceof CustomEvent)) return;
     const { username, password } = event.detail;
-    logIn(username, password)
+    familySession
+      .logIn(username, password)
       .then(() => {
         location.replace('#/notices');
       })
